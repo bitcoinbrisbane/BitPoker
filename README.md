@@ -29,6 +29,9 @@ The paramaters are
 6.  Max players
 7.  Game type
 8.  Other (straddles, "run it twice")
+9.  Address for multisig
+
+### Buy in
 
 Example xml serialziation
 ```
@@ -39,8 +42,8 @@ Example xml serialziation
 ```
 
 ## Hand Contract
-Number and position of players
-Private Key.  Each hand also includes some entropy so hands can not be pre computed.
+1.  Number and position of players
+2.  Private Key.  Each hand also includes some entropy so hands can not be pre computed.
 
 ```
 <Hand Key="d0033f6f-9f24-4bf2-b280-4832a278c771">
@@ -98,6 +101,9 @@ We know how the distribution of cards that will be dealt.  In Holdem, each card 
 - Card[3] => Alice
 
 ## Flop, Turn and River
+
+## Post hand consensus
+Once the hand has been played, the table then reaches consensus..
 
 ## Network Topology
 
