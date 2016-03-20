@@ -71,16 +71,16 @@ The deck is represented by an array[52].
 -Card[3] = 2S
 
 Create an array of 52 private keys.  These do not leave Alices computer.
--Key[0]=89fb4cf3-c801-406c-8c65-b4f065e0b23b
--Key[1]=9e1fa9ca-c9c2-481e-96c8-92aaf7bc058b
--Key[2]=3eb5a6a1-3d06-4a6b-a5d4-3f71f589371a
--Key[3]=37c0abe4-742a-48a8-aa9c-9e7ee1af9867
+- Key[0]=89fb4cf3-c801-406c-8c65-b4f065e0b23b
+- Key[1]=9e1fa9ca-c9c2-481e-96c8-92aaf7bc058b
+- Key[2]=3eb5a6a1-3d06-4a6b-a5d4-3f71f589371a
+- Key[3]=37c0abe4-742a-48a8-aa9c-9e7ee1af9867
 
 Each card is double encrypted and represented in base64.  First with the table key.  In the example key = d0033f6f-9f24-4bf2-b280-4832a278c771
--Card[0]=Lxda6XQS8+E80rwhx70MqiUdKErWU1VFbyYHIRcGlaw=
--Card[1]=mHlaEvcUb7vC7xe66tAzOAefYIm4NHVtaMOUfFtowq8=
--Card[2]=MDOO3rFc8yAxBjoqjDC5tPSNC/eAtCt18peIhPFyIVY=
--Card[3]=jZ/1pTx60F3kqDSp6jRr14YAaa9UZIH8Rut7OMqvmhE=
+- Card[0]=Lxda6XQS8+E80rwhx70MqiUdKErWU1VFbyYHIRcGlaw=
+- Card[1]=mHlaEvcUb7vC7xe66tAzOAefYIm4NHVtaMOUfFtowq8=
+- Card[2]=MDOO3rFc8yAxBjoqjDC5tPSNC/eAtCt18peIhPFyIVY=
+- Card[3]=jZ/1pTx60F3kqDSp6jRr14YAaa9UZIH8Rut7OMqvmhE=
 
 Now encrypted with the matching key.
 Card[0]=yma39Z60CRkAt3Kr1JDSpRiGE/vWqZRAMy63KSL9wR1INMYW7R95S4A9m3R/wi1KTx+ssY+sDFLGm1TfXSh0fQ==
@@ -92,10 +92,10 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 
 ## Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
--Card[0] => Bob
--Card[1] => Alice
--Card[2] => Bob
--Card[3] => Alice
+- Card[0] => Bob
+- Card[1] => Alice
+- Card[2] => Bob
+- Card[3] => Alice
 
 ## Flop, Turn and River
 
