@@ -4,15 +4,12 @@
 The goal of the project is to create peer to peer "mesh" networks of poker games, in which no central actor can control the deck and thus rig the game.  The game uses bitcoin and lightning network to settle bets between actors.
 
 ### Notation
-| First Header  | Second Header |
+| Key  | Value |
 | ------------- | ------------- |
 | A  | Ace  |
 | K  | King  |
-
-- A = Ace
-- K = King
-- Q = Queen
-- J = Jack
+| Q  | Queen |
+| J  | Jack  |
 
 - S = Spades
 - C = Clubs
@@ -22,33 +19,72 @@ The goal of the project is to create peer to peer "mesh" networks of poker games
 - SB = Small Blind
 - BB = Big Blind
 
+### Example Keys (Address, Public Key, WIF Private Key)
+Alice 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF 03c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f75 KzWvEbX8aysrcoeW8ucCnqnDDkWbWF45xEWmKjQuhN2DBZtQ7Lp2
+
+Bob 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G 036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da548823700972 Kyp68W4Lq6w78MnWzVCC1zj8pwm6VjUNCTxMY1EEMv5guH3XfquX
+
+Witness 135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa 027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e KwzvU7vjSWiuXDv7ohhNKa47zJUhHJzsh4LJ19A6yjFyZtLnaZvQ
+
+Redeem Script 522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae
+
+https://coinb.in/?verify=522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae#verify
+
 ## The protocol
 
+### Overview
+1.  A punter either looks to join a table with game paramaters
+2.  A punter can choose to start a table be defining a table contract
+3.  Tables should also broad cast their game, status and number of current players to other tables
+4.  Leaving the table
+
 ## Table Contract
-The paramaters are
-1.  Encryption Algorithm
-2.  Hash Algorithm
+The paramaters are 
+1.  Encryption Algorithm (Enum AES-256)
+2.  Hash Algorithm (Enum SHA-256)
+3.  Currency (Enum)
 3.  Blinds
 4.  Rake*
 5.  Min players
 6.  Max players
-7.  Game type
+7.  Game type (Enum, No Limit Texas Holdem)
 8.  Other (straddles, "run it twice")
 9.  Address for multisig
+10.  Consensus
+11.  Version
+12.  Voting
 
-### Buy in
+### Buying in
 
 Example xml serialziation
 ```
-<Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" Address="1GpgWDapL6WQarq8G3rgMs77doEzVYHi4s">
-  <Enc>AES-265</Enc>
+<Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" Address="3P1c61hiSBuZstuVkECYo8ntDPVsnG2EQh" AddressType"2-3">
+  <Encryption>AES-265</Encryption>
   <Hash>SHA-256</Hash>
+  <Currency>BTC</Currency>
+  <Blinds>
+    <SmallBlind>0.001</SmallBlind>
+    <BigBlind>0.002</BigBlind>
+  </Blinds>
+  <BuyIn>
+    <Min>0.1</Min>
+    <Max<0.2</Max>
+  </BuyIn>
+  <Game>
+    <Type>Texas Holdem</Type>
+    <Limit>No Limit</Limit>
+  </Game>
 </Table>
 ```
 
+## Witness nodes
+Game witness can also be allowed or chosen to arbitrate a game.  The witness could also help network propigation.  A witness would be choose by the table starter and a small rake paid to the witness.
+
+There will become a market for reputable witnesses based off a https dns endpoint.
+
 ## Hand Contract
 1.  Number and position of players
-2.  Private Key.  Each hand also includes some entropy so hands can not be pre computed.
+2.  Private Key.  Each hand also includes some entropy so hands can not be pre computed.  The dealer creates the GUID.
 
 ```
 <Hand Key="d0033f6f-9f24-4bf2-b280-4832a278c771">
@@ -98,6 +134,8 @@ Encrypt the card value with the corrsponding key value.  Ie, card value in array
 ### Alice sends the deck to Bob
 As the deck is encrypted, and assumed shuffled, Bob has no way to known the contents of the deck.  Bob now double encrypts and shuffles, and sends the result back to Alice.
 
+*Note:  The deck could also be shuffled by a witness.
+
 ## Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
 - Card[0] => Bob
@@ -108,13 +146,14 @@ We know how the distribution of cards that will be dealt.  In Holdem, each card 
 ## Flop, Turn and River
 
 ## Post hand consensus
-Once the hand has been played, the table then reaches consensus..
+Once the hand has been played, the table then reaches consensus.   The signed game history could then be persistend into an Ethereum block chain.
 
 ## Network Topology
 
 ### Dealing with disconnects
 
 ## Betting via lightning channels
+Each bet is a signature from the punter that is not broad cast to the network.   For example, in the heads up game, if both Alice and Bob post blinds, the net transfer result = 0.
 
 ### Settlement
 
