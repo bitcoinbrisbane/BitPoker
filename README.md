@@ -42,13 +42,15 @@ Private Key.  Each hand also includes some entropy so hands can not be pre compu
 ```
 <Hand Key="d0033f6f-9f24-4bf2-b280-4832a278c771">
   <Seat Number="1" Position="SB">14QJhqjdmRJQBsr9zEE4VJi76yj59WhY51</Seat>
-  ...
-  <Seat Number="10" Position="Dealer">1F7TAjU1tEy8EMkv4BHFL5CxfrH5maEXve</Seat>
+  <Seat Number="2" Position="Dealer">1F7TAjU1tEy8EMkv4BHFL5CxfrH5maEXve</Seat>
 <Hand>
 ```
 
-## The shuffle
+## The Shuffle
 In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case, Alice is the dealer.  Bob the small blind, and Alice the big blind.
+
+Alice = 1F7TAjU1tEy8EMkv4BHFL5CxfrH5maEXve
+Bob = 14QJhqjdmRJQBsr9zEE4VJi76yj59WhY51
 
 The deck is represented by an array[52].  
 
@@ -91,3 +93,10 @@ Card[0] => Bob
 Card[1] => Alice
 Card[2] => Bob
 Card[3] => Alice
+
+##Flop, Turn and River
+
+#Network Topology
+
+#Betting via lightning channels
+
