@@ -74,6 +74,8 @@ Example xml serialziation
     <Type>Texas Holdem</Type>
     <Limit>No Limit</Limit>
   </Game>
+  <Clock>30</Clock>
+  <TimeOuts>60</TimeOut>
 </Table>
 ```
 
@@ -88,16 +90,17 @@ There will become a market for reputable witnesses based off a https dns endpoin
 
 ```
 <Hand Key="d0033f6f-9f24-4bf2-b280-4832a278c771">
-  <Seat Number="1" Position="SB">14QJhqjdmRJQBsr9zEE4VJi76yj59WhY51</Seat>
-  <Seat Number="2" Position="Dealer">1F7TAjU1tEy8EMkv4BHFL5CxfrH5maEXve</Seat>
+  <Seat Number="1" Position="SB">1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G</Seat>
+  <Seat Number="2" Position="Dealer">1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF</Seat>
+  <Witness>135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa</Witness>
 <Hand>
 ```
 
 ## The Shuffle
 In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case, Alice is the dealer.  Bob the small blind, and Alice the big blind.
 
--Alice = 1F7TAjU1tEy8EMkv4BHFL5CxfrH5maEXve
--Bob = 14QJhqjdmRJQBsr9zEE4VJi76yj59WhY51
+-Alice = 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF
+-Bob = 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G
 
 The deck is represented by an array[52].  
 
@@ -144,6 +147,29 @@ We know how the distribution of cards that will be dealt.  In Holdem, each card 
 - Card[3] => Alice
 
 ## Flop, Turn and River
+The client software co-ordinates the game, based off agreed game rules. 
+
+1.  Enforces action rules of its own player, such as check, bet or fold
+2.  If the action involves money, creates the tx
+3.  Creates a signed message and broad casts to each player
+4.  Waits for next action message
+5.  Validates the message
+
+Example action message from Bob.  A call from the small blind.
+```
+<Action Position="1" Address="1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G">
+  <PreviousHash></PreviousHash>
+  <Call>
+    <Amount>0.001</Amount>
+    <Tx></Tx>
+  </Call>
+  <MessageSignature>
+  </MessageSignature>
+<Action>
+<Hash>
+
+</Hash>
+```
 
 ## Post hand consensus
 Once the hand has been played, the table then reaches consensus.   The signed game history could then be persistend into an Ethereum block chain.
