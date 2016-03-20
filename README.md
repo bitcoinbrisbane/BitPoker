@@ -4,6 +4,11 @@
 The goal of the project is to create peer to peer "mesh" networks of poker games, in which no central actor can control the deck and thus rig the game.  The game uses bitcoin and lightning network to settle bets between actors.
 
 ### Notation
+| First Header  | Second Header |
+| ------------- | ------------- |
+| A  | Ace  |
+| K  | King  |
+
 - A = Ace
 - K = King
 - Q = Queen
@@ -107,5 +112,11 @@ Once the hand has been played, the table then reaches consensus..
 
 ## Network Topology
 
+### Dealing with disconnects
+
 ## Betting via lightning channels
 
+### Settlement
+
+### References
+https://lightning.network/lightning-network-paper.pdf
