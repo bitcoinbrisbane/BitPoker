@@ -1,5 +1,8 @@
 # BitPoker
 
+## Abstract
+The goal of the project is to create peer to peer "mesh" networks of poker games, in which no central actor can control the deck and thus rig the game.  The game uses bitcoin and lightning network to settle bets between actors.
+
 Notation
 A = Ace
 K = King
