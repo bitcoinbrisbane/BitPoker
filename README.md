@@ -91,7 +91,7 @@ There will become a market for reputable witnesses based off a https dns endpoin
 2.  Private Key.  Each hand also includes some entropy so hands can not be pre computed.  The dealer creates the GUID.
 
 ```
-<Hand Key="d0033f6f-9f24-4bf2-b280-4832a278c771">
+<Hand Key="HBFwc/qnlFqkxwiXTmNkXw==">
   <Seat Number="1" Position="SB">1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G</Seat>
   <Seat Number="2" Position="Dealer">1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF</Seat>
   <Witness>135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa</Witness>
@@ -101,43 +101,43 @@ There will become a market for reputable witnesses based off a https dns endpoin
 ## The Shuffle
 In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case, Alice is the dealer.  Bob the small blind, and Alice the big blind.
 
--Alice = 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF
--Bob = 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G
+- Alice = 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF
+- Bob = 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G
 
 The deck is represented by an array[52].  
 
--Card[0] = AH
--Card[1] = KH
--Card[2] = QH
--Card[3] = JH
+- Card[0] = AH
+- Card[1] = KH
+- Card[2] = QH
+- Card[3] = JH
 ...
--Card[51] = 2C
+- Card[51] = 2C
 
 ### Alice shuffles the deck and does not disclose the un-encrypted result.
--Card[0] = AC
--Card[1] = 3S
--Card[2] = AH
--Card[3] = 2S
+- Card[0] = AC
+- Card[1] = 3S
+- Card[2] = AH
+- Card[3] = 2S
 
-Create an array of 52 private keys.  These do not leave Alices computer.
-- Key[0]=89fb4cf3-c801-406c-8c65-b4f065e0b23b
-- Key[1]=9e1fa9ca-c9c2-481e-96c8-92aaf7bc058b
-- Key[2]=3eb5a6a1-3d06-4a6b-a5d4-3f71f589371a
-- Key[3]=37c0abe4-742a-48a8-aa9c-9e7ee1af9867
+Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.
+- Key[0]=VC65FGS6DQpKLzC+65XPbQ==
+- Key[1]=r5a9aeztGOAFovYk+SESHg==
+- Key[2]=TneaKNlV8fZgVJ61e6Xwwg==
+- Key[3]=YhcT8QLRmmcV2Q/CxOkQKQ==
 
-Each card is double encrypted and represented in base64.  First with the table key.  In the example key = d0033f6f-9f24-4bf2-b280-4832a278c771
-- Card[0]=Lxda6XQS8+E80rwhx70MqiUdKErWU1VFbyYHIRcGlaw=
-- Card[1]=mHlaEvcUb7vC7xe66tAzOAefYIm4NHVtaMOUfFtowq8=
-- Card[2]=MDOO3rFc8yAxBjoqjDC5tPSNC/eAtCt18peIhPFyIVY=
-- Card[3]=jZ/1pTx60F3kqDSp6jRr14YAaa9UZIH8Rut7OMqvmhE=
+Each card is double encrypted.  First round of encryption with the hand key.  In the example key = HBFwc/qnlFqkxwiXTmNkXw== (1c 11 70 73 fa a7 94 5a a4 c7 08 97 4e 63 64 5f) in hex.
 
-Now encrypted with the matching key.
-Card[0]=yma39Z60CRkAt3Kr1JDSpRiGE/vWqZRAMy63KSL9wR1INMYW7R95S4A9m3R/wi1KTx+ssY+sDFLGm1TfXSh0fQ==
+- Card[0]=
+- Card[1]=
+- Card[2]=
+- Card[3]=
 
-Encrypt the card value with the corrsponding key value.  Ie, card value in array 0 is encrypted with key 0
+Then each card is encrypted again with the matching key and represented as base64.  Eg, card[0] is encrypted with key[0]
+Card[0]=
+
 
 ### Alice sends the deck to Bob
-As the deck is encrypted, and assumed shuffled, Bob has no way to known the contents of the deck.  Bob now double encrypts and shuffles, and sends the result back to Alice.
+As the deck is encrypted, and assumed shuffled, Bob has no way to known the contents of the deck.  Bob the encrypts the deck again and shuffles, and sends the result back to Alice.
 
 *Note:  The deck could also be shuffled by a witness.
 
