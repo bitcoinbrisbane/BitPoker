@@ -1,7 +1,9 @@
 # BitPoker
 
 ## Abstract
-The goal of the project is to create peer to peer "mesh" networks of poker games, in which no central actor can control the deck and thus rig the game.  The game uses bitcoin and lightning network to settle bets between actors.
+The goal of the project is to design a peer to peer protocol of games, such as online poker, in which no central actor can control the deck and thus rig the game.  The game uses bitcoin and lightning network to settle bets between actors.
+
+Different clients developed in different programming languages are encouraged.
 
 ### Notation
 | Key  | Value |
@@ -82,7 +84,7 @@ Example xml serialziation
 ## Witness nodes
 Game witness can also be allowed or chosen to arbitrate a game.  The witness could also help network propigation.  A witness would be choose by the table starter and a small rake paid to the witness.
 
-There will become a market for reputable witnesses based off a https dns endpoint.
+There will become a market for reputable witnesses based off a https dns endpoint and earn small revenues for witnessing hands.
 
 ## Hand Contract
 1.  Number and position of players
@@ -172,7 +174,11 @@ Example action message from Bob.  A call from the small blind.
 ```
 
 ## Post hand consensus
-Once the hand has been played, the table then reaches consensus.   The signed game history could then be persistend into an Ethereum block chain.
+Once the hand has been played, the table then reaches consensus.   The signed game history could then be persistend into an Ethereum block chain, referencing previous hands.  
+
+Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done, the more fees it will incure. 
+
+## Cashing out
 
 ## Network Topology
 
@@ -182,6 +188,7 @@ Once the hand has been played, the table then reaches consensus.   The signed ga
 Each bet is a signature from the punter that is not broad cast to the network.   For example, in the heads up game, if both Alice and Bob post blinds, the net transfer result = 0.
 
 ### Settlement
+
 
 ### References
 https://lightning.network/lightning-network-paper.pdf
