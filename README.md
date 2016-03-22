@@ -46,12 +46,23 @@ Poker terminology
 https://coinb.in/?verify=522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae#verify
 
 ## The protocol
+Each client connects to the table starter, who then gives a list of players IPs.  They then connect to each other.  As new players join, the table starter.
+
+If the table starter disconnects, the next joined player becomes the table starter.
+
+Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.  
+
+### Message types
+- Join
+- Quit
+- Action
+- Shuffle Request
 
 ### Overview
 1.  A punter either looks to join a table with game paramaters
 2.  A punter can choose to start a table be defining a table contract
 3.  Tables should also broad cast their game, status and number of current players to other tables
-4.  Leaving the table
+4.  Leaving the table (closing the channel)
 
 ## Table Contract
 The paramaters are 
@@ -68,8 +79,7 @@ The paramaters are
 10.  Consensus
 11.  Version
 12.  Voting
-
-### Buying in
+13.  Channel Address
 
 *Example xml serialziation*
 ```
@@ -98,6 +108,11 @@ The paramaters are
 Game witness can also be allowed or chosen to arbitrate a game.  The witness could also help network propigation.  A witness would be choose by the table starter and a small rake paid to the witness.
 
 There will become a market for reputable witnesses based off a https dns endpoint and earn small revenues for witnessing hands.
+
+## Buying in
+A player buying in opens a lightning payment channel with all players.
+
+"Through this network of interconnected payment channels, Lightning provides a scalable, decentralized micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
 
 ## Hand Contract
 1.  Number and position of players
