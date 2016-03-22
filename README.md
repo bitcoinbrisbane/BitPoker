@@ -14,6 +14,7 @@ Different clients developed in different programming languages are encouraged.
 | J  | Jack  |
 
 Suites
+
 | Key  | Value |
 | ------------- | ------------- |
 | S  | Spade  |
@@ -94,7 +95,7 @@ The paramaters for a table are defined in the following schema.  Developers are 
 6.  Max players
 7.  Game type (Enum, No Limit Texas Holdem) *
 8.  Other (straddles, "run it twice") **
-9.  Address for multisig
+9.  Channel Address / multisig
 10.  Consensus Algorithm
 11.  Anti Collusion Algorithm
 11.  Version
@@ -123,7 +124,8 @@ The paramaters for a table are defined in the following schema.  Developers are 
     <Limit>No Limit</Limit>
   </Game>
   <Clock>30</Clock>
-  <TimeOuts>60</TimeOut>
+  <TimeOuts>120</TimeOut>
+  <Version>0.0.1</Version>
 </Table>
 ```
 
