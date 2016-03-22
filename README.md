@@ -13,20 +13,33 @@ Different clients developed in different programming languages are encouraged.
 | Q  | Queen |
 | J  | Jack  |
 
-- S = Spades
-- C = Clubs
-- H = Hearts
-- D = Diamonds
+Suites
+| Key  | Value |
+| ------------- | ------------- |
+| S  | Spade  |
+| C  | Club |
+| H  | Heart |
+| D  | Diamond  |
 
+Poker terminology
 - SB = Small Blind
 - BB = Big Blind
 
 ### Example Keys (Address, Public Key, WIF Private Key)
-*Alice* 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF 03c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f75 KzWvEbX8aysrcoeW8ucCnqnDDkWbWF45xEWmKjQuhN2DBZtQ7Lp2
+*Alice* 
+- 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF 
+- 03c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f75 
+- KzWvEbX8aysrcoeW8ucCnqnDDkWbWF45xEWmKjQuhN2DBZtQ7Lp2
 
-*Bob* 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G 036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da548823700972 Kyp68W4Lq6w78MnWzVCC1zj8pwm6VjUNCTxMY1EEMv5guH3XfquX
+*Bob* 
+- 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G 
+- 036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da548823700972 
+- Kyp68W4Lq6w78MnWzVCC1zj8pwm6VjUNCTxMY1EEMv5guH3XfquX
 
-*Witness* 135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa 027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e KwzvU7vjSWiuXDv7ohhNKa47zJUhHJzsh4LJ19A6yjFyZtLnaZvQ
+*Witness* 
+- 135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa
+- 027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e 
+- KwzvU7vjSWiuXDv7ohhNKa47zJUhHJzsh4LJ19A6yjFyZtLnaZvQ
 
 *Redeem Script* 522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae
 
@@ -58,7 +71,7 @@ The paramaters are
 
 ### Buying in
 
-Example xml serialziation
+*Example xml serialziation*
 ```
 <Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" Address="3P1c61hiSBuZstuVkECYo8ntDPVsnG2EQh" AddressType"2-3">
   <Encryption>AES-265</Encryption>
@@ -88,7 +101,7 @@ There will become a market for reputable witnesses based off a https dns endpoin
 
 ## Hand Contract
 1.  Number and position of players
-2.  Private Key.  Each hand also includes some entropy so hands can not be pre computed.  The dealer creates the GUID.
+2.  Private Key.  Each hand also includes a private key to add entropy so hands can not be pre computed.  The dealer creates the private key.
 
 ```
 <Hand Key="HBFwc/qnlFqkxwiXTmNkXw==">
@@ -135,9 +148,20 @@ Each card is double encrypted.  First round of encryption with the hand key.  In
 Then each card is encrypted again with the matching key and represented as base64.  Eg, card[0] is encrypted with key[0]
 Card[0]=
 
-
 ### Alice sends the deck to Bob
 As the deck is encrypted, and assumed shuffled, Bob has no way to known the contents of the deck.  Bob the encrypts the deck again and shuffles, and sends the result back to Alice.
+
+*Example message in xml*
+```
+<Deck>
+  <Card Index="0"></Card>
+  <Card Index="1"></Card>
+  ...
+  <Card Index="51"></Card>
+  <Signature>
+  </Signature>
+<Deck>
+```
 
 *Note:  The deck could also be shuffled by a witness.
 
@@ -157,7 +181,7 @@ The client software co-ordinates the game, based off agreed game rules.
 4.  Waits for next action message
 5.  Validates the message
 
-Example action message from Bob.  A call from the small blind.
+*Example action message from Bob.  A call from the small blind.*
 ```
 <Action Position="1" Address="1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G">
   <PreviousHash></PreviousHash>
