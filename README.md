@@ -77,6 +77,11 @@ By embedding the payment conditional upon knowledge of a secure cryptographic ha
 
 [https://lightning.network/lightning-network-summary.pdf]
 
+## Game as a contract
+In the below *table contract* the below game Texas Holdem is defined as an Enum.  The whole rules of the game could be defined as a contract, thus allowing anyone to develop variations of the game, such as the "Seven Duce" rule, other variations of poker such as Ohmaha or even other games.  
+
+These are out side the scope of this paper.
+
 ## Table Contract
 The paramaters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
 
@@ -87,14 +92,17 @@ The paramaters for a table are defined in the following schema.  Developers are 
 4.  Rake*
 5.  Min players
 6.  Max players
-7.  Game type (Enum, No Limit Texas Holdem)
-8.  Other (straddles, "run it twice")
+7.  Game type (Enum, No Limit Texas Holdem) *
+8.  Other (straddles, "run it twice") **
 9.  Address for multisig
 10.  Consensus Algorithm
 11.  Anti Collusion Algorithm
 11.  Version
 12.  Voting Algorithm
 13.  Channel Address
+
+* Perhaps an entire contract
+** Perhaps an entire contract
 
 *Example xml serialziation*
 ```
@@ -233,6 +241,7 @@ Once the hand has been played, the table then reaches consensus.   The signed ga
 Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done, the more fees it will incure. 
 
 ## Cashing out
+Closing the channel
 
 ## Network Topology
 
@@ -241,8 +250,8 @@ Fee vs Payouts.  The table would also include a paramater when to commite the ha
 ## Betting via lightning channels
 Each bet is a signature from the punter that is not broad cast to the network.   For example, in the heads up game, if both Alice and Bob post blinds, the net transfer result = 0.
 
-### Settlement
+## Settlement
 
 
-### References
+## References
 https://lightning.network/lightning-network-paper.pdf
