@@ -63,9 +63,23 @@ Messages are sent to all players, signed, and referencing the existing message. 
 2.  A punter can choose to start a table be defining a table contract
 3.  Tables should also broad cast their game, status and number of current players to other tables
 4.  Leaving the table (closing the channel)
+5.  Lightning network will facilitate micro payments "off chain".  The table can agree to bring them "on chain" after n hands are dealt.
+
+### Aside:  Lightning Network
+
+*How it Works.* 
+
+Funds are placed into a two-party, multisignature "channel" bitcoin address. This channel is represented as an entry on the bitcoin public ledger. In order to spend funds from the channel, both parties must agree on the new balance. The current balance is stored as the most recent transaction signed by both parties, spending from the channel address. To make a payment, both parties sign a new exit transaction spending from the channel address. All old exit transactions are invalidated by doing so.
+
+The Lightning Network does not require cooperation from the counterparty to exit the channel. Both parties have the option to unilaterally close the channel, ending their relationship. Since all parties have multiple multisignature channels with many di erent users on this network, one can send a payment to any other party across this network.
+
+By embedding the payment conditional upon knowledge of a secure cryptographic hash, payments can be made across a network of channels without the need for any party to have unilateral custodial ownership of funds. The Lightning Network enables what was previously not possible with trusted financial systems vulnerable to monopolies—without the need for custodial trust and ownership, participation on the network can be dynamic and open for all.
+
+[https://lightning.network/lightning-network-summary.pdf]
 
 ## Table Contract
-The paramaters are 
+The paramaters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
+
 1.  Encryption Algorithm (Enum AES-256)
 2.  Hash Algorithm (Enum SHA-256)
 3.  Currency (Enum)
@@ -76,9 +90,10 @@ The paramaters are
 7.  Game type (Enum, No Limit Texas Holdem)
 8.  Other (straddles, "run it twice")
 9.  Address for multisig
-10.  Consensus
+10.  Consensus Algorithm
+11.  Anti Collusion Algorithm
 11.  Version
-12.  Voting
+12.  Voting Algorithm
 13.  Channel Address
 
 *Example xml serialziation*
