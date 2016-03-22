@@ -212,6 +212,18 @@ We know how the distribution of cards that will be dealt.  In Holdem, each card 
 - Card[2] => Bob
 - Card[3] => Alice
 
+## Game play
+The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
+
+- Alice -> Action request message to Bob.
+- Bob -> Returns signed action message to Alice
+- Alice -> Checks signature, and adds action response to the block
+- Alice -> Broadcasts the concatinated block to all players
+- All players -> Verifiy the block and signature
+- All players -> Return verification message
+
+*TODO: CREATE SEQUENCE DIAGRAM*
+
 ## Flop, Turn and River
 The client software co-ordinates the game, based off agreed game rules. 
 
@@ -221,7 +233,7 @@ The client software co-ordinates the game, based off agreed game rules.
 4.  Waits for next action message
 5.  Validates the message
 
-*Example action message from Bob.  A call from the small blind.*
+*Example action message from Bob serialzed in XML.  A call from the small blind.*
 ```
 <Action Position="1" Address="1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G">
   <PreviousHash></PreviousHash>
@@ -232,9 +244,7 @@ The client software co-ordinates the game, based off agreed game rules.
   <MessageSignature>
   </MessageSignature>
 <Action>
-<Hash>
-
-</Hash>
+<Hash Algorithm="SHA256">8df28bd9b4617cb0c425ff838926533252a3840b4e602fdb7e181f3968165929</Hash>
 ```
 
 ## Post hand consensus
@@ -254,6 +264,7 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 
 ## Settlement
 
+## Team
 
 ## References
 https://lightning.network/lightning-network-paper.pdf
