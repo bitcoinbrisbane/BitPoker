@@ -47,7 +47,7 @@ Poker terminology
 https://coinb.in/?verify=522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae#verify
 
 ## The protocol
-Each client connects to the table starter, who then gives a list of players IPs.  They then connect to each other.  As new players join, the table starter.
+Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.
 
 If the table starter disconnects, the next joined player becomes the table starter.
 
@@ -60,10 +60,19 @@ Messages are sent to all players, signed, and referencing the existing message. 
 - Shuffle Request
 
 ### Overview
-1.  A punter either looks to join a table with game paramaters
-2.  A punter can choose to start a table be defining a table contract
-3.  Tables should also broad cast their game, status and number of current players to other tables
-4.  Leaving the table (closing the channel)
+If the game is to be developed using Etherum contracts:
+1.  The game is defined an an Etherum contract
+2.  Players agree to the table contract
+3.  Each players actions are defined as inputs for the hand contract
+4.  After the hand has ended, each player verifies the integrety of the hand contract.  Its in everyones best intrest to verify correctly [Game Theory Citation]
+5.  The hand inputs are then excuted on the Etherum network for the pot to be awarded
+
+Less use of Etherum
+1.  Players connect to each other via P2P
+2.  A player either looks to join a table with game paramaters
+3.  A palyer can choose to start a table be defining a table contract
+4.  Tables should also broad cast their game, status and number of current players to other tables
+5.  Leaving the table (closing the channel)
 5.  Lightning network will facilitate micro payments "off chain".  The table can agree to bring them "on chain" after n hands are dealt.
 
 ### Aside:  Lightning Network
@@ -94,16 +103,15 @@ The paramaters for a table are defined in the following schema.  Developers are 
 5.  Min players
 6.  Max players
 7.  Game type (Enum, No Limit Texas Holdem) *
-8.  Other (straddles, "run it twice") **
+8.  Other (straddles, "run it twice") *
 9.  Channel Address / multisig
 10.  Consensus Algorithm
-11.  Anti Collusion Algorithm
+11.  Anti Collusion Algorithm / Contract
 11.  Version
-12.  Voting Algorithm
+12.  Voting Algorithm / Contract
 13.  Channel Address
 
 * Perhaps an entire contract
-** Perhaps an entire contract
 
 *Example xml serialziation*
 ```
@@ -139,20 +147,27 @@ A player buying in opens a lightning payment channel with all players.
 
 "Through this network of interconnected payment channels, Lightning provides a scalable, decentralized micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
 
-## Hand Contract
-1.  Number and position of players
-2.  Private Key.  Each hand also includes a private key to add entropy so hands can not be pre computed.  The dealer creates the private key.
+## Game play
+The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
 
+## Hand Contract
+At the start of each hand, the dealer defines the hand contract which references the table contract.  
+
+1.  The players and seat postions
+2.  The stack of each player
+3.  A new "Private" Key to add entropy so hands can not be pre computed.  (IV or Salt instead?)
+
+*Example hand contract seralized in XML
 ```
-<Hand Key="HBFwc/qnlFqkxwiXTmNkXw==">
-  <Seat Number="1" Position="SB">1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G</Seat>
-  <Seat Number="2" Position="Dealer">1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF</Seat>
+<Hand Key="HBFwc/qnlFqkxwiXTmNkXw==" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
+  <Seat Number="1" Position="SB" Stack="1.01">1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G</Seat>
+  <Seat Number="2" Position="BB,Dealer" Stack="0.9">1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF</Seat>
   <Witness>135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa</Witness>
 <Hand>
 ```
 
 ## The Shuffle
-In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case, Alice is the dealer.  Bob the small blind, and Alice the big blind.
+In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case the hand contract defines Alice is the dealer, Bob the small blind, and Alice the big blind.
 
 - Alice = 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF
 - Bob = 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G
@@ -212,9 +227,6 @@ We know how the distribution of cards that will be dealt.  In Holdem, each card 
 - Card[2] => Bob
 - Card[3] => Alice
 
-## Game play
-The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
-
 - Alice -> Action request message to Bob.
 - Bob -> Returns signed action message to Alice
 - Alice -> Checks signature, and adds action response to the block
@@ -236,7 +248,7 @@ The client software co-ordinates the game, based off agreed game rules.
 *Example action message from Bob serialzed in XML.  A call from the small blind.*
 ```
 <Action Position="1" Address="1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G">
-  <PreviousHash></PreviousHash>
+  <PreviousHash>d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
   <Call>
     <Amount>0.001</Amount>
     <Tx></Tx>
@@ -248,7 +260,7 @@ The client software co-ordinates the game, based off agreed game rules.
 ```
 
 ## Post hand consensus
-Once the hand has been played, the table then reaches consensus.   The signed game history could then be persistend into an Ethereum block chain, referencing previous hands.  
+Once the hand has been played, the table then reaches consensus.  The signed game history could then be persistend into an Ethereum block chain referencing previous hands.  
 
 Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done, the more fees it will incure. 
 
@@ -267,4 +279,5 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 ## Team
 
 ## References
-https://lightning.network/lightning-network-paper.pdf
+1. https://lightning.network/lightning-network-paper.pdf
+2. http://www.pokerlistings.com/poker-rules-texas-holdem
