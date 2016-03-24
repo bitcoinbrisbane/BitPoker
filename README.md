@@ -150,8 +150,19 @@ A player buying in opens a lightning payment channel with all players.
 
 ## Game play
 The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
+1.  Define the hand contract
+2.  Shuffle the deck
+3.  Post blinds
+4.  Pre flop round
+5.  Deal the flop
+6.  Post flop round
+7.  Deal the turn
+8.  Post turn round
+9.  Deal the river
+10.  Post river round
+11.  Award the pot
 
-## Hand Contract
+### Hand Contract
 At the start of each hand, the dealer defines the hand contract which references the table contract.  
 
 1.  The players and seat postions
@@ -167,7 +178,7 @@ At the start of each hand, the dealer defines the hand contract which references
 <Hand>
 ```
 
-## The Shuffle
+### The Shuffle
 In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case the hand contract defines Alice is the dealer, Bob the small blind, and Alice the big blind.
 
 - Alice = msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv
@@ -204,7 +215,7 @@ Each card is double encrypted.  First round of encryption with the hand key.  In
 Then each card is encrypted again with the matching key and represented as base64.  Eg, card[0] is encrypted with key[0]
 - Card[0]=
 
-### Alice sends the deck to Bob
+#### Alice sends the deck to Bob
 As the deck is encrypted, and assumed shuffled, Bob has no way to known the contents of the deck.  Bob the encrypts the deck again and shuffles, and sends the result back to Alice.
 
 *Example message in xml*
@@ -221,7 +232,9 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 
 *Note:  The deck could also be shuffled by a witness.
 
-## Pre flop
+### Post blinds
+
+### Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
 - Card[0] => Bob
 - Card[1] => Alice
@@ -237,7 +250,7 @@ We know how the distribution of cards that will be dealt.  In Holdem, each card 
 
 *TODO: CREATE SEQUENCE DIAGRAM*
 
-## Flop, Turn and River
+### Flop, Turn and River
 The client software co-ordinates the game, based off agreed game rules. 
 
 1.  Enforces action rules of its own player, such as check, bet or fold
@@ -260,7 +273,7 @@ The client software co-ordinates the game, based off agreed game rules.
 <Hash Algorithm="SHA256">8df28bd9b4617cb0c425ff838926533252a3840b4e602fdb7e181f3968165929</Hash>
 ```
 
-## Post hand consensus
+### Award the post. (Post hand consensus)
 Once the hand has been played, the table then reaches consensus.  The signed game history could then be persistend into an Ethereum block chain referencing previous hands.  
 
 Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done, the more fees it will incure. 
