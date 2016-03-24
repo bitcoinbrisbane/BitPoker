@@ -28,19 +28,19 @@ Poker terminology
 
 ### Example Keys (Address, Public Key, WIF Private Key)
 *Alice* 
-- 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF 
-- 03c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f75 
-- KzWvEbX8aysrcoeW8ucCnqnDDkWbWF45xEWmKjQuhN2DBZtQ7Lp2
+- msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv 
+- 041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1 
+- 93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS
 
 *Bob* 
-- 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G 
-- 036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da548823700972 
-- Kyp68W4Lq6w78MnWzVCC1zj8pwm6VjUNCTxMY1EEMv5guH3XfquX
+- mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo 
+- 04F48396AC675B97EEB54E57554827CC2B937C2DAE285A9198F9582B15C920D91309BC567858DC63357BCD5D24FD8C041CA55DE8BAE62C7315B0BA66FE5F96C20D 
+- 91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672
 
 *Witness* 
-- 135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa
-- 027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e 
-- KwzvU7vjSWiuXDv7ohhNKa47zJUhHJzsh4LJ19A6yjFyZtLnaZvQ
+- mq1Ctw6xTcomjGgQz5pi8oXdR1tjjZQHYs
+-  
+- 93C4fbYtv8VXWDnbJLzQiVfBGuQgfz1hBF1QwQeJxQepe9oE876
 
 *Redeem Script* 522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae
 
@@ -97,6 +97,7 @@ The paramaters for a table are defined in the following schema.  Developers are 
 
 1.  Encryption Algorithm (Enum AES-256)
 2.  Hash Algorithm (Enum SHA-256)
+3.  Table ID (GUID)
 3.  Currency (Enum)
 3.  Blinds
 4.  Rake*
@@ -160,17 +161,17 @@ At the start of each hand, the dealer defines the hand contract which references
 *Example hand contract seralized in XML
 ```
 <Hand Key="HBFwc/qnlFqkxwiXTmNkXw==" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
-  <Seat Number="1" Position="SB" Stack="1.01">1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G</Seat>
-  <Seat Number="2" Position="BB,Dealer" Stack="0.9">1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF</Seat>
-  <Witness>135iuRV5GWKjRMhWbSnSyPLYHy3pNHLYKa</Witness>
+  <Seat Number="1" Position="SB" Stack="1.01">mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</Seat>
+  <Seat Number="2" Position="BB,Dealer" Stack="0.9">msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</Seat>
+  <Witness>mq1Ctw6xTcomjGgQz5pi8oXdR1tjjZQHYs</Witness>
 <Hand>
 ```
 
 ## The Shuffle
 In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In this case the hand contract defines Alice is the dealer, Bob the small blind, and Alice the big blind.
 
-- Alice = 1LgogfdwKv5m9jDLNr3neogWr1y67oVJLF
-- Bob = 1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G
+- Alice = msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv
+- Bob = mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo
 
 The deck is represented by an array[52].  
 
@@ -247,7 +248,7 @@ The client software co-ordinates the game, based off agreed game rules.
 
 *Example action message from Bob serialzed in XML.  A call from the small blind.*
 ```
-<Action Position="1" Address="1PGq12ixSJiyq5hSwm2aX7q64pcnDzbX4G">
+<Action Position="1" Address="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
   <PreviousHash>d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
   <Call>
     <Amount>0.001</Amount>
