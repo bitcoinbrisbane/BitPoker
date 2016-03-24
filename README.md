@@ -12,6 +12,13 @@ Different clients developed in different programming languages are encouraged.
 | K  | King  |
 | Q  | Queen |
 | J  | Jack  |
+| T  | Ten |
+| 9 | 9 |
+| 9 | 9 |
+| 9 | 9 |
+| 9 | 9 |
+| 9 | 9 |
+| 9 | 9 |
 
 Suites
 
