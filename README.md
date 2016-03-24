@@ -188,8 +188,8 @@ The deck is represented by an array[52].
 - Card[2] = AH
 - Card[3] = 2S
 
-Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.
-- Key[0]=VC65FGS6DQpKLzC+65XPbQ==
+Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.  *See test dat for full set
+- Key[0]=ro4So+aeT6VJt9/OKTa/Ag==
 - Key[1]=r5a9aeztGOAFovYk+SESHg==
 - Key[2]=TneaKNlV8fZgVJ61e6Xwwg==
 - Key[3]=YhcT8QLRmmcV2Q/CxOkQKQ==
@@ -278,6 +278,10 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 ## Settlement
 
 ## Team
+
+## Test Data
+Alice keys
+Bob keys
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
