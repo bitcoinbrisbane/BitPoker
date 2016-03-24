@@ -190,9 +190,9 @@ The deck is represented by an array[52].
 
 Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.  *See test dat for full set
 - Key[0]=ro4So+aeT6VJt9/OKTa/Ag==
-- Key[1]=r5a9aeztGOAFovYk+SESHg==
-- Key[2]=TneaKNlV8fZgVJ61e6Xwwg==
-- Key[3]=YhcT8QLRmmcV2Q/CxOkQKQ==
+- Key[1]=GcL2OvzsDg54RIZZ5ruMFA==
+- Key[2]=HEKFpbtQnjl715X5P+8Y8g==
+- Key[3]=2cXOWr/IQcJ/AyqhF/W/jg==
 
 Each card is double encrypted.  First round of encryption with the hand key.  In the example key = HBFwc/qnlFqkxwiXTmNkXw== (1c 11 70 73 fa a7 94 5a a4 c7 08 97 4e 63 64 5f) in hex.
 
@@ -280,8 +280,8 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 ## Team
 
 ## Test Data
-Alice keys
-Bob keys
+- Alice keys
+- Bob keys
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
