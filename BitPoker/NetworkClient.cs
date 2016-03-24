@@ -18,7 +18,7 @@ namespace BitPoker
 			return null;
 		}
 
-		public static void StartClient(String message) 
+		public static void StartClient(String ip, String message) 
 		{
 			// Data buffer for incoming data.
 			byte[] bytes = new byte[1024];
@@ -29,7 +29,7 @@ namespace BitPoker
 				// Establish the remote endpoint for the socket.
 				// This example uses port 11000 on the local computer.
 				//IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
-				IPAddress ipAddress = IPAddress.Parse("192.168.0.1");
+				IPAddress ipAddress = IPAddress.Parse(ip);
 				
 				IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
 

@@ -36,6 +36,8 @@ namespace BitPoker
 
 		public String BitcoinAddress { get; set; }
 
+		public Int64 Stack { get; set; }
+
 		public TexasHoldemPlayer()
 		{
 			Deck = new List<Byte[]> (52);
@@ -90,10 +92,13 @@ namespace BitPoker
 			{
 				Byte[] key = new Byte[16];
 				rng.NextBytes (key);
+				key.CopyTo (allKeys, i * 16);
 
 				_keys.Add (key);
 				Console.WriteLine (Convert.ToBase64String(key));
 			}
+
+			//Calculate hash on allKeys
 		}
 
 		public void EncryptDeck()

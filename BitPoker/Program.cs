@@ -24,8 +24,23 @@ namespace BitPoker
 			NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress ();
 			NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress ();
 
-			TexasHoldemPlayer alice = new TexasHoldemPlayer () { Position = 0, BitcoinAddress = alice_address.ToString() };
-			TexasHoldemPlayer bob = new TexasHoldemPlayer () { Position = 1, BitcoinAddress = bob_address.ToString() };
+			TexasHoldemPlayer alice = new TexasHoldemPlayer () 
+			{ 
+				Position = 0, 
+				BitcoinAddress = alice_address.ToString(),
+				IsDealer = true,
+				IsBigBlind = true,
+				Stack = 50000000
+			};
+
+			TexasHoldemPlayer bob = new TexasHoldemPlayer () 
+			{ 
+				Position = 1, 
+				BitcoinAddress = bob_address.ToString(),
+				IsSmallBlind = true,
+				Stack = 4000000,
+				IpAddress = "192.168.0.1"
+			};
 
 
 			//Create table contract
@@ -37,12 +52,14 @@ namespace BitPoker
 			};
 
 			String json = Newtonsoft.Json.JsonConvert.SerializeObject (table);
+
+			//Sign message
 			//NBitcoin.Key key = NBitcoin.Key.Parse (alice_wif, NBitcoin.Network.TestNet);
 			//Byte[] signature = key.SignMessage ();
 
 
 			//Bob joins, send the table contract
-			String result = NetworkClient.SendMessage(bob.IpAddress, json);
+			NetworkClient.StartClient(bob.IpAddress, json);
 
 
 			//Alice is dealer
@@ -50,7 +67,7 @@ namespace BitPoker
 
 
 			//Swap and shuff shuffle
-			bob.SwapDeck(alice.Deck);
+			//bob.SwapDeck(alice.Deck);
 
 			//Know to all.
 			TableDeck = bob.Deck;
@@ -59,7 +76,7 @@ namespace BitPoker
 			NetworkClient.SendMessage (bob.IpAddress, "");
 
 			//Alice is dealer
-			var result = NetworkClient.SendMessage(bob.IpAddress, "Post Small Blind");
+			//var result = NetworkClient.SendMessage(bob.IpAddress, "Post Small Blind");
 
 
 		}
