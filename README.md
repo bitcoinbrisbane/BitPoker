@@ -47,13 +47,15 @@ Poker terminology
 https://coinb.in/?verify=522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae#verify
 
 ## The protocol
-Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.
+Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
-If the table starter disconnects, the next joined player becomes the table starter.
+- Table reaches consensus on whos turn to act
+- Table reaches conesnsus on the legal moves / actions a player can make
+- Table waits for a signed message from that player
+- All other players validate that message
+- Repeat
 
-Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.  
-
-### Message types
+### Sample Message types
 - Join
 - Quit
 - Action
@@ -61,6 +63,7 @@ Messages are sent to all players, signed, and referencing the existing message. 
 
 ### Overview
 If the game is to be developed using Etherum contracts:
+
 1.  The game is defined an an Etherum contract
 2.  Players agree to the table contract
 3.  Each players actions are defined as inputs for the hand contract
@@ -68,8 +71,9 @@ If the game is to be developed using Etherum contracts:
 5.  The hand inputs are then excuted on the Etherum network for the pot to be awarded
 
 Less use of Etherum
+
 1.  Players connect to each other via P2P
-2.  A player either looks to join a table with game paramaters
+2.  A player either looks to join a table and reviews the contract
 3.  A palyer can choose to start a table be defining a table contract
 4.  Tables should also broad cast their game, status and number of current players to other tables
 5.  Leaving the table (closing the channel)
@@ -108,9 +112,9 @@ The paramaters for a table are defined in the following schema.  Developers are 
 9.  Channel Address / multisig
 10.  Consensus Algorithm
 11.  Anti Collusion Algorithm / Contract
-11.  Version
-12.  Voting Algorithm / Contract
-13.  Channel Address
+12.  Version
+13.  Voting Algorithm / Contract
+14.  Channel Address
 
 * Perhaps an entire contract
 
@@ -236,6 +240,7 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 
 ### Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
+
 - Card[0] => Bob
 - Card[1] => Alice
 - Card[2] => Bob
