@@ -188,7 +188,7 @@ The deck is represented by an array[52].
 - Card[2] = AH
 - Card[3] = 2S
 
-Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.  *See test dat for full set
+Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.  *See test data for full set.
 - Key[0]=ro4So+aeT6VJt9/OKTa/Ag==
 - Key[1]=GcL2OvzsDg54RIZZ5ruMFA==
 - Key[2]=HEKFpbtQnjl715X5P+8Y8g==
@@ -202,7 +202,7 @@ Each card is double encrypted.  First round of encryption with the hand key.  In
 - Card[3]=
 
 Then each card is encrypted again with the matching key and represented as base64.  Eg, card[0] is encrypted with key[0]
-Card[0]=
+- Card[0]=
 
 ### Alice sends the deck to Bob
 As the deck is encrypted, and assumed shuffled, Bob has no way to known the contents of the deck.  Bob the encrypts the deck again and shuffles, and sends the result back to Alice.
