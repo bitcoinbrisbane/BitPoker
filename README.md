@@ -14,11 +14,13 @@ Different clients developed in different programming languages are encouraged.
 | J  | Jack  |
 | T  | Ten |
 | 9 | 9 |
-| 9 | 9 |
-| 9 | 9 |
-| 9 | 9 |
-| 9 | 9 |
-| 9 | 9 |
+| 8 | 8 |
+| 7 | 7 |
+| 6 | 6 |
+| 5 | 5 |
+| 4 | 4 |
+| 3 | 3 |
+| 2 | 2 |
 
 Suites
 
