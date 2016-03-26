@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
+using BitPoker.Models;
 
 namespace BitPoker
 {

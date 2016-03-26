@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BitPoker.Models.Contracts
 {
@@ -14,9 +15,12 @@ namespace BitPoker.Models.Contracts
 
 		public Int16 MinPlayers { get; set; }
 
+        public ICollection<Byte[]> Deck { get; set; }
+
 		public Table ()
 		{
 			this.Id = new Guid ();
+            this.Deck = new List<Byte[]>();
 		}
 	}
 }
