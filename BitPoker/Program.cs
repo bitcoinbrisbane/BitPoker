@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 
 namespace BitPoker
 {
@@ -12,8 +14,22 @@ namespace BitPoker
 
 		private static Stack<String> actions;
 
+		private static ICollection<TexasHoldemPlayer> Players;
+
+		private static NetworkClient _client;
+		private static TcpListener listener;
+
 		public static void Main (string[] args)
 		{
+			//http://www.codeproject.com/Articles/745134/csharp-async-socket-server
+			//https://code.msdn.microsoft.com/windowsdesktop/Communication-through-91a2582b/
+
+			//CancellationTokenSource cts = new CancellationTokenSource();
+			listener = new TcpListener(IPAddress.Any, 6666);
+
+			_client = new NetworkClient () { ListeningPort = 11001 };
+			_client.StartListening ();
+
 			//For testing
 			const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
 			const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
@@ -42,6 +58,10 @@ namespace BitPoker
 				IpAddress = "192.168.0.1"
 			};
 
+			Players = new List<TexasHoldemPlayer> ();
+			Players.Add (alice);
+			Players.Add (bob);
+
 
 			//Create table contract
 			BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table () 
@@ -59,7 +79,7 @@ namespace BitPoker
 
 
 			//Bob joins, send the table contract
-			NetworkClient.StartClient(bob.IpAddress, json);
+			NetworkClient.SendMessage(bob.IpAddress, json);
 
 
 			//Alice is dealer
