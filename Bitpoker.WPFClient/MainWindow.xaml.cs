@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BitPoker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -19,6 +20,9 @@ using System.Windows.Threading;
 
 namespace Bitpoker.WPFClient
 {
+    //Thanks http://www.codeproject.com/Articles/463947/Working-with-Sockets-in-Csharp
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -38,6 +42,8 @@ namespace Bitpoker.WPFClient
 
         private Byte[] IV = new Byte[16];
 
+        private ViewModels.MainViewModel _viewModel = new ViewModels.MainViewModel();
+
         public MainWindow()
         {
             const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
@@ -49,7 +55,7 @@ namespace Bitpoker.WPFClient
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
             NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
 
-            TexasHoldemPlayer alice = new TexasHoldemPlayer()
+            BitPoker.Models.TexasHoldemPlayer alice = new TexasHoldemPlayer()
             {
                 Position = 0,
                 BitcoinAddress = alice_address.ToString(),
@@ -57,6 +63,8 @@ namespace Bitpoker.WPFClient
                 IsBigBlind = true,
                 Stack = 50000000
             };
+
+
 
             InitializeComponent();
         }
@@ -105,25 +113,25 @@ namespace Bitpoker.WPFClient
             }
         }
 
-        private void Listen_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Places a Socket in a listening state and specifies the maximum 
-                // Length of the pending connections queue 
-                sListener.Listen(10);
+        //private void Listen_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Places a Socket in a listening state and specifies the maximum 
+        //        // Length of the pending connections queue 
+        //        sListener.Listen(10);
 
-                // Begins an asynchronous operation to accept an attempt 
-                AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
-                sListener.BeginAccept(aCallback, sListener);
+        //        // Begins an asynchronous operation to accept an attempt 
+        //        AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
+        //        sListener.BeginAccept(aCallback, sListener);
 
-                //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
+        //        //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
 
-                //StartListen_Button.IsEnabled = false;
-                //Send_Button.IsEnabled = true;
-            }
-            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
-        }
+        //        //StartListen_Button.IsEnabled = false;
+        //        //Send_Button.IsEnabled = true;
+        //    }
+        //    catch (Exception exc) { MessageBox.Show(exc.ToString()); }
+        //}
 
         public void AcceptCallback(IAsyncResult ar)
         {
@@ -276,6 +284,31 @@ namespace Bitpoker.WPFClient
             { 
                 MessageBox.Show(exc.ToString()); 
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.NewTable(2, 10);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Places a Socket in a listening state and specifies the maximum 
+                // Length of the pending connections queue 
+                sListener.Listen(10);
+
+                // Begins an asynchronous operation to accept an attempt 
+                AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
+                sListener.BeginAccept(aCallback, sListener);
+
+                //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
+
+                //StartListen_Button.IsEnabled = false;
+                //Send_Button.IsEnabled = true;
+            }
+            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
         }
     }
 }

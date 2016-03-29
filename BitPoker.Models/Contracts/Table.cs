@@ -15,12 +15,20 @@ namespace BitPoker.Models.Contracts
 
 		public Int16 MinPlayers { get; set; }
 
-        public ICollection<Byte[]> Deck { get; set; }
+        public IDeck Deck { get; set; }
 
-		public Table ()
+        public IList<TexasHoldemPlayer> Players { get; set; }
+
+		public Table (Int16 minPlayers, Int16 maxPlayers)
 		{
 			this.Id = new Guid ();
-            this.Deck = new List<Byte[]>();
+            this.MinPlayers = minPlayers;
+            this.MaxPlayers = maxPlayers;
+
+            this.Players = new List<TexasHoldemPlayer>(maxPlayers);
+
+            this.Players[0].IsDealer = true;
+            this.Players[1].IsSmallBlind = true;
 		}
 	}
 }

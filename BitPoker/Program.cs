@@ -44,69 +44,30 @@ namespace BitPoker
 			};
 
 
-			//Create table contract
-			BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table () 
-			{
-				SmallBlind = 10000,
-				BigBlind = 20000,
-				Id = Guid.NewGuid()
-			};
+            ////Create table contract
+            //BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table () 
+            //{
+            //    SmallBlind = 10000,
+            //    BigBlind = 20000,
+            //    Id = Guid.NewGuid()
+            //};
 
-			String json = Newtonsoft.Json.JsonConvert.SerializeObject (table);
+            //String json = Newtonsoft.Json.JsonConvert.SerializeObject (table);
 
-			//Sign message
-			//NBitcoin.Key key = NBitcoin.Key.Parse (alice_wif, NBitcoin.Network.TestNet);
-			//Byte[] signature = key.SignMessage ();
-
-
-			//Bob joins, send the table contract
-			NetworkClient.StartClient(bob.IpAddress, json);
+            ////Sign message
+            ////NBitcoin.Key key = NBitcoin.Key.Parse (alice_wif, NBitcoin.Network.TestNet);
+            ////Byte[] signature = key.SignMessage ();
 
 
-			//Alice is dealer
-			alice.NewDeck ();
+            ////Bob joins, send the table contract
+            //NetworkClient.StartClient(bob.IpAddress, json);
+
+            //NetworkClient.SendMessage (bob.IpAddress, "");
+
+            ////Alice is dealer
+            ////var result = NetworkClient.SendMessage(bob.IpAddress, "Post Small Blind");
 
 
-			//Swap and shuff shuffle
-			//bob.SwapDeck(alice.Deck);
-
-			//Know to all.
-			TableDeck = bob.Deck;
-
-
-			NetworkClient.SendMessage (bob.IpAddress, "");
-
-			//Alice is dealer
-			//var result = NetworkClient.SendMessage(bob.IpAddress, "Post Small Blind");
-
-
-		}
-
-		/// <summary>
-		/// Shuffle the specified list.
-		/// </summary>
-		/// <param name="list">List.</param>
-		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public static void Shuffle<T>(IList<T> list)
-		{
-			using (RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider ()) 
-			{
-				int n = list.Count;
-
-				while (n > 1) 
-				{
-					byte[] box = new byte[1];
-					do
-						provider.GetBytes (box);
-					while (!(box [0] < n * (Byte.MaxValue / n)));
-					int k = (box [0] % n);
-					n--;
-
-					T value = list [k];
-					list [k] = list [n];
-					list [n] = value;
-				}
-			}
 		}
 
 		/// <summary>

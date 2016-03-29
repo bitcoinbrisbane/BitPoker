@@ -57,9 +57,7 @@
       <Name>BitPoker.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="TestData\AliceKeys.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

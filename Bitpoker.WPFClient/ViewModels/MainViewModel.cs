@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,46 +12,26 @@ namespace Bitpoker.WPFClient.ViewModels
 {
     public class MainViewModel
     {
+
+        SocketPermission permission;
+        Socket sListener;
+        IPEndPoint ipEndPoint;
+        Socket handler;
+        Socket senderSock; 
+
         private static Random rng = new Random();  
 
         public IObservable<BitPoker.Models.PlayerInfo> Players { get; set; }
 
         public BitPoker.Models.Contracts.Table Table { get; set; }
 
-        public void NewDeck()
+        internal ICollection<Byte[]> Keys { get; set; }
+
+        internal Byte[] IV { get; set; }
+
+        public void NewTable(Int16 minPlayers, Int16 maxPlayers)
         {
-            List<String> suites = new List<String>(4);
-            suites.Add("H");
-            suites.Add("D");
-            suites.Add("S");
-            suites.Add("C");
-
-            IList<String> deck = new List<string>(52);
-
-            foreach (String suite in suites)
-            {
-                for (Int32 i = 0; i < 13; i++)
-                {
-                    String card = String.Format("{0}{1}", i, suite);
-                    deck.Add(card);
-                }
-            }
-
-            //Shuffle
-            IEnumerable<String> shuffledDeck = deck.Randomize();
-
-            Int32 j = 0;
-            foreach (String card in shuffledDeck)
-            {
-                Byte[] encryptedCard = EncryptStringToBytes_Aes(card, _keys[j], IV);
-                Deck.Add(encryptedCard);
-
-                Console.WriteLine(Convert.ToBase64String(encryptedCard));
-                j++;
-            }
-
-            deck = null;
-            shuffledDeck = null;
+            this.Table = new BitPoker.Models.Contracts.Table(minPlayers, maxPlayers);
         }
 
         public void CreateKeys()
@@ -60,17 +44,46 @@ namespace Bitpoker.WPFClient.ViewModels
                 rng.NextBytes(key);
                 key.CopyTo(allKeys, i * 16);
 
-                _keys.Add(key);
-                Console.WriteLine(Convert.ToBase64String(key));
+                this.Keys.Add(key);
+                //Console.WriteLine(Convert.ToBase64String(key));
             }
 
             //Calculate hash on allKeys
         }
 
-        public void Shuffle()
+        public void Connect(IPAddress ipAddr)
         {
-            var deck = Deck.OrderBy(item => rng.Next());
-        }
+            try
+            {
+                // Create one SocketPermission for socket access restrictions  
+                SocketPermission permission = new SocketPermission(NetworkAccess.Connect, TransportType.Tcp, "", SocketPermission.AllPorts);
+
+                // Ensures the code to have permission to access a Socket  
+                permission.Demand();
+
+                //// Resolves a host name to an IPHostEntry instance             
+                //IPHostEntry ipHost = Dns.GetHostEntry("");
+
+                //// Gets first IP address associated with a localhost  
+                //IPAddress ipAddr = ipHost.AddressList[0];
+
+                // Creates a network endpoint  
+                IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, 4510);
+
+                // Create one Socket object to setup Tcp connection  
+                senderSock = new Socket(ipAddr.AddressFamily, SocketType.Stream,  ProtocolType.Tcp );
+
+                senderSock.NoDelay = false;   // Using the Nagle algorithm  
+
+                // Establishes a connection to a remote host  
+                senderSock.Connect(ipEndPoint);
+
+            }
+            catch (Exception exc)
+            {
+
+            };
+        } 
 
         public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
         {
