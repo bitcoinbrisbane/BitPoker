@@ -55,6 +55,67 @@ Poker terminology
 
 https://coinb.in/?verify=522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae#verify
 
+### Test PGP Private and Public Keys
+
+*Alice*
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+Version: OpenPGP.js v.1.20130420
+Comment: http://openpgpjs.org
+
+xcA4BFb6E1MBAf9pyMRXuXc9A7DR8dDe7zkVEksMfOIDuYAE/Kd4cfbpRLRJ
+5Ph0iVi69XU3GV1KS+1ThkqrlU94p8/WKAQRjdt7ABEBAAEAAf4gqwavjLAd
+IJmnjEUTw87eCgMxPRPTUKMPZzMUyCUXTmFs3q+DGVnIDs928fgNS0RIovSB
+GXZnx6uH74qKqg8BAQCxcsy4qvapXHAHmHVgxvgkQFa7xec/nXNKcCJ8xZiq
+gQEAmJyuUqmFxaa9FtOOz+9lHqVG5L6E/1V0jupaWHsRL/sA/RDQgcmIZlo3
+jGDX1zK6kt5H65pUKjZqFSFdS5vwT1HXUInNJFRlc3QgTWNUZXN0aW5ndG9u
+IDx0ZXN0QGV4YW1wbGUuY29tPsJcBBABCAAQBQJW+hNTCRBx4oH3PIZldwAA
+DO8B/0Lf1eqIfbBCIhqq4n7ge/qy5ITQKtMT1+P2pSqGj2+6/hUQhmHcvqBq
+Sp07i29QBZiup2mExktQMaMvCLD40Vo=
+=tIvp
+-----END PGP PRIVATE KEY BLOCK-----
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: OpenPGP.js v.1.20130420
+Comment: http://openpgpjs.org
+
+xk0EVvoTUwEB/2nIxFe5dz0DsNHx0N7vORUSSwx84gO5gAT8p3hx9ulEtEnk
++HSJWLr1dTcZXUpL7VOGSquVT3inz9YoBBGN23sAEQEAAc0kVGVzdCBNY1Rl
+c3Rpbmd0b24gPHRlc3RAZXhhbXBsZS5jb20+wlwEEAEIABAFAlb6E1MJEHHi
+gfc8hmV3AAAM7wH/Qt/V6oh9sEIiGqrifuB7+rLkhNAq0xPX4/alKoaPb7r+
+FRCGYdy+oGpKnTuLb1AFmK6naYTGS1Axoy8IsPjRWg==
+=cWad
+-----END PGP PUBLIC KEY BLOCK-----
+
+*Bob*
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+Version: OpenPGP.js v.1.20130420
+Comment: http://openpgpjs.org
+
+xcA4BFb6FKoBAgC5MgyxxJSELbTHZpN6T8H5ncblOmZkXrFlXtxC9acdReg/
+15PWiB0omxzDRI0PvUsRHIcgJvd9h97Nq2F6eUITABEBAAEAAf9nk9SBwD6I
+Rr/rHjWxnNYSc+n/3s/Rpxx0Y7+xO49B0RmLVBEt8QljZIkc/tXC4HqwzpwW
+FmLQFrPqUWoKtkWhAQDmINi1D92m3B4zjgqQ94ZPgiWrGsN+hoPJlWj0JyPc
+eQEAzgQGc5iRhOSQJ+35Rw0ma0h/kAOHB6nUYWywE7P3F+sBAIOkByxHtuQi
+z2PmIxN9pRa6VQrm84HBpOWfzXEqS2J0UULNJFRlc3QgTWNUZXN0aW5ndG9u
+IDx0ZXN0QGV4YW1wbGUuY29tPsJcBBABCAAQBQJW+hSrCRAT+yaNasjJggAA
+1W0CAJRnrk8vd6PJhoBrH22U8ninyQahVmdmQ31jwdvVuENUNNPmxVD2UPQJ
+nuiaFDXyQsyWs/nnbliJdS4F1HtGOCA=
+=B2vt
+-----END PGP PRIVATE KEY BLOCK-----
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: OpenPGP.js v.1.20130420
+Comment: http://openpgpjs.org
+
+xk0EVvoUqgECALkyDLHElIQttMdmk3pPwfmdxuU6ZmResWVe3EL1px1F6D/X
+k9aIHSibHMNEjQ+9SxEchyAm932H3s2rYXp5QhMAEQEAAc0kVGVzdCBNY1Rl
+c3Rpbmd0b24gPHRlc3RAZXhhbXBsZS5jb20+wlwEEAEIABAFAlb6FKsJEBP7
+Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
+0+bFUPZQ9Ame6JoUNfJCzJaz+eduWIl1LgXUe0Y4IA==
+=Amq+
+-----END PGP PUBLIC KEY BLOCK-----
+
+
 ## The protocol
 Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
@@ -239,6 +300,17 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
   ...
   <Card Index="51"></Card>
   <Signature>
+  <![CDATA[
+  -----BEGIN PGP SIGNATURE-----
+  Version: OpenPGP.js v1.0.1
+  Comment: http://openpgpjs.org
+  
+  wlwEAQEIABAFAlb6E4IJEHHigfc8hmV3AABO5QH/YrvNcYsG+F6J8QJ99Mq2
+  gtbA1oWxHJo9j9NXpfvxVQbjv4ZQtvGbQ9qQJY5eKBDMlcgW8Dz6Tl7E1DXq
+  SGSzdg==
+  =M2wV
+  -----END PGP SIGNATURE-----
+  ]]>
   </Signature>
 <Deck>
 ```
@@ -315,3 +387,4 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
 2. http://www.pokerlistings.com/poker-rules-texas-holdem
+3. http://ianpurton.com/online-pgp/
