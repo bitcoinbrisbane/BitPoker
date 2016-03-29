@@ -315,8 +315,6 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 <Deck>
 ```
 
-<img src="http://yuml.me/diagram/funky/activity/(start)-><a>[encrypt]->(Shuffle)->(Encrypt),<a>[Shuffle]->(end)" >
-
 *Note:  The deck could also be shuffled by a witness.
 
 ### Post blinds
@@ -378,7 +376,6 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 
 ## Settlement
 
-## Team
 
 ## Test Data
 - Alice keys
