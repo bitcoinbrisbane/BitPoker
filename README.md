@@ -380,6 +380,15 @@ Each bet is a signature from the punter that is not broad cast to the network.  
 ## Test Data
 - Alice keys
 - Bob keys
+For full key set, see the test data folder
+
+### Mock API
+An REST API is located at 
+https://bitpoker.azurewebsites.net/api
+
+GET /Players
+GET /Players/<bitcoinaddress>
+
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
