@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BitPoker.Models
 {
@@ -15,6 +16,8 @@ namespace BitPoker.Models
 		public Int32 Latency { get; set; }
 
 		public DateTime LastSeen { get; set; }
+
+        public IEnumerable<Guid> Tables { get; set; }
 
 		public PlayerInfo ()
 		{
