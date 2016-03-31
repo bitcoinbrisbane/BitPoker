@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models
 {
-	public class PostSmallBlindMessage : IMessage, IMoneyMessage
+	public class PostSmallBlindMessage : IMessage 
 	{
 		public String Tx { get; set; }
 
