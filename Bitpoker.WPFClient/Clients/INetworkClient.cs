@@ -11,5 +11,7 @@ namespace Bitpoker.WPFClient.Clients
         IEnumerable<BitPoker.Models.PlayerInfo> GetPlayers();
 
         Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync();
+
+        Boolean IsConnected { get; }
     }
 }

@@ -12,14 +12,15 @@ namespace Bitpoker.WPFClient.ViewModels
 {
     public class MainViewModel
     {
-
-        SocketPermission permission;
-        Socket sListener;
-        IPEndPoint ipEndPoint;
-        Socket handler;
+        //SocketPermission permission;
+        //Socket sListener;
+        //IPEndPoint ipEndPoint;
+        //Socket handler;
         public Socket senderSock; 
 
-        private static Random rng = new Random();  
+        private static Random rng = new Random();
+
+        public IList<Clients.INetworkClient> Clients { get; set; }
 
         public IObservable<BitPoker.Models.PlayerInfo> Players { get; set; }
 
@@ -29,9 +30,30 @@ namespace Bitpoker.WPFClient.ViewModels
 
         internal Byte[] IV { get; set; }
 
+        public MainViewModel()
+        {
+            this.Clients = new List<Clients.INetworkClient>(2);
+
+
+            this.Clients.Add(new Clients.APIClient("https://bitpoker.azurewebsites.net/api/"));
+            this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
+
+        }
+
         public void NewTable(Int16 minPlayers, Int16 maxPlayers)
         {
             this.Table = new BitPoker.Models.Contracts.Table(minPlayers, maxPlayers);
+        }
+
+        public void GetPlayers()
+        {
+            foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
+            {
+                if (client.IsConnected)
+                {
+                    var players = client.GetPlayers();
+                }
+            }
         }
 
         public void CreateKeys()
@@ -83,13 +105,6 @@ namespace Bitpoker.WPFClient.ViewModels
             {
 
             };
-        }
-
-        public void SendGetPlayersMessage()
-        {
-            //Call connected
-
-            //Deseralize json
         }
 
         public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)

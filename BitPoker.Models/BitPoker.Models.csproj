@@ -44,7 +44,7 @@
     <Compile Include="Messages\MuckMessage.cs" />
     <Compile Include="Messages\PostSmallBlindMessage.cs" />
     <Compile Include="Messages\IMoneyMessage.cs" />
-    <Compile Include="Messages\PlayerInfo.cs" />
+    <Compile Include="PlayerInfo.cs" />
     <Compile Include="Messages\ShuffleMessage.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
   </ItemGroup>

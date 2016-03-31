@@ -34,5 +34,11 @@ namespace Bitpoker.WPFClient.Clients
 
             throw new NotImplementedException();
         }
+
+
+        public bool IsConnected
+        {
+            get { return true; }
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace BitPoker.Models
 
 		public String BitcoinAddress { get; set; }
 
+        public String PublicKey { get; set; }
+
 		public String IPAddress { get; set; }
 
 		public Int32 Latency { get; set; }

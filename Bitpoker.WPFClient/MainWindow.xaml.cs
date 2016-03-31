@@ -311,12 +311,12 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            _viewModel.Connect(IPAddress.Parse("192.168.0.7"));
 
-            if (_viewModel.senderSock.Connected == true)
-            {
-                _viewModel.SendGetPlayersMessage();
-            }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            _viewModel.GetPlayers();
         }
     }
 }
