@@ -26,7 +26,7 @@ namespace Bitpoker.WPFClient.Clients
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                var json = httpClient.GetStringAsync(_apiUrl).Result;
+                var json = httpClient.GetStringAsync(String.Format("{0}players",_apiUrl)).Result;
                 IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
                 return result;
             }
