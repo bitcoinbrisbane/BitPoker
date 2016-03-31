@@ -12,6 +12,11 @@ namespace Bitpoker.WPFClient.Clients
     {
         private readonly String _apiUrl;
 
+        public bool IsConnected
+        {
+            get { return true; }
+        }
+
         public APIClient(String apiUrl)
         {
             _apiUrl = apiUrl;
@@ -19,10 +24,12 @@ namespace Bitpoker.WPFClient.Clients
 
         public IEnumerable<BitPoker.Models.PlayerInfo> GetPlayers()
         {
-            var httpClient = new HttpClient();
-            var json = httpClient.GetStringAsync(_apiUrl).Result;
-            IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
-            return result;
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var json = httpClient.GetStringAsync(_apiUrl).Result;
+                IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
+                return result;
+            }
         }
 
 
@@ -33,12 +40,6 @@ namespace Bitpoker.WPFClient.Clients
             //return await Task.Run(() =&gt; JsonObject.Parse(content));
 
             throw new NotImplementedException();
-        }
-
-
-        public bool IsConnected
-        {
-            get { return true; }
         }
     }
 }
