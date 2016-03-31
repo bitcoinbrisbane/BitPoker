@@ -17,7 +17,7 @@ namespace Bitpoker.WPFClient.ViewModels
         Socket sListener;
         IPEndPoint ipEndPoint;
         Socket handler;
-        Socket senderSock; 
+        public Socket senderSock; 
 
         private static Random rng = new Random();  
 
@@ -83,7 +83,14 @@ namespace Bitpoker.WPFClient.ViewModels
             {
 
             };
-        } 
+        }
+
+        public void SendGetPlayersMessage()
+        {
+            //Call connected
+
+            //Deseralize json
+        }
 
         public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
         {

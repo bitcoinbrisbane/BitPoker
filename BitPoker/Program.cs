@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
-<<<<<<< HEAD
 using System.Net;
 using System.Net.Sockets;
-=======
 using BitPoker.Models;
->>>>>>> bea9ac316beaec1386588875c2f6ec4dfed96b89
 
 namespace BitPoker
 {

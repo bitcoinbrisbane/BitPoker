@@ -65,6 +65,7 @@ namespace Bitpoker.WPFClient
             };
 
 
+            Start();
 
             InitializeComponent();
         }
@@ -219,9 +220,7 @@ namespace Bitpoker.WPFClient
                         byte[] buffernew = new byte[1024];
                         obj[0] = buffernew;
                         obj[1] = handler;
-                        handler.BeginReceive(buffernew, 0, buffernew.Length,
-                            SocketFlags.None,
-                            new AsyncCallback(ReceiveCallback), obj);
+                        handler.BeginReceive(buffernew, 0, buffernew.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), obj);
                     }
 
                     this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
@@ -245,8 +244,7 @@ namespace Bitpoker.WPFClient
                 byte[] byteData = Encoding.Unicode.GetBytes(message);
 
                 // Sends data asynchronously to a connected Socket 
-                handler.BeginSend(byteData, 0, byteData.Length, 0,
-                    new AsyncCallback(SendCallback), handler);
+                handler.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), handler);
 
                 //Send_Button.IsEnabled = false;
                 //Close_Button.IsEnabled = true;
@@ -309,6 +307,16 @@ namespace Bitpoker.WPFClient
                 //Send_Button.IsEnabled = true;
             }
             catch (Exception exc) { MessageBox.Show(exc.ToString()); }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Connect(IPAddress.Parse("192.168.0.7"));
+
+            if (_viewModel.senderSock.Connected == true)
+            {
+                _viewModel.SendGetPlayersMessage();
+            }
         }
     }
 }

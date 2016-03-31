@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Models", "BitPoker
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitpoker.WPFClient", "Bitpoker.WPFClient\Bitpoker.WPFClient.csproj", "{737E13A4-29FC-4524-A07C-444C3BF22324}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.API", "BitPoker.API\BitPoker.API.csproj", "{77BF1037-A40B-49DB-B37D-F108E8F8134B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.API.Tests", "BitPoker.API.Tests\BitPoker.API.Tests.csproj", "{E24D9F46-3D48-4EA0-977E-310B40842CED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,26 @@ Global
 		{737E13A4-29FC-4524-A07C-444C3BF22324}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{737E13A4-29FC-4524-A07C-444C3BF22324}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{737E13A4-29FC-4524-A07C-444C3BF22324}.Release|x86.ActiveCfg = Release|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{77BF1037-A40B-49DB-B37D-F108E8F8134B}.Release|x86.ActiveCfg = Release|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
