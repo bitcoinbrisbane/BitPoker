@@ -35,7 +35,7 @@ Poker terminology
 - SB = Small Blind
 - BB = Big Blind
 
-### Example Keys (Address, Public Key, WIF Private Key)
+### Example Keys (Address, Public Key (Not compressed), WIF Private Key)
 *Alice* 
 - msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv 
 - 041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1 
@@ -51,9 +51,16 @@ Poker terminology
 - 04C82B8E2D6EA7F17665C4A1070F340E84D4C02DA72AE5018574001841C10E8009A04E2C333D3EB90102E71B324BFE595430D4C654BBFF0F66EDBFE63798C7A271
 - 93C4fbYtv8VXWDnbJLzQiVfBGuQgfz1hBF1QwQeJxQepe9oE876
 
-*Redeem Script* 522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae
+*2 of 3 address
+2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85
+https://testnet.blockexplorer.com/address/2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85
 
-https://coinb.in/?verify=522103c507bbc4cfaf5f5febaba63a80fec2327a9fcba3ffcd5c925adbfb6308539f7521036120d79f2962fed22d5ed8c6a9c4ac60e00bcbe55c76058498da54882370097221027d095e4af2a82c68466587406a2bfed119b7eac31f70582085cc24fc0e36033e53ae#verify
+*Redeem Script* 524104c82b8e2d6ea7f17665c4a1070f340e84d4c02da72ae5018574001841c10e8009a04e2c333d3eb90102e71b324bfe595430d4c654bbff0f66edbfe63798c7a2714104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d4104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d53ae
+
+References:
+http://ms-brainwallet.org
+
+https://coinb.in/?verify=524104c82b8e2d6ea7f17665c4a1070f340e84d4c02da72ae5018574001841c10e8009a04e2c333d3eb90102e71b324bfe595430d4c654bbff0f66edbfe63798c7a2714104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d4104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d53ae#verify
 
 ### Test PGP Private and Public Keys
 
@@ -221,6 +228,8 @@ There will become a market for reputable witnesses based off a https dns endpoin
 A player buying in opens a lightning payment channel with all players.
 
 "Through this network of interconnected payment channels, Lightning provides a scalable, decentralized micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
+1.  Alice creates a deposit transaction
+2.  Bob creates a deposit transaction
 
 ## Game play
 The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
