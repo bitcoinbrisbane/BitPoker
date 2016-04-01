@@ -228,8 +228,16 @@ There will become a market for reputable witnesses based off a https dns endpoin
 A player buying in opens a lightning payment channel with all players.
 
 "Through this network of interconnected payment channels, Lightning provides a scalable, decentralized micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
+
 1.  Alice creates a deposit transaction
 2.  Bob creates a deposit transaction
+
+Alice tx  f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3
+Bob tx c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e
+
+*Sample opening lightning channel in c# / NBitcoin*
+```
+```
 
 ## Game play
 The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
@@ -403,3 +411,4 @@ GET /Players/<bitcoinaddress>
 1. https://lightning.network/lightning-network-paper.pdf
 2. http://www.pokerlistings.com/poker-rules-texas-holdem
 3. http://ianpurton.com/online-pgp/
+4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
