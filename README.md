@@ -197,7 +197,7 @@ The paramaters for a table are defined in the following schema.  Developers are 
 
 *Example xml serialziation*
 ```
-<Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" Address="3P1c61hiSBuZstuVkECYo8ntDPVsnG2EQh" AddressType"2-3">
+<Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" AddressType"2-2">
   <Encryption>AES-265</Encryption>
   <Hash>SHA-256</Hash>
   <Currency>BTC</Currency>
@@ -250,6 +250,7 @@ Both Alice and Bob now deposit their buy in to the address 2Mx377XSXhvqqVyLaXsPD
 Alice tx  f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3
 Bob tx c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e
 
+*Sample c# NBitcoin code.
 ```
 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
 
@@ -351,10 +352,14 @@ fd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62
 Which yields transaction id 0e7ae471ffd578c64b142c232f36c3f7810e1fcb2e31b8c1b02f4c61c07859dc
 Bobs transaction id d74b4bfc99dd46adb7c30877cc3ce7ea13feb51a6fab3b9b15f75f4e213ac0da
 
+The address 2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi now contains 1btc https://testnet.blockexplorer.com/address/2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi
+
 *Sample opening lightning channel in c# / NBitcoin*
 ```
 ```
 
+### Create the refund transaction
+Alice and Bob must also create a refund transaction to themselves, but *not* broadcast it.
 
 ## Game play
 The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
@@ -452,6 +457,11 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 *Note:  The deck could also be shuffled by a witness.
 
 ### Post blinds
+In our example, Bob is SB and Alice is BB.  Using the lightning proposal, Bob creates an unsigned TX of 0.001 to Alice.
+
+```
+```
+
 
 ### Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
