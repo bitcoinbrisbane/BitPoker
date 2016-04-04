@@ -349,7 +349,7 @@ fd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62
 }
 ```
 Which yields transaction id 0e7ae471ffd578c64b142c232f36c3f7810e1fcb2e31b8c1b02f4c61c07859dc
-
+Bobs transaction id d74b4bfc99dd46adb7c30877cc3ce7ea13feb51a6fab3b9b15f75f4e213ac0da
 
 *Sample opening lightning channel in c# / NBitcoin*
 ```
