@@ -251,59 +251,42 @@ Alice tx  f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3
 Bob tx c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e
 
 ```
-			const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-			const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
 
-			NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret (alice_wif, NBitcoin.Network.TestNet);
-			NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret (bob_wif, NBitcoin.Network.TestNet);
+NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret (alice_wif, NBitcoin.Network.TestNet);
+NBitcoin.BitcoinAddress alice = alice_secret.GetAddress ();
 
-			NBitcoin.BitcoinAddress alice = alice_secret.GetAddress ();
-			NBitcoin.BitcoinAddress bob = bob_secret.GetAddress ();
-
-            NBitcoin.Transaction aliceFunding = new NBitcoin.Transaction()
-            {
-                Outputs =
-                {
-                    new NBitcoin.TxOut("1.0", alice)
-                }
-            };
-
-            NBitcoin.Coin[] aliceCoinsx = aliceFunding
-                .Outputs
-                .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(aliceFunding.GetHash(), i), o))
-                .ToArray();
-
-            //Create 2 of 2
-            NBitcoin.Script table = NBitcoin.PayToMultiSigTemplate
+//Create 2 of 2
+NBitcoin.Script table = NBitcoin.PayToMultiSigTemplate
                         .Instance
                         .GenerateScriptPubKey(2, new[] { alice_secret.PubKey, alice_secret.PubKey });
 
-            Console.WriteLine(table);
-            Console.WriteLine(table.Hash.GetAddress(NBitcoin.Network.TestNet));
+Console.WriteLine(table);
+Console.WriteLine(table.Hash.GetAddress(NBitcoin.Network.TestNet));
 
-            NBitcoin.IDestination msigAddress = table.Hash.GetAddress(NBitcoin.Network.TestNet);
+NBitcoin.IDestination msigAddress = table.Hash.GetAddress(NBitcoin.Network.TestNet);
 
-            var blockr = new NBitcoin.BlockrTransactionRepository(NBitcoin.Network.TestNet);
-            NBitcoin.Transaction transaction = blockr.GetAsync(new NBitcoin.uint256("f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3")).Result;
+var blockr = new NBitcoin.BlockrTransactionRepository(NBitcoin.Network.TestNet);
+NBitcoin.Transaction transaction = blockr.GetAsync(new NBitcoin.uint256("f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3")).Result;
 
-            NBitcoin.Coin[] aliceCoins = transaction
+NBitcoin.Coin[] aliceCoins = transaction
                         .Outputs
                         .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(transaction.GetHash(), i), o))
                         .ToArray();
 
-            var txBuilder = new NBitcoin.TransactionBuilder();
+var txBuilder = new NBitcoin.TransactionBuilder();
 
-            var tx = txBuilder
-                .AddKeys(alice_secret.PrivateKey)
-                .AddCoins(aliceCoins)
-                .Send(msigAddress, new NBitcoin.Money(50000000))
-                .SetChange(alice)
-                .SendFees(NBitcoin.Money.Coins(0.001m))
-                .BuildTransaction(true);
+var tx = txBuilder
+	.AddKeys(alice_secret.PrivateKey)
+        .AddCoins(aliceCoins)
+        .Send(msigAddress, new NBitcoin.Money(50000000))
+        .SetChange(alice)
+        .SendFees(NBitcoin.Money.Coins(0.001m))
+        .BuildTransaction(true);
 
-            Boolean ok = txBuilder.Verify(tx);
+Boolean ok = txBuilder.Verify(tx);
 
-  Console.WriteLine(tx.ToHex());
+Console.WriteLine(tx.ToHex());
 ```
 
 *Raw TX Alice buy in of 0.5 BTC
