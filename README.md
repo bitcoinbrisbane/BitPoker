@@ -207,7 +207,7 @@ The paramaters for a table are defined in the following schema.  Developers are 
   </Blinds>
   <BuyIn>
     <Min>0.1</Min>
-    <Max<0.2</Max>
+    <Max<0.5</Max>
   </BuyIn>
   <Game>
     <Type>Texas Holdem</Type>
@@ -229,15 +229,149 @@ A player buying in opens a lightning payment channel with all players.
 
 "Through this network of interconnected payment channels, Lightning provides a scalable, decentralized micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
 
-1.  Alice creates a deposit transaction
+### Process
+1.  Alice and Bob create a 2 of 2 address
+2.  Alice creates a deposit transaction
 2.  Bob creates a deposit transaction
+
+*2 of 2 Redeem Script and Address for Alice and Bob
+```
+2 041fa97efd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba53
+5a3ee89a62238c5afc7f8bf1fa0985dc4e1a06c25209bab78bd1 041fa97efd760f26e93e91e29fd
+df3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62238c5afc7f8bf1fa098
+5dc4e1a06c25209bab78bd1 2 OP_CHECKMULTISIG
+
+2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi
+```
+
+###Funding TXs
+Both Alice and Bob now deposit their buy in to the address 2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi.  Note:  The table contract could include a minumum confirmation count.
 
 Alice tx  f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3
 Bob tx c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e
 
+```
+			const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+			const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+
+			NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret (alice_wif, NBitcoin.Network.TestNet);
+			NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret (bob_wif, NBitcoin.Network.TestNet);
+
+			NBitcoin.BitcoinAddress alice = alice_secret.GetAddress ();
+			NBitcoin.BitcoinAddress bob = bob_secret.GetAddress ();
+
+            NBitcoin.Transaction aliceFunding = new NBitcoin.Transaction()
+            {
+                Outputs =
+                {
+                    new NBitcoin.TxOut("1.0", alice)
+                }
+            };
+
+            NBitcoin.Coin[] aliceCoinsx = aliceFunding
+                .Outputs
+                .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(aliceFunding.GetHash(), i), o))
+                .ToArray();
+
+            //Create 2 of 2
+            NBitcoin.Script table = NBitcoin.PayToMultiSigTemplate
+                        .Instance
+                        .GenerateScriptPubKey(2, new[] { alice_secret.PubKey, alice_secret.PubKey });
+
+            Console.WriteLine(table);
+            Console.WriteLine(table.Hash.GetAddress(NBitcoin.Network.TestNet));
+
+            NBitcoin.IDestination msigAddress = table.Hash.GetAddress(NBitcoin.Network.TestNet);
+
+            var blockr = new NBitcoin.BlockrTransactionRepository(NBitcoin.Network.TestNet);
+            NBitcoin.Transaction transaction = blockr.GetAsync(new NBitcoin.uint256("f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3")).Result;
+
+            NBitcoin.Coin[] aliceCoins = transaction
+                        .Outputs
+                        .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(transaction.GetHash(), i), o))
+                        .ToArray();
+
+            var txBuilder = new NBitcoin.TransactionBuilder();
+
+            var tx = txBuilder
+                .AddKeys(alice_secret.PrivateKey)
+                .AddCoins(aliceCoins)
+                .Send(msigAddress, new NBitcoin.Money(50000000))
+                .SetChange(alice)
+                .SendFees(NBitcoin.Money.Coins(0.001m))
+                .BuildTransaction(true);
+
+            Boolean ok = txBuilder.Verify(tx);
+
+  Console.WriteLine(tx.ToHex());
+```
+
+*Raw TX Alice buy in of 0.5 BTC
+```
+0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
+008b483045022100c21e5c296d3024f64dbd948b1999933206a3d3d757ff1004ce874fa4b9277acc
+02202d0c0115b4f52a7de2a1863141eda25192255015da14765a1409d8d202f096b40141041fa97e
+fd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62
+238c5afc7f8bf1fa0985dc4e1a06c25209bab78bd1ffffffff02e069f902000000001976a914822f
+3782f8d0357cb6fc7b4c5cfc1424b3f0100988ac80f0fa020000000017a914348de5f6c91078c128
+4956a88a9322be8d2834148700000000
+```
+
+*In JSON
+```
+{
+  "txid": "0e7ae471ffd578c64b142c232f36c3f7810e1fcb2e31b8c1b02f4c61c07859dc",
+  "size": 256,
+  "version": 1,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "3045022100c21e5c296d3024f64dbd948b1999933206a3d3d757ff1004ce874fa4b9277acc02202d0c0115b4f52a7de2a1863141eda25192255015da14765a1409d8d202f096b4[ALL] 041fa97efd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62238c5afc7f8bf1fa0985dc4e1a06c25209bab78bd1",
+        "hex": "483045022100c21e5c296d3024f64dbd948b1999933206a3d3d757ff1004ce874fa4b9277acc02202d0c0115b4f52a7de2a1863141eda25192255015da14765a1409d8d202f096b40141041fa97efd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62238c5afc7f8bf1fa0985dc4e1a06c25209bab78bd1"
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.499,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "OP_DUP OP_HASH160 822f3782f8d0357cb6fc7b4c5cfc1424b3f01009 OP_EQUALVERIFY OP_CHECKSIG",
+        "hex": "76a914822f3782f8d0357cb6fc7b4c5cfc1424b3f0100988ac",
+        "reqSigs": 1,
+        "type": "pubkeyhash",
+        "addresses": [
+          "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv"
+        ]
+      }
+    },
+    {
+      "value": 0.5,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "OP_HASH160 348de5f6c91078c1284956a88a9322be8d283414 OP_EQUAL",
+        "hex": "a914348de5f6c91078c1284956a88a9322be8d28341487",
+        "reqSigs": 1,
+        "type": "scripthash",
+        "addresses": [
+          "2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi"
+        ]
+      }
+    }
+  ]
+}
+```
+Which yields transaction id 0e7ae471ffd578c64b142c232f36c3f7810e1fcb2e31b8c1b02f4c61c07859dc
+
+
 *Sample opening lightning channel in c# / NBitcoin*
 ```
 ```
+
 
 ## Game play
 The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
