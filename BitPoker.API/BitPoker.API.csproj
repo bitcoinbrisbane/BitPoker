@@ -40,6 +40,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NBitcoin, Version=3.0.0.23, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.3.0.0.23\lib\net45\NBitcoin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NBitcoin.BouncyCastle, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.3.0.0.23\lib\net45\NBitcoin.BouncyCastle.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -78,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BuyInController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\ShuffleController.cs" />
     <Compile Include="Controllers\TablesController.cs" />

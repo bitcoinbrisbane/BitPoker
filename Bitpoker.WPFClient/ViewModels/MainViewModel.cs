@@ -56,6 +56,19 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
+        public void BuyIn(Guid id, Int64 amount)
+        {
+
+            //foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
+            //{
+            //    if (client.IsConnected)
+            //    {
+            //        var players = client.GetPlayers();
+            //    }
+            //}
+
+        }
+
         public void CreateKeys()
         {
             Byte[] allKeys = new Byte[832];

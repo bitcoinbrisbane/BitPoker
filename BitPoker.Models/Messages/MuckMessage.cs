@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BitPoker.Models
+namespace BitPoker.Models.Messages
 {
 	public class MuckMessage : IMessage
 	{

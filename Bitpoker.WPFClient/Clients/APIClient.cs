@@ -32,7 +32,6 @@ namespace Bitpoker.WPFClient.Clients
             }
         }
 
-
         public Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync()
         {
             //var httpClient = new HttpClient();
@@ -40,6 +39,18 @@ namespace Bitpoker.WPFClient.Clients
             //return await Task.Run(() =&gt; JsonObject.Parse(content));
 
             throw new NotImplementedException();
+        }
+
+        public void BuyIn(BitPoker.Models.Messages.BuyInRequestMessage buyIn)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                //String json = Newtonsoft.Json.JsonConvert.SerializeObject
+
+                //var json = httpClient.PostAsync(String.Format("{0}players", _apiUrl)).Result;
+                //IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
+                //return result;
+            }
         }
     }
 }
