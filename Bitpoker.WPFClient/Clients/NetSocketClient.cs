@@ -76,5 +76,11 @@ namespace Bitpoker.WPFClient.Clients
         {
             get { return senderSock.Connected; }
         }
+
+
+        public BitPoker.Models.Contracts.Table GetTable(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
