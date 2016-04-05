@@ -64,30 +64,50 @@ namespace BitPoker
             Console.WriteLine(table);
             Console.WriteLine(table.Hash.GetAddress(NBitcoin.Network.TestNet));
 
-            NBitcoin.IDestination msigAddress = table.Hash.GetAddress(NBitcoin.Network.TestNet);
-
-
+            NBitcoin.IDestination tableAddress = table.Hash.GetAddress(NBitcoin.Network.TestNet);
 
 
             var blockr = new NBitcoin.BlockrTransactionRepository(NBitcoin.Network.TestNet);
-            NBitcoin.Transaction transaction = blockr.GetAsync(new NBitcoin.uint256("c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e")).Result;
+            NBitcoin.Transaction aliceTx = blockr.GetAsync(new NBitcoin.uint256("f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3")).Result;
+            NBitcoin.Transaction bobTx = blockr.GetAsync(new NBitcoin.uint256("c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e")).Result;
 
-            NBitcoin.Coin[] coins = transaction
-                        .Outputs
-                        .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(transaction.GetHash(), i), o))
-                        .ToArray();
+            NBitcoin.Coin[] alicCoins = bobTx
+                .Outputs
+                .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(aliceTx.GetHash(), i), o))
+                .ToArray();
+
+            NBitcoin.Coin[] bobCoins = bobTx
+                .Outputs
+                .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(bobTx.GetHash(), i), o))
+                .ToArray();
 
             var txBuilder = new NBitcoin.TransactionBuilder();
 
-            var tx = txBuilder
-                .AddKeys(bob_secret.PrivateKey)
-                .AddCoins(coins)
-                .Send(msigAddress, new NBitcoin.Money(50000000))
+            var tx_alice = txBuilder
+                .AddKeys(alice_secret.PrivateKey)
+                .AddCoins(alicCoins)
+                .Send(tableAddress, new NBitcoin.Money(5000000))
                 .SetChange(alice)
                 .SendFees(NBitcoin.Money.Coins(0.001m))
                 .BuildTransaction(true);
 
+            //Console.WriteLine(tx_alice.ToHex());
+
+            string signature = alice_secret.PrivateKey.SignMessage("CALL 5000000");
+            //Console.WriteLine(signature);
+
+            var tx = txBuilder
+                .AddKeys(bob_secret.PrivateKey)
+                .AddCoins(bobCoins)
+                .Send(tableAddress, new NBitcoin.Money(100000))
+                .SetChange(bob)
+                .SendFees(NBitcoin.Money.Coins(0.001m))
+                .BuildTransaction(true);
+
             Boolean ok = txBuilder.Verify(tx);
+
+            signature = bob_secret.PrivateKey.SignMessage("CALL 100000");
+            Console.WriteLine(signature);
 
             //BE.Providers.Blockr blockr = new BE.Providers.Blockr(true);
             //return blockr.BroadCastTx(tx.ToHex());

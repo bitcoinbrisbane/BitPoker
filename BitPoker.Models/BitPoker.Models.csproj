@@ -38,10 +38,7 @@
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />
     <Compile Include="Messages\IMessage.cs" />
-    <Compile Include="Messages\BetMessage.cs" />
     <Compile Include="Messages\CallMessage.cs" />
-    <Compile Include="Messages\RaiseMessage.cs" />
-    <Compile Include="Messages\FoldMessage.cs" />
     <Compile Include="Messages\MuckMessage.cs" />
     <Compile Include="Messages\PostSmallBlindMessage.cs" />
     <Compile Include="PlayerInfo.cs" />
