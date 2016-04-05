@@ -132,10 +132,10 @@ Each client connects to one another in the "lobby".  They can then look for play
 - All other players validate that message
 - Repeat
 
-### Sample Message types
+### Sample Message types (See below for more on messages)
 - Join
 - Quit
-- Action
+- Action (CALL, RAISE, FOLD, MUCK)
 - Shuffle Request
 
 ### Overview
@@ -380,11 +380,11 @@ At the start of each hand, the dealer defines the hand contract which references
 
 1.  The players and seat postions
 2.  The stack of each player
-3.  A new "Private" Key to add entropy so hands can not be pre computed.  (IV or Salt instead?)
+3.  A ID as a GUID
 
 *Example hand contract seralized in XML
 ```
-<Hand Key="HBFwc/qnlFqkxwiXTmNkXw==" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
+<Hand ID="398b5fe2-da27-4772-81ce-37fa615719b5" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
   <Seat Number="1" Position="SB" Stack="1.01">mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</Seat>
   <Seat Number="2" Position="BB,Dealer" Stack="0.9">msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</Seat>
   <Witness>mq1Ctw6xTcomjGgQz5pi8oXdR1tjjZQHYs</Witness>
@@ -456,12 +456,58 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 
 *Note:  The deck could also be shuffled by a witness.
 
+## Messages
+All actions are sent as messages.  They must reference the hand Id, be signed and reference there previous message.  The message requires the following:
+
+| Property  | Eg |
+| ------------- | ------------- |
+| Version  | 1  |
+| Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
+| Index | 2 |
+| Action | CALL 5000000 |
+| TX | |
+| Message Signature | |
+| Previous Hash | |
+| Hash | |
+
+The hash (SHA-256) is of the property values concantinated, thus format agnostic.
+
+Eg of above message
+```
+1398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
+```
+
+Eg in XML
+```
+<Message Version="1">
+  <Action Position="1" Address="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
+    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
+    <Index>2</Index>
+    <Action>CALL 5000000<</Action>
+    <Tx>0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
+008a47304402205530f19e6cad5f2f4e04a92c3d4438907ac29a4ab50e6861088d2ad9e59ee61002
+20134b57cce3157f0ccaf47d9928d85713611062521900941460d677ccc884da20014104f48396ac
+675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24
+fd8c041ca55de8bae62c7315b0ba66fe5f96c20dffffffff0380c6ef05000000001976a9141518ab
+b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
+56a88a9322be8d28341487a08601000000000017a914348de5f6c91078c1284956a88a9322be8d28
+34148700000000</Tx>
+    <MessageSignature></MessageSignature>
+    <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
+  <Action>
+  <Hash Algorithm="SHA256"></Hash>
+</Message>
+```
+
 ### Post blinds
-In our example, Bob is SB and Alice is BB.  Using the lightning proposal, Bob creates an unsigned TX of 0.001 to Alice.
+In our example, Bob is SB and Alice is BB.  Using the lightning proposal, Bob creates an unsigned TX of 0.001 to Alice.  
 
 ```
 ```
 
+Eg SB message in XML
+```
+```
 
 ### Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
@@ -491,16 +537,24 @@ The client software co-ordinates the game, based off agreed game rules.
 
 *Example action message from Bob serialzed in XML.  A call from the small blind.*
 ```
-<Action Position="1" Address="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
-  <PreviousHash>d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
-  <Call>
-    <Amount>0.001</Amount>
-    <Tx></Tx>
-  </Call>
-  <MessageSignature>
-  </MessageSignature>
-<Action>
-<Hash Algorithm="SHA256">8df28bd9b4617cb0c425ff838926533252a3840b4e602fdb7e181f3968165929</Hash>
+<Message Version="1">
+  <Action Position="1" Address="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
+    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
+    <Index>2</Index>
+    <Action>CALL 10000<</Action>
+    <Tx>0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
+008a47304402205530f19e6cad5f2f4e04a92c3d4438907ac29a4ab50e6861088d2ad9e59ee61002
+20134b57cce3157f0ccaf47d9928d85713611062521900941460d677ccc884da20014104f48396ac
+675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24
+fd8c041ca55de8bae62c7315b0ba66fe5f96c20dffffffff0380c6ef05000000001976a9141518ab
+b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
+56a88a9322be8d28341487a08601000000000017a914348de5f6c91078c1284956a88a9322be8d28
+34148700000000</Tx>
+    <MessageSignature>G3m66hVXe+gfbkDRS/0MNd6Sxp+Tem7i2czVNdt+aTdQXP7sUrHVOYwDX/70qywfKjEZKPr/FJ4n1kJPZKSHlSI=</MessageSignature>
+    <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
+  <Action>
+  <Hash Algorithm="SHA256">68b4f0c0955cc947aaf179d212aa80848d7dc41c5ac845447bb504ad595bb8e9</Hash>
+</Message>
 ```
 
 ### Award the post. (Post hand consensus)
