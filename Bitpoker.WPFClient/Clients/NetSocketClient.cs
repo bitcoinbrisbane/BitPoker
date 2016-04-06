@@ -82,5 +82,11 @@ namespace Bitpoker.WPFClient.Clients
         {
             throw new NotImplementedException();
         }
+
+
+        public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

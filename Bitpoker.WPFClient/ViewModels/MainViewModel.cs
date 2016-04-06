@@ -1,6 +1,7 @@
 ﻿using NBitcoin;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -26,7 +27,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public IList<Clients.INetworkClient> Clients { get; set; }
 
-        public IObservable<BitPoker.Models.PlayerInfo> Players { get; set; }
+        public ObservableCollection<BitPoker.Models.PlayerInfo> Players { get; set; }
 
         public BitPoker.Models.Contracts.Table Table { get; set; }
 
@@ -38,12 +39,16 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public MainViewModel()
         {
-            this.Clients = new List<Clients.INetworkClient>(2);
-
+            this.Players = new ObservableCollection<BitPoker.Models.PlayerInfo>();
+            this.Clients = new List<Clients.INetworkClient>(1);
+            
             this.Clients.Add(new Clients.APIClient("https://bitpoker.azurewebsites.net/api/"));
-            this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
+            //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
-            this.Address = NBitcoin.BitcoinAddress.Create("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
+            NBitcoin.BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", Network.TestNet);
+            this.Address = secret.GetAddress();
+
+
         }
 
         public void NewTable(Int16 minPlayers, Int16 maxPlayers)
@@ -57,7 +62,13 @@ namespace Bitpoker.WPFClient.ViewModels
             {
                 if (client.IsConnected)
                 {
+                    //TODO: Check player does not exist in collection and zip
                     var players = client.GetPlayers();
+
+                    foreach (BitPoker.Models.PlayerInfo player in players)
+                    {
+                        this.Players.Add(player);
+                    }
                 }
             }
         }

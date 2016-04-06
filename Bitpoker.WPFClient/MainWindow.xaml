@@ -6,17 +6,21 @@
         <Button Content="New Table" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Listen" HorizontalAlignment="Left" Margin="100,289,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
         <Button Content="Connect" HorizontalAlignment="Left" Margin="203,289,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-        <Button Content="Find Players" HorizontalAlignment="Left" Margin="19,256,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
-        <Grid HorizontalAlignment="Left" Height="100" Margin="19,30,0,0" VerticalAlignment="Top" Width="239" Background="#FFAEA9A9"/>
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="311,37,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Find Players" HorizontalAlignment="Left" Margin="183,158,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+
+        <DataGrid HorizontalAlignment="Left" Height="100" Margin="19,51,0,0" VerticalAlignment="Top" Width="239" Background="#FFAEA9A9" ItemsSource="{Binding Players}"
+                  AutoGenerateColumns="True" />
+
+            <ListBox HorizontalAlignment="Left" Height="100" Margin="311,37,0,0" VerticalAlignment="Top" Width="100"/>
         <Grid HorizontalAlignment="Left" Height="168" Margin="330,195,0,0" VerticalAlignment="Top" Width="266" Background="#FF8F1010"/>
         <Button Content="Join Table" HorizontalAlignment="Left" Margin="17,358,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_4"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="278,387,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="19,156,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="278,387,0,0" TextWrapping="Wrap" Text="0.005" VerticalAlignment="Top" Width="120"/>
+        <Label Content="My Address : " HorizontalAlignment="Left" Margin="19,172,0,0" VerticalAlignment="Top"/>
         <Label Content="Balance" HorizontalAlignment="Left" Margin="19,195,0,0" VerticalAlignment="Top"/>
         <Button Content="Call" HorizontalAlignment="Left" Margin="415,387,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_5"/>
         <Button Content="Raise" HorizontalAlignment="Left" Margin="506,387,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Fold" HorizontalAlignment="Left" Margin="596,387,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Players" HorizontalAlignment="Left" Margin="19,23,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

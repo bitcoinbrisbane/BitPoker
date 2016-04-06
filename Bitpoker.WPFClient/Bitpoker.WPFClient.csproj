@@ -75,6 +75,7 @@
     <Compile Include="Clients\NetSocketClient.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\WalletViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

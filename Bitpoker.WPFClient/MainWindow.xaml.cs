@@ -64,6 +64,7 @@ namespace Bitpoker.WPFClient
                 Stack = 50000000
             };
 
+            this.DataContext = _viewModel;
 
             Start();
 
@@ -330,7 +331,7 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            
+            _viewModel.Call(5000);
         }
     }
 }
