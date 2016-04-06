@@ -62,7 +62,7 @@ http://ms-brainwallet.org
 
 https://coinb.in/?verify=524104c82b8e2d6ea7f17665c4a1070f340e84d4c02da72ae5018574001841c10e8009a04e2c333d3eb90102e71b324bfe595430d4c654bbff0f66edbfe63798c7a2714104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d4104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d53ae#verify
 
-### Test PGP Private and Public Keys
+### Test PGP Private and Public Keys (NOTE BITCOIN MESSAGE SIGNING TO BE USED INSTEAD)
 
 *Alice*
 -----BEGIN PGP PRIVATE KEY BLOCK-----
@@ -126,7 +126,7 @@ Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
 ## The protocol
 Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
-- Table reaches consensus on whos turn to act
+- Table reaches consensus on whos turn to act based off the game contract
 - Table reaches conesnsus on the legal moves / actions a player can make
 - Table waits for a signed message from that player
 - All other players validate that message
@@ -136,7 +136,7 @@ Each client connects to one another in the "lobby".  They can then look for play
 - Join
 - Quit
 - Action (CALL, RAISE, FOLD, MUCK)
-- Shuffle Request
+- Shuffle
 
 ### Overview
 If the game is to be developed using Etherum contracts:
@@ -232,7 +232,9 @@ A player buying in opens a lightning payment channel with all players.
 ### Process
 1.  Alice and Bob create a 2 of 2 address
 2.  Alice creates a deposit transaction
-2.  Bob creates a deposit transaction
+3.  Bob creates a deposit transaction
+4.  Alice creates a refund transaction but does not broadcast
+5.  Bob creates a refund transaction but does not broadcast
 
 *2 of 2 Redeem Script and Address for Alice and Bob
 ```
@@ -250,7 +252,7 @@ Both Alice and Bob now deposit their buy in to the address 2Mx377XSXhvqqVyLaXsPD
 Alice tx  f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3
 Bob tx c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e
 
-*Sample c# NBitcoin code.
+*Sample C# NBitcoin code
 ```
 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
 
@@ -462,6 +464,7 @@ All actions are sent as messages.  They must reference the hand Id, be signed an
 | Property  | Eg |
 | ------------- | ------------- |
 | Version  | 1  |
+| Public Key | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
 | Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
 | Index | 2 |
 | Action | CALL 5000000 |
@@ -474,13 +477,13 @@ The hash (SHA-256) is of the property values concantinated, thus format agnostic
 
 Eg of above message
 ```
-1398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
+1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
 ```
 
 Eg in XML
 ```
 <Message Version="1">
-  <Action Position="1" Address="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
+  <Action Position="1" PublicKey="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
     <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
     <Index>2</Index>
     <Action>CALL 5000000<</Action>
@@ -557,10 +560,10 @@ b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
 </Message>
 ```
 
-### Award the post. (Post hand consensus)
+### Award the pot. (Post hand consensus)
 Once the hand has been played, the table then reaches consensus.  The signed game history could then be persistend into an Ethereum block chain referencing previous hands.  
 
-Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done, the more fees it will incure. 
+Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done the more fees it will incure. 
 
 ## Cashing out
 Closing the channel
@@ -568,12 +571,6 @@ Closing the channel
 ## Network Topology
 
 ### Dealing with disconnects
-
-## Betting via lightning channels
-Each bet is a signature from the punter that is not broad cast to the network.   For example, in the heads up game, if both Alice and Bob post blinds, the net transfer result = 0.
-
-## Settlement
-
 
 ## Test Data
 - Alice keys
