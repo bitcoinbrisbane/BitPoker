@@ -327,5 +327,10 @@ namespace Bitpoker.WPFClient
 
             
         }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -13,5 +13,7 @@ namespace Bitpoker.WPFClient.Clients
         Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync();
 
         BitPoker.Models.Contracts.Table GetTable(Guid id);
+
+        void SendMessage(BitPoker.Models.Messages.ActionMessage message);
     }
 }

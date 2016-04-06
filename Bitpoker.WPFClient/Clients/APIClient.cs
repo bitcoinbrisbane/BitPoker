@@ -58,5 +58,29 @@ namespace Bitpoker.WPFClient.Clients
         {
             throw new NotImplementedException();
         }
+
+
+        public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                String json = JsonConvert.SerializeObject(message);
+                StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+                String url = String.Format("{0}message", _apiUrl);
+
+                using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+                {
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                        //return Convert.ToInt32(responseContent);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+        }
     }
 }

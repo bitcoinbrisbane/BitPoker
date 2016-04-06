@@ -71,7 +71,7 @@ namespace BitPoker
             NBitcoin.Transaction aliceTx = blockr.GetAsync(new NBitcoin.uint256("f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3")).Result;
             NBitcoin.Transaction bobTx = blockr.GetAsync(new NBitcoin.uint256("c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e")).Result;
 
-            NBitcoin.Coin[] alicCoins = bobTx
+            NBitcoin.Coin[] alicCoins = aliceTx
                 .Outputs
                 .Select((o, i) => new NBitcoin.Coin(new NBitcoin.OutPoint(aliceTx.GetHash(), i), o))
                 .ToArray();

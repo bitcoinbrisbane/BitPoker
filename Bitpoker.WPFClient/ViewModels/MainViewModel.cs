@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NBitcoin;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Bitpoker.WPFClient.ViewModels
 {
+    /// <summary>
+    /// View model for table really.
+    /// </summary>
     public class MainViewModel
     {
         //SocketPermission permission;
@@ -30,14 +34,16 @@ namespace Bitpoker.WPFClient.ViewModels
 
         internal Byte[] IV { get; set; }
 
+        public NBitcoin.BitcoinAddress Address { get; set; }
+
         public MainViewModel()
         {
             this.Clients = new List<Clients.INetworkClient>(2);
 
-
             this.Clients.Add(new Clients.APIClient("https://bitpoker.azurewebsites.net/api/"));
             this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
+            this.Address = NBitcoin.BitcoinAddress.Create("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
         }
 
         public void NewTable(Int16 minPlayers, Int16 maxPlayers)
@@ -67,6 +73,28 @@ namespace Bitpoker.WPFClient.ViewModels
             //    }
             //}
 
+        }
+
+        public void Call(Int64 amount)
+        {
+            BitPoker.Models.Messages.ActionMessage call = new BitPoker.Models.Messages.ActionMessage()
+            {
+                Action = "CALL",
+                Amount = amount,
+                PublicKey = this.Address.ToString()
+            };
+
+            //Signe message
+            BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", NBitcoin.Network.TestNet);
+            call.Signature = secret.PrivateKey.SignMessage(call.ToString());
+
+            foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
+            {
+                if (client.IsConnected)
+                {
+                    client.SendMessage(call);
+                }
+            }
         }
 
         public void CreateKeys()

@@ -21,5 +21,10 @@ namespace BitPoker.Models.Messages
 		public ActionMessage ()
 		{
 		}
+
+        public override string ToString()
+        {
+            return String.Format("{0}{1}{2}{3}{4}", PublicKey, HandId, Index, Action, Amount);
+        }
 	}
 }
