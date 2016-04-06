@@ -10,6 +10,7 @@ namespace BitPoker.API.Controllers
 {
     public class MessageController : ApiController
     {
+        ///Get a mock message
         // GET api/<controller>/5
         public Models.Messages.ActionMessage Get(String id)
         {
@@ -20,7 +21,7 @@ namespace BitPoker.API.Controllers
         public Boolean Post(Models.Messages.ActionMessage message)
         {
             var address = new BitcoinPubKeyAddress(message.PublicKey);
-            bool verified = address.VerifyMessage(message.Action, message.Signature);
+            bool verified = address.VerifyMessage(message.ToString(), message.Signature);
             
             return verified;
         }
