@@ -27,9 +27,13 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public IList<Clients.INetworkClient> Clients { get; set; }
 
-        public ObservableCollection<BitPoker.Models.PlayerInfo> Players { get; set; }
+        /// <summary>
+        /// Players on the entire network
+        /// </summary>
+        public ObservableCollection<BitPoker.Models.PlayerInfo> NetworkPlayers { get; set; }
 
-        public BitPoker.Models.Contracts.Table Table { get; set; }
+        //public BitPoker.Models.Contracts.Table Table { get; set; }
+        public ViewModels.TableViewModel Table { get; set; }
 
         internal ICollection<Byte[]> Keys { get; set; }
 
@@ -39,7 +43,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public MainViewModel()
         {
-            this.Players = new ObservableCollection<BitPoker.Models.PlayerInfo>();
+            this.NetworkPlayers = new ObservableCollection<BitPoker.Models.PlayerInfo>();
             this.Clients = new List<Clients.INetworkClient>(1);
             
             this.Clients.Add(new Clients.APIClient("https://bitpoker.azurewebsites.net/api/"));
@@ -47,13 +51,11 @@ namespace Bitpoker.WPFClient.ViewModels
 
             NBitcoin.BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", Network.TestNet);
             this.Address = secret.GetAddress();
-
-
         }
 
         public void NewTable(Int16 minPlayers, Int16 maxPlayers)
         {
-            this.Table = new BitPoker.Models.Contracts.Table(minPlayers, maxPlayers);
+            //this.Table = new BitPoker.Models.Contracts.Table(minPlayers, maxPlayers);
         }
 
         public void GetPlayers()
@@ -67,15 +69,14 @@ namespace Bitpoker.WPFClient.ViewModels
 
                     foreach (BitPoker.Models.PlayerInfo player in players)
                     {
-                        this.Players.Add(player);
+                        this.NetworkPlayers.Add(player);
                     }
                 }
             }
         }
 
-        public void BuyIn(Guid id, Int64 amount)
+        public void BuyIn(Guid tableId, Int64 amount)
         {
-
             //foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
             //{
             //    if (client.IsConnected)
@@ -83,30 +84,9 @@ namespace Bitpoker.WPFClient.ViewModels
             //        var players = client.GetPlayers();
             //    }
             //}
-
         }
 
-        public void Call(Int64 amount)
-        {
-            BitPoker.Models.Messages.ActionMessage call = new BitPoker.Models.Messages.ActionMessage()
-            {
-                Action = "CALL",
-                Amount = amount,
-                PublicKey = this.Address.ToString()
-            };
 
-            //Signe message
-            BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", NBitcoin.Network.TestNet);
-            call.Signature = secret.PrivateKey.SignMessage(call.ToString());
-
-            foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
-            {
-                if (client.IsConnected)
-                {
-                    client.SendMessage(call);
-                }
-            }
-        }
 
         public void CreateKeys()
         {

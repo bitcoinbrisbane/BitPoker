@@ -99,11 +99,7 @@ namespace Bitpoker.WPFClient
                 ipEndPoint = new IPEndPoint(ipAddr, 4510);
 
                 // Create one Socket object to listen the incoming connection 
-                sListener = new Socket(
-                    ipAddr.AddressFamily,
-                    SocketType.Stream,
-                    ProtocolType.Tcp
-                    );
+                sListener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 // Associates a Socket with a local endpoint 
                 sListener.Bind(ipEndPoint);
@@ -331,7 +327,7 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            _viewModel.Call(5000);
+            _viewModel.Table.Call(5000);
         }
     }
 }

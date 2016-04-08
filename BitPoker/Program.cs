@@ -22,6 +22,11 @@ namespace BitPoker
 
 		public static void Main (string[] args)
 		{
+            //NBitcoin.Key key = new NBitcoin.Key();
+            //var w = key.GetWif(NBitcoin.Network.TestNet);
+            //NBitcoin.BitcoinAddress a = w.GetAddress();
+            //var ca = a.ToColoredAddress();
+
 			//http://www.codeproject.com/Articles/745134/csharp-async-socket-server
 			//https://code.msdn.microsoft.com/windowsdesktop/Communication-through-91a2582b/
 
