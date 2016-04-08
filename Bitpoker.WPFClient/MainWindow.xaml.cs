@@ -327,7 +327,17 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            _viewModel.Table.Call(5000);
+            if (_viewModel.Table != null)
+            {
+                _viewModel.Table.Call(5000);
+            }
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Get user pubkey
+
+            //Load tables
         }
     }
 }

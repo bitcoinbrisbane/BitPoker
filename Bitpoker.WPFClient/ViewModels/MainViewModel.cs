@@ -39,7 +39,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         internal Byte[] IV { get; set; }
 
-        public NBitcoin.BitcoinAddress Address { get; set; }
+        public ViewModels.WalletViewModel Wallet { get; set; }
 
         public MainViewModel()
         {
@@ -49,8 +49,7 @@ namespace Bitpoker.WPFClient.ViewModels
             this.Clients.Add(new Clients.APIClient("https://bitpoker.azurewebsites.net/api/"));
             //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
-            NBitcoin.BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", Network.TestNet);
-            this.Address = secret.GetAddress();
+            Wallet = new WalletViewModel("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
         }
 
         public void NewTable(Int16 minPlayers, Int16 maxPlayers)

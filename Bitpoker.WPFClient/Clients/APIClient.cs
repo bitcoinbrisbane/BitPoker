@@ -56,7 +56,12 @@ namespace Bitpoker.WPFClient.Clients
 
         public BitPoker.Models.Contracts.Table GetTable(Guid id)
         {
-            throw new NotImplementedException();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var json = httpClient.GetStringAsync(String.Format("{0}table?id={1}", _apiUrl, id)).Result;
+                BitPoker.Models.Contracts.Table result = JsonConvert.DeserializeObject<BitPoker.Models.Contracts.Table>(json);
+                return result;
+            }
         }
 
 
