@@ -34,6 +34,8 @@
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="IDeck.cs" />
     <Compile Include="Messages\BuyInRequestMessage.cs" />
+    <Compile Include="Messages\BuyInResponseMessage.cs" />
+    <Compile Include="Messages\DeckMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />
