@@ -98,8 +98,10 @@ namespace BitPoker
 
             //Console.WriteLine(tx_alice.ToHex());
 
-            string signature = alice_secret.PrivateKey.SignMessage("CALL 5000000");
-            //Console.WriteLine(signature);
+            string signature = alice_secret.PrivateKey.SignMessage("1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000");
+            Console.WriteLine(signature);
+
+            Console.ReadKey();
 
             var tx = txBuilder
                 .AddKeys(bob_secret.PrivateKey)
