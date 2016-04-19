@@ -173,6 +173,58 @@ In the below *table contract* the below game Texas Holdem is defined as an Enum.
 
 These are out side the scope of this paper.
 
+## Messages
+All actions are sent as messages.  They must include a public key be signed.  The payload must also reference there previous message hash.
+
+| Property  | Eg |
+| ------------- | ------------- |
+| Version  | 1  |
+| Public Key Hash | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
+| Type | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
+| Payload | |
+| Message Signature | |
+| Hash | |
+
+Example action message (payload)
+
+| Property  | Eg |
+| ------------- | ------------- |
+| Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
+| Index | 2 |
+| Action | CALL 5000000 |
+| TX | |
+| Previous Hash | |
+
+The hash (SHA-256) is of the property values concantinated, thus seriliazation format agnostic.
+
+Eg of above message
+```
+1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
+```
+
+Eg in XML
+```
+<Message Version="1" Type="Action">
+  <PublicKeyHash>mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</PublicKeyHash>
+  <Action Position="1">
+    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
+    <Index>2</Index>
+    <Action>CALL 5000000<</Action>
+    <Tx>0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
+008a47304402205530f19e6cad5f2f4e04a92c3d4438907ac29a4ab50e6861088d2ad9e59ee61002
+20134b57cce3157f0ccaf47d9928d85713611062521900941460d677ccc884da20014104f48396ac
+675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24
+fd8c041ca55de8bae62c7315b0ba66fe5f96c20dffffffff0380c6ef05000000001976a9141518ab
+b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
+56a88a9322be8d28341487a08601000000000017a914348de5f6c91078c1284956a88a9322be8d28
+34148700000000</Tx>
+    <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
+  <Action>
+  <MessageSignature>Gztf4/3oNvanh51g11W4NlPOEyAhTCURaPTOF13Yl3iYHHh+SUvGk/5dtuZDKQdteuLAwIt8K5uthLTYsyf90rI=</MessageSignature>
+  <Hash Algorithm="SHA256"></Hash>
+</Message>
+```
+
 ## Table Contract
 The paramaters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
 
@@ -197,26 +249,30 @@ The paramaters for a table are defined in the following schema.  Developers are 
 
 *Example xml serialziation*
 ```
-<Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" AddressType"2-2">
-  <Encryption>AES-265</Encryption>
-  <Hash>SHA-256</Hash>
-  <Currency>BTC</Currency>
-  <Blinds>
-    <SmallBlind>0.001</SmallBlind>
-    <BigBlind>0.002</BigBlind>
-  </Blinds>
-  <BuyIn>
-    <Min>0.1</Min>
-    <Max<0.5</Max>
-  </BuyIn>
-  <Game>
-    <Type>Texas Holdem</Type>
-    <Limit>No Limit</Limit>
-  </Game>
-  <Clock>30</Clock>
-  <TimeOuts>120</TimeOut>
-  <Version>0.0.1</Version>
-</Table>
+<Message Verion="1" Type="Table">
+  <PubKeyHash></PubKeyHash>
+  <Table Id="bf368921-346a-42d8-9cb8-621f9cad5e16" AddressType"2-2">
+    <Encryption>AES-265</Encryption>
+    <Hash>SHA-256</Hash>
+    <Currency>BTC</Currency>
+    <Blinds>
+      <SmallBlind>0.001</SmallBlind>
+      <BigBlind>0.002</BigBlind>
+    </Blinds>
+    <BuyIn>
+      <Min>0.1</Min>
+      <Max<0.5</Max>
+    </BuyIn>
+    <Game>
+      <Type>Texas Holdem</Type>
+      <Limit>No Limit</Limit>
+    </Game>
+    <Clock>30</Clock>
+    <TimeOuts>120</TimeOut>
+    <Version>0.0.1</Version>
+  </Table>
+  <MessageSignature></MessageSignature>
+</Message>
 ```
 
 ## Witness nodes
@@ -386,11 +442,13 @@ At the start of each hand, the dealer defines the hand contract which references
 
 *Example hand contract seralized in XML
 ```
-<Hand ID="398b5fe2-da27-4772-81ce-37fa615719b5" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
-  <Seat Number="1" Position="SB" Stack="1.01">mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</Seat>
-  <Seat Number="2" Position="BB,Dealer" Stack="0.9">msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</Seat>
-  <Witness>mq1Ctw6xTcomjGgQz5pi8oXdR1tjjZQHYs</Witness>
-<Hand>
+<Message Verison="1">
+  <Hand ID="398b5fe2-da27-4772-81ce-37fa615719b5" Table ID=" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
+    <Seat Number="1" Position="SB" Stack="1.01">mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</Seat>
+    <Seat Number="2" Position="BB,Dealer" Stack="0.9">msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</Seat>
+    <Witness>mq1Ctw6xTcomjGgQz5pi8oXdR1tjjZQHYs</Witness>
+  <Hand>
+</Message>
 ```
 
 ### The Shuffle
@@ -435,72 +493,18 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 
 *Example message in xml*
 ```
-<Deck>
-  <Card Index="0"></Card>
-  <Card Index="1"></Card>
-  ...
-  <Card Index="51"></Card>
-  <Signature>
-  <![CDATA[
-  -----BEGIN PGP SIGNATURE-----
-  Version: OpenPGP.js v1.0.1
-  Comment: http://openpgpjs.org
-  
-  wlwEAQEIABAFAlb6E4IJEHHigfc8hmV3AABO5QH/YrvNcYsG+F6J8QJ99Mq2
-  gtbA1oWxHJo9j9NXpfvxVQbjv4ZQtvGbQ9qQJY5eKBDMlcgW8Dz6Tl7E1DXq
-  SGSzdg==
-  =M2wV
-  -----END PGP SIGNATURE-----
-  ]]>
-  </Signature>
-<Deck>
+<Message Version="1">
+  <Deck>
+    <Card Index="0"></Card>
+    <Card Index="1"></Card>
+    ...
+    <Card Index="51"></Card>
+  <Deck>
+  <Signature></Signature>
+</Message>
 ```
 
 *Note:  The deck could also be shuffled by a witness.
-
-## Messages
-All actions are sent as messages.  They must reference the hand Id, be signed and reference there previous message.  The message requires the following:
-
-| Property  | Eg |
-| ------------- | ------------- |
-| Version  | 1  |
-| Public Key | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
-| Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
-| Index | 2 |
-| Action | CALL 5000000 |
-| TX | |
-| Message Signature | |
-| Previous Hash | |
-| Hash | |
-
-The hash (SHA-256) is of the property values concantinated, thus format agnostic.
-
-Eg of above message
-```
-1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
-```
-
-Eg in XML
-```
-<Message Version="1">
-  <Action Position="1" PublicKey="mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo">
-    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
-    <Index>2</Index>
-    <Action>CALL 5000000<</Action>
-    <Tx>0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
-008a47304402205530f19e6cad5f2f4e04a92c3d4438907ac29a4ab50e6861088d2ad9e59ee61002
-20134b57cce3157f0ccaf47d9928d85713611062521900941460d677ccc884da20014104f48396ac
-675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24
-fd8c041ca55de8bae62c7315b0ba66fe5f96c20dffffffff0380c6ef05000000001976a9141518ab
-b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
-56a88a9322be8d28341487a08601000000000017a914348de5f6c91078c1284956a88a9322be8d28
-34148700000000</Tx>
-    <MessageSignature>Gztf4/3oNvanh51g11W4NlPOEyAhTCURaPTOF13Yl3iYHHh+SUvGk/5dtuZDKQdteuLAwIt8K5uthLTYsyf90rI=</MessageSignature>
-    <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
-  <Action>
-  <Hash Algorithm="SHA256"></Hash>
-</Message>
-```
 
 ### Post blinds
 In our example, Bob is SB and Alice is BB.  Using the lightning proposal, Bob creates an unsigned TX of 0.001 to Alice.  
@@ -553,10 +557,10 @@ fd8c041ca55de8bae62c7315b0ba66fe5f96c20dffffffff0380c6ef05000000001976a9141518ab
 b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
 56a88a9322be8d28341487a08601000000000017a914348de5f6c91078c1284956a88a9322be8d28
 34148700000000</Tx>
-    <MessageSignature>G3m66hVXe+gfbkDRS/0MNd6Sxp+Tem7i2czVNdt+aTdQXP7sUrHVOYwDX/70qywfKjEZKPr/FJ4n1kJPZKSHlSI=</MessageSignature>
     <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
   <Action>
   <Hash Algorithm="SHA256">68b4f0c0955cc947aaf179d212aa80848d7dc41c5ac845447bb504ad595bb8e9</Hash>
+  <Signature>G3m66hVXe+gfbkDRS/0MNd6Sxp+Tem7i2czVNdt+aTdQXP7sUrHVOYwDX/70qywfKjEZKPr/FJ4n1kJPZKSHlSI=</Signature>
 </Message>
 ```
 
