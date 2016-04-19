@@ -11,7 +11,9 @@ namespace BitPoker.Models
 
         public String PublicKey { get; set; }
 
-		public String IPAddress { get; set; }
+        public Int64 Stack { get; set; }
+
+		public String Address { get; set; }
 
 		public Int32 Latency { get; set; }
 

@@ -32,13 +32,14 @@ namespace Bitpoker.WPFClient.Clients
             }
         }
 
-        public Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync()
+        public async Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync()
         {
-            //var httpClient = new HttpClient();
-            //var content = await httpClient.GetStringAsync(_apiUrl);
-            //return await Task.Run(() =&gt; JsonObject.Parse(content));
-
-            throw new NotImplementedException();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var json = await httpClient.GetStringAsync(String.Format("{0}players", _apiUrl));
+                IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
+                return result;
+            }
         }
 
         public void BuyIn(BitPoker.Models.Messages.BuyInRequestMessage buyIn)

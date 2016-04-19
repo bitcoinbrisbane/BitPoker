@@ -6,6 +6,11 @@ namespace BitPoker.Models.Messages
 	{
         public String PublicKey { get; set; }
 
+        /// <summary>
+        /// Include table id to make searching on hands more efficent
+        /// </summary>
+        public Guid TableId { get; set; }
+
         public Guid HandId { get; set; }
 
         public Int32 Index { get; set; }
