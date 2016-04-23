@@ -9,28 +9,28 @@ namespace BitPoker.API.Controllers
 {
     public class PlayersController : ApiController
     {
-        public IEnumerable<Models.PlayerInfo> Get()
+        public IEnumerable<BitPoker.Models.PlayerInfo> Get()
         {
-            Models.PlayerInfo alice = new Models.PlayerInfo()
+            BitPoker.Models.PlayerInfo alice = new BitPoker.Models.PlayerInfo()
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv"
             };
 
-            Models.PlayerInfo bob = new Models.PlayerInfo()
+            BitPoker.Models.PlayerInfo bob = new BitPoker.Models.PlayerInfo()
             {
                 BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo"
             };
 
-            List<Models.PlayerInfo> mockPlayers = new List<Models.PlayerInfo>();
+            List<BitPoker.Models.PlayerInfo> mockPlayers = new List<BitPoker.Models.PlayerInfo>();
             mockPlayers.Add(alice);
             mockPlayers.Add(bob);
 
             return mockPlayers;
         }
 
-        public Models.PlayerInfo Get(String address)
+        public BitPoker.Models.PlayerInfo Get(String address)
         {
-            Models.PlayerInfo mock = new Models.PlayerInfo()
+            BitPoker.Models.PlayerInfo mock = new BitPoker.Models.PlayerInfo()
             {
                 BitcoinAddress = address
             };

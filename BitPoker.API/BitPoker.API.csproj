@@ -95,6 +95,9 @@
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\ShuffleController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Exceptions\HandNotFoundException.cs" />
+    <Compile Include="Exceptions\PlayerNotFoundException.cs" />
+    <Compile Include="Exceptions\TableNotFoundException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

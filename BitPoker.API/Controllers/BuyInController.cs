@@ -30,7 +30,7 @@ namespace BitPoker.API.Controllers
             response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.PubKey, Stack = buyInRequest.Amount };
 
             //Buy in to mock table
-            if (buyInRequest.TableId.ToString() == "D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363")
+            if (buyInRequest.TableId.ToString().ToUpper() == "D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363")
             {
                 //Alice pub key
                 String key = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
@@ -45,28 +45,28 @@ namespace BitPoker.API.Controllers
             else
             {
                 //Buy in with Alice and get allocated a seat.
-                if (MemoryCache.Default.Contains(buyInRequest.TableId.ToString()))
+                Models.Table table = GetTableFromCache(buyInRequest.TableId);
+
+                if (table != null)
                 {
-                    Models.Table table = (Models.Table)MemoryCache.Default[buyInRequest.TableId.ToString()];
+                    //Alice pub key
+                    String key = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
+                    Byte[] aliceKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(key);
+                    NBitcoin.PubKey aliceKey = new NBitcoin.PubKey(aliceKeyAsBytes);
 
-                    if (table != null)
-                    {
-                        //Alice pub key
-                        String key = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
-                        Byte[] aliceKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(key);
-                        NBitcoin.PubKey aliceKey = new NBitcoin.PubKey(aliceKeyAsBytes);
+                    Byte[] userKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(buyInRequest.BitcoinAddress);
+                    NBitcoin.PubKey userKey = new NBitcoin.PubKey(userKeyAsBytes);
 
-                        Byte[] userKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(buyInRequest.PubKey);
-                        NBitcoin.PubKey userKey = new NBitcoin.PubKey(userKeyAsBytes);
+                    var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
 
-                        var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
+                    //As its heads up, create the first hand and deck
+                    Models.Hand hand = new Models.Hand(players);
+                    //As its a new table, add shuffled deck back to table
+                    table.Hands[0] = hand;
 
-                        //As its heads up, create the first hand and deck
-                        Models.Hand hand = new Models.Hand(players);
-                        hand.Deck.Shuffle();
-
-
-                    }
+                    ////Save back to memory
+                    CacheItemPolicy policy = new CacheItemPolicy() { SlidingExpiration = new TimeSpan(0, 30, 0)};
+                    MemoryCache.Default.Set(buyInRequest.TableId.ToString(), table, policy); 
                 }
             }
 

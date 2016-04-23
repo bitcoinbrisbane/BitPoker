@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-	public class ActionMessage
+	public class ActionMessage : BaseMessage
 	{
         public String PublicKey { get; set; }
 
@@ -18,10 +18,6 @@ namespace BitPoker.Models.Messages
         public String Action { get; set; }
 
         public Int64 Amount { get; set; }
-
-        public String Signature { get; set; }
-
-        public String PreviousHash { get; set; }
 
 		public ActionMessage ()
 		{

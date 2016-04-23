@@ -12,13 +12,14 @@ namespace BitPoker.Models
     {
         private const Int32 LENGTH = 52;
 
-        public ICollection<Byte> EncryptedCards { get; set; }
+        public ICollection<Byte[]> EncryptedCards { get; set; }
 
         private IList<String> deck;
 
         public FiftyTwoCardDeck()
         {
             deck = new List<string>(LENGTH);
+            EncryptedCards = new List<Byte[]>(LENGTH);
         }
 
         public void New()
@@ -42,12 +43,18 @@ namespace BitPoker.Models
         public void Shuffle()
         {
             Random rnd = new Random();
-
-            //Shuffle
             deck = deck.OrderBy<String, int>((item) => rnd.Next()).ToList();
         }
 
-        
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (Byte[] card in EncryptedCards)
+            {
+                sb.Append(Convert.ToBase64String(card));
+            }
+            return base.ToString();
+        }
 
 
         ///// <summary>

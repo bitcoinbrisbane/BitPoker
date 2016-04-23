@@ -26,5 +26,10 @@ namespace BitPoker.API.Models
 
             this.Deck = new BitPoker.Models.FiftyTwoCardDeck();
         }
+
+        //public void WithdrawFunds(Decimal amount, String accountNumber)
+        //{
+
+        //}
     }
 }

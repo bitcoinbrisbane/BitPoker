@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BitPoker.Models.Messages
 {
-    public class DeckMessage
+    public class DeckRequestMessage : BaseMessage
     {
         public Guid TableId { get; set; }
 
