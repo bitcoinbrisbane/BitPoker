@@ -43,21 +43,18 @@ namespace BitPoker.API.Controllers
                 var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
             }
             else
-            {
-                //Buy in with Alice and get allocated a seat.
-                Models.Table table = GetTableFromCache(buyInRequest.TableId);
+    {
+        public void Post(Models.Messages.BuyInRequestMessage buyInRequest)
+        {
+            //Alice pub key
+            String key = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
+            Byte[] aliceKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(key);
+            NBitcoin.PubKey aliceKey = new NBitcoin.PubKey(aliceKeyAsBytes);
 
-                if (table != null)
-                {
-                    //Alice pub key
-                    String key = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
-                    Byte[] aliceKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(key);
-                    NBitcoin.PubKey aliceKey = new NBitcoin.PubKey(aliceKeyAsBytes);
+            Byte[] userKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(buyInRequest.PubKey);
+            NBitcoin.PubKey userKey = new NBitcoin.PubKey(userKeyAsBytes);
 
-                    Byte[] userKeyAsBytes = NBitcoin.DataEncoders.Encoders.Hex.DecodeData(buyInRequest.BitcoinAddress);
-                    NBitcoin.PubKey userKey = new NBitcoin.PubKey(userKeyAsBytes);
-
-                    var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
+            var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
 
                     //As its heads up, create the first hand and deck
                     Models.Hand hand = new Models.Hand(players);
