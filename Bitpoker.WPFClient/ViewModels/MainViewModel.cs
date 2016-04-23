@@ -74,7 +74,7 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public void BuyIn(Guid tableId, Int64 amount)
+        public Int32 BuyIn(Guid tableId, Int64 amount)
         {
             //foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
             //{
@@ -83,6 +83,7 @@ namespace Bitpoker.WPFClient.ViewModels
             //        var players = client.GetPlayers();
             //    }
             //}
+            return 0;
         }
 
 
