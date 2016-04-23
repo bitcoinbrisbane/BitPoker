@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FiftyTwoCardDeck.cs" />
+    <Compile Include="Hand.cs" />
     <Compile Include="IDeck.cs" />
     <Compile Include="Messages\BaseMessage.cs" />
     <Compile Include="Messages\BuyInRequestMessage.cs" />
@@ -48,6 +49,7 @@
     <Compile Include="Messages\PostSmallBlindMessage.cs" />
     <Compile Include="PlayerInfo.cs" />
     <Compile Include="Messages\ShuffleMessage.cs" />
+    <Compile Include="Table.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace BitPoker.API.Models
+namespace BitPoker.Models
 {
     public class Hand
     {

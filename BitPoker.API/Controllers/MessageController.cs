@@ -44,8 +44,10 @@ namespace BitPoker.API.Controllers
                     return message;
                 case 1:
                     //ALICE 0.002 
-                    message = new Models.Messages.ActionMessage()
-        {
+                    message = new Models.Messages.ActionMessage();
+                    break;
+            }
+        
             return new BitPoker.Models.Messages.ActionMessage();
         }
 

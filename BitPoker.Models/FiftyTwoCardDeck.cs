@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BitPoker.Models
 {
-    public class FiftyTwoCardDeck : BitPoker.Models.IDeck
+    public class FiftyTwoCardDeck : IDeck
     {
         private const Int32 LENGTH = 52;
 
-        public ICollection<Byte[]> EncryptedCards { get; set; }
+        public ICollection<Byte[]> Cards { get; private set; }
+
+        public bool IsEncrypted
+        {
+            get; private set;
+        }
 
         private IList<String> deck;
 
         public FiftyTwoCardDeck()
         {
             deck = new List<string>(LENGTH);
-            EncryptedCards = new List<Byte[]>(LENGTH);
+            Cards = new List<Byte[]>(LENGTH);
         }
 
         public void New()
@@ -46,10 +48,15 @@ namespace BitPoker.Models
             deck = deck.OrderBy<String, int>((item) => rnd.Next()).ToList();
         }
 
+        public void Encrypt()
+        {
+            this.IsEncrypted = true;
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (Byte[] card in EncryptedCards)
+            foreach (Byte[] card in Cards)
             {
                 sb.Append(Convert.ToBase64String(card));
             }
