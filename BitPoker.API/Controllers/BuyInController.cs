@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Runtime.Caching;
 
@@ -10,10 +8,17 @@ namespace BitPoker.API.Controllers
 {
     public class BuyInController : BaseController
     {
+        private readonly BitPoker.Repository.IHandRepository repo;
+
+        public BuyInController()
+        {
+            //this.repo = new Repository.InMemoryRepo();
+        }
+
         [HttpPost]
         public BitPoker.Models.Messages.BuyInResponseMessage Post(BitPoker.Models.Messages.BuyInRequestMessage buyInRequest)
         {
-            if (!base.Verify(buyInRequest.BitcoinAddress, buyInRequest.Signature))
+            if (!base.Verify(buyInRequest.BitcoinAddress, buyInRequest.ToString(), buyInRequest.Signature))
             {
                 //throw new 
             }
@@ -35,7 +40,7 @@ namespace BitPoker.API.Controllers
             response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress, Stack = buyInRequest.Amount };
 
             //
-            Models.Table table = new Models.Table();
+            Models.Contracts.Table table = new Models.Contracts.Table(2, 10);
 
             //Buy in to mock table
             if (buyInRequest.TableId.ToString().ToUpper() == "D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363")
@@ -44,7 +49,7 @@ namespace BitPoker.API.Controllers
             }
             else
             {
-                table = GetTableFromCache(buyInRequest.TableId);
+                table = null; //GetTableFromCache(buyInRequest.TableId);
             }
 
             //Alice pub key
@@ -59,7 +64,7 @@ namespace BitPoker.API.Controllers
             //As its heads up, create the first hand and deck
             Models.Hand hand = new Models.Hand(players);
 
-            table.Hands[0] = hand;
+            //table.Hands[0] = hand;
 
             ////Save back to memory
             CacheItemPolicy policy = new CacheItemPolicy() { SlidingExpiration = new TimeSpan(0, 30, 0)};

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BitPoker.Repository
 {
-    public class MockRepo : IPlayerRepository, ITableRepository
+    public class MockPlayerRepo : IPlayerRepository
     {
         public IEnumerable<BitPoker.Models.PlayerInfo> All()
         {
@@ -24,13 +27,6 @@ namespace BitPoker.Repository
             return mockPlayers;
         }
 
-        public Models.Contracts.Table Find(Guid id)
-        {
-            //Return a fake contract
-            //{D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363}
-            return new Models.Contracts.Table(2, 10) { Id = new Guid("D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363") };
-        }
-
         public BitPoker.Models.PlayerInfo Find(String address)
         {
             if (address == "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv")
@@ -46,11 +42,6 @@ namespace BitPoker.Repository
             {
                 throw new IndexOutOfRangeException();
             }
-        }
-
-        public IEnumerable<Models.Contracts.Table> All()
-        {
-            throw new NotImplementedException();
         }
     }
 }

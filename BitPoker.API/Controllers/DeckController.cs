@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
 using System.Web.Http;
 
 namespace BitPoker.API.Controllers
@@ -18,7 +17,7 @@ namespace BitPoker.API.Controllers
         /// <param name="tableId"></param>
         /// <param name="handId"></param>
         /// <returns></returns>
-        public BitPoker.Models.Messages.DeckResponseMessage Get(Guid tableId, Guid handId)
+        public BitPoker.Models.Messages.DeckResponseMessage Get(Guid handId)
         {
             //As its heads up, create the first hand and deck
             Models.Hand hand = base.GetHandFromCache(tableId, handId);

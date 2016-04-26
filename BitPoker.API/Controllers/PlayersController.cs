@@ -11,7 +11,7 @@ namespace BitPoker.API.Controllers
 
         public PlayersController()
         {
-            repo = new BitPoker.Repository.MockRepo();
+            repo = new BitPoker.Repository.MockPlayerRepo();
         }
 
         public IEnumerable<BitPoker.Models.PlayerInfo> Get()

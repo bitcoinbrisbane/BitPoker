@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace BitPoker.API.Controllers
 {
     public class ShuffleController : BaseController
     {
+        private readonly BitPoker.Repository.IHandRepository repo;
+
+        public ShuffleController()
+        {
+        }
+
         /// <summary>
         /// Get deck to shuffle
         /// </summary>
@@ -24,18 +28,18 @@ namespace BitPoker.API.Controllers
 
             message.BitcoinAddress = alice_address.ToString();
 
-            if (tableId.ToString() == "" && handId.ToString() == "398b5fe2-da27-4772-81ce-37fa615719b5")
-            {
-                //return mock shuffled deck
-            }
-            else
-            {
-                //Get new hand
-                var hand = base.GetHandFromCache(tableId, handId);
-                hand.Deck.Shuffle();
+            //if (tableId.ToString() == "" && handId.ToString() == "398b5fe2-da27-4772-81ce-37fa615719b5")
+            //{
+            //    //return mock shuffled deck
+            //}
+            //else
+            //{
+            //    //Get new hand
+            //    var hand = repo.find(tableId, handId);
+            //    hand.Deck.Shuffle();
 
-                message.Signature = alice_secret.PrivateKey.SignMessage(hand.Deck.ToString());
-            }
+            //    message.Signature = alice_secret.PrivateKey.SignMessage(hand.Deck.ToString());
+            //}
 
             return message;
         }

@@ -9,10 +9,16 @@ namespace BitPoker.API.Controllers
 {
     public class HandHistoryController : BaseController
     {
-        public IEnumerable<Models.Messages.ActionMessage> Get(Guid tableId, Guid handId)
+        private readonly BitPoker.Repository.IHandRepository repo;
+
+        public HandHistoryController()
         {
-            var hand = base.GetHandFromCache(tableId, handId);
-            return hand.History;
+            this.repo = new Repository.InMemoryHandRepo();
+        }
+
+        public IEnumerable<Models.Messages.ActionMessage> Get(Guid handId)
+        {
+            return repo.All(handId)
         }
     }
 }

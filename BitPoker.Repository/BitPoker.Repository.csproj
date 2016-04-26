@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BitPoker.Repository</RootNamespace>
     <AssemblyName>BitPoker.Repository</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IGenericRepository.cs" />
+    <Compile Include="IHandRepository.cs" />
+    <Compile Include="IMessagesRepository.cs" />
     <Compile Include="IPlayerRepository.cs" />
     <Compile Include="ITableRepository.cs" />
-    <Compile Include="MockRepo.cs" />
+    <Compile Include="MockHandRepo.cs" />
+    <Compile Include="MockPlayerRepo.cs" />
+    <Compile Include="MockTableRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
