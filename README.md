@@ -582,11 +582,13 @@ Closing the channel
 For full key set, see the test data folder
 
 ### Mock API
-An REST API is located at 
-https://bitpoker.azurewebsites.net/api
+An REST API is located at https://bitpoker.azurewebsites.net/api for users to develop clients against.
 
-GET /Players
-GET /Players/<bitcoinaddress>
+| Verb  | Uri |
+| ------------- | ------------- |
+| GET | /Players |
+| GET | /Players/<bitcoinaddress> |
+| GET | /Tables |
 
 
 ## References
