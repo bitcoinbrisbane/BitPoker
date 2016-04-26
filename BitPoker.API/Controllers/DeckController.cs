@@ -8,6 +8,10 @@ namespace BitPoker.API.Controllers
 {
     public class DeckController : BaseController
     {
+        public DeckController()
+        {
+        }
+
         /// <summary>
         /// Get deck for mock hand
         /// </summary>
