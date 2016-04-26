@@ -16,11 +16,11 @@ namespace BitPoker.Models
             get; private set;
         }
 
-        private IList<String> deck;
+        private IList<String> cards;
 
         public FiftyTwoCardDeck()
         {
-            deck = new List<string>(LENGTH);
+            cards = new List<string>(LENGTH);
             Cards = new List<Byte[]>(LENGTH);
         }
 
@@ -37,7 +37,7 @@ namespace BitPoker.Models
                 for (Int32 i = 0; i < 13; i++)
                 {
                     String card = String.Format("{0}{1}", i, suite);
-                    deck.Add(card);
+                    cards.Add(card);
                 }
             }
         }
@@ -45,7 +45,7 @@ namespace BitPoker.Models
         public void Shuffle()
         {
             Random rnd = new Random();
-            deck = deck.OrderBy<String, int>((item) => rnd.Next()).ToList();
+            cards = cards.OrderBy<String, int>((item) => rnd.Next()).ToList();
         }
 
         public void Encrypt()
@@ -62,33 +62,5 @@ namespace BitPoker.Models
             }
             return base.ToString();
         }
-
-
-        ///// <summary>
-        ///// Shuffle the specified list.
-        ///// </summary>
-        ///// <param name="list">List.</param>
-        ///// <typeparam name="T">The 1st type parameter.</typeparam>
-        //public static void Shuffle<T>(IList<T> list)
-        //{
-        //    using (RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider())
-        //    {
-        //        int n = list.Count;
-
-        //        while (n > 1)
-        //        {
-        //            byte[] box = new byte[1];
-        //            do
-        //                provider.GetBytes(box);
-        //            while (!(box[0] < n * (Byte.MaxValue / n)));
-        //            int k = (box[0] % n);
-        //            n--;
-
-        //            T value = list[k];
-        //            list[k] = list[n];
-        //            list[n] = value;
-        //        }
-        //    }
-        //}
     }
 }

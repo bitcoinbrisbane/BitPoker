@@ -8,11 +8,13 @@ namespace BitPoker.Models
 {
     public class MockShuffledDeck : IDeck
     {
+        private ICollection<Byte[]> _cards;
+
         public ICollection<byte[]> Cards
         {
             get
             {
-                throw new NotImplementedException();
+                return _cards;
             }
         }
 

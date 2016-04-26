@@ -22,6 +22,11 @@ namespace BitPoker
 
 		public static void Main (string[] args)
 		{
+            IDeck deck = new FiftyTwoCardDeck();
+            deck.Shuffle();
+
+            DumpToDisk(deck.Cards, "deck.txt");
+
             //NBitcoin.Key key = new NBitcoin.Key();
             //var w = key.GetWif(NBitcoin.Network.TestNet);
             //NBitcoin.BitcoinAddress a = w.GetAddress();

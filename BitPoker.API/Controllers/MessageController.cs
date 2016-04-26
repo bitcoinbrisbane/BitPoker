@@ -21,8 +21,8 @@ namespace BitPoker.API.Controllers
         // GET api/<controller>/5
         public Models.Messages.ActionMessage Get(String id, Int32 index)
         {
-            NBitcoin.BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
-            NBitcoin.BitcoinSecret bob_secret = new BitcoinSecret(BOB_WIF, NBitcoin.Network.Main);
+            BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
+            BitcoinSecret bob_secret = new BitcoinSecret(BOB_WIF, NBitcoin.Network.Main);
 
             Models.Messages.ActionMessage message;
 

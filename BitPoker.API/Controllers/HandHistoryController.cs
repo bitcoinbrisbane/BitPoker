@@ -7,8 +7,12 @@ using System.Web.Http;
 
 namespace BitPoker.API.Controllers
 {
-    public class HandHistoryController : ApiController
+    public class HandHistoryController : BaseController
     {
-
+        public IEnumerable<Models.Messages.ActionMessage> Get(Guid tableId, Guid handId)
+        {
+            var hand = base.GetHandFromCache(tableId, handId);
+            return hand.History;
+        }
     }
 }

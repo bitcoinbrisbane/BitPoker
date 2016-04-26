@@ -1,41 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace BitPoker.API.Controllers
 {
     public class PlayersController : ApiController
     {
+        private readonly BitPoker.Repository.IPlayerRepository repo;
+
+        public PlayersController()
+        {
+            repo = new BitPoker.Repository.MockRepo();
+        }
+
         public IEnumerable<BitPoker.Models.PlayerInfo> Get()
         {
-            BitPoker.Models.PlayerInfo alice = new BitPoker.Models.PlayerInfo()
-            {
-                BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv"
-            };
-
-            BitPoker.Models.PlayerInfo bob = new BitPoker.Models.PlayerInfo()
-            {
-                BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo"
-            };
-
-            List<BitPoker.Models.PlayerInfo> mockPlayers = new List<BitPoker.Models.PlayerInfo>();
-            mockPlayers.Add(alice);
-            mockPlayers.Add(bob);
-
-            return mockPlayers;
+            return repo.All();
         }
 
         public BitPoker.Models.PlayerInfo Get(String address)
         {
-            BitPoker.Models.PlayerInfo mock = new BitPoker.Models.PlayerInfo()
-            {
-                BitcoinAddress = address
-            };
-
-            return mock;
+            BitPoker.Models.PlayerInfo player = repo.Find(address);
+            return player;
         }
     }
 }

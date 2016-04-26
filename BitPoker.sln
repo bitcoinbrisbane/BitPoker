@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker", "BitPoker\BitPoker.csproj", "{FBA16F9C-D388-464F-8B40-5D8D96FABDEA}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.API", "BitPoker.API\BitPoker.API.csproj", "{77BF1037-A40B-49DB-B37D-F108E8F8134B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.API.Tests", "BitPoker.API.Tests\BitPoker.API.Tests.csproj", "{E24D9F46-3D48-4EA0-977E-310B40842CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Web", "BitPoker.Web\BitPoker.Web.csproj", "{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Repository", "BitPoker.Repository\BitPoker.Repository.csproj", "{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,30 @@ Global
 		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{E24D9F46-3D48-4EA0-977E-310B40842CED}.Release|x86.ActiveCfg = Release|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Debug|x86.Build.0 = Debug|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Release|x86.ActiveCfg = Release|Any CPU
+		{30A268FD-46D1-4E08-93B6-2A03ACD45EA2}.Release|x86.Build.0 = Release|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

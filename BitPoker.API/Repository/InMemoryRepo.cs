@@ -1,28 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Caching;
-using System.Web.Http;
 
-namespace BitPoker.API.Controllers
+namespace BitPoker.API.Repository
 {
-    public abstract class BaseController : ApiController
+    public class InMemoryRepo : BitPoker.Repository.ITableRepository
     {
-        public Boolean Verify(String address, String message, String signature)
+        public Models.Table Find(Guid id)
         {
-            NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
-            var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
-            bool verified = pubKey.VerifyMessage(message, signature);
-
-            return verified;
-        }
-
-        [Obsolete]
-        public Models.Table GetTableFromCache(Guid tableId)
-        {
-            if (MemoryCache.Default.Contains(tableId.ToString()))
+            if (MemoryCache.Default.Contains(id.ToString()))
             {
-                Models.Table table = (Models.Table)MemoryCache.Default[tableId.ToString()];
+                Models.Table table = (Models.Table)MemoryCache.Default[id.ToString()];
                 return table;
             }
             else
@@ -31,8 +19,7 @@ namespace BitPoker.API.Controllers
             }
         }
 
-        [Obsolete]
-        public Models.Hand GetHandFromCache(Guid tableId, Guid handId)
+        public Models.Hand GetHand(Guid tableId, Guid handId)
         {
             if (MemoryCache.Default.Contains(tableId.ToString()))
             {
