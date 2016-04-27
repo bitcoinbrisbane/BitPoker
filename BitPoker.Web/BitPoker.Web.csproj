@@ -113,6 +113,8 @@
     <None Include="scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="scripts\jquery-2.2.3.js" />
     <Content Include="scripts\jquery-2.2.3.min.js" />
+    <Content Include="styles\theme.css" />
+    <Content Include="styles\theme.min.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
