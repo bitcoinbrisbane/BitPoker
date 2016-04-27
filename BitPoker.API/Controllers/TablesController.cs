@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Runtime.Caching;
 
 namespace BitPoker.API.Controllers
 {
@@ -14,7 +10,7 @@ namespace BitPoker.API.Controllers
 
         public TablesController()
         {
-            this.repo = new BitPoker.Repository.MockRepo();
+            this.repo = new BitPoker.Repository.MockTableRepo();
         }
 
         public IEnumerable<BitPoker.Models.Contracts.Table> Get()

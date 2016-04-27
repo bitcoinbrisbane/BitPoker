@@ -7,7 +7,7 @@ namespace BitPoker.Models
     {
         Boolean IsEncrypted { get; }
 
-        ICollection<Byte[]> Cards { get; }
+        IList<Byte[]> Cards { get; }
 
         void New();
 

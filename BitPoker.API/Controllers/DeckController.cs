@@ -7,8 +7,11 @@ namespace BitPoker.API.Controllers
 {
     public class DeckController : BaseController
     {
+        private readonly BitPoker.Repository.IHandRepository repo;
+
         public DeckController()
         {
+            repo = new BitPoker.Repository.MockHandRepo();
         }
 
         /// <summary>
@@ -20,7 +23,7 @@ namespace BitPoker.API.Controllers
         public BitPoker.Models.Messages.DeckResponseMessage Get(Guid handId)
         {
             //As its heads up, create the first hand and deck
-            Models.Hand hand = base.GetHandFromCache(tableId, handId);
+            Models.Hand hand = repo.Find(handId);
 
             //Assume alice
             const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
@@ -29,7 +32,7 @@ namespace BitPoker.API.Controllers
 
             BitPoker.Models.Messages.DeckResponseMessage response = new BitPoker.Models.Messages.DeckResponseMessage()
             {
-                TableId = tableId,
+                TableId = new Guid(),
                 HandId = handId,
                 BitcoinAddress = alice_address.ToString(),
                 Deck = hand.Deck
