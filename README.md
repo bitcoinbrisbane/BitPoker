@@ -11,31 +11,31 @@ Deck is represented as an array of Bytes.
 
 | Key  | Value | Decimal | Byte |
 | ------------- | ------------- |
-| A  | Ace  | 0 | {0x00}
-| K  | King  | 1 |
-| Q  | Queen | 2 |
-| J  | Jack  | 3 |
-| T  | Ten | 4
-| 9 | 9 |
-| 8 | 8 |
-| 7 | 7 |
-| 6 | 6 |
-| 5 | 5 | 4 |
-| 4 | 4 | 3 |
-| 3 | 3 | 2 |
-| 2 | 2 | 1 |
+| A  | Ace  | 0 | {0x00} |
+| K  | King  | 1 ||
+| Q  | Queen | 2 ||
+| J  | Jack  | 3 ||
+| T  | Ten | 4 ||
+| 9 | 9 | ||
+| 8 | 8 | ||
+| 7 | 7 | ||
+| 6 | 6 | ||
+| 5 | 5 | 4 ||
+| 4 | 4 | 3 ||
+| 3 | 3 | 2 ||
+| 2 | 2 | 1 ||
 
 Suites
 
 | Key  | Value | Offset |
 | ------------- | ------------- |
-| S  | Spade  | +0 | {0x00}
-| C  | Club | +13 | {0x0D}
-| H  | Heart | +26 |
-| D  | Diamond  | +39 |
+| S  | Spade  | +0 | {0x00} |
+| C  | Club | +13 | {0x0D} |
+| H  | Heart | +26 | |
+| D  | Diamond  | +39  ||
 
 *Eg
-Ace of clubs = { 0x13 }
+Ace of clubs = { 0x0D }
 
 Poker terminology
 - SB = Small Blind
