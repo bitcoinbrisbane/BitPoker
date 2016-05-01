@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BitPoker.Models
 {
     public class MockShuffledDeck : IDeck
     {
-        private ICollection<Byte[]> _cards;
+        private List<Byte[]> _cards;
 
-        public ICollection<byte[]> Cards
+        public IList<byte[]> Cards
         {
             get
             {
@@ -29,6 +26,10 @@ namespace BitPoker.Models
 
         public void New()
         {
+            _cards = new List<byte[]>(52);
+
+            Byte[] card = new Byte[] { 0x00 };
+            _cards.Add(card);
         }
 
         public void Shuffle()

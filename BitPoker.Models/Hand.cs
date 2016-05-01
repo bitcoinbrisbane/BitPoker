@@ -9,25 +9,22 @@ namespace BitPoker.Models
 
         public Guid Id { get; set; }
 
+        public Guid TableId { get; set; }
+
         public Int32 PersonToAct { get; set; }
 
-        public ICollection<BitPoker.Models.Messages.ActionMessage> History { get; set; }
+        public IList<Messages.ActionMessage> History { get; set; }
 
-        public BitPoker.Models.IDeck Deck { get; set; }
+        public IDeck Deck { get; set; }
 
         public Hand(BitPoker.Models.PlayerInfo[] players)
         {
             _players = players;
             Id = new Guid();
             Id = Guid.NewGuid();
-            History = new List<BitPoker.Models.Messages.ActionMessage>();
+            History = new List<Messages.ActionMessage>();
 
-            this.Deck = new BitPoker.Models.FiftyTwoCardDeck();
+            this.Deck = new FiftyTwoCardDeck();
         }
-
-        //public void WithdrawFunds(Decimal amount, String accountNumber)
-        //{
-
-        //}
     }
 }

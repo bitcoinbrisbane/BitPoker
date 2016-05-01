@@ -8,7 +8,7 @@ namespace BitPoker.API.Repository
 {
     public class InMemoryHandRepo : BitPoker.Repository.IHandRepository
     {
-        public IEnumerable<Hand> All(Guid tableId)
+        public IEnumerable<Hand> All()
         {
             //if (MemoryCache.Default.Contains(id.ToString()))
             //{

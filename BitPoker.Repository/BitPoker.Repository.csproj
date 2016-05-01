@@ -47,6 +47,7 @@
     <Compile Include="IPlayerRepository.cs" />
     <Compile Include="ITableRepository.cs" />
     <Compile Include="MockHandRepo.cs" />
+    <Compile Include="MockMessageRepo.cs" />
     <Compile Include="MockPlayerRepo.cs" />
     <Compile Include="MockTableRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
