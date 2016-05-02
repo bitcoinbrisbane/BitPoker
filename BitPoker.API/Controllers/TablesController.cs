@@ -4,7 +4,7 @@ using System.Web.Http;
 
 namespace BitPoker.API.Controllers
 {
-    public class TablesController : ApiController
+    public class TablesController : BaseController
     {
         private readonly BitPoker.Repository.ITableRepository repo;
 
@@ -13,14 +13,20 @@ namespace BitPoker.API.Controllers
             this.repo = new BitPoker.Repository.MockTableRepo();
         }
 
-        public IEnumerable<BitPoker.Models.Contracts.Table> Get()
+        public IEnumerable<Models.Contracts.Table> Get()
         {
             return repo.All();
         }
 
-        public BitPoker.Models.Contracts.Table Get(Guid id)
+        public Models.Contracts.Table Get(Guid id)
         {
             return repo.Find(id);
+        }
+
+        public void Post(Models.Contracts.Table model)
+        {
+            var repo = new BitPoker.API.Repository.InMemoryTableRepo();
+            
         }
     }
 }

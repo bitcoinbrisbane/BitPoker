@@ -30,7 +30,7 @@ namespace BitPoker.API.Controllers
             NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
 
-            BitPoker.Models.Messages.DeckResponseMessage response = new BitPoker.Models.Messages.DeckResponseMessage()
+            Models.Messages.DeckResponseMessage response = new BitPoker.Models.Messages.DeckResponseMessage()
             {
                 TableId = new Guid(),
                 HandId = handId,
