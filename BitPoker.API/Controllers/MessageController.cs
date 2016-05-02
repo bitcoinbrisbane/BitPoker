@@ -27,12 +27,12 @@ namespace BitPoker.API.Controllers
 
         ///Get a mock message
         // GET api/<controller>/5
-        public Models.Messages.ActionMessage Get(Guid handId, Int32 index)
+        public BitPoker.Models.Messages.ActionMessage Get(Guid handId, Int32 index)
         {
             BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
             BitcoinSecret bob_secret = new BitcoinSecret(BOB_WIF, NBitcoin.Network.Main);
 
-            Models.Messages.ActionMessage message = handRepo.Find(handId).History[index];
+            BitPoker.Models.Messages.ActionMessage message = handRepo.Find(handId).History[index];
             return new BitPoker.Models.Messages.ActionMessage();
         }
 

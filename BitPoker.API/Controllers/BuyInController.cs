@@ -17,7 +17,7 @@ namespace BitPoker.API.Controllers
         }
 
         [HttpPost]
-        public Models.Messages.BuyInResponseMessage Post(Models.Messages.BuyInRequestMessage buyInRequest)
+        public Models.Messages.BuyInResponseMessage Post(BitPoker.Models.Messages.BuyInRequestMessage buyInRequest)
         {
             if (!base.Verify(buyInRequest.BitcoinAddress, buyInRequest.ToString(), buyInRequest.Signature))
             {
@@ -29,19 +29,19 @@ namespace BitPoker.API.Controllers
             NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
 
-            Models.Messages.BuyInResponseMessage response = new Models.Messages.BuyInResponseMessage(2);
+            BitPoker.Models.Messages.BuyInResponseMessage response = new BitPoker.Models.Messages.BuyInResponseMessage(2);
 
             //Create players
-            Models.PlayerInfo[] players = new BitPoker.Models.PlayerInfo[2];
-            players[0] = new Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", Address = "https://bitpoker.azurewebsites.net/api", Stack = 1000000 };
+            BitPoker.Models.PlayerInfo[] players = new BitPoker.Models.PlayerInfo[2];
+            players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", Address = "https://bitpoker.azurewebsites.net/api", Stack = 1000000 };
             players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress, Stack = buyInRequest.Amount };
 
             //Alice in seat 0, you in the sb
-            response.Players[0] = new Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", Address = "https://bitpoker.azurewebsites.net/api", Stack = 1000000 };
-            response.Players[1] = new Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress, Stack = buyInRequest.Amount };
+            response.Players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", Address = "https://bitpoker.azurewebsites.net/api", Stack = 1000000 };
+            response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress, Stack = buyInRequest.Amount };
 
             //
-            Models.Contracts.Table table = new Models.Contracts.Table(2, 10);
+            BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table(2, 10);
 
             var t = tableRepo.Find(buyInRequest.TableId);
 
@@ -63,9 +63,9 @@ namespace BitPoker.API.Controllers
             NBitcoin.PubKey userKey = new NBitcoin.PubKey(buyInRequest.PubKey);
 
             var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { alicePubKey, userKey });
-            
+
             //As its heads up, create the first hand and deck
-            Models.Hand hand = new Models.Hand(players);
+            BitPoker.Models.Hand hand = new BitPoker.Models.Hand(players);
 
             //table.Hands[0] = hand;
 
