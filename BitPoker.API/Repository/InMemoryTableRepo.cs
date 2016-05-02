@@ -13,11 +13,11 @@ namespace BitPoker.API.Repository
             throw new NotImplementedException();
         }
 
-        public Models.Contracts.Table Find(Guid id)
+        public Table Find(Guid id)
         {
             if (MemoryCache.Default.Contains(id.ToString()))
             {
-                Models.Contracts.Table table = (Models.Contracts.Table)MemoryCache.Default[id.ToString()];
+                Table table = (Table)MemoryCache.Default[id.ToString()];
                 return table;
             }
             else
