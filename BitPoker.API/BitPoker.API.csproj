@@ -103,6 +103,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HandContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\InMemoryHandRepo.cs" />
     <Compile Include="Repository\InMemoryTableRepo.cs" />

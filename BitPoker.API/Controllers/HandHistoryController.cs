@@ -14,7 +14,7 @@ namespace BitPoker.API.Controllers
             //this.repo = new Repository.InMemoryHandRepo();
         }
 
-        public IEnumerable<Models.Messages.ActionMessage> Get(Guid handId)
+        public IEnumerable<BitPoker.Models.Messages.ActionMessage> Get(Guid handId)
         {
             return repo.All().Where(m => m.HandId.ToString() == handId.ToString());
         }

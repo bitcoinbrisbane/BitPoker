@@ -8,38 +8,39 @@ namespace BitPoker.API.Repository
 {
     public class InMemoryHandRepo : BitPoker.Repository.IHandRepository
     {
+        private const string KEY = "hands";
+
         public IEnumerable<Hand> All()
         {
-            //if (MemoryCache.Default.Contains(id.ToString()))
-            //{
-            //    Models.Hand hand = (Models.Hand)MemoryCache.Default[id.ToString()];
-            //    if (id != null)
-            //    {
-            //        //return table.Hands.First(h => h.Id.ToString() == handId.ToString());
-            //        return hand;
-            //    }
-            //    else
-            //    {
-            //        throw new Exceptions.HandNotFoundException();
-            //    }
-            //}
-            //else
-            //{
-            //    throw new IndexOutOfRangeException();
-            //}
+            if (MemoryCache.Default.Contains(KEY))
+            {
+                Models.HandContainer handContainer = (Models.HandContainer)MemoryCache.Default[KEY];
 
-            throw new NotImplementedException();
+                if (handContainer != null)
+                {
+                    //return table.Hands.First(h => h.Id.ToString() == handId.ToString());
+                    return handContainer.Hands;
+                }
+                else
+                {
+                    throw new Exceptions.HandNotFoundException();
+                }
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
         }
 
         public Hand Find(Guid id)
         {
-            if (MemoryCache.Default.Contains(id.ToString()))
+            if (MemoryCache.Default.Contains(KEY)
             {
-                Models.Hand hand = (Models.Hand)MemoryCache.Default[id.ToString()];
-                if (id != null)
+                Models.HandContainer handContainer = (Models.HandContainer)MemoryCache.Default[KEY];
+
+                if (handContainer != null)
                 {
-                    //return table.Hands.First(h => h.Id.ToString() == handId.ToString());
-                    return hand;
+                    return handContainer.Hands.SingleOrDefault(h => h.Id.ToString() == id.ToString());
                 }
                 else
                 {
