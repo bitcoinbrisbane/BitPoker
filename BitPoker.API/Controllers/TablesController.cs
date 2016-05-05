@@ -6,34 +6,38 @@ namespace BitPoker.API.Controllers
 {
     public class TablesController : BaseController
     {
-        private readonly BitPoker.Repository.ITableRepository repo;
+        private readonly BitPoker.Repository.ITableRepository _repo;
 
         public TablesController()
         {
-            this.repo = new BitPoker.Repository.MockTableRepo();
+            this._repo = Repository.Factory.GetTableRepository();
         }
 
         public IEnumerable<BitPoker.Models.Contracts.Table> Get()
         {
-            return repo.All();
+            using (BitPoker.Repository.ITableRepository repo = Repository.Factory.GetTableRepository())
+            {
+                return repo.All();
+            }
         }
 
         public BitPoker.Models.Contracts.Table Get(Guid id)
         {
-            return repo.Find(id);
+            using (BitPoker.Repository.ITableRepository repo = Repository.Factory.GetTableRepository())
+            {
+                return repo.Find(id);
+            }
         }
 
         [HttpPost]
         public void Post(BitPoker.Models.Contracts.TableRequest model)
         {
-            BitPoker.Repository.ITableRepository repo = new Repository.InMemoryTableRepo();
-
             if (!base.Verify(model.BitcoinAddress, model.ToString(), model.Signature))
             {
                 throw new Exceptions.SignatureNotValidException();
             }
 
-            repo.Add(model.Table);
+            _repo.Add(model.Table);
         }
     }
 }
