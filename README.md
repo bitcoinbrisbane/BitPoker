@@ -10,7 +10,7 @@ Different clients developed in different programming languages are encouraged.
 Deck is represented as an array of Bytes.
 
 | Key  | Value | Decimal | Byte |
-| ------------- | ------------- |
+| -----|-------- | -------|------ |
 | A  | Ace  | 0 | {0x00} |
 | K  | King  | 1 ||
 | Q  | Queen | 2 ||
@@ -420,6 +420,7 @@ The address 2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi now contains 1btc https://testne
 
 *Sample opening lightning channel in c# / NBitcoin*
 ```
+TODO
 ```
 
 ### Create the refund transaction
@@ -449,7 +450,7 @@ At the start of each hand, the dealer defines the hand contract which references
 *Example hand contract seralized in XML
 ```
 <Message Verison="1">
-  <Hand ID="398b5fe2-da27-4772-81ce-37fa615719b5" Table ID=" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
+  <Hand ID="398b5fe2-da27-4772-81ce-37fa615719b5" Table ID="bf368921-346a-42d8-9cb8-621f9cad5e16" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
     <Seat Number="1" Position="SB" Stack="1.01">mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</Seat>
     <Seat Number="2" Position="BB,Dealer" Stack="0.9">msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</Seat>
     <Witness>mq1Ctw6xTcomjGgQz5pi8oXdR1tjjZQHYs</Witness>
@@ -463,7 +464,7 @@ In this example, we will use a "Heads up" game of No Limit Texas Holdem.  In thi
 - Alice = msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv
 - Bob = mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo
 
-The deck is represented by an array[52].  
+The deck is represented by an array[52] of bytes.  See lookup table.
 
 - Card[0] = AH
 - Card[1] = KH
@@ -472,7 +473,9 @@ The deck is represented by an array[52].
 ...
 - Card[51] = 2C
 
-### Alice shuffles the deck and does not disclose the un-encrypted result.
+### Encrypting the deck
+The deck needs to be encrypted using a commutative algorithm, such as RSA.  Alice shuffles the deck and does not disclose the un-encrypted result.
+
 - Card[0] = AC
 - Card[1] = 3S
 - Card[2] = AH
@@ -484,7 +487,7 @@ Create an array of 52 private keys, 16 bytes represented as base64.  These do no
 - Key[2]=HEKFpbtQnjl715X5P+8Y8g==
 - Key[3]=2cXOWr/IQcJ/AyqhF/W/jg==
 
-Each card is double encrypted.  First round of encryption with the hand key.  In the example key = HBFwc/qnlFqkxwiXTmNkXw== (1c 11 70 73 fa a7 94 5a a4 c7 08 97 4e 63 64 5f) in hex.
+~~Each card is double encrypted.  First round of encryption with the hand key.  In the example key = HBFwc/qnlFqkxwiXTmNkXw== (1c 11 70 73 fa a7 94 5a a4 c7 08 97 4e 63 64 5f) in hex.~~
 
 - Card[0]=
 - Card[1]=
