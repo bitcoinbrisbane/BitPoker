@@ -10,12 +10,24 @@ namespace BitPoker.API.Repository
     {
         public void Add(Table item)
         {
-            throw new NotImplementedException();
+            if (MemoryCache.Default.Contains("TableContainer"))
+            {
+                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
+                container.Tables.Add(item);
+            }
         }
 
         public IEnumerable<Table> All()
         {
-            throw new NotImplementedException();
+            if (MemoryCache.Default.Contains("TableContainer"))
+            {
+                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
+                return container.Tables;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public Table Find(Guid id)
