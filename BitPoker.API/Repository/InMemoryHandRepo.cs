@@ -34,7 +34,7 @@ namespace BitPoker.API.Repository
 
         public Hand Find(Guid id)
         {
-            if (MemoryCache.Default.Contains(KEY)
+            if (MemoryCache.Default.Contains(KEY))
             {
                 Models.HandContainer handContainer = (Models.HandContainer)MemoryCache.Default[KEY];
 

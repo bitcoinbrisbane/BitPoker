@@ -23,14 +23,14 @@ namespace BitPoker.API.Controllers
         public BitPoker.Models.Messages.DeckResponseMessage Get(Guid handId)
         {
             //As its heads up, create the first hand and deck
-            Models.Hand hand = repo.Find(handId);
+            BitPoker.Models.Hand hand = repo.Find(handId);
 
             //Assume alice
             const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
             NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
 
-            Models.Messages.DeckResponseMessage response = new BitPoker.Models.Messages.DeckResponseMessage()
+            BitPoker.Models.Messages.DeckResponseMessage response = new BitPoker.Models.Messages.DeckResponseMessage()
             {
                 TableId = new Guid(),
                 HandId = handId,

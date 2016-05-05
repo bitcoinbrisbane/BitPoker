@@ -70,7 +70,7 @@ namespace BitPoker.API.Controllers
             var hand = this.handRepo.Find(message.HandId);
 
             var i = hand.History.Count;
-            message.Index
+            //message.Index[i];
 
 
             return verified;
