@@ -61,6 +61,18 @@ namespace BitPoker.API.Controllers
             BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(message.PublicKey);
             bool verified = address.VerifyMessage(message.ToString(), message.Signature);
             
+            if (verified != true)
+            {
+                throw new Exceptions.SignatureNotValidException();
+            }
+
+            //Some API
+            var hand = this.handRepo.Find(message.HandId);
+
+            var i = hand.History.Count;
+            message.Index
+
+
             return verified;
         }
     }

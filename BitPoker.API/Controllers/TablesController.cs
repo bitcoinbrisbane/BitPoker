@@ -13,20 +13,27 @@ namespace BitPoker.API.Controllers
             this.repo = new BitPoker.Repository.MockTableRepo();
         }
 
-        public IEnumerable<Models.Contracts.Table> Get()
+        public IEnumerable<BitPoker.Models.Contracts.Table> Get()
         {
             return repo.All();
         }
 
-        public Models.Contracts.Table Get(Guid id)
+        public BitPoker.Models.Contracts.Table Get(Guid id)
         {
             return repo.Find(id);
         }
 
-        public void Post(Models.Contracts.Table model)
+        [HttpPost]
+        public void Post(BitPoker.Models.Contracts.TableRequest model)
         {
-            var repo = new BitPoker.API.Repository.InMemoryTableRepo();
-            
+            BitPoker.Repository.ITableRepository repo = new Repository.InMemoryTableRepo();
+
+            if (!base.Verify(model.BitcoinAddress, model.ToString(), model.Signature))
+            {
+                throw new Exceptions.SignatureNotValidException();
+            }
+
+            repo.Add(model.Table);
         }
     }
 }

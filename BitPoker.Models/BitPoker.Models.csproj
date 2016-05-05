@@ -31,6 +31,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="Contracts\TableRequest.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="IDeck.cs" />

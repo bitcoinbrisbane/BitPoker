@@ -1,11 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace BitPoker.API.Exceptions
 {
-    public class SignatureNotValidException
+    public class SignatureNotValidException : Exception
     {
+        public SignatureNotValidException()
+        {
+        }
+
+        public SignatureNotValidException(string message)
+        : base(message)
+        {
+        }
+
+        public SignatureNotValidException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
     }
 }
