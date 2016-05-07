@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BitPoker.Models;
 
 namespace BitPoker.Repository
 {
     public class MockPlayerRepo : IPlayerRepository
     {
+        public void Add(PlayerInfo item)
+        {
+        }
+
         public IEnumerable<BitPoker.Models.PlayerInfo> All()
         {
             BitPoker.Models.PlayerInfo alice = new BitPoker.Models.PlayerInfo()

@@ -8,18 +8,11 @@ namespace BitPoker.API.Repository
 {
     public class InMemoryTableRepo : BitPoker.Repository.ITableRepository
     {
-        public void Add(Table item)
-        {
-            if (MemoryCache.Default.Contains("TableContainer"))
-            {
-                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
-                container.Tables.Add(item);
-            }
-        }
+        private const String KEY = "TableContainer";
 
         public IEnumerable<Table> All()
         {
-            if (MemoryCache.Default.Contains("TableContainer"))
+            if (MemoryCache.Default.Contains(KEY))
             {
                 Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
                 return container.Tables;
@@ -32,14 +25,35 @@ namespace BitPoker.API.Repository
 
         public Table Find(Guid id)
         {
-            if (MemoryCache.Default.Contains(id.ToString()))
+            if (MemoryCache.Default.Contains(KEY))
             {
-                Table table = (Table)MemoryCache.Default[id.ToString()];
-                return table;
+                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
+                
+                if (container != null)
+                {
+                    return container.Tables.FirstOrDefault(t => t.Id.ToString() == id.ToString());
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
-                throw new IndexOutOfRangeException();
+                return null;
+            }
+        }
+
+        public void Add(Table item)
+        {
+            if (MemoryCache.Default.Contains("TableContainer"))
+            {
+                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
+                container.Tables.Add(item);
+
+                CacheItemPolicy policy = new CacheItemPolicy();
+                policy.SlidingExpiration.Add(new TimeSpan(0, 30, 0));
+                MemoryCache.Default.Add(KEY, container, policy);
             }
         }
 
