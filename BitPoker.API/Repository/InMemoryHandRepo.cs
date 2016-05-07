@@ -28,7 +28,7 @@ namespace BitPoker.API.Repository
             }
             else
             {
-                throw new IndexOutOfRangeException();
+                return null;
             }
         }
 

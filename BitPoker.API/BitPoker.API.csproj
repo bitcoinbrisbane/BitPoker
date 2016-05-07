@@ -104,10 +104,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HandContainer.cs" />
+    <Compile Include="Models\PlayerContainer.cs" />
     <Compile Include="Models\TableContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Factory.cs" />
     <Compile Include="Repository\InMemoryHandRepo.cs" />
+    <Compile Include="Repository\InMemoryPlayerRepo.cs" />
     <Compile Include="Repository\InMemoryTableRepo.cs" />
   </ItemGroup>
   <ItemGroup>

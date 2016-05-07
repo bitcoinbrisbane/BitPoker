@@ -5,13 +5,13 @@ using System.Web.Http;
 
 namespace BitPoker.API.Controllers
 {
-    public class PlayersController : ApiController
+    public class PlayersController : BaseController
     {
         private readonly BitPoker.Repository.IPlayerRepository repo;
 
         public PlayersController()
         {
-            repo = new BitPoker.Repository.MockPlayerRepo();
+            repo = Repository.Factory.GetPlayerRepository();
         }
 
         public IEnumerable<BitPoker.Models.PlayerInfo> Get()
@@ -23,6 +23,20 @@ namespace BitPoker.API.Controllers
         {
             BitPoker.Models.PlayerInfo player = repo.Find(address);
             return player;
+        }
+
+        [HttpPost]
+        public void Post(BitPoker.Models.Messages.AddPlayerRequest model)
+        {
+            if (model.BitcoinAddress == model.Player.BitcoinAddress)
+            {
+                Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
+
+                if (valid)
+                {
+                    repo.Add(model.Player);
+                }
+            }
         }
     }
 }

@@ -5,8 +5,10 @@ namespace BitPoker.Repository
 {
     public interface IPlayerRepository
     {
-        IEnumerable<BitPoker.Models.PlayerInfo> All();
+        IEnumerable<Models.PlayerInfo> All();
 
-        BitPoker.Models.PlayerInfo Find(String address);
+        Models.PlayerInfo Find(String address);
+
+        void Add(Models.PlayerInfo item);
     }
 }
