@@ -22,10 +22,18 @@ namespace BitPoker
 
 		public static void Main (string[] args)
 		{
-            IDeck deck = new FiftyTwoCardDeck();
-            deck.Shuffle();
 
-            DumpToDisk(deck.Cards, "deck.txt");
+			Console.WriteLine ("Menu");
+			Console.WriteLine ("1. Find players");
+			Console.WriteLine ("2. Find tabels");
+			Console.WriteLine ("3. Join table");
+
+			FindPlayers ();
+
+//            IDeck deck = new FiftyTwoCardDeck();
+//            deck.Shuffle();
+//
+//            DumpToDisk(deck.Cards, "deck.txt");
 
             //NBitcoin.Key key = new NBitcoin.Key();
             //var w = key.GetWif(NBitcoin.Network.TestNet);
@@ -125,6 +133,15 @@ namespace BitPoker
             //return blockr.BroadCastTx(tx.ToHex());
 
             Console.WriteLine(tx.ToHex());
+		}
+			
+		private static IEnumerable<Models.PlayerInfo> FindPlayers()
+		{
+			using (BitPoker.Clients.IPlayerClient client = new BitPoker.Clients.APIClient("https://bitpokermocks.azurewebsites.net"))
+			{
+				IEnumerable<Models.PlayerInfo> players = client.GetPlayers();
+				return players;
+			}
 		}
 
 		/// <summary>
