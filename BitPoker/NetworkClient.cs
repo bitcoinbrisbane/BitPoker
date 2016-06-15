@@ -8,6 +8,7 @@ namespace BitPoker
 {
 	public delegate void MessageReceivedEventHandler(object sender, EventArgs e);
 
+	[Obsolete]
 	public class NetworkClient
 	{
 		// Invoke the Changed event; called whenever message arrives
