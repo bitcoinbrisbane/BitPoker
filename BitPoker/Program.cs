@@ -24,8 +24,11 @@ namespace BitPoker
 		public static void Main (string[] args)
 		{
 
-            //Mnemonic mnemo = new Mnemonic("build story spirit chuckle wire sketch check make finger seven spy situate", Wordlist.English);
-            Mnemonic mnemo = new Mnemonic("antenna endless unknown between glow lucky shed season master bomb tunnel fashion", Wordlist.English);
+            Console.WriteLine("1 Parse deck");
+            var cards = ConvertToByteArray(@"C:\Users\lucas.cullen\Source\Repos\bitpoker\headsupcolddeck.txt");
+
+            Mnemonic mnemo = new Mnemonic("test", Wordlist.English);
+
             var key = mnemo.DeriveExtKey();
             var x = key.PrivateKey;
 
@@ -156,5 +159,61 @@ namespace BitPoker
 				}
 			}
 		}
-	}
+
+        public static IList<Byte[]> ConvertToByteArray(String filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                List<Byte[]> data = new List<byte[]>();
+                using (System.IO.StreamReader file = new System.IO.StreamReader(filePath))
+                {
+                    Int32 value = 0;
+                    String card = file.ReadLine().ToUpper();
+                    switch(card.ToUpper().Substring(0, 1))
+                    {
+                        case "A":
+                            value += 12;
+                            break;
+                        case "K":
+                            value += 11;
+                            break;
+                        case "Q":
+                            value += 10;
+                            break;
+                        case "J":
+                            value += 9;
+                            break;
+                        case "T":
+                            value += 8;
+                            break;
+                        default:
+                            value += Convert.ToInt32(card.ToUpper().Substring(0, 1)) - 2;
+                            break;
+                    }
+
+                    switch (card.ToUpper().Substring(1, 1))
+                    {
+                        case "S":
+                            value += 0;
+                            break;
+                        case "C":
+                            value += 13;
+                            break;
+                        case "H":
+                            value += 26;
+                            break;
+                        case "D":
+                            value += 39;
+                            break;
+                    }
+
+                    return data;
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException();
+            }
+        }
+    }
 }

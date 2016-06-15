@@ -27,9 +27,7 @@ namespace BitPoker.Models
         public void New()
         {
             _cards = new List<byte[]>(52);
-
-            Byte[] card = new Byte[] { 0x00 };
-            _cards.Add(card);
+            _cards.Add(new Byte[] { 0x00 });
         }
 
         public void Shuffle()

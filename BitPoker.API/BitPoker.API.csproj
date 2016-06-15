@@ -117,6 +117,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Models.Mocks\BitPoker.Models.Mocks.csproj">
+      <Project>{4766e44d-1c55-4022-8cc8-2fd2fe616dfa}</Project>
+      <Name>BitPoker.Models.Mocks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
       <Name>BitPoker.Models</Name>
