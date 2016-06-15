@@ -581,6 +581,59 @@ Fee vs Payouts.  The table would also include a paramater when to commite the ha
 ## Cashing out
 Closing the channel
 
+## Sample hand
+To be used via the mock API.
+Table ID =
+Hand ID =
+
+The hand is decribed in Poker Stars Hand History format.
+```
+PokerStars Hand #GUID:  Hold'em No Limit (0.005/0.01 BTC) - 2015/09/10 7:31:28 ET
+Table GUID 10-max Seat #3 is the button
+Seat 1: alice ($111.26 in chips) 
+Seat 2: bob ($99.49 in chips) 
+Sweden_Pound: posts small blind $0.50
+sylvian31: is sitting out 
+sylvian31 leaves the table
+KLOP06031987: posts big blind $1
+*** HOLE CARDS ***
+Avtovo: raises $1.50 to $2.50
+SharingaaN: folds 
+koksskrt: folds 
+nickgodro: calls $2.50
+DarioNo$had: folds 
+Monsthand: folds 
+Sweden_Pound: folds 
+KLOP06031987: folds 
+*** FLOP *** [7d Qh 9s]
+Avtovo: bets $4
+nickgodro: calls $4
+*** TURN *** [7d Qh 9s] [4h]
+Avtovo: bets $8.31
+nickgodro: calls $8.31
+*** RIVER *** [7d Qh 9s 4h] [6s]
+Avtovo: checks 
+nickgodro: bets $10
+maxxmeister joins the table at seat #6 
+Avtovo: calls $10
+*** SHOW DOWN ***
+nickgodro: shows [Qs Ks] (a pair of Queens)
+Avtovo: mucks hand 
+nickgodro collected $48.82 from pot
+*** SUMMARY ***
+Total pot $51.12 | Rake $2.30 
+Board [7d Qh 9s 4h 6s]
+Seat 1: koksskrt folded before Flop (didn't bet)
+Seat 2: nickgodro showed [Qs Ks] and won ($48.82) with a pair of Queens
+Seat 3: DarioNo$had folded before Flop (didn't bet)
+Seat 4: Monsthand (button) folded before Flop (didn't bet)
+Seat 5: Sweden_Pound (small blind) folded before Flop
+Seat 7: KLOP06031987 (big blind) folded before Flop
+Seat 8: Avtovo mucked
+Seat 9: SharingaaN folded before Flop (didn't bet)
+```
+
+
 ## Network Topology
 
 ### Dealing with disconnects
@@ -589,6 +642,7 @@ Closing the channel
 - Alice keys
 - Bob keys
 For full key set, see the test data folder
+Cold deck from https://www.benjoffe.com/holdem
 
 ### Mock API
 An REST API is located at https://bitpoker.azurewebsites.net/api for users to develop clients against.
@@ -605,3 +659,4 @@ An REST API is located at https://bitpoker.azurewebsites.net/api for users to de
 2. http://www.pokerlistings.com/poker-rules-texas-holdem
 3. http://ianpurton.com/online-pgp/
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
+5. https://www.benjoffe.com/holdem
