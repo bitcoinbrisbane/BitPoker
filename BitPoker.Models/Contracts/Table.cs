@@ -9,6 +9,10 @@ namespace BitPoker.Models.Contracts
 
         public IList<TexasHoldemPlayer> Players { get; set; }
 
+        public Table()
+        {
+        }
+
 		public Table (Int16 minPlayers, Int16 maxPlayers)
 		{
 			this.Id = new Guid ();
@@ -17,8 +21,8 @@ namespace BitPoker.Models.Contracts
 
             this.Players = new List<TexasHoldemPlayer>(maxPlayers);
 
-            this.Players[0].IsDealer = true;
-            this.Players[1].IsSmallBlind = true;
+            //this.Players[0].IsDealer = true;
+            //this.Players[1].IsSmallBlind = true;
 		}
 	}
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using BitPoker.Models;
+using NBitcoin;
 
 namespace BitPoker
 {
@@ -22,6 +23,19 @@ namespace BitPoker
 
 		public static void Main (string[] args)
 		{
+
+            //Mnemonic mnemo = new Mnemonic("build story spirit chuckle wire sketch check make finger seven spy situate", Wordlist.English);
+            Mnemonic mnemo = new Mnemonic("antenna endless unknown between glow lucky shed season master bomb tunnel fashion", Wordlist.English);
+            var key = mnemo.DeriveExtKey();
+            var x = key.PrivateKey;
+
+            var s = x.GetBitcoinSecret(Network.Main);
+            var b = s.GetAddress();
+
+
+            Console.WriteLine(b);
+            Console.ReadKey();
+
             IDeck deck = new FiftyTwoCardDeck();
             deck.Shuffle();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,11 +38,13 @@ namespace BitPoker.API.Repository
 
             if (!String.IsNullOrEmpty(repoName))
             {
-                BitPoker.Repository.ITableRepository repo = (BitPoker.Repository.ITableRepository)Activator.CreateInstance(Type.GetType(repoName));
+                //String path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath;
+                //System.Reflection.Assembly assembly = AppDomain.CurrentDomain.Load(File.ReadAllBytes(path + @"/bin/Debug/BitPoker.Repository.dll"));
+                //BitPoker.Repository.ITableRepository repo = (BitPoker.Repository.ITableRepository)assembly.CreateInstance(repoName); //Type.GetType(
 
-                if (repo != null)
+                if (repoName.Contains("Mock"))
                 {
-                    return repo;
+                    return new BitPoker.Repository.MockTableRepo();
                 }
                 else
                 {
