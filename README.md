@@ -653,6 +653,10 @@ An REST API is located at https://bitpoker.azurewebsites.net/api for users to de
 | GET | /Players/<bitcoinaddress> |
 | GET | /Tables |
 
+## Coloured coin
+Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
+http://coloredcoins.org/explorer/asset/Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ/f5102f4c37a64ede406173ed707d3458c6258dca48f72f0efdb234ce38e2d9f8/0
+
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
