@@ -141,7 +141,8 @@ Each client connects to one another in the "lobby".  They can then look for play
 ### Sample Message types (See below for more on messages)
 - Join
 - Quit
-- Action (CALL, RAISE, FOLD, MUCK)
+- Sit Out
+- Action (CALL, BET, RAISE, FOLD, MUCK)
 - Shuffle
 
 ### Overview
@@ -583,7 +584,7 @@ Closing the channel
 
 ## Sample hand
 To be used via the mock API.
-Table ID =
+Table ID = 
 Hand ID =
 
 The hand is decribed in Poker Stars Hand History format.
@@ -633,7 +634,6 @@ Seat 8: Avtovo mucked
 Seat 9: SharingaaN folded before Flop (didn't bet)
 ```
 
-
 ## Network Topology
 
 ### Dealing with disconnects
@@ -641,6 +641,8 @@ Seat 9: SharingaaN folded before Flop (didn't bet)
 ## Test Data
 - Alice keys
 - Bob keys
+- Sample hand XML
+- Sample hand JSON
 For full key set, see the test data folder
 Cold deck from https://www.benjoffe.com/holdem
 
@@ -653,6 +655,9 @@ An REST API is located at https://bitpoker.azurewebsites.net/api for users to de
 | GET | /Players/<bitcoinaddress> |
 | GET | /Tables |
 
+## Coloured coin crowd sale
+The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
+http://coloredcoins.org/explorer/asset/Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ/f5102f4c37a64ede406173ed707d3458c6258dca48f72f0efdb234ce38e2d9f8/0
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
