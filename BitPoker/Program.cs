@@ -24,54 +24,45 @@ namespace BitPoker
 		private static NetworkClient _client;
 		private static TcpListener listener;
 
+        const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+        const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+        private static BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
+        private static BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
+        private static BitcoinAddress alice = alice_secret.GetAddress();
+        private static BitcoinAddress bob = bob_secret.GetAddress();
+
         /// <summary>
         /// Console for test code
         /// </summary>
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-            const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-            const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
-
-            BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
-            BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
-
-            BitcoinAddress alice = alice_secret.GetAddress();
-            BitcoinAddress bob = bob_secret.GetAddress();
-
             //Create a hand chain for example.
             //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
             //{
             //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
 
             //};
+            Console.WriteLine("1 Add player");
+            Console.WriteLine("2 List players");
+            Console.WriteLine("Q Quit");
+            ConsoleKeyInfo command = Console.ReadKey();
 
-            Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
-            message.BitcoinAddress = alice.ToString();
-            message.Player = new PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
-
-            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
-
-            String json = JsonConvert.SerializeObject(message);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
-            String url = String.Format("{0}players", "https://bitpoker.azurewebsites.net/api/");
-            HttpClient httpClient = new HttpClient();
-
-            using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+            while (command.KeyChar != 'Q')
             {
-                if (responseMessage.IsSuccessStatusCode)
+                switch (command.KeyChar)
                 {
-                    String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                    case '1':
+                        AddPlayer();
+                        break;
                 }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
+
+                command = Console.ReadKey();
             }
 
             //String aliceJSON = Newtonsoft.Json.JsonConvert.SerializeObject(alice2);
 
-            Console.WriteLine("1 Parse deck");
+            
             var cards = ConvertToByteArray(@"C:\Users\lucas.cullen\Source\Repos\bitpoker\headsupcolddeck.txt");
 
             Mnemonic mnemo = new Mnemonic("test", Wordlist.English);
@@ -255,6 +246,33 @@ namespace BitPoker
             else
             {
                 throw new FileNotFoundException();
+            }
+        }
+
+        private static void AddPlayer()
+        {
+            Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
+            message.BitcoinAddress = alice.ToString();
+            message.Player = new PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
+
+            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+
+            String json = JsonConvert.SerializeObject(message);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}players", "https://bitpoker.azurewebsites.net/api/");
+            HttpClient httpClient = new HttpClient();
+
+            using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+            {
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                    Console.WriteLine(responseContent);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
             }
         }
     }

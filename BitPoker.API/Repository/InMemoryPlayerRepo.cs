@@ -11,6 +11,7 @@ namespace BitPoker.API.Repository
     public class InMemoryPlayerRepo : BitPoker.Repository.IPlayerRepository
     {
         private const string KEY = "players";
+        private CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
 
         public IEnumerable<PlayerInfo> All()
         {
@@ -56,6 +57,14 @@ namespace BitPoker.API.Repository
 
         public void Add(PlayerInfo item)
         {
+            if (!MemoryCache.Default.Contains(KEY))
+            {
+                cacheItemPolicy.SlidingExpiration = new TimeSpan(1, 0, 0);
+                Models.PlayerContainer container = new Models.PlayerContainer();
+                container.Players.Add(item);
+                MemoryCache.Default.Add(KEY, container, cacheItemPolicy);
+            }
+
             if (MemoryCache.Default.Contains(KEY))
             {
                 Models.PlayerContainer container = (Models.PlayerContainer)MemoryCache.Default[KEY];
