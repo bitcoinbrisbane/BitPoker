@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BitPoker.Models
+namespace BitPoker.Models.Mocks
 {
     public class MockShuffledDeck : IDeck
     {

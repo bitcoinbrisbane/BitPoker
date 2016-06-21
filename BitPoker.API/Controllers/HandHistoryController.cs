@@ -7,16 +7,20 @@ namespace BitPoker.API.Controllers
 {
     public class HandHistoryController : BaseController
     {
-        private readonly BitPoker.Repository.IMessagesRepository repo;
+        private readonly BitPoker.Repository.IMessagesRepository _repo;
 
         public HandHistoryController()
         {
-            //this.repo = new Repository.InMemoryHandRepo();
+        }
+
+        public HandHistoryController(BitPoker.Repository.IMessagesRepository repo)
+        {
+            _repo = repo;
         }
 
         public IEnumerable<BitPoker.Models.Messages.ActionMessage> Get(Guid handId)
         {
-            return repo.All().Where(m => m.HandId.ToString() == handId.ToString());
+            return _repo.All().Where(m => m.HandId.ToString() == handId.ToString());
         }
     }
 }

@@ -21,8 +21,21 @@ namespace BitPoker
 		private static NetworkClient _client;
 		private static TcpListener listener;
 
+        /// <summary>
+        /// Console for test code
+        /// </summary>
+        /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
+
+            //Create a hand chain for example.
+            //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
+            //{
+            //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
+
+            //};
+
+            //String aliceJSON = Newtonsoft.Json.JsonConvert.SerializeObject(alice2);
 
             Console.WriteLine("1 Parse deck");
             var cards = ConvertToByteArray(@"C:\Users\lucas.cullen\Source\Repos\bitpoker\headsupcolddeck.txt");
@@ -207,6 +220,9 @@ namespace BitPoker
                             break;
                     }
 
+                    Byte[] b = new Byte[1];
+                    //b = Convert.to(value);
+                    //data.Add(b);
                     return data;
                 }
             }

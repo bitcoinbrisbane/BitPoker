@@ -37,12 +37,12 @@ namespace BitPoker.API.Controllers
 
                 //Create players
                 BitPoker.Models.PlayerInfo[] players = new BitPoker.Models.PlayerInfo[2];
-                players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", Address = "https://bitpoker.azurewebsites.net/api", Stack = 1000000 };
-                players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress, Stack = buyInRequest.Amount };
+                players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", IPAddress = "https://bitpoker.azurewebsites.net/api" };
+                players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress };
 
                 //Alice in seat 0, you in the sb
-                response.Players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", Address = "https://bitpoker.azurewebsites.net/api", Stack = 1000000 };
-                response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress, Stack = buyInRequest.Amount };
+                response.Players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", IPAddress = "https://bitpoker.azurewebsites.net/api" };
+                response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress };
 
                 //
                 //BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table(2, 10);

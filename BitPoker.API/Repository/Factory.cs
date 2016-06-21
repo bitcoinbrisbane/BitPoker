@@ -57,13 +57,13 @@ namespace BitPoker.API.Repository
             }
         }
 
-        public static BitPoker.Repository.ITableRepository GetHandRepository()
+        public static BitPoker.Repository.IHandRepository GetHandRepository()
         {
-            String repoName = System.Configuration.ConfigurationManager.AppSettings["TableRepository"];
+            String repoName = System.Configuration.ConfigurationManager.AppSettings["HandRepository"];
 
             if (!String.IsNullOrEmpty(repoName))
             {
-                BitPoker.Repository.ITableRepository repo = (BitPoker.Repository.ITableRepository)Activator.CreateInstance(Type.GetType(repoName));
+                BitPoker.Repository.IHandRepository repo = (BitPoker.Repository.IHandRepository)Activator.CreateInstance(Type.GetType(repoName));
 
                 if (repo != null)
                 {
@@ -71,12 +71,12 @@ namespace BitPoker.API.Repository
                 }
                 else
                 {
-                    return new InMemoryTableRepo();
+                    return new InMemoryHandRepo();
                 }
             }
             else
             {
-                return new InMemoryTableRepo();
+                return new InMemoryHandRepo();
             }
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BitPoker.Models
 {
-	public class TexasHoldemPlayer
+	public class TexasHoldemPlayer : IPlayer
 	{
 		//Texas holdem properties
 		public Int16 Position { get; set; }
@@ -20,19 +20,15 @@ namespace BitPoker.Models
 
 		public Boolean IsTurnToAct { get; set; }
 
-		public ICollection<BitPoker.Models.IMessage> AllowedActions { get; set; }
+		//public ICollection<BitPoker.Models.IMessage> AllowedActions { get; set; }
 
-		public String IpAddress { get; set; }
+		//public String IpAddress { get; set; }
 
 		public String BitcoinAddress { get; set; }
 
 		public Int64 Stack { get; set; }
 
 		public TexasHoldemPlayer()
-		{
-		}
-
-		public void EncryptDeck()
 		{
 		}
 	}

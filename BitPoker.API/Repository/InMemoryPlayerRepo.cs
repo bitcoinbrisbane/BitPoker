@@ -41,7 +41,7 @@ namespace BitPoker.API.Repository
 
                 if (container != null)
                 {
-                    return container.Players.FirstOrDefault(p => p.Address == address);
+                    return container.Players.FirstOrDefault(p => p.IPAddress == address);
                 }
                 else
                 {

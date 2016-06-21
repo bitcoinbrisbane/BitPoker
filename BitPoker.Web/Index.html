@@ -3,8 +3,32 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 </head>
 <body>
+    <table id="players">
+        <tr>
 
+        </tr>
+    </table>
+    <script type="text/javascript">
+        var uri = 'http://localhost:8157/api/payers';
+
+        $(document).ready(function () {
+          // Send an AJAX request
+          $.getJSON(uri)
+              .done(function (data) {
+                // On success, 'data' contains a list of products.
+                $.each(data, function (key, item) {
+                  // Add a list item for the product.
+                  $('<tr>', { text: formatItem(item) }).appendTo($('#players'));
+                });
+              });
+        });
+
+        function formatItem(item) {
+            return '<td>' + item.Id + '</td><td>' + item.BitcoinAddress + '</td>';
+        }
+    </script>
 </body>
 </html>

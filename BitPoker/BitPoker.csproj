@@ -54,10 +54,6 @@
       <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
       <Name>BitPoker.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">
-      <Project>{78C72946-A97A-44DA-ACDC-2C83F71BAE0E}</Project>
-      <Name>BitPoker.Clients</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

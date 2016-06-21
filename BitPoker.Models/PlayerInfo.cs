@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace BitPoker.Models
 {
+    /// <summary>
+    /// Player not in a game perhaps
+    /// </summary>
 	public class PlayerInfo
 	{
 		public String UserAgent { get; set; }
@@ -11,15 +14,15 @@ namespace BitPoker.Models
 
         public String PublicKey { get; set; }
 
-        public Int64 Stack { get; set; }
+        //public Int64 Stack { get; set; }
 
-		public String Address { get; set; }
+		public String IPAddress { get; set; }
 
-		public Int32 Latency { get; set; }
+		public TimeSpan Latency { get; set; }
 
 		public DateTime LastSeen { get; set; }
 
-        public IEnumerable<Guid> Tables { get; set; }
+        //public IEnumerable<Guid> Tables { get; set; }
 
 		public PlayerInfo ()
 		{
