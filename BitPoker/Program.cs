@@ -7,6 +7,9 @@ using System.Net;
 using System.Net.Sockets;
 using BitPoker.Models;
 using NBitcoin;
+using Newtonsoft.Json;
+using System.Text;
+using System.Net.Http;
 
 namespace BitPoker
 {
@@ -27,6 +30,14 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
+            const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+            const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+
+            BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
+            BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
+
+            BitcoinAddress alice = alice_secret.GetAddress();
+            BitcoinAddress bob = bob_secret.GetAddress();
 
             //Create a hand chain for example.
             //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
@@ -34,6 +45,29 @@ namespace BitPoker
             //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
 
             //};
+
+            Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
+            message.BitcoinAddress = alice.ToString();
+            message.Player = new PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
+
+            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+
+            String json = JsonConvert.SerializeObject(message);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}players", "https://bitpoker.azurewebsites.net/api/");
+            HttpClient httpClient = new HttpClient();
+
+            using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+            {
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+            }
 
             //String aliceJSON = Newtonsoft.Json.JsonConvert.SerializeObject(alice2);
 
@@ -73,14 +107,6 @@ namespace BitPoker
 
             //Begin lightning test
 			//For testing
-			const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-			const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
-
-			NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret (alice_wif, NBitcoin.Network.TestNet);
-			NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret (bob_wif, NBitcoin.Network.TestNet);
-
-			NBitcoin.BitcoinAddress alice = alice_secret.GetAddress ();
-			NBitcoin.BitcoinAddress bob = bob_secret.GetAddress ();
 
             NBitcoin.Transaction aliceFunding = new NBitcoin.Transaction()
             {

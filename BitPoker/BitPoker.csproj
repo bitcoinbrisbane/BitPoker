@@ -34,6 +34,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Numerics" />
     <Reference Include="NBitcoin, Version=3.0.0.23, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\NBitcoin.3.0.0.23\lib\net45\NBitcoin.dll</HintPath>

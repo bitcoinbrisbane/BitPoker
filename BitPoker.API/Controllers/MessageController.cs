@@ -65,13 +65,20 @@ namespace BitPoker.API.Controllers
             {
                 throw new Exceptions.SignatureNotValidException();
             }
+            else
+            {
+                //switch (message.Action.ToLower())
+                //{
+
+                //}
+            }
+
 
             //Some API
             var hand = this.handRepo.Find(message.HandId);
 
             var i = hand.History.Count;
             //message.Index[i];
-
 
             return verified;
         }

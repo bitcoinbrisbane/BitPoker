@@ -5,21 +5,26 @@ namespace BitPoker.Models
 {
     public class Hand
     {
-        private BitPoker.Models.PlayerInfo[] _players;
+        public BitPoker.Models.PlayerInfo[] Players { get; set; }
 
         public Guid Id { get; set; }
 
         public Guid TableId { get; set; }
 
-        public Int32 PersonToAct { get; set; }
+        public Int16 PersonToAct { get; set; }
 
         public IList<Messages.ActionMessage> History { get; set; }
 
         public IDeck Deck { get; set; }
 
-        public Hand(BitPoker.Models.PlayerInfo[] players)
+        public Hand()
         {
-            _players = players;
+        }
+
+        public Hand(PlayerInfo[] players)
+        {
+            this.Players = players;
+            this.PersonToAct = 0;
             Id = new Guid();
             Id = Guid.NewGuid();
             History = new List<Messages.ActionMessage>();

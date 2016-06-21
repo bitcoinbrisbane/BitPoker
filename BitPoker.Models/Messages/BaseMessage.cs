@@ -17,5 +17,7 @@ namespace BitPoker.Models.Messages
         public String Signature { get; set; }
 
         //public String PreviousHash { get; set; }
+
+        public DateTime TimeStamp { get; set; }
     }
 }

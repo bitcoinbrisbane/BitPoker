@@ -26,16 +26,26 @@ namespace BitPoker.API.Controllers
         }
 
         [HttpPost]
-        public void Post(BitPoker.Models.Messages.AddPlayerRequest model)
+        public String Post(BitPoker.Models.Messages.AddPlayerRequest model)
         {
             if (model.BitcoinAddress == model.Player.BitcoinAddress)
             {
+                //need to include timestamp too
                 Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
 
                 if (valid)
                 {
                     repo.Add(model.Player);
+                    return "ok";
                 }
+                else
+                {
+                    return "invalid";
+                }
+            }
+            else
+            {
+                return "addresses do not match";
             }
         }
     }
