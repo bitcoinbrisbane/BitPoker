@@ -24,8 +24,8 @@ namespace BitPoker
 		private static NetworkClient _client;
 		private static TcpListener listener;
 
-        const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-        const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+        private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+        private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
         private static BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
         private static BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
         private static BitcoinAddress alice = alice_secret.GetAddress();
@@ -260,18 +260,20 @@ namespace BitPoker
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}players", "https://bitpoker.azurewebsites.net/api/");
-            HttpClient httpClient = new HttpClient();
 
-            using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+            using (HttpClient httpClient = new HttpClient())
             {
-                if (responseMessage.IsSuccessStatusCode)
+                using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
                 {
-                    String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine(responseContent);
-                }
-                else
-                {
-                    throw new InvalidOperationException();
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                        Console.WriteLine(responseContent);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException();
+                    }
                 }
             }
         }

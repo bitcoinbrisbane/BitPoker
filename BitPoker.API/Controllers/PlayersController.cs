@@ -7,21 +7,26 @@ namespace BitPoker.API.Controllers
 {
     public class PlayersController : BaseController
     {
-        private readonly BitPoker.Repository.IPlayerRepository repo;
+        private readonly BitPoker.Repository.IPlayerRepository _repo;
 
         public PlayersController()
         {
-            repo = Repository.Factory.GetPlayerRepository();
+            _repo = Repository.Factory.GetPlayerRepository();
+        }
+
+        public PlayersController(BitPoker.Repository.IPlayerRepository repo)
+        {
+            _repo = repo;
         }
 
         public IEnumerable<BitPoker.Models.PlayerInfo> Get()
         {
-            return repo.All();
+            return _repo.All();
         }
 
         public BitPoker.Models.PlayerInfo Get(String address)
         {
-            BitPoker.Models.PlayerInfo player = repo.Find(address);
+            BitPoker.Models.PlayerInfo player = _repo.Find(address);
             return player;
         }
 
@@ -35,7 +40,7 @@ namespace BitPoker.API.Controllers
 
                 if (valid)
                 {
-                    repo.Add(model.Player);
+                    _repo.Add(model.Player);
                     return "ok";
                 }
                 else
