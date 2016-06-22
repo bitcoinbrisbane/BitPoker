@@ -7,6 +7,8 @@ namespace BitPoker.API.Models
     {
         public IList<BitPoker.Models.PlayerInfo> Players { get; set; }
 
+        public DateTime Updated { get; set; }
+
         public PlayerContainer()
         {
             this.Players = new List<BitPoker.Models.PlayerInfo>();
