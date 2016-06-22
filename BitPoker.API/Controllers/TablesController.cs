@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BitPoker.API.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TablesController : BaseController
     {
         private readonly BitPoker.Repository.ITableRepository _repo;
@@ -11,6 +13,11 @@ namespace BitPoker.API.Controllers
         public TablesController()
         {
             this._repo = Repository.Factory.GetTableRepository();
+        }
+
+        public TablesController(BitPoker.Repository.ITableRepository repo)
+        {
+            this._repo = repo;
         }
 
         public IEnumerable<BitPoker.Models.Contracts.Table> Get()
@@ -30,14 +37,16 @@ namespace BitPoker.API.Controllers
         }
 
         [HttpPost]
-        public void Post(BitPoker.Models.Contracts.TableRequest model)
+        public void Post(BitPoker.Models.Messages.AddTableRequest model)
         {
             if (!base.Verify(model.BitcoinAddress, model.ToString(), model.Signature))
             {
                 throw new Exceptions.SignatureNotValidException();
             }
-
-            _repo.Add(model.Table);
+            else
+            {
+                _repo.Add(model.Table);
+            }
         }
     }
 }

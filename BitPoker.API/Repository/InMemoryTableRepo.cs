@@ -8,7 +8,8 @@ namespace BitPoker.API.Repository
 {
     public class InMemoryTableRepo : BitPoker.Repository.ITableRepository
     {
-        private const String KEY = "TableContainer";
+        private const String KEY = "table";
+        private CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
 
         public IEnumerable<Table> All()
         {
@@ -46,14 +47,23 @@ namespace BitPoker.API.Repository
 
         public void Add(Table item)
         {
-            if (MemoryCache.Default.Contains("TableContainer"))
+            if (MemoryCache.Default.Contains(KEY))
             {
                 Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
                 container.Tables.Add(item);
 
-                CacheItemPolicy policy = new CacheItemPolicy();
-                policy.SlidingExpiration.Add(new TimeSpan(0, 30, 0));
-                MemoryCache.Default.Add(KEY, container, policy);
+                cacheItemPolicy.SlidingExpiration = new TimeSpan(0, 30, 0);
+                MemoryCache.Default.Add(KEY, container, cacheItemPolicy);
+            }
+
+            if (MemoryCache.Default.Contains(KEY))
+            {
+                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default[KEY];
+
+                if (container != null)
+                {
+                    container.Tables.Add(item);
+                }
             }
         }
 

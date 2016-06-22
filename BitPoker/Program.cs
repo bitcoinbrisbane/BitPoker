@@ -277,5 +277,34 @@ namespace BitPoker
                 }
             }
         }
+
+        private static void AddTable()
+        {
+            Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
+            message.BitcoinAddress = alice.ToString();
+            message.Player = new PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
+
+            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+
+            String json = JsonConvert.SerializeObject(message);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}players", "https://bitpoker.azurewebsites.net/api/");
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+                {
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                        Console.WriteLine(responseContent);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+        }
     }
 }
