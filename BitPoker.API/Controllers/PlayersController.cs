@@ -6,7 +6,7 @@ using System.Web.Http.Cors;
 
 namespace BitPoker.API.Controllers
 {
-    [EnableCors(origins: "", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PlayersController : BaseController
     {
         private readonly BitPoker.Repository.IPlayerRepository _repo;
