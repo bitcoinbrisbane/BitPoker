@@ -10,7 +10,14 @@ namespace BitPoker.Repository
         {
             //Return a fake contract
             //{D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363}
-            return new Table(2, 10) { Id = new Guid("D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363"), BigBlind = 10000, SmallBlind = 5000 };
+            if (id.ToString() == "D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363")
+            {
+                return new Table(2, 10) { Id = new Guid("D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363"), BigBlind = 10000, SmallBlind = 5000 };
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Table> All()

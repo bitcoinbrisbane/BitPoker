@@ -28,12 +28,25 @@ namespace BitPoker.API.Controllers
 
             if (table != null)
             {
+                table.Players[2] = new BitPoker.Models.TexasHoldemPlayer()
+                {
+                    BitcoinAddress = buyInRequest.BitcoinAddress,
+                    Stack = buyInRequest.Amount,
+                    Position = 2,
+                    IsBigBlind = false,
+                    IsDealer = true,
+                    IsSmallBlind = false,
+                    IsTurnToAct = false,
+                };
+
                 //			
                 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
                 NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
                 NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
 
-                BitPoker.Models.Messages.BuyInResponseMessage response = new BitPoker.Models.Messages.BuyInResponseMessage(2);
+                BitPoker.Models.Messages.BuyInResponseMessage response = new BitPoker.Models.Messages.BuyInResponseMessage();
+                response.Table = table;
+
 
                 //Create players
                 BitPoker.Models.PlayerInfo[] players = new BitPoker.Models.PlayerInfo[2];
@@ -41,8 +54,8 @@ namespace BitPoker.API.Controllers
                 players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress };
 
                 //Alice in seat 0, you in the sb
-                response.Players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", IPAddress = "https://bitpoker.azurewebsites.net/api" };
-                response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress };
+                //response.Players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", IPAddress = "https://bitpoker.azurewebsites.net/api" };
+                //response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress };
 
                 //
                 //BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table(2, 10);

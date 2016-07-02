@@ -6,11 +6,13 @@ namespace BitPoker.Models.Messages
 {
     public class BuyInResponseMessage
     {
-        public Models.PlayerInfo[] Players { get; set; }
+        //public PlayerInfo[] Players { get; set; }
+        public Models.Contracts.Table Table { get; set; }
 
-        public BuyInResponseMessage(Int32 n)
+        public BuyInResponseMessage()
         {
-            this.Players = new Models.PlayerInfo[n];
+            //this.Players = new PlayerInfo[n];
+            this.Table = new Contracts.Table();
         }
     }
 }
