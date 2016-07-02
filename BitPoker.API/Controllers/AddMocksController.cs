@@ -9,7 +9,7 @@ namespace BitPoker.API.Controllers
 {
     public class AddMocksController : ApiController
     {
-        public void Get()
+        public String Get()
         {
             BitPoker.Repository.IPlayerRepository repo = new BitPoker.Repository.MockPlayerRepo();
             IEnumerable<BitPoker.Models.PlayerInfo> players = BitPoker.API.Repository.Factory.GetPlayerRepository().All();
@@ -18,6 +18,8 @@ namespace BitPoker.API.Controllers
             {
                 repo.Add(player);
             }
+
+            return "ok";
         }
     }
 }
