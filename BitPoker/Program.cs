@@ -75,6 +75,9 @@ namespace BitPoker
                     case '1':
                         AddPlayer();
                         break;
+                    case '2':
+                        GetPlayers();
+                        break;
                     case '3':
                         AddTable();
                         break;
@@ -317,9 +320,9 @@ namespace BitPoker
             {
                 Uri uri = new Uri(String.Format("{0}players", API_URL));
                 String json = httpClient.GetStringAsync(uri).Result;
-                List<PlayerInfo> response = JsonConvert.DeserializeObject<List<Models.PlayerInfo>>(json);
+                List<PlayerInfo> response = JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
 
-                foreach (Models.PlayerInfo player in response)
+                foreach (PlayerInfo player in response)
                 {
                     Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
                 }
