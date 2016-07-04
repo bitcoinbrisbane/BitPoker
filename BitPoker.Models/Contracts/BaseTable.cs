@@ -13,5 +13,9 @@ namespace BitPoker.Models.Contracts
         public Int16 MaxPlayers { get; set; }
 
         public Int16 MinPlayers { get; set; }
+
+        public Int64 MinBuyIn { get; set; }
+
+        public Int64 MaxBuyIn { get; set; }
     }
 }
