@@ -11,7 +11,7 @@ namespace BitPoker.Models.Contracts
 
         public Table()
         {
-            this.Players = new List<TexasHoldemPlayer>(maxPlayers);
+            this.Players = new List<TexasHoldemPlayer>(10);
         }
 
 		public Table (Int16 minPlayers, Int16 maxPlayers)
