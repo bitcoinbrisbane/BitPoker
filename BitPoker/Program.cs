@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http;
 using NBitcoin.BouncyCastle.Security;
+using System.Threading.Tasks;
 
 namespace BitPoker
 {
@@ -40,7 +41,10 @@ namespace BitPoker
 
         private const String API_URL = "https://bitpoker.azurewebsites.net/api/";
 
-        
+        public static async Task MainAsync()
+        {
+
+        }
 
         /// <summary>
         /// Console for test code
@@ -70,34 +74,34 @@ namespace BitPoker
             Console.WriteLine("K Create new keys");
             Console.WriteLine("Q Quit");
 
-            ConsoleKeyInfo command = Console.ReadKey();
+            String command = Console.ReadLine();
 
-            while (command.KeyChar != 'Q')
+            while (command != "Q")
             {
-                switch (command.KeyChar)
+                switch (command)
                 {
-                    case '1':
+                    case "1":
                         AddPlayer();
                         break;
-                    case '2':
+                    case "2":
                         GetPlayers();
                         break;
-                    case '3':
+                    case "3":
                         AddTable();
                         break;
-                    case '4':
+                    case "4":
                         GetTables();
                         break;
-                    case '5':
+                    case "5":
                         BuyIn(100000);
                         break;
-                    case 'K':
-                    case 'k':
+                    case "k":
+                    case "K":
                         CreateKeys(52, 16);
                         break;
                 }
 
-                command = Console.ReadKey();
+                command = Console.ReadLine();
             }
 
             //String aliceJSON = Newtonsoft.Json.JsonConvert.SerializeObject(alice2);
@@ -292,7 +296,7 @@ namespace BitPoker
         /// <summary>
         /// Add a player to the stub api.
         /// </summary>
-        private static void AddPlayer()
+        public static void AddPlayer()
         {
             Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
             message.BitcoinAddress = carol.ToString();
@@ -321,17 +325,72 @@ namespace BitPoker
             }
         }
 
-        private static void GetPlayers()
+        /// <summary>
+        /// Add a player to the stub api.
+        /// </summary>
+        public static async Task AddPlayerAsync()
+        {
+            Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
+            message.BitcoinAddress = carol.ToString();
+            message.Player = new PlayerInfo() { BitcoinAddress = carol.ToString(), IPAddress = "localhost" };
+
+            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+
+            String json = JsonConvert.SerializeObject(message);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+            String url = String.Format("{0}players", API_URL);
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                using (HttpResponseMessage responseMessage = await httpClient.PostAsync(url, requestContent))
+                {
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+                        Console.WriteLine(responseContent);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+        }
+
+        public static void GetPlayers()
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 Uri uri = new Uri(String.Format("{0}players", API_URL));
                 String json = httpClient.GetStringAsync(uri).Result;
-                List<PlayerInfo> response = JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
 
-                foreach (PlayerInfo player in response)
+                if (!String.IsNullOrEmpty(json))
                 {
-                    Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
+                    List<PlayerInfo> response = JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
+
+                    foreach (PlayerInfo player in response)
+                    {
+                        Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
+                    }
+                }
+            }
+        }
+
+        public static async Task GetPlayersAsync()
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Uri uri = new Uri(String.Format("{0}players", API_URL));
+                String json = await httpClient.GetStringAsync(uri);
+
+                if (!String.IsNullOrEmpty(json))
+                {
+                    List<PlayerInfo> response = JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
+
+                    foreach (PlayerInfo player in response)
+                    {
+                        Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
+                    }
                 }
             }
         }

@@ -13,7 +13,6 @@ namespace BitPoker.MVC.Controllers
         {
             BitPoker.Repository.IPlayerRepository repo = Repository.Factory.GetPlayerRepository();
             BitPoker.Repository.IPlayerRepository mocksRepo = new BitPoker.Repository.MockPlayerRepo();
-            //IEnumerable<BitPoker.Models.PlayerInfo> players = 
 
             foreach(BitPoker.Models.PlayerInfo player in mocksRepo.All())
             {
