@@ -54,7 +54,11 @@ namespace BitPoker
             //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
             //};
 
-            Console.WriteLine("1. Add player");
+            Console.WriteLine("***");
+            Console.WriteLine("This console app, under the context of Carol. {0}", carol);
+            Console.WriteLine("***");
+
+            Console.WriteLine("1. Add player (carol) to mock api");
             Console.WriteLine("2. List players");
             Console.WriteLine("3. Add table");
             Console.WriteLine("4. List tables");
@@ -285,11 +289,14 @@ namespace BitPoker
             }
         }
 
+        /// <summary>
+        /// Add a player to the stub api.
+        /// </summary>
         private static void AddPlayer()
         {
             Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
-            message.BitcoinAddress = alice.ToString();
-            message.Player = new PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
+            message.BitcoinAddress = carol.ToString();
+            message.Player = new PlayerInfo() { BitcoinAddress = carol.ToString(), IPAddress = "localhost" };
 
             message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
@@ -329,12 +336,15 @@ namespace BitPoker
             }
         }
 
+        /// <summary>
+        /// Adds a table to mock api under carols address
+        /// </summary>
         private static void AddTable()
         {
-            Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
-            message.BitcoinAddress = alice.ToString();
-            //message.Player = new PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
+            Console.WriteLine("Adds a table to mock api under carols address");
 
+            Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
+            message.BitcoinAddress = carol.ToString();
             message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
             String json = JsonConvert.SerializeObject(message);

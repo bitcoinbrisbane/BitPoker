@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NBitcoin;
 
-namespace BitPoker.API.Tests
+namespace BitPoker.MVC.Tests
 {
     [TestClass]
     public class PlayersControllerTests
@@ -23,7 +23,7 @@ namespace BitPoker.API.Tests
 
             message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
-            Controllers.PlayersController controller = new Controllers.PlayersController();
+            BitPoker.MVC.Controllers.PlayersController controller = new BitPoker.MVC.Controllers.PlayersController();
             controller.Post(message);
 
             var players = controller.Get();

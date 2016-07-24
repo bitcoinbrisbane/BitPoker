@@ -36,10 +36,11 @@ namespace BitPoker.API.Controllers
             return new BitPoker.Models.Messages.ActionMessage();
         }
 
-        // POST api/<controller>
         [HttpPost]
         public Boolean Post(BitPoker.Models.Messages.ActionMessage message)
         {
+            //NOTE:  THIS IS WHERE THE STUB AI LOGIC SHOULD EXIST.
+            //
             //if (MemoryCache.Default.Contains(message.TableId.ToString()))
             //{
             //    Models.Hand.Table table = (Models.Hand.Table)MemoryCache.Default[message.TableId.ToString()];

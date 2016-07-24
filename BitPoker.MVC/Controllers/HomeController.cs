@@ -13,21 +13,10 @@ namespace BitPoker.MVC.Controllers
             return View();
         }
 
-        public ActionResult Buy()
-        {
-            Models.BuyRequest request = new Models.BuyRequest()
-            {
-                AssetId = "Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ",
-                Amount = 1000,
-                Rate = 0.002M
-            };
-            return View(request);
-        }
-
-        [HttpPost]
-        public ActionResult Buy(Models.BuyRequest request)
+        public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
+
             return View();
         }
 
