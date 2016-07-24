@@ -1,53 +1,42 @@
-﻿@{
-    ViewBag.Title = "BitPoker.io";
-}
-
-
-        <!-- START HEADER -->
-        <section id="header">
-            <div class="container">
-                <header>
-                    <!-- HEADLINE -->
-                    <h1 data-animated="GoIn"><b>COUNTER</b> site is coming soon...</h1>
-                </header>
-                <!-- START TIMER -->
-                <div id="timer" data-animated="FadeIn">
-                    <p id="message"></p>
-                    <div id="days" class="timer_box"></div>
-                    <div id="hours" class="timer_box"></div>
-                    <div id="minutes" class="timer_box"></div>
-                    <div id="seconds" class="timer_box"></div>
+﻿<!-- START HEADER -->
+<section id="header">
+    <div class="container">
+        <header>
+            <!-- HEADLINE -->
+            <h1 data-animated="GoIn"><b>BITPOKER.IO</b> coming soon...</h1>
+        </header>
+        <!-- START TIMER -->
+        <div id="timer" data-animated="FadeIn">
+            <p id="message"></p>
+            <div id="days" class="timer_box"></div>
+            <div id="hours" class="timer_box"></div>
+            <div id="minutes" class="timer_box"></div>
+            <div id="seconds" class="timer_box"></div>
+        </div>
+        <!-- END TIMER -->
+        <div class="col-lg-4 col-lg-offset-4 mt centered">
+            <h4>CAN'T FOLD?</h4>
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
                 </div>
-                <!-- END TIMER -->
-                <div class="col-lg-4 col-lg-offset-4 mt centered">
-                    <h4>CANT FOLD</h4>
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
-                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-                        </div>
-                        <button type="submit" class="btn btn-info">Submit</button>
-                    </form>
-                </div>
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
 
-            </div>
-            <!-- LAYER OVER THE SLIDER TO MAKE THE WHITE TEXTE READABLE -->
-            <div id="layer"></div>
-            <!-- END LAYER -->
-            <!-- START SLIDER -->
-            <div id="slider" class="rev_slider">
-                <ul>
-                    <li data-transition="slideleft" data-slotamount="1" data-thumb="assets/img/slider/1.jpg">
-                        <img src="assets/img/slider/1.jpg">
-                    </li>
-                </ul>
-            </div>
-            <!-- END SLIDER -->
-        </section>
-        <!-- END HEADER -->
+    </div>
+    <!-- LAYER OVER THE SLIDER TO MAKE THE WHITE TEXTE READABLE -->
+    <div id="layer"></div>
+    <!-- END LAYER -->
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    @*</body>
-</html>*@
+    <!-- START SLIDER -->
+    <div id="slider" class="rev_slider">
+        <ul>
+            <li data-transition="slideleft" data-slotamount="1" data-thumb="/Images/aceofspades.jpg">
+                <img src="/Images/aceofspades.jpg">
+        </ul>
+    </div>
+    <!-- END SLIDER -->
+</section>
+<!-- END HEADER -->
