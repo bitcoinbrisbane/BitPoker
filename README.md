@@ -1,4 +1,4 @@
-# BitPoker
+# BitPoker.IO
 
 ## Abstract
 Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer protocol of games, such as online poker, in which no central actor can control the outcome and thus rig the game and is proovably fair.  The game uses bitcoin and lightning network to settle bets between actors.
