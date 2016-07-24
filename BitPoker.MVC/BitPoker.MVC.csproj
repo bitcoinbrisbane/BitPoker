@@ -236,6 +236,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Explorer\" />
+    <Folder Include="Views\Invest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

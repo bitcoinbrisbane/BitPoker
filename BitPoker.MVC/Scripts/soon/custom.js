@@ -24,7 +24,7 @@ COMMING SOON PAGE
             hours.html('<h1>0</h1><p>Hour</p>');
             minutes.html('<h1>0</h1><p>Minute</p>');
             seconds.html('<h1>0</h1><p>Second</p>');
-            message.html('DECENTRALIZED POKER USING BITCOIN, LIGHTNING NETOWORK AND SMART CONTRACTS');
+            message.html('DECENTRALIZED POKER USING BITCOIN, LIGHTNING NETWORK AND SMART CONTRACTS');
         }
         else{
             var s = -now.getTimezoneOffset()*60 + (launch.getTime() - now.getTime())/1000;
@@ -43,7 +43,7 @@ COMMING SOON PAGE
             seconds.html('<h1>'+s+'</h1><p>Second'+(s>1?'s':''),'</p>');
             setTimeout(setDate, 1000);
 
-            message.html('OUR SITE IS NOT READY YET, BUT WE ARE COMING SOON');
+            message.html('DECENTRALIZED POKER USING BITCOIN, LIGHTNING NETWORK AND SMART CONTRACTS');
         }
     }
 })(jQuery);
