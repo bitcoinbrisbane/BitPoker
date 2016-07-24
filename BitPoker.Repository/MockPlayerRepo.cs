@@ -29,8 +29,6 @@ namespace BitPoker.Repository
 
             _mockPlayers.Add(alice);
             _mockPlayers.Add(bob);
-
-            return _mockPlayers;
         }
 
         public void Add(PlayerInfo item)
