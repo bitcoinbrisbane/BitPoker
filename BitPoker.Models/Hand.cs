@@ -25,7 +25,6 @@ namespace BitPoker.Models
         {
             this.Players = players;
             this.PersonToAct = 0;
-            Id = new Guid();
             Id = Guid.NewGuid();
             History = new List<Messages.ActionMessage>();
 

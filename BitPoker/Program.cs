@@ -41,6 +41,9 @@ namespace BitPoker
 
         private const String API_URL = "https://bitpoker.azurewebsites.net/api/";
 
+        private const String MOCK_HAND_ID = "398b5fe2-da27-4772-81ce-37fa615719b5";
+        private const String TABLE_ID = "";
+
         public static async Task MainAsync()
         {
 
@@ -62,11 +65,11 @@ namespace BitPoker
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
             Console.WriteLine("***");
 
-            Console.WriteLine("1. Add player (carol) to mock api");
+            Console.WriteLine("1. Add player (Carol) to mock api");
             Console.WriteLine("2. List players");
             Console.WriteLine("3. Add table");
             Console.WriteLine("4. List tables");
-            Console.WriteLine("5. Buy in");
+            Console.WriteLine("5. Buy in (Table ID {0})", TABLE_ID);
             Console.WriteLine("6. Fold / Muck");
             Console.WriteLine("7. Call");
             Console.WriteLine("8. Bet / Raise");

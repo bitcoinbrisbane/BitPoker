@@ -18,9 +18,14 @@ namespace BitPoker.MVC.Controllers
             _repo = repo;
         }
 
-        public IEnumerable<BitPoker.Models.Messages.ActionMessage> Get(Guid handId)
+        /// <summary>
+        /// Get all hands played at this table
+        /// </summary>
+        /// <param name="id">Table Id</param>
+        /// <returns></returns>
+        public IEnumerable<BitPoker.Models.Messages.ActionMessage> Get(Guid id)
         {
-            return _repo.All().Where(m => m.HandId.ToString() == handId.ToString());
+            return _repo.All().Where(m => m.TableId.ToString() == id.ToString());
         }
     }
 }

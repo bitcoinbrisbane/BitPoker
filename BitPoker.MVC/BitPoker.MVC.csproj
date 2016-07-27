@@ -150,6 +150,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\API\BaseController.cs" />
     <Compile Include="Controllers\API\BuyInController.cs" />
+    <Compile Include="Controllers\API\DealController.cs" />
     <Compile Include="Controllers\API\DeckController.cs" />
     <Compile Include="Controllers\API\HandController.cs" />
     <Compile Include="Controllers\API\HandHistoryController.cs" />

@@ -9,6 +9,10 @@ namespace BitPoker.Repository
 {
     public class MockHandRepo : IHandRepository
     {
+        public void Add(Hand entity)
+        {
+        }
+
         public IEnumerable<Hand> All()
         {
             throw new NotImplementedException();
@@ -20,12 +24,17 @@ namespace BitPoker.Repository
             {
                 case "398b5fe2-da27-4772-81ce-37fa615719b5":
 
+                    //return a full mock hand
 
                     break;
 
             }
 
             throw new NotImplementedException();
+        }
+
+        public void Update(Hand entity)
+        {
         }
     }
 }

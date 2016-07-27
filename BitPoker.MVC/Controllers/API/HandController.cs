@@ -21,7 +21,13 @@ namespace BitPoker.MVC.Controllers
             _repo = repo;
         }
 
-        public BitPoker.Models.Hand Get(Guid id)
+        /// <summary>
+        /// Get a specific hand via id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public BitPoker.Models.Hand Get(Guid id, Int32 index = 0)
         {
             if (id.ToString() == "398b5fe2-da27-4772-81ce-37fa615719b5")
             {
@@ -30,11 +36,6 @@ namespace BitPoker.MVC.Controllers
 
             BitPoker.Models.Hand hand = _repo.Find(id);
             return hand;
-        }
-
-        [HttpPost]
-        public void Post(BitPoker.Models.Hand hand)
-        {
         }
     }
 }

@@ -9,6 +9,6 @@ namespace BitPoker.Repository
 
         Models.PlayerInfo Find(String address);
 
-        void Add(Models.PlayerInfo item);
+        void Add(Models.PlayerInfo entity);
     }
 }

@@ -19,13 +19,23 @@ namespace BitPoker.Models.Messages
 
         public Int64 Amount { get; set; }
 
-		public ActionMessage ()
+        public String Tx { get; set; }
+
+        public String PreviousHash { get; set; }
+
+        public String HashAlgorithim { get; set; }
+
+        public ActionMessage ()
 		{
+            this.Id = Guid.NewGuid();
+            this.TimeStamp = DateTime.UtcNow;
+            this.HashAlgorithim = "SHA256";
+            this.Version = 1;
 		}
 
         public override string ToString()
         {
-            return String.Format("{0}{1}{2}{3}{4}", PublicKey, HandId, Index, Action, Amount);
+            return String.Format("{0}{1}{2}{3}{4}{5}", Id, PublicKey, HandId, Index, Action, Amount);
         }
 	}
 }
