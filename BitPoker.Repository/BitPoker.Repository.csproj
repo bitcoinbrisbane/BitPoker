@@ -45,6 +45,7 @@
     <Compile Include="IHandRepository.cs" />
     <Compile Include="IMessagesRepository.cs" />
     <Compile Include="IPlayerRepository.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="ITableRepository.cs" />
     <Compile Include="MockHandRepo.cs" />
     <Compile Include="MockMessageRepo.cs" />

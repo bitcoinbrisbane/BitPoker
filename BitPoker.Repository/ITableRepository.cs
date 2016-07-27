@@ -9,6 +9,8 @@ namespace BitPoker.Repository
 
         Models.Contracts.Table Find(Guid id);
 
-        void Add(Models.Contracts.Table item);
+        void Add(Models.Contracts.Table entity);
+
+        void Update(Models.Contracts.Table entity);
     }
 }

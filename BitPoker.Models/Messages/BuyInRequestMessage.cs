@@ -8,6 +8,8 @@ namespace BitPoker.Models.Messages
 
         public Int64 Amount { get; set; }
 
+        public Int16 Seat { get; set; }
+
         /// <summary>
         /// Pub key required for multisig.  
         /// </summary>

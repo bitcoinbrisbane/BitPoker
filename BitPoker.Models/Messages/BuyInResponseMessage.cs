@@ -4,15 +4,14 @@ using System.Collections.Generic;
 
 namespace BitPoker.Models.Messages
 {
-    public class BuyInResponseMessage
+    public class BuyInResponseMessage : BaseMessage
     {
-        //public PlayerInfo[] Players { get; set; }
-        public Models.Contracts.Table Table { get; set; }
+        //public Contracts.Table Table { get; set; }
+        public String TxID { get; set; }
 
         public BuyInResponseMessage()
         {
-            //this.Players = new PlayerInfo[n];
-            this.Table = new Contracts.Table();
+            base.Id = Guid.NewGuid();
         }
     }
 }

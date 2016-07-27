@@ -16,9 +16,13 @@ namespace BitPoker.Repository
 
         public Hand Find(Guid id)
         {
-            if (id.ToString() == "398b5fe2-da27-4772-81ce-37fa615719b5")
+            switch (id.ToString())
             {
-                //return mock shuffled deck
+                case "398b5fe2-da27-4772-81ce-37fa615719b5":
+
+
+                    break;
+
             }
 
             throw new NotImplementedException();

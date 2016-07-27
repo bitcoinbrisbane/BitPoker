@@ -28,7 +28,7 @@ namespace BitPoker.MVC.Controllers
 
             if (table != null)
             {
-                table.Players[2] = new BitPoker.Models.TexasHoldemPlayer()
+                table.Players[buyInRequest.Seat] = new BitPoker.Models.TexasHoldemPlayer()
                 {
                     BitcoinAddress = buyInRequest.BitcoinAddress,
                     Stack = buyInRequest.Amount,
@@ -39,13 +39,15 @@ namespace BitPoker.MVC.Controllers
                     IsTurnToAct = false,
                 };
 
+                tableRepo.Update(table);
+
                 //			
                 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
                 NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
                 NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
 
                 BitPoker.Models.Messages.BuyInResponseMessage response = new BitPoker.Models.Messages.BuyInResponseMessage();
-                response.Table = table;
+                //response.Table = table;
 
 
                 //Create players
@@ -57,20 +59,6 @@ namespace BitPoker.MVC.Controllers
                 //response.Players[0] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice_address.ToString(), UserAgent = "Bitpoker 0.1", IPAddress = "https://bitpoker.azurewebsites.net/api" };
                 //response.Players[1] = new BitPoker.Models.PlayerInfo() { BitcoinAddress = buyInRequest.BitcoinAddress };
 
-                //
-                //BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table(2, 10);
-
-
-
-                //Buy in to mock table
-                //if (buyInRequest.TableId.ToString().ToUpper() == "D6D9890D-0CA2-4B5D-AE98-FA4D45EB4363")
-                //{
-
-                //}
-                //else
-                //{
-                //    table = null; //GetTableFromCache(buyInRequest.TableId);
-                //}
 
                 //Alice pub key
                 const String alice_pub_key = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
@@ -83,12 +71,6 @@ namespace BitPoker.MVC.Controllers
 
                 //As its heads up, create the first hand and deck
                 BitPoker.Models.Hand hand = new BitPoker.Models.Hand(players);
-
-                //table.Hands[0] = hand;
-
-                ////Save back to memory
-                CacheItemPolicy policy = new CacheItemPolicy() { SlidingExpiration = new TimeSpan(0, 30, 0) };
-                MemoryCache.Default.Set(buyInRequest.TableId.ToString(), table, policy);
 
                 return response;
             }

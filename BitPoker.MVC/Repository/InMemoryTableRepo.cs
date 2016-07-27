@@ -11,6 +11,8 @@ namespace BitPoker.MVC.Repository
         private const String KEY = "table";
         private CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
 
+        private const Int32 MINUTES = 30; 
+
         public IEnumerable<Table> All()
         {
             if (MemoryCache.Default.Contains(KEY))
@@ -45,14 +47,14 @@ namespace BitPoker.MVC.Repository
             }
         }
 
-        public void Add(Table item)
+        public void Add(Table entity)
         {
             if (MemoryCache.Default.Contains(KEY))
             {
                 Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
-                container.Tables.Add(item);
+                container.Tables.Add(entity);
 
-                cacheItemPolicy.SlidingExpiration = new TimeSpan(0, 30, 0);
+                cacheItemPolicy.SlidingExpiration = new TimeSpan(0, MINUTES, 0);
                 MemoryCache.Default.Add(KEY, container, cacheItemPolicy);
             }
 
@@ -62,8 +64,20 @@ namespace BitPoker.MVC.Repository
 
                 if (container != null)
                 {
-                    container.Tables.Add(item);
+                    container.Tables.Add(entity);
                 }
+            }
+        }
+
+        public void Update(Table entity)
+        {
+            if (MemoryCache.Default.Contains(KEY))
+            {
+                Models.TableContainer container = (Models.TableContainer)MemoryCache.Default["TableContainer"];
+                var table = container.Tables.First(t => t.Id == entity.Id);
+
+                cacheItemPolicy.SlidingExpiration = new TimeSpan(0, MINUTES, 0);
+                MemoryCache.Default.Add(KEY, container, cacheItemPolicy);
             }
         }
 

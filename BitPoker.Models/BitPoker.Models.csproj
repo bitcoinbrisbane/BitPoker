@@ -39,6 +39,7 @@
     <Compile Include="Messages\AddPlayerRequest.cs" />
     <Compile Include="Messages\AddTableRequest.cs" />
     <Compile Include="Messages\BaseMessage.cs" />
+    <Compile Include="Messages\BaseResponse.cs" />
     <Compile Include="Messages\BuyInRequestMessage.cs" />
     <Compile Include="Messages\BuyInResponseMessage.cs" />
     <Compile Include="Messages\DeckRequestMessage.cs" />
