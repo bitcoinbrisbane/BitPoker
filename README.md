@@ -10,7 +10,7 @@ Different clients developed in different programming languages are encouraged.
 Deck is represented as an array of Bytes.
 
 | Key  | Value | Decimal | Byte |
-| -----|-------- | -------|------ |
+| -----|------ | -------|------ |
 | A  | Ace  | 12 | {0x0C} |
 | K  | King  | 11 |{0x0B}|
 | Q  | Queen | 10 |{0x0A}|
@@ -28,7 +28,7 @@ Deck is represented as an array of Bytes.
 Suites
 
 | Key  | Value | Offset | Byte |
-| ------------- | ------------- | ------------- | ------------- |
+| ---- | ----- | ------ | ---- |
 | S  | Spade  | +0 | {0x00} |
 | C  | Club | +13 | {0x0D} |
 | H  | Heart | +26 | |
@@ -139,7 +139,7 @@ Each client connects to one another in the "lobby".  They can then look for play
 - Repeat
 
 ### Sample Message types (See below for more on messages)
-- Join
+- Buy In
 - Quit
 - Sit Out
 - Action (CALL, BET, RAISE, FOLD, MUCK)
@@ -184,18 +184,19 @@ These are out side the scope of this paper.
 All actions are sent as messages.  They must include a public key be signed.  The payload must also reference there previous message hash.
 
 | Property  | Eg |
-| ------------- | ------------- |
+| --------- | -- |
 | Version  | 1  |
 | Public Key Hash | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
-| Type | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
+| Action | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
 | Payload | |
 | Message Signature | |
-| Hash | |
+| Pervious Hash | |
 
 Example action message (payload)
 
 | Property  | Eg |
 | ------------- | ------------- |
+| Id | 4BC7F305-AA16-450A-A3BE-AAD8FBA7F425 |
 | Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
 | Index | 2 |
 | Action | CALL 5000000 |
@@ -214,6 +215,7 @@ Eg in XML
 <Message Version="1" Type="Action">
   <PublicKeyHash>mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</PublicKeyHash>
   <Action Position="1">
+    <Id>4BC7F305-AA16-450A-A3BE-AAD8FBA7F425</Id>
     <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
     <Index>2</Index>
     <Action>CALL 5000000<</Action>
