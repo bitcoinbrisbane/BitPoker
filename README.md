@@ -652,7 +652,7 @@ For full key set, see the test data folder
 Cold deck from https://www.benjoffe.com/holdem
 
 ### Mock API
-An REST API is located at https://bitpoker.azurewebsites.net/api for users to develop clients against.
+An REST API is located at https://www.bitpoker.io/api for users to develop clients against.
 
 | Verb  | Uri |
 | ------------- | ------------- |
@@ -661,8 +661,8 @@ An REST API is located at https://bitpoker.azurewebsites.net/api for users to de
 | GET | /Tables |
 
 ## Coloured coin crowd sale
-The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
-http://coloredcoins.org/explorer/asset/Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ/f5102f4c37a64ede406173ed707d3458c6258dca48f72f0efdb234ce38e2d9f8/0
+The following colour coin asset will be sold to raise funds for the development of the project. Asset Id 
+From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
