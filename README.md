@@ -7,6 +7,9 @@ Different clients developed in different programming languages are encouraged.
 
 ### Notation
 
+Ids should be represented as GUIDs, and be in lower case
+All values represented in base16 (hex) should be lower case
+
 Deck is represented as an array of Bytes.
 
 | Key  | Value | Decimal | Byte |
