@@ -39,7 +39,7 @@ namespace BitPoker
         private static BitcoinAddress bob = bob_secret.GetAddress();
         private static BitcoinAddress carol = carol_secret.GetAddress();
 
-        private const String API_URL = "https://bitpoker.azurewebsites.net/api/";
+        private const String API_URL = "https://www.bitpoker.io/api/";
 
         private const String MOCK_HAND_ID = "398b5fe2-da27-4772-81ce-37fa615719b5";
         private const String TABLE_ID = "";

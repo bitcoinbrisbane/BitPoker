@@ -15,11 +15,13 @@ namespace BitPoker.MVC.Controllers
         public DealController()
         {
             this.tableRepo = new Repository.InMemoryTableRepo();
+            this.handRepo = new Repository.InMemoryHandRepo();
         }
 
-        public DealController(BitPoker.Repository.ITableRepository tableRepo)
+        public DealController(BitPoker.Repository.ITableRepository tableRepo, BitPoker.Repository.IHandRepository handRepo)
         {
             this.tableRepo = tableRepo;
+            this.handRepo = handRepo;
         }
 
         /// <summary>
@@ -28,14 +30,13 @@ namespace BitPoker.MVC.Controllers
         /// <param name="id">Table id</param>
         /// <returns></returns>
         [HttpPost]
-        public String Post(Guid id)
+        public BitPoker.Models.Hand Post(Guid id)
         {
             var table = tableRepo.Find(id);
 
             if (table != null)
             {
-                Guid handId = Guid.NewGuid();
-                List<BitPoker.Models.Messages.ActionMessage> actions = new List<BitPoker.Models.Messages.ActionMessage>();
+                BitPoker.Models.Hand hand = new BitPoker.Models.Hand(); //Guid("ddf2ecb7-bcc1-4c17-a463-56cc0a3dec84");
 
                 //todo:  change to position
                 var sb = table.Players[0];
@@ -52,13 +53,13 @@ namespace BitPoker.MVC.Controllers
                     Action = "SMALL BLIND",
                     Amount = table.SmallBlind,
                     BitcoinAddress = sb.BitcoinAddress,
-                    HandId = handId,
+                    HandId = hand.Id,
                     PublicKey = alice_pubkey,
                     TableId = id
                 };
 
                 smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
-                actions.Add(smallBlind);
+                hand.History.Add(smallBlind);
 
                 var bb = table.Players[1];
 
@@ -72,18 +73,28 @@ namespace BitPoker.MVC.Controllers
 
                 BitPoker.Models.Messages.ActionMessage bigBlind = new BitPoker.Models.Messages.ActionMessage()
                 {
+                    Id = new Guid("d10cc043-4df3-4d41-8b31-8dd573824c8b"),
                     Index = 1,
                     Action = "BIG BLIND",
                     Amount = table.BigBlind,
                     BitcoinAddress = bb.BitcoinAddress,
-                    HandId = handId,
+                    HandId = hand.Id,
                     PreviousHash = NBitcoin.DataEncoders.Encoders.ASCII.EncodeData(hash),
                     PublicKey = bob_pubkey,
                     TableId = id
                 };
-            }
 
-            return "";
+                bigBlind.Signature = bob_secret.PrivateKey.SignMessage(bigBlind.ToString());
+                hand.History.Add(bigBlind);
+                hand.PersonToAct = 2;
+
+                this.handRepo.Add(hand);
+                return hand;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }

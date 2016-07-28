@@ -15,7 +15,7 @@ namespace BitPoker.Repository
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),
-                IPAddress = "http://www.bitpoker.io/api",
+                IPAddress = "https://www.bitpoker.io/api",
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
@@ -23,7 +23,7 @@ namespace BitPoker.Repository
             {
                 BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
                 LastSeen = DateTime.UtcNow.AddSeconds(-1),
-                IPAddress = "http://www.bitpoker.io/api",
+                IPAddress = "https://www.bitpoker.io/api",
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 

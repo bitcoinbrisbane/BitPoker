@@ -180,6 +180,7 @@
     <Compile Include="Repository\InMemoryTableRepo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
