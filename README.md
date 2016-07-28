@@ -154,15 +154,15 @@ If the game is to be developed using Etherum contracts:
 1.  The game is defined an an Etherum contract
 2.  Players agree to the table contract
 3.  Each players actions are defined as inputs for the hand contract
-4.  After the hand has ended, each player verifies the integrety of the hand contract.  Its in everyones best intrest to verify correctly [Game Theory Citation]
-5.  The hand inputs are then excuted on the Etherum network for the pot to be awarded
+4.  After the hand has ended, each player verifies the integrety of the hand contract.  Its in everyones best interest to verify correctly [Game Theory Citation]
+5.  The hand message chain is then excuted on the Etherum network for the pot to be awarded
 
 Less use of Etherum
 
 1.  Players connect to each other via P2P
 2.  A player either looks to join a table and reviews the contract
 3.  A palyer can choose to start a table be defining a table contract
-4.  Tables should also broad cast their game, status and number of current players to other tables
+4.  Tables should also broad cast their game, status and number of current players to other tables for better network properation
 5.  Leaving the table (closing the channel)
 5.  Lightning network will facilitate micro payments "off chain".  The table can agree to bring them "on chain" after n hands are dealt.
 
@@ -199,7 +199,7 @@ Example action message (payload)
 
 | Property  | Eg |
 | ------------- | ------------- |
-| Id | 4BC7F305-AA16-450A-A3BE-AAD8FBA7F425 |
+| Id | 4bc7f305-aa16-450a-a3be-aad8fba7f425 |
 | Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
 | Index | 2 |
 | Action | CALL 5000000 |
@@ -218,7 +218,7 @@ Eg in XML
 <Message Version="1" Type="Action">
   <PublicKeyHash>mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</PublicKeyHash>
   <Action Position="1">
-    <Id>4BC7F305-AA16-450A-A3BE-AAD8FBA7F425</Id>
+    <Id>4bc7f305-aa16-450a-a3be-aad8fba7f425</Id>
     <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
     <Index>2</Index>
     <Action>CALL 5000000<</Action>
@@ -268,12 +268,12 @@ The paramaters for a table are defined in the following schema.  Developers are 
     <Hash>SHA-256</Hash>
     <Currency>BTC</Currency>
     <Blinds>
-      <SmallBlind>0.001</SmallBlind>
-      <BigBlind>0.002</BigBlind>
+      <SmallBlind>100000</SmallBlind>
+      <BigBlind>200000</BigBlind>
     </Blinds>
     <BuyIn>
-      <Min>0.1</Min>
-      <Max<0.5</Max>
+      <Min>10000000</Min>
+      <Max<50000000</Max>
     </BuyIn>
     <Game>
       <Type>Texas Holdem</Type>
