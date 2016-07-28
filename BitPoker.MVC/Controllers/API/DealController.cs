@@ -43,10 +43,11 @@ namespace BitPoker.MVC.Controllers
                 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
                 NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
                 NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
-                const String alice_pubkey = "041FA97EFD760F26E93E91E29FDDF3DDDDD3F543841CF9435BDC156FB73854F4BF22557798BA535A3EE89A62238C5AFC7F8BF1FA0985DC4E1A06C25209BAB78BD1";
+                const String alice_pubkey = "041fa97efd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62238c5afc7f8bf1fa0985dc4e1a06c25209bab78bd1";
 
                 BitPoker.Models.Messages.ActionMessage smallBlind = new BitPoker.Models.Messages.ActionMessage()
                 {
+                    Id = new Guid("4bc7f305-aa16-450a-a3be-aad8fba7f425"),
                     Index = 0,
                     Action = "SMALL BLIND",
                     Amount = table.SmallBlind,
@@ -64,7 +65,7 @@ namespace BitPoker.MVC.Controllers
                 const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
                 NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
                 NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
-                const String bob_pubkey = "04F48396AC675B97EEB54E57554827CC2B937C2DAE285A9198F9582B15C920D91309BC567858DC63357BCD5D24FD8C041CA55DE8BAE62C7315B0BA66FE5F96C20D";
+                const String bob_pubkey = "04f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d";
 
                 //NBitcoin.Crypto.Hashes.SHA256(NBitcoin.DataEncoders.Encoders.ASCII.(smallBlind.ToString()));
                 Byte[] hash = NBitcoin.Crypto.Hashes.SHA256(NBitcoin.DataEncoders.Encoders.ASCII.DecodeData(smallBlind.ToString()));
