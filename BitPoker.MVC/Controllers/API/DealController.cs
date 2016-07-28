@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace BitPoker.MVC.Controllers
 {
-    public class DealController : ApiController //, IDisposable
+    public class DealController : BaseController //, IDisposable
     {
         private readonly BitPoker.Repository.ITableRepository tableRepo;
         private readonly BitPoker.Repository.IHandRepository handRepo;
@@ -24,19 +24,18 @@ namespace BitPoker.MVC.Controllers
             this.handRepo = handRepo;
         }
 
-        /// <summary>
-        /// Kick off new hand
-        /// </summary>
-        /// <param name="id">Table id</param>
-        /// <returns></returns>
+
         [HttpPost]
-        public BitPoker.Models.Hand Post(Guid id)
+        public BitPoker.Models.Hand Post(BitPoker.Models.Messages.DealRequest request)
         {
-            var table = tableRepo.Find(id);
+            var table = tableRepo.Find(request.TableId);
 
             if (table != null)
             {
-                BitPoker.Models.Hand hand = new BitPoker.Models.Hand(); //Guid("ddf2ecb7-bcc1-4c17-a463-56cc0a3dec84");
+                BitPoker.Models.Hand hand = new BitPoker.Models.Hand() //Guid("ddf2ecb7-bcc1-4c17-a463-56cc0a3dec84");
+                {
+                    Deck = request.Deck
+                };
 
                 //todo:  change to position
                 var sb = table.Players[0];
@@ -55,7 +54,7 @@ namespace BitPoker.MVC.Controllers
                     BitcoinAddress = sb.BitcoinAddress,
                     HandId = hand.Id,
                     PublicKey = alice_pubkey,
-                    TableId = id
+                    TableId = request.TableId
                 };
 
                 smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
@@ -81,7 +80,7 @@ namespace BitPoker.MVC.Controllers
                     HandId = hand.Id,
                     PreviousHash = NBitcoin.DataEncoders.Encoders.ASCII.EncodeData(hash),
                     PublicKey = bob_pubkey,
-                    TableId = id
+                    TableId = request.TableId
                 };
 
                 bigBlind.Signature = bob_secret.PrivateKey.SignMessage(bigBlind.ToString());
