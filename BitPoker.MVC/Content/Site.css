@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.rev_slider ul {
+	-webkit-padding-start: 0;
+}
