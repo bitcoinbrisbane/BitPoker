@@ -8,7 +8,7 @@ namespace BitPokerMobile
 		{
 			InitializeComponent();
 
-			MainPage = new BitPokerMobilePage();
+			MainPage = new HomePage();
 		}
 
 		protected override void OnStart()

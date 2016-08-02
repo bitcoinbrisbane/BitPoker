@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BitPokerMobile.Clients
 {
-	public interface ITableClient
+	public interface ITableClient : IDisposable
 	{
 	}
 }

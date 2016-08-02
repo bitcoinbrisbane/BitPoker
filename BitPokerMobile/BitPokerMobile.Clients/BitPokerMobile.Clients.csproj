@@ -35,6 +35,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITableClient.cs" />
     <Compile Include="IPlayerClient.cs" />
+    <Compile Include="BitPokerRestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -49,6 +50,15 @@
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitPokerMobile.PCL.Models\BitPokerMobile.PCL.Models.csproj">
+      <Project>{F2F77FFD-C6AB-42A5-B2D4-7A15AFED854F}</Project>
+      <Name>BitPokerMobile.PCL.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>
