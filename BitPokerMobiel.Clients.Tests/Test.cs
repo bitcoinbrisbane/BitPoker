@@ -8,7 +8,7 @@ namespace BitPokerMobile.Clients.Tests
 	public class Test
 	{
 		[Test()]
-		public async Task TestCase()
+		public async Task Should_Get_Players()
 		{
 			using (Clients.IPlayerClient client = new Clients.BitPokerRestClient())
 			{
