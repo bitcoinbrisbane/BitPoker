@@ -42,6 +42,7 @@
     <Compile Include="Messages\BaseResponse.cs" />
     <Compile Include="Messages\BuyInRequestMessage.cs" />
     <Compile Include="Messages\BuyInResponseMessage.cs" />
+    <Compile Include="Messages\DealRequest.cs" />
     <Compile Include="Messages\DeckRequestMessage.cs" />
     <Compile Include="Messages\DeckResponseMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

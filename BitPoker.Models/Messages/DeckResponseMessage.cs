@@ -12,7 +12,6 @@ namespace BitPoker.Models.Messages
 
         public DeckResponseMessage()
         {
-            base.Id = new Guid();
             base.Id = Guid.NewGuid();
         }
 

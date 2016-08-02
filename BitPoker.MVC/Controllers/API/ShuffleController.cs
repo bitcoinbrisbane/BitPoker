@@ -7,8 +7,6 @@ namespace BitPoker.MVC.Controllers
 {
     public class ShuffleController : BaseController
     {
-        private readonly BitPoker.Repository.IHandRepository repo;
-
         public ShuffleController()
         {
         }
@@ -17,16 +15,18 @@ namespace BitPoker.MVC.Controllers
         /// Get deck to shuffle
         /// </summary>
         /// <param name="tableId"></param>
-        /// <param name="handId"></param>
-        public BitPoker.Models.Messages.DeckResponseMessage Get(Guid tableId, Guid handId)
+        public BitPoker.Models.Messages.DeckResponseMessage Get(Guid tableId)
         {
             var message = new BitPoker.Models.Messages.DeckResponseMessage();
 
-            const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-            NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
-            NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
+            message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
+            message.Deck.Shuffle();
 
-            message.BitcoinAddress = alice_address.ToString();
+            //const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+            //NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
+            //NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
+
+            //message.BitcoinAddress = alice_address.ToString();
 
             //if (tableId.ToString() == "" && handId.ToString() == "398b5fe2-da27-4772-81ce-37fa615719b5")
             //{
@@ -42,11 +42,6 @@ namespace BitPoker.MVC.Controllers
             //}
 
             return message;
-        }
-
-        [HttpPost]
-        public void Post()
-        {
         }
     }
 }
