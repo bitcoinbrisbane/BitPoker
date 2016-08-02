@@ -14,6 +14,8 @@ namespace BitPokerMobile
 			InitializeComponent();
 			_viewModel = new ViewModels.HomeViewModel();
 			BindingContext = _viewModel;
+
+			PlayersList.ItemsSource = _viewModel.Players;
 		}
 	}
 }
