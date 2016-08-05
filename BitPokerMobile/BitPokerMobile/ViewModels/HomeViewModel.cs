@@ -32,23 +32,31 @@ namespace BitPokerMobile.ViewModels
 
 		public ICommand RefreshKeyTapped { protected set; get; }
 
+		public ICommand CreateMockKeyTapped { protected set; get; }
+
 		public HomeViewModel()
 		{
 			this.GenerateKeyTapped = new Command(OnGenerateKeyTappedAsync);
 			this.RefreshKeyTapped = new Command(GetPlayersAsync);
+			this.CreateMockKeyTapped = new Command(RefreshMocksAsync);
 			this.Players = new ObservableCollection<Models.ListItemModel>();
 		}
 
-		public async void OnGenerateKeyTappedAsync()
+		public void OnGenerateKeyTappedAsync()
 		{
 			const String carol_wif = "91rahqyxZb6R1MMq2rdYomfB8GWsLVqkBMHrUnaepxks73KgfaQ";
 			NBitcoin.BitcoinSecret carol_secret = new NBitcoin.BitcoinSecret(carol_wif, NBitcoin.Network.TestNet);
 
 			this.BitcoinAddress = carol_secret.GetAddress().ToString();
+
+			MessagingCenter.Send<HomeViewModel>(this, "Hi");
+			//MessagingCenter.Send<HomeViewModel>(this, "Hi", this.BitcoinAddress);
 		}
 
 		public async void GetPlayersAsync()
 		{
+			this.IsBusy = true;
+
 			using (Clients.IPlayerClient client = new Clients.BitPokerRestClient())
 			{
 				var players = await client.GetPlayersAsync();
@@ -58,6 +66,21 @@ namespace BitPokerMobile.ViewModels
 					this.Players.Add(new Models.ListItemModel() { Title = player.BitcoinAddress, Description = player.UserAgent });
 				}
 			}
+
+			this.IsBusy = false;
+		}
+
+		public async void RefreshMocksAsync()
+		{
+			this.IsBusy = true;
+
+			using (Clients.BitPokerRestClient client = new Clients.BitPokerRestClient())
+			{
+				var result = await client.RefreshMocksAsync();
+				//MessagingCenter.Send<HomeViewModel>(this, "Hi", new EventArgs());
+			}
+
+			this.IsBusy = false;
 		}
 	}
 }

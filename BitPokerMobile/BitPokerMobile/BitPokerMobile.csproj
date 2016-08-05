@@ -34,6 +34,12 @@
     <EmbeddedResource Include="Views\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\TablesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PlayersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -46,6 +52,15 @@
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ListItemModel.cs" />
+    <Compile Include="Views\MainPage.cs" />
+    <Compile Include="Views\TablesPage.xaml.cs">
+      <DependentUpon>TablesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\TablesViewModel.cs" />
+    <Compile Include="Views\PlayersPage.xaml.cs">
+      <DependentUpon>PlayersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\PlayersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NBitcoin">

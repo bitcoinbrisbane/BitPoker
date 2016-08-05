@@ -1,20 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BitPokerMobile.HomePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BitPokerMobile.TablesPage">
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="20" VerticalOptions="End">
 			<ActivityIndicator Color="White" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
-			<ListView x:Name="PlayersList">
+			<ListView x:Name="TablesList">
 	        	<ListView.ItemTemplate>
 			      	<DataTemplate>
 						<TextCell Text="{Binding Title}" Detail="{Binding Detail}" />
 			      	</DataTemplate>
 			    </ListView.ItemTemplate>
 	        </ListView>
-			<Label Text ="{Binding BitcoinAddress}"></Label>
-			<Button IsEnabled="{Binding AllowUserInteraction}" Text="Generate New Key" BackgroundColor="Black" TextColor="White" Command="{Binding GenerateKeyTapped}"/>
 			<Button IsEnabled="{Binding AllowUserInteraction}" Text="Refresh" BackgroundColor="Black" TextColor="White" Command="{Binding RefreshKeyTapped}"/>
-			<Button IsEnabled="{Binding AllowUserInteraction}" Text="Refresh Mocks" BackgroundColor="Black" TextColor="White" Command="{Binding CreateMockKeyTapped}"/>
-
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
