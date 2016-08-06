@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="BitPokerMobile.PlayersPage">
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="20" VerticalOptions="End">
-			<ActivityIndicator Color="White" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
-			<ListView x:Name="PlayersList">
-	        	<ListView.ItemTemplate>
+			<!--<ActivityIndicator Color="White" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>-->
+			<ListView x:Name="PlayersList" ItemSelected="OnSelection" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshKeyTapped}" IsRefreshing="{Binding IsBusy}"> <!--Refreshing="OnRefresh"-->
+	        	<ListView.ItemTemplate> 
 			      	<DataTemplate>
 						<TextCell Text="{Binding Title}" Detail="{Binding Detail}" />
 			      	</DataTemplate>

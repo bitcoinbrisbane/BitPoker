@@ -20,7 +20,7 @@ namespace BitPokerMobile.ViewModels
 
 		public async void GetPlayersAsync()
 		{
-			this.IsBusy = true;
+			//this.IsBusy = true;
 
 			using (Clients.IPlayerClient client = new Clients.BitPokerRestClient())
 			{
@@ -32,7 +32,7 @@ namespace BitPokerMobile.ViewModels
 				}
 			}
 
-			this.IsBusy = false;
+			//this.IsBusy = false;
 		}
 	}
 }
