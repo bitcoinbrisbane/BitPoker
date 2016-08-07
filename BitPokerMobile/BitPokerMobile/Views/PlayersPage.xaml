@@ -3,7 +3,7 @@
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="20" VerticalOptions="End">
 			<!--<ActivityIndicator Color="White" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>-->
-			<ListView x:Name="PlayersList" ItemSelected="OnSelection" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshKeyTapped}" IsRefreshing="{Binding IsBusy}"> <!--Refreshing="OnRefresh"-->
+			<ListView x:Name="PlayersList" ItemSelected="OnSelection" IsPullToRefreshEnabled="true" RefreshCommand="{Binding RefreshKeyTapped}" IsRefreshing="{Binding IsBusy}">
 	        	<ListView.ItemTemplate> 
 			      	<DataTemplate>
 						<TextCell Text="{Binding Title}" Detail="{Binding Detail}" />
