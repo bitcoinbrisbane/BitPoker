@@ -61,6 +61,9 @@ namespace BitPoker
             //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
             //};
 
+            Repository.MockPlayerRepo repo = new Repository.MockPlayerRepo("mockplayers.json");
+            var players = repo.All();
+
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
             Console.WriteLine("***");

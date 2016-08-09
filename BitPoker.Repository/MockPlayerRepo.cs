@@ -31,6 +31,12 @@ namespace BitPoker.Repository
             _mockPlayers.Add(bob);
         }
 
+        public MockPlayerRepo(String fileName)
+        {
+            String json = System.IO.File.ReadAllText(fileName);
+            _mockPlayers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
+        }
+
         public void Add(PlayerInfo item)
         {
         }

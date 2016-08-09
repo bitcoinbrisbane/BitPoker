@@ -9,6 +9,16 @@ namespace BitPoker.Repository
 {
     public class MockHandRepo : IHandRepository
     {
+
+        private PlayerInfo alice;
+        private PlayerInfo bob;
+
+
+        public MockHandRepo()
+        {
+            IPlayerRepository playerRepo = new MockPlayerRepo();
+        }
+
         public void Add(Hand entity)
         {
         }
@@ -24,7 +34,10 @@ namespace BitPoker.Repository
             {
                 case "398b5fe2-da27-4772-81ce-37fa615719b5":
 
-                    //return a full mock hand
+                    Hand hand = new Hand()
+                    {
+                        Id = new Guid("398b5fe2-da27-4772-81ce-37fa615719b5")
+                    };
 
                     break;
 
