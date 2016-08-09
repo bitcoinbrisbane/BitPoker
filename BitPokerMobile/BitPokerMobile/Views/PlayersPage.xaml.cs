@@ -18,16 +18,16 @@ namespace BitPokerMobile
 			PlayersList.ItemsSource = _viewModel.Players;
 		}
 
-		private void OnRefresh(object sender, EventArgs e)
-		{
-			var list = (ListView)sender;
+		//private void OnRefresh(object sender, EventArgs e)
+		//{
+		//	var list = (ListView)sender;
 
-			//put your refreshing logic here
-			_viewModel.GetPlayersAsync();
+		//	//put your refreshing logic here
+		//	_viewModel.GetPlayersAsync();
 
-			//make sure to end the refresh state
-			list.IsRefreshing = false;
-		}
+		//	//make sure to end the refresh state
+		//	list.IsRefreshing = false;
+		//}
 
 		//void OnTap(object sender, ItemTappedEventArgs e)
 		//{
