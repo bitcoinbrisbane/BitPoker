@@ -131,7 +131,6 @@ Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
 =Amq+
 -----END PGP PUBLIC KEY BLOCK-----
 
-
 ## The protocol
 Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
@@ -186,19 +185,19 @@ These are out side the scope of this paper.
 ## Messages
 All actions are sent as messages.  They must include a public key be signed.  The payload must also reference there previous message hash.
 
-| Property  | Eg |
-| --------- | -- |
-| Version  | 1  |
+| Property | Eg |
+| -------- | -- |
+| Version | 1 |
 | Public Key Hash | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
 | Action | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
-| Payload | |
-| Message Signature | |
-| Pervious Hash | |
+| Payload | TODO |
+| Message Signature | TODO |
+| Pervious Hash | TODO |
 
 Example action message (payload)
 
 | Property  | Eg |
-| ------------- | ------------- |
+| --------- | -- |
 | Id | 4bc7f305-aa16-450a-a3be-aad8fba7f425 |
 | Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
 | Index | 2 |
@@ -208,7 +207,7 @@ Example action message (payload)
 
 The hash (SHA-256) is of the property values concantinated, thus seriliazation format agnostic.
 
-Eg of above message
+Eg of above message.
 ```
 1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
 ```
@@ -242,7 +241,7 @@ The paramaters for a table are defined in the following schema.  Developers are 
 
 1.  Encryption Algorithm (Enum AES-256)
 2.  Hash Algorithm (Enum SHA-256)
-3.  Table ID (GUID)
+3.  Id (GUID)
 3.  Currency (Enum)
 3.  Blinds
 4.  Rake*
@@ -593,15 +592,13 @@ Table ID = 04dd3def-a654-4995-97e4-a1d151ef18ad
 Hand ID = ce364246-6c52-40e8-a35f-18a1ea519251
 
 Players (in seats)
-1. Alice
-2. Bob
-2. Daniel
-3. Chris
-4. Tony
-5. Phil
-6. sylvian31
-7. Tom
-9. SharingaaN * Button
+2. Daniel my8qxmUcTMGpwaLr5SsGsDwXpv78BGmVuL 
+3. Chris n4oaGy1uBZ4J4Pge7ZaGgbRRcJ9795dfdE
+4. Tony mmbC1Gs1oGSwoT8F8VLQcwmLrNTV5DdajA
+5. Phil mgXqH7yA6Djx5Wqpaspsw25mNLTx2yaPeB
+6. Mike mre7fKPYqyKjACfb74rSjVNubE9ZX3t7Cb
+7. Tom mxeHrRd239QgwYZtEtNo8eGrnmGeDbCFPB
+9. Gus mkcuSxhM5F76vzbAXyhXayXUw4sTitJXhc * Button
 
 The hand is decribed in Poker Stars Hand History format.
 ```
@@ -611,18 +608,18 @@ Seat 2: Daniel (0.01 in chips)
 Seat 3: Chris (0.01 in chips) 
 Seat 4: Tony (0.01 in chips) 
 Seat 5: Phil (0.01 in chips) 
-Seat 6: sylvian31 (0.01 in chips) 
+Seat 6: Mike (0.01 in chips) 
 Seat 7: Tom (0.01 in chips) 
-Seat 9: SharingaaN (0.008 in chips) 
+Seat 9: Gus (0.008 in chips) 
 Daniel: posts small blind 0.0005
-er13to: posts big blind 0.001
+Chris: posts big blind 0.001
 *** HOLE CARDS ***
 Avtovo joins the table at seat #8 
 Tony: folds 
 Phil: folds 
-sylvian31: folds 
+Mike: folds 
 Tom: raises 0.00126 to 0.0026
-SharingaaN: folds 
+Gus: folds 
 Daniel: calls 0.00176
 Chris: calls 0.00126
 *** FLOP *** [9h Td 6h]
@@ -640,7 +637,7 @@ Tom: checks
 Daniel: checks 
 Chris: bets 0.006
 Tom: folds 
-nickgodro: folds 
+Daniel: folds 
 Uncalled bet (0.006) returned to Chris
 Chris collected 0.02037 from pot
 Chris: doesn't show hand 
@@ -653,7 +650,21 @@ Seat 4: Tony folded before Flop (didn't bet)
 Seat 5: Phil folded before Flop (didn't bet)
 Seat 6: sylvian31 folded before Flop (didn't bet)
 Seat 7: Tom folded on the River
-Seat 9: SharingaaN (button) folded before Flop (didn't bet)
+Seat 9: Gus (button) folded before Flop (didn't bet)
+```
+Private Keys
+2. Daniel 92DurEQEwd5KR4BjeaLfK3xuuSiQEWNc8R3szPH1VM5XorMa3eq 
+3. Chris 92ZY3DxX8h9wpueDwSzD8YWKXCi1YT9yrvYDVhfnbqXgCvKQmX6
+4. Tony 92WmrGTyfW6uvZdzy7TsoARwtg9QpzNvxz31UTeoD2WSgSLQHHg
+5. Phil 92Q53JuV5L3ehi2ML4CbwWAhGrAJUAd2jc39yke4bqqW1XUpgQx
+6. Mike 92rXYx7owd2AgUiJZzDUJrNy4EBD92y1x6JSQBiSHkKD6PdL9Zt
+7. Tom 91qV38Xgc2KS5zNJfXfi9rK36FUS14yoFPE9iaEpmHckFLCWsTX
+9. Gus 92GD9YDCT4koimj3nBQ2gcLZbxdHdkcLPboBjibjJAhP5Gks8An
+
+The above hand as a message chain.
+```
+
+```
 
 ## Network Topology
 
