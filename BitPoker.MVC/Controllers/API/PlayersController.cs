@@ -55,5 +55,11 @@ namespace BitPoker.MVC.Controllers
                 return "addresses do not match";
             }
         }
+
+        [HttpPost]
+        public String Post(String id, BitPoker.Models.Messages.ActionMessage model)
+        {
+            return "ok";
+        }
     }
 }

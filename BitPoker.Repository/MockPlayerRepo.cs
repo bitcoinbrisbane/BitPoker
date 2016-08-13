@@ -7,7 +7,7 @@ namespace BitPoker.Repository
 {
     public class MockPlayerRepo : IPlayerRepository
     {
-        List<PlayerInfo> _mockPlayers = new List<PlayerInfo>();
+        List<PlayerInfo> _players = new List<PlayerInfo>();
 
         public MockPlayerRepo()
         {
@@ -27,14 +27,14 @@ namespace BitPoker.Repository
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
-            _mockPlayers.Add(alice);
-            _mockPlayers.Add(bob);
+            _players.Add(alice);
+            _players.Add(bob);
         }
 
         public MockPlayerRepo(String fileName)
         {
             String json = System.IO.File.ReadAllText(fileName);
-            _mockPlayers = Newtonsoft.Json.JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
+            _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
         }
 
         public void Add(PlayerInfo item)
@@ -43,12 +43,12 @@ namespace BitPoker.Repository
 
         public IEnumerable<PlayerInfo> All()
         {
-            return _mockPlayers;
+            return _players;
         }
 
         public PlayerInfo Find(String address)
         {
-            return _mockPlayers.FirstOrDefault(p => p.BitcoinAddress == address);
+            return _players.FirstOrDefault(p => p.BitcoinAddress == address);
         }
     }
 }

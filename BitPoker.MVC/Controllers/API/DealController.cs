@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BitPoker.Models.ExtensionMethods;
 
 namespace BitPoker.MVC.Controllers
 {
@@ -58,7 +59,7 @@ namespace BitPoker.MVC.Controllers
                 };
 
                 smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
-                hand.History.Add(smallBlind);
+                hand.AddMessage(smallBlind);
 
                 var bb = table.Players[1];
 
@@ -84,8 +85,7 @@ namespace BitPoker.MVC.Controllers
                 };
 
                 bigBlind.Signature = bob_secret.PrivateKey.SignMessage(bigBlind.ToString());
-                hand.History.Add(bigBlind);
-                hand.PersonToAct = 2;
+                hand.AddMessage(bigBlind);
 
                 this.handRepo.Add(hand);
                 return hand;

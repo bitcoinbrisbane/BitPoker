@@ -5,9 +5,10 @@ namespace BitPoker.Models.Contracts
 {
 	public class Table : BaseTable
 	{
-        public IDeck Deck { get; set; }
-
-        public IList<TexasHoldemPlayer> Players { get; set; }
+        /// <summary>
+        /// Array of players in their seats
+        /// </summary>
+        public IList<TexasHoldemPlayer> Players { get; private set; }
 
         public Table()
         {
@@ -21,9 +22,6 @@ namespace BitPoker.Models.Contracts
             this.MaxPlayers = maxPlayers;
 
             this.Players = new List<TexasHoldemPlayer>(maxPlayers);
-
-            //this.Players[0].IsDealer = true;
-            //this.Players[1].IsSmallBlind = true;
 		}
 	}
 }

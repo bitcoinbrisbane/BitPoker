@@ -32,6 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="ExtensionMethods\HandExtensions.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="Helpers\Chain.cs" />
@@ -57,7 +58,5 @@
     <Compile Include="TexasHoldemPlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Logic\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
