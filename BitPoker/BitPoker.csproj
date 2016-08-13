@@ -85,6 +85,10 @@
       <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
       <Name>BitPoker.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
+      <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>
+      <Name>BitPoker.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
