@@ -8,7 +8,7 @@ namespace BitPoker.Models.Messages
 {
     public class AddTableRequest : BaseMessage
     {
-        public Models.Contracts.Table Table { get; set; }
+        public Contracts.Table Table { get; set; }
 
         public AddTableRequest()
         {

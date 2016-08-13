@@ -52,6 +52,7 @@
     <Compile Include="PlayerInfo.cs" />
     <Compile Include="Messages\ShuffleMessage.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
+    <Compile Include="Enums.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
