@@ -12,5 +12,7 @@ namespace BitPoker.Repository
         void Add(Models.Contracts.Table entity);
 
         void Update(Models.Contracts.Table entity);
+
+        void Save();
     }
 }

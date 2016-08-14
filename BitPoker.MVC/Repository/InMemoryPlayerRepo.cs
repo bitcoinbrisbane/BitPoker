@@ -76,5 +76,9 @@ namespace BitPoker.MVC.Repository
                 }
             }
         }
+
+        public void Save()
+        {
+        }
     }
 }

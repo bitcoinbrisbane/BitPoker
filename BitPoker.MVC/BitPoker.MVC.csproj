@@ -171,6 +171,7 @@
     <Compile Include="Models\CallingStation.cs" />
     <Compile Include="Models\HandContainer.cs" />
     <Compile Include="Models\IAiPlayer.cs" />
+    <Compile Include="Models\Logic.cs" />
     <Compile Include="Models\PlayerContainer.cs" />
     <Compile Include="Models\TableContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,7 +11,7 @@ namespace BitPoker.MVC.Controllers
 {
     public class MessageController : BaseController
     {
-        private readonly BitPoker.Repository.IMessagesRepository repo;
+        //private readonly BitPoker.Repository.IMessagesRepository repo;
         private readonly BitPoker.Repository.IHandRepository handRepo;
 
         //ALICE AS PER READ ME
@@ -61,25 +61,40 @@ namespace BitPoker.MVC.Controllers
 
             BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(message.PublicKey);
             bool verified = address.VerifyMessage(message.ToString(), message.Signature);
-            
+
             if (verified != true)
             {
                 throw new Exceptions.SignatureNotValidException();
             }
             else
             {
-                //switch (message.Action.ToLower())
-                //{
+                //Some API
+                var hand = this.handRepo.Find(message.HandId);
 
-                //}
+                foreach(BitPoker.Models.Messages.ActionMessage previousAction in hand.History)
+                {
+                    //verify
+                }
+
+                var lastAction = hand.History.Last();
+                String[] allowedAction = new String[1];
+
+                switch (lastAction.Action.ToUpper())
+                {
+                    case "POST SMALL BLIND":
+                    case "SMALL BLIND":
+                    case "SB":
+                        allowedAction[0] = "BIG BLIND";
+                        break;
+
+                    case "POST BIG BLIND":
+                    case "BIG BLIND":
+                    case "BB":
+
+                        break;
+                }
+
             }
-
-
-            //Some API
-            var hand = this.handRepo.Find(message.HandId);
-
-            var i = hand.History.Count;
-            //message.Index[i];
 
             return verified;
         }

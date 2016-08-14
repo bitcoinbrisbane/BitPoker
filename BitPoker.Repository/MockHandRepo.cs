@@ -27,6 +27,9 @@ namespace BitPoker.Repository
                     //return a full mock hand
 
                     break;
+                case "91dacf01-4c4b-4656-912b-2c3a11f6e516":
+                    //heads up?
+                    break;
 
             }
 

@@ -13,6 +13,8 @@ namespace BitPoker.Models
 
         public Int16 PersonToAct { get; set; }
 
+        public Int16 Round { get; set; }
+
         public IList<Messages.ActionMessage> History { get; set; }
 
         public IDeck Deck { get; set; }

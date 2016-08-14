@@ -81,6 +81,10 @@ namespace BitPoker.MVC.Repository
             }
         }
 
+        public void Save()
+        {
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

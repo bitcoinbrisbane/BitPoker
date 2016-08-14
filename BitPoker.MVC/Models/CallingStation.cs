@@ -8,5 +8,14 @@ namespace BitPoker.MVC.Models
 {
     public class CallingStation : IAiPlayer
     {
+        public CallingStation(BitPoker.Models.IPlayer player)
+        {
+
+        }
+
+        public void Action(BitPoker.Models.Hand hand)
+        {
+
+        }
     }
 }

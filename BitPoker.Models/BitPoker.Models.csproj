@@ -32,9 +32,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="IDeck.cs" />
+    <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="Messages\AddPlayerRequest.cs" />
     <Compile Include="Messages\AddTableRequest.cs" />
