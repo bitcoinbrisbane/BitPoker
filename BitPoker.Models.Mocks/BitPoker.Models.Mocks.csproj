@@ -50,7 +50,9 @@
       <Name>BitPoker.Models</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Players\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Data\alice.json" />
   </ItemGroup>

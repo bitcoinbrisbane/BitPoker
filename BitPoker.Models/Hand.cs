@@ -5,7 +5,7 @@ namespace BitPoker.Models
 {
     public class Hand
     {
-        public BitPoker.Models.PlayerInfo[] Players { get; set; }
+        public PlayerInfo[] Players { get; set; }
 
         public Guid Id { get; set; }
 
@@ -18,6 +18,8 @@ namespace BitPoker.Models
         public IList<Messages.ActionMessage> History { get; set; }
 
         public IDeck Deck { get; set; }
+
+		public Int64 TimeStamp { get; set; }
 
         public Hand()
         {
@@ -32,5 +34,10 @@ namespace BitPoker.Models
 
             this.Deck = new FiftyTwoCardDeck();
         }
+
+		public override string ToString()
+		{
+			return string.Format("{0}-{1}, PersonToAct={3}, History={4}, Deck={5}]", Id, TableId, PersonToAct, History, Deck);
+		}
     }
 }

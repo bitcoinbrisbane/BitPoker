@@ -55,11 +55,16 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-            //Create a hand chain for example.
-            //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
-            //{
-            //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-            //};
+			//Create a hand chain for example.
+			//TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
+			//{
+			//    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
+			//};
+
+
+
+            Repository.MockPlayerRepo repo = new Repository.MockPlayerRepo("mockplayers.json");
+            var players = repo.All();
 
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
@@ -404,6 +409,11 @@ namespace BitPoker
         private static void AddTable()
         {
             Console.WriteLine("Adds a table to mock api under carols address");
+
+			Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
+			{
+				HashAlgorithm = "SHA256"
+			}
 
             Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
             message.BitcoinAddress = carol.ToString();

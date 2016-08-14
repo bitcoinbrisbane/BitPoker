@@ -1,7 +1,7 @@
 # BitPoker.IO
 
 ## Abstract
-Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer protocol of games, such as online poker, in which no central actor can control the outcome and thus rig the game and is proovably fair.  The game uses bitcoin and lightning network to settle bets between actors.
+Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer protocol of games, such as online poker, in which no central actor can control the outcome and thus rig the game and is proovably fair.  The game uses bitcoin (or other digital tokens) and lightning network to settle bets between actors.
 
 Different clients developed in different programming languages are encouraged.
 
@@ -13,7 +13,7 @@ All values represented in base16 (hex) should be lower case
 Deck is represented as an array of Bytes.
 
 | Key  | Value | Decimal | Byte |
-| -----|------ | -------|------ |
+| -----|------ | --------|----- |
 | A  | Ace  | 12 | {0x0C} |
 | K  | King  | 11 |{0x0B}|
 | Q  | Queen | 10 |{0x0A}|
@@ -34,8 +34,8 @@ Suites
 | ---- | ----- | ------ | ---- |
 | S  | Spade  | +0 | {0x00} |
 | C  | Club | +13 | {0x0D} |
-| H  | Heart | +26 | |
-| D  | Diamond  | +39  ||
+| H  | Heart | +26 | {0x1A} |
+| D  | Diamond  | +39  | {0x27} |
 
 *Eg
 Ace of clubs = { 0x0D }
@@ -131,7 +131,6 @@ Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
 =Amq+
 -----END PGP PUBLIC KEY BLOCK-----
 
-
 ## The protocol
 Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
@@ -186,19 +185,19 @@ These are out side the scope of this paper.
 ## Messages
 All actions are sent as messages.  They must include a public key be signed.  The payload must also reference there previous message hash.
 
-| Property  | Eg |
-| --------- | -- |
-| Version  | 1  |
+| Property | Eg |
+| -------- | -- |
+| Version | 1 |
 | Public Key Hash | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
 | Action | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
-| Payload | |
-| Message Signature | |
-| Pervious Hash | |
+| Payload | TODO |
+| Message Signature | TODO |
+| Pervious Hash | TODO |
 
 Example action message (payload)
 
 | Property  | Eg |
-| ------------- | ------------- |
+| --------- | -- |
 | Id | 4bc7f305-aa16-450a-a3be-aad8fba7f425 |
 | Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
 | Index | 2 |
@@ -208,7 +207,7 @@ Example action message (payload)
 
 The hash (SHA-256) is of the property values concantinated, thus seriliazation format agnostic.
 
-Eg of above message
+Eg of above message.
 ```
 1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
 ```
@@ -242,7 +241,7 @@ The paramaters for a table are defined in the following schema.  Developers are 
 
 1.  Encryption Algorithm (Enum AES-256)
 2.  Hash Algorithm (Enum SHA-256)
-3.  Table ID (GUID)
+3.  Id (GUID)
 3.  Currency (Enum)
 3.  Blinds
 4.  Rake*
@@ -587,56 +586,84 @@ Fee vs Payouts.  The table would also include a paramater when to commite the ha
 ## Cashing out
 Closing the channel
 
-## Sample hand
+## Sample hands
 To be used via the mock API.
-Table ID = 
-Hand ID =
+Table ID = 04dd3def-a654-4995-97e4-a1d151ef18ad
+Hand ID = ce364246-6c52-40e8-a35f-18a1ea519251
+
+Players (in seats)
+2. Daniel my8qxmUcTMGpwaLr5SsGsDwXpv78BGmVuL 
+3. Chris n4oaGy1uBZ4J4Pge7ZaGgbRRcJ9795dfdE
+4. Tony mmbC1Gs1oGSwoT8F8VLQcwmLrNTV5DdajA
+5. Phil mgXqH7yA6Djx5Wqpaspsw25mNLTx2yaPeB
+6. Mike mre7fKPYqyKjACfb74rSjVNubE9ZX3t7Cb
+7. Tom mxeHrRd239QgwYZtEtNo8eGrnmGeDbCFPB
+9. Gus mkcuSxhM5F76vzbAXyhXayXUw4sTitJXhc * Button
 
 The hand is decribed in Poker Stars Hand History format.
 ```
-PokerStars Hand #GUID:  Hold'em No Limit (0.005/0.01 BTC) - 2015/09/10 7:31:28 ET
-Table GUID 10-max Seat #3 is the button
-Seat 1: alice ($111.26 in chips) 
-Seat 2: bob ($99.49 in chips) 
-Sweden_Pound: posts small blind $0.50
-sylvian31: is sitting out 
-sylvian31 leaves the table
-KLOP06031987: posts big blind $1
+PokerStars Hand ce364246-6c52-40e8-a35f-18a1ea519251:  Hold'em No Limit (0.0005/0.001 BTC) - 2015/09/10 7:13:56 ET
+Table 04dd3def-a654-4995-97e4-a1d151ef18ad 9-max Seat #9 is the button
+Seat 2: Daniel (0.01 in chips) 
+Seat 3: Chris (0.01 in chips) 
+Seat 4: Tony (0.01 in chips) 
+Seat 5: Phil (0.01 in chips) 
+Seat 6: Mike (0.01 in chips) 
+Seat 7: Tom (0.01 in chips) 
+Seat 9: Gus (0.008 in chips) 
+Daniel: posts small blind 0.0005
+Chris: posts big blind 0.001
 *** HOLE CARDS ***
-Avtovo: raises $1.50 to $2.50
-SharingaaN: folds 
-koksskrt: folds 
-nickgodro: calls $2.50
-DarioNo$had: folds 
-Monsthand: folds 
-Sweden_Pound: folds 
-KLOP06031987: folds 
-*** FLOP *** [7d Qh 9s]
-Avtovo: bets $4
-nickgodro: calls $4
-*** TURN *** [7d Qh 9s] [4h]
-Avtovo: bets $8.31
-nickgodro: calls $8.31
-*** RIVER *** [7d Qh 9s 4h] [6s]
-Avtovo: checks 
-nickgodro: bets $10
-maxxmeister joins the table at seat #6 
-Avtovo: calls $10
-*** SHOW DOWN ***
-nickgodro: shows [Qs Ks] (a pair of Queens)
-Avtovo: mucks hand 
-nickgodro collected $48.82 from pot
+Avtovo joins the table at seat #8 
+Tony: folds 
+Phil: folds 
+Mike: folds 
+Tom: raises 0.00126 to 0.0026
+Gus: folds 
+Daniel: calls 0.00176
+Chris: calls 0.00126
+*** FLOP *** [9h Td 6h]
+Daniel: checks 
+Chris: checks 
+Tom: bets 0.00485
+koksskrt joins the table at seat #1 
+Daniel: calls 0.00485
+Chris: calls 0.00485
+*** TURN *** [9h Td 6h] [Qh]
+Daniel: checks 
+Chris: checks 
+Tom: checks 
+*** RIVER *** [9h Td 6h Qh] [Th]
+Daniel: checks 
+Chris: bets 0.006
+Tom: folds 
+Daniel: folds 
+Uncalled bet (0.006) returned to Chris
+Chris collected 0.02037 from pot
+Chris: doesn't show hand 
 *** SUMMARY ***
-Total pot $51.12 | Rake $2.30 
-Board [7d Qh 9s 4h 6s]
-Seat 1: koksskrt folded before Flop (didn't bet)
-Seat 2: nickgodro showed [Qs Ks] and won ($48.82) with a pair of Queens
-Seat 3: DarioNo$had folded before Flop (didn't bet)
-Seat 4: Monsthand (button) folded before Flop (didn't bet)
-Seat 5: Sweden_Pound (small blind) folded before Flop
-Seat 7: KLOP06031987 (big blind) folded before Flop
-Seat 8: Avtovo mucked
-Seat 9: SharingaaN folded before Flop (didn't bet)
+Total pot $21.33 | Rake $0.96 
+Board [9h Td 6h Qh Th]
+Seat 2: Daniel (small blind) folded on the River
+Seat 3: Chris (big blind) collected (0.02037)
+Seat 4: Tony folded before Flop (didn't bet)
+Seat 5: Phil folded before Flop (didn't bet)
+Seat 6: sylvian31 folded before Flop (didn't bet)
+Seat 7: Tom folded on the River
+Seat 9: Gus (button) folded before Flop (didn't bet)
+```
+Private Keys
+2. Daniel 92DurEQEwd5KR4BjeaLfK3xuuSiQEWNc8R3szPH1VM5XorMa3eq 
+3. Chris 92ZY3DxX8h9wpueDwSzD8YWKXCi1YT9yrvYDVhfnbqXgCvKQmX6
+4. Tony 92WmrGTyfW6uvZdzy7TsoARwtg9QpzNvxz31UTeoD2WSgSLQHHg
+5. Phil 92Q53JuV5L3ehi2ML4CbwWAhGrAJUAd2jc39yke4bqqW1XUpgQx
+6. Mike 92rXYx7owd2AgUiJZzDUJrNy4EBD92y1x6JSQBiSHkKD6PdL9Zt
+7. Tom 91qV38Xgc2KS5zNJfXfi9rK36FUS14yoFPE9iaEpmHckFLCWsTX
+9. Gus 92GD9YDCT4koimj3nBQ2gcLZbxdHdkcLPboBjibjJAhP5Gks8An
+
+The above hand as a message chain.
+```
+
 ```
 
 ## Network Topology
@@ -652,7 +679,7 @@ For full key set, see the test data folder
 Cold deck from https://www.benjoffe.com/holdem
 
 ### Mock API
-An REST API is located at https://www.bitpoker.io/api for users to develop clients against.
+An REST API is located at https://www.bitpoker.io/api for users to develop clients against.  The API returns mock data to develop against.
 
 | Verb  | Uri |
 | ------------- | ------------- |
@@ -670,3 +697,4 @@ From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
 3. http://ianpurton.com/online-pgp/
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
+6. http://ms-brainwallet.org
