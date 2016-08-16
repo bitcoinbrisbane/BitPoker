@@ -1,0 +1,10 @@
+<Hand Id="ce364246-6c52-40e8-a35f-18a1ea519251" TableId="04dd3def-a654-4995-97e4-a1d151ef18ad" TableContract="5ed4565da9b0cf46f8e3b6a5e6353d0c41b7d1b88234de5310315be670c2cf13">
+    <Players>
+        <Player Seat="1" Position="1" Stack="1.01">mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</Player>
+        <Player Seat="2" Position="0" Stack="0.9">msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</Player>
+    </Players>
+    <Actions>
+        <Action>
+        </Action>
+    </Actions>
+</Hand>
