@@ -46,13 +46,12 @@ namespace BitPoker.Models
         public Boolean AddMessage(Messages.ActionMessage message)
         {
             _history.Add(message);
-
             return true;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}-{1}, PersonToAct={3}, History={4}, Deck={5}]", Id, TableId, PersonToAct, History, Deck);
+            return string.Format("{0}-{1}-{2}", Id, TableId, TimeStamp);
         }
     }
 }

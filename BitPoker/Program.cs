@@ -68,6 +68,7 @@ namespace BitPoker
 
             String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
 
+
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
             Console.WriteLine("***");
@@ -412,10 +413,10 @@ namespace BitPoker
         {
             Console.WriteLine("Adds a table to mock api under carols address");
 
-			Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
-			{
-				HashAlgorithm = "SHA256"
-			}
+            Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
+            {
+                HashAlgorithm = "SHA256"
+            };
 
             Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
             message.BitcoinAddress = carol.ToString();
