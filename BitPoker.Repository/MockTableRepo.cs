@@ -63,7 +63,29 @@ namespace BitPoker.Repository
 
         public IEnumerable<Table> All()
         {
-            return _tables;
+            List<Table> tables = new List<Table>(2);
+            tables.Add(new Table(2, 10)
+            {
+                Id = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363"),
+                BigBlind = 10000,
+                SmallBlind = 5000,
+                MaxBuyIn = 20000000,
+                MinBuyIn = 10000000
+            });
+
+            Table mockTable = new Table(2, 2) { Id = new Guid("29a67f70-ac8d-4280-947a-d42e97224bd8"), BigBlind = 10000, SmallBlind = 5000 };
+
+            Models.TexasHoldemPlayer alice = new Models.TexasHoldemPlayer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", Stack = 100000 };
+            Models.TexasHoldemPlayer bob = new Models.TexasHoldemPlayer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", Stack = 100000 };
+            mockTable.Players.Add(alice);
+            mockTable.Players.Add(bob);
+
+            tables.Add(mockTable);
+
+            Table lonelyTable = new Table(2, 10) { Id = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516"), BigBlind = 10000, SmallBlind = 5000 };
+            lonelyTable.Players.Add(alice);
+
+            return tables;
         }
 
         public void Add(Table item)
@@ -75,6 +97,10 @@ namespace BitPoker.Repository
         }
 
         public void Update(Table entity)
+        {
+        }
+
+        public void Save()
         {
         }
     }

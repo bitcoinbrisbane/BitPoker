@@ -34,6 +34,11 @@ namespace BitPoker.MVC.Controllers
                 _repo = new BitPoker.Repository.MockHandRepo();
             }
 
+            if (id.ToString() == "91dacf01-4c4b-4656-912b-2c3a11f6e516")
+            {
+                _repo = new BitPoker.Repository.MockHandRepo();
+            }
+
             BitPoker.Models.Hand hand = _repo.Find(id);
             return hand;
         }

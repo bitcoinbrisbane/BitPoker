@@ -15,7 +15,7 @@ namespace BitPoker.Models
 
         public Int16 PlayerToAct { get; private set; }
 
-        public Int16 Dealer { get; private set; }
+        public Int16 Round { get; set; }
 
         public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
 
@@ -26,7 +26,6 @@ namespace BitPoker.Models
         public Hand()
         {
             this.PlayerToAct = 1;
-            this.Dealer = 0;
             Id = Guid.NewGuid();
             _history = new List<Messages.ActionMessage>();
 

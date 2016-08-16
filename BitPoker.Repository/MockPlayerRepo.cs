@@ -50,5 +50,14 @@ namespace BitPoker.Repository
         {
             return _players.FirstOrDefault(p => p.BitcoinAddress == address);
         }
+
+        public Int32 Save()
+        {
+            return 0;
+        }
+
+        public void Dispose()
+        {
+        }
     }
 }

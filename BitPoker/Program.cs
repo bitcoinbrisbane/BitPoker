@@ -81,9 +81,9 @@ namespace BitPoker
             Console.WriteLine("6. Fold / Muck");
             Console.WriteLine("7. Call");
             Console.WriteLine("8. Bet / Raise");
-            Console.WriteLine("R Refresh");
-            Console.WriteLine("K Create new keys");
-            Console.WriteLine("Q Quit");
+            Console.WriteLine("R. Refresh");
+            Console.WriteLine("K. Create new keys");
+            Console.WriteLine("Q. Quit");
 
             String command = Console.ReadLine();
 

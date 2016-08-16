@@ -64,6 +64,9 @@ namespace BitPoker.Repository
                     };
 
                     break;
+                case "91dacf01-4c4b-4656-912b-2c3a11f6e516":
+                    //heads up?
+                    break;
 
             }
 
@@ -71,6 +74,15 @@ namespace BitPoker.Repository
         }
 
         public void Update(Hand entity)
+        {
+        }
+
+        public Int32 Save()
+        {
+            return 0;
+        }
+
+        public void Dispose()
         {
         }
     }

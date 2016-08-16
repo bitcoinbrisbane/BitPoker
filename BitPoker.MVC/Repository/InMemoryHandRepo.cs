@@ -80,5 +80,14 @@ namespace BitPoker.MVC.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Int32 Save()
+        {
+            return 0;
+        }
+
+        public void Dispose()
+        {
+        }
     }
 }
