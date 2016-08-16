@@ -21,6 +21,8 @@ namespace BitPoker.Models
 
         public IDeck Deck { get; set; }
 
+		public Int64 TimeStamp { get; set; }
+
         public Hand()
         {
             this.PlayerToAct = 1;
@@ -46,6 +48,11 @@ namespace BitPoker.Models
             _history.Add(message);
 
             return true;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}, PersonToAct={3}, History={4}, Deck={5}]", Id, TableId, PersonToAct, History, Deck);
         }
     }
 }
