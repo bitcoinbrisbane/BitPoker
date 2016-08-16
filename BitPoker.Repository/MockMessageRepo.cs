@@ -9,8 +9,10 @@ namespace BitPoker.Repository
 {
     public class MockMessageRepo : IMessagesRepository
     {
+
         public IEnumerable<ActionMessage> All()
         {
+
             throw new NotImplementedException();
         }
 
@@ -37,6 +39,30 @@ namespace BitPoker.Repository
             //        message = new Models.Messages.ActionMessage();
             //        break;
             //}
+            throw new NotImplementedException();
+        }
+
+        public Int32 Save()
+        {
+            return 0;
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public void Add(ActionMessage entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(ActionMessage entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(ActionMessage entity)
+        {
             throw new NotImplementedException();
         }
     }

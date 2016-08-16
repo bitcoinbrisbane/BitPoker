@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BitPoker.Repository
 {
-    public interface IPlayerRepository
+    public interface IPlayerRepository : IDisposable, IRepository
     {
         IEnumerable<Models.PlayerInfo> All();
 

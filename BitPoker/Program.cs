@@ -78,9 +78,9 @@ namespace BitPoker
             Console.WriteLine("6. Fold / Muck");
             Console.WriteLine("7. Call");
             Console.WriteLine("8. Bet / Raise");
-            Console.WriteLine("R Refresh");
-            Console.WriteLine("K Create new keys");
-            Console.WriteLine("Q Quit");
+            Console.WriteLine("R. Refresh");
+            Console.WriteLine("K. Create new keys");
+            Console.WriteLine("Q. Quit");
 
             String command = Console.ReadLine();
 
@@ -410,10 +410,10 @@ namespace BitPoker
         {
             Console.WriteLine("Adds a table to mock api under carols address");
 
-			Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
-			{
-				HashAlgorithm = "SHA256"
-			}
+            Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
+            {
+                HashAlgorithm = "SHA256"
+            };
 
             Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
             message.BitcoinAddress = carol.ToString();
