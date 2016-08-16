@@ -52,5 +52,14 @@ namespace BitPoker.Repository
         public void Update(Hand entity)
         {
         }
+
+        public Int32 Save()
+        {
+            return 0;
+        }
+
+        public void Dispose()
+        {
+        }
     }
 }

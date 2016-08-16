@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BitPoker.Repository
 {
-    public interface IHandRepository
+    public interface IHandRepository : IRepository, IDisposable
     {
         IEnumerable<Models.Hand> All();
 

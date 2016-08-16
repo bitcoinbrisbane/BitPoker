@@ -5,13 +5,13 @@ namespace BitPoker.Repository
 {
     public interface ITableRepository : IDisposable
     {
-        IEnumerable<Models.Contracts.Table> All();
+        IEnumerable<BitPoker.Models.Contracts.Table> All();
 
-        Models.Contracts.Table Find(Guid id);
+        BitPoker.Models.Contracts.Table Find(Guid id);
 
-        void Add(Models.Contracts.Table entity);
+        void Add(BitPoker.Models.Contracts.Table entity);
 
-        void Update(Models.Contracts.Table entity);
+        void Update(BitPoker.Models.Contracts.Table entity);
 
         void Save();
     }

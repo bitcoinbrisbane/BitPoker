@@ -410,10 +410,10 @@ namespace BitPoker
         {
             Console.WriteLine("Adds a table to mock api under carols address");
 
-			Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
-			{
-				HashAlgorithm = "SHA256"
-			}
+            Models.Contracts.Table table = new Models.Contracts.Table(2, 10)
+            {
+                HashAlgorithm = "SHA256"
+            };
 
             Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
             message.BitcoinAddress = carol.ToString();

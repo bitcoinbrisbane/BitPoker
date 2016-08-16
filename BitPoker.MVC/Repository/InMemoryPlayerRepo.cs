@@ -77,7 +77,12 @@ namespace BitPoker.MVC.Repository
             }
         }
 
-        public void Save()
+        public Int32 Save()
+        {
+            return 0;
+        }
+
+        public void Dispose()
         {
         }
     }
