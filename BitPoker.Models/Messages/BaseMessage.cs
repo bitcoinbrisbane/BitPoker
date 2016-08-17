@@ -5,7 +5,7 @@ namespace BitPoker.Models.Messages
 {
     public abstract class BaseMessage
     {
-        public Int16 Version { get; set; }
+        public Decimal Version { get; set; }
 
         public Guid Id { get; set; }
 

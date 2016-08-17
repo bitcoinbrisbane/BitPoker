@@ -23,6 +23,10 @@ namespace BitPoker.Models
 
 		public Int64 TimeStamp { get; set; }
 
+        public Guid PreviousHandId { get; set; }
+
+        public String PreviousHandHash { get; set; }
+
         public Hand()
         {
             this.PlayerToAct = 1;
@@ -50,7 +54,7 @@ namespace BitPoker.Models
 
         public override string ToString()
         {
-            return string.Format("{0}-{1}-{2}", Id, TableId, TimeStamp);
+            return string.Format("{0}{1}{2}{3}{4}{5:yyyyMMddHHmmss}", Id, TableId, TimeStamp, PreviousHandId, PreviousHandHash, TimeStamp);
         }
     }
 }

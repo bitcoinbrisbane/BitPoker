@@ -55,18 +55,22 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-			//Create a hand chain for example.
-			//TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
-			//{
-			//    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-			//};
+            //Create a hand chain for example.
+            //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
+            //{
+            //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
+            //};
+
+            Repository.IHandRepository handRepo = new Repository.MockHandRepo();
+            var hand = handRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
+
+            String json = Newtonsoft.Json.JsonConvert.SerializeObject(hand);
 
 
+            Repository.MockTableRepo tableRepo = new Repository.MockTableRepo();
+            var tables = tableRepo.All();
 
-            Repository.MockTableRepo repo = new Repository.MockTableRepo();
-            var tables = repo.All();
-
-            String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+            String tableJSON = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
 
 
             Console.WriteLine("***");
