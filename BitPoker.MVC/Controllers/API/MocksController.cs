@@ -19,6 +19,8 @@ namespace BitPoker.MVC.Controllers
                 playerRepo.Add(player);
             }
 
+            playerRepo.Save();
+
             BitPoker.Repository.ITableRepository tableRepo = Repository.Factory.GetTableRepository();
             BitPoker.Repository.ITableRepository mockTableRepo = new BitPoker.Repository.MockTableRepo();
 
@@ -26,6 +28,8 @@ namespace BitPoker.MVC.Controllers
             {
                 tableRepo.Add(player);
             }
+
+            tableRepo.Save();
 
             return "ok";
         }
