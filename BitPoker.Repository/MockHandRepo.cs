@@ -106,7 +106,7 @@ namespace BitPoker.Repository
                         BitcoinAddress = bob_address,
                         Index = 1,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 0, 10),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     bb.Signature = bob_secret.PrivateKey.SignMessage(bb.ToString());
@@ -116,7 +116,7 @@ namespace BitPoker.Repository
                     data = null;
                     hash = null;
 
-                    data = NBitcoin.DataEncoders.Encoders.ASCII.DecodeData(sb.ToString());
+                    data = NBitcoin.DataEncoders.Encoders.ASCII.DecodeData(bb.ToString());
                     hash = NBitcoin.Crypto.Hashes.SHA256(data);
 
                     Models.Messages.ActionMessage sb_call = new Models.Messages.ActionMessage()
@@ -129,7 +129,7 @@ namespace BitPoker.Repository
                         BitcoinAddress = alice_address,
                         Index = 2,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 0, 20),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     sb_call.Signature = alice_secret.PrivateKey.SignMessage(sb_call.ToString());
@@ -149,9 +149,9 @@ namespace BitPoker.Repository
                         TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                         HandId = id,
                         BitcoinAddress = bob_address,
-                        Index = 1,
+                        Index = 3,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 0, 30),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     option.Signature = bob_secret.PrivateKey.SignMessage(option.ToString());
@@ -169,13 +169,13 @@ namespace BitPoker.Repository
                     {
                         Action = "BET",
                         Amount = 100000,
-                        Id = new Guid(""),
+                        Id = new Guid("0e9053eb-288c-44be-81e0-d6ad57e42ded"),
                         TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                         HandId = id,
                         BitcoinAddress = alice_address,
-                        Index = 1,
+                        Index = 4,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 0, 40),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     pre_flop_bet.Signature = bob_secret.PrivateKey.SignMessage(pre_flop_bet.ToString());
@@ -192,13 +192,13 @@ namespace BitPoker.Repository
                     {
                         Action = "CALL",
                         Amount = 50000,
-                        Id = new Guid(""),
+                        Id = new Guid("93cae6c4-4dbf-4d5d-8df1-bf7e0d6baa71"),
                         TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                         HandId = id,
                         BitcoinAddress = bob_address,
-                        Index = 2,
+                        Index = 5,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 0, 50),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     pre_flop_call.Signature = alice_secret.PrivateKey.SignMessage(pre_flop_call.ToString());
@@ -216,13 +216,13 @@ namespace BitPoker.Repository
                     {
                         Action = "BET",
                         Amount = 50000,
-                        Id = new Guid(""),
+                        Id = new Guid("3ea0a3de-2595-476f-b1b4-20d37fc25197"),
                         TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                         HandId = id,
                         BitcoinAddress = alice_address,
-                        Index = 2,
+                        Index = 6,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 1, 0),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     turn_bet.Signature = alice_secret.PrivateKey.SignMessage(turn_bet.ToString());
@@ -239,13 +239,13 @@ namespace BitPoker.Repository
                     {
                         Action = "CALL",
                         Amount = 50000,
-                        Id = new Guid(""),
+                        Id = new Guid("52cf418b-3b8b-4d91-b2fb-35d7a9ee0d1f"),
                         TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                         HandId = id,
                         BitcoinAddress = bob_address,
-                        Index = 2,
+                        Index = 7,
                         TimeStamp = new DateTime(2016, 08, 17, 0, 1, 10),
-                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(data)
+                        PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
                     };
 
                     turn_call.Signature = alice_secret.PrivateKey.SignMessage(turn_call.ToString());
@@ -254,8 +254,6 @@ namespace BitPoker.Repository
                     //Reset
                     data = null;
                     hash = null;
-
-                    //River
 
                     return hand;
                 case "91dacf01-4c4b-4656-912b-2c3a11f6e516":

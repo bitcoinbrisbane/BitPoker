@@ -148,7 +148,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\API\AliceController.cs" />
     <Compile Include="Controllers\API\BaseController.cs" />
     <Compile Include="Controllers\API\BuyInController.cs" />
     <Compile Include="Controllers\API\DealController.cs" />

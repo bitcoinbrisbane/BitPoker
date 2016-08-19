@@ -8,11 +8,9 @@ namespace BitPoker.Models.Helpers
 {
     public class Chain
     {
-        public Boolean IsValid(IEnumerable<Models.Messages.ActionMessage> messages)
+        public Boolean IsValid(IEnumerable<Messages.ActionMessage> messages)
         {
             //
-            List<Messages.ActionMessage> orderedMessage = messages.OrderBy(m => m.Index).ToList();
-
             foreach (Messages.ActionMessage action in messages.OrderBy(m => m.Index))
             {
                 //Verify hash

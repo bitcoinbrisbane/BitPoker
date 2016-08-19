@@ -48,6 +48,7 @@ namespace BitPoker.Models
 
         public Boolean AddMessage(Messages.ActionMessage message)
         {
+            //validate first
             _history.Add(message);
             return true;
         }

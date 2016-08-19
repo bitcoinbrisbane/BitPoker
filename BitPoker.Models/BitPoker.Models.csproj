@@ -33,11 +33,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="ExtensionMethods\ActionExtension.cs" />
     <Compile Include="ExtensionMethods\HandExtensions.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="Helpers\Chain.cs" />
-    <Compile Include="Helpers\Signature.cs" />
     <Compile Include="IDeck.cs" />
     <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
