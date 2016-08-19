@@ -8,7 +8,7 @@ using BitPoker.Models.ExtensionMethods;
 
 namespace BitPoker.MVC.Controllers
 {
-    public class DealController : BaseController //, IDisposable
+    public class DealController : BaseController
     {
         private readonly BitPoker.Repository.ITableRepository tableRepo;
         private readonly BitPoker.Repository.IHandRepository handRepo;
@@ -33,7 +33,7 @@ namespace BitPoker.MVC.Controllers
 
             if (table != null)
             {
-                BitPoker.Models.Hand hand = new BitPoker.Models.Hand() //Guid("ddf2ecb7-bcc1-4c17-a463-56cc0a3dec84");
+                BitPoker.Models.Hand hand = new BitPoker.Models.Hand()
                 {
                     Deck = request.Deck
                 };
@@ -61,31 +61,31 @@ namespace BitPoker.MVC.Controllers
                 smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
                 hand.AddMessage(smallBlind);
 
-                var bb = table.Players[1];
+                //var bb = table.Players[1];
 
-                const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
-                NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
-                NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
-                const String bob_pubkey = "04f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d";
+                //const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+                //NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
+                //NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
+                //const String bob_pubkey = "04f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d";
 
-                //NBitcoin.Crypto.Hashes.SHA256(NBitcoin.DataEncoders.Encoders.ASCII.(smallBlind.ToString()));
-                Byte[] hash = NBitcoin.Crypto.Hashes.SHA256(NBitcoin.DataEncoders.Encoders.ASCII.DecodeData(smallBlind.ToString()));
+                ////NBitcoin.Crypto.Hashes.SHA256(NBitcoin.DataEncoders.Encoders.ASCII.(smallBlind.ToString()));
+                //Byte[] hash = NBitcoin.Crypto.Hashes.SHA256(NBitcoin.DataEncoders.Encoders.ASCII.DecodeData(smallBlind.ToString()));
 
-                BitPoker.Models.Messages.ActionMessage bigBlind = new BitPoker.Models.Messages.ActionMessage()
-                {
-                    Id = new Guid("d10cc043-4df3-4d41-8b31-8dd573824c8b"),
-                    Index = 1,
-                    Action = "BIG BLIND",
-                    Amount = table.BigBlind,
-                    BitcoinAddress = bb.BitcoinAddress,
-                    HandId = hand.Id,
-                    PreviousHash = NBitcoin.DataEncoders.Encoders.ASCII.EncodeData(hash),
-                    PublicKey = bob_pubkey,
-                    TableId = request.TableId
-                };
+                //BitPoker.Models.Messages.ActionMessage bigBlind = new BitPoker.Models.Messages.ActionMessage()
+                //{
+                //    Id = new Guid("d10cc043-4df3-4d41-8b31-8dd573824c8b"),
+                //    Index = 1,
+                //    Action = "BIG BLIND",
+                //    Amount = table.BigBlind,
+                //    BitcoinAddress = bb.BitcoinAddress,
+                //    HandId = hand.Id,
+                //    PreviousHash = NBitcoin.DataEncoders.Encoders.ASCII.EncodeData(hash),
+                //    PublicKey = bob_pubkey,
+                //    TableId = request.TableId
+                //};
 
-                bigBlind.Signature = bob_secret.PrivateKey.SignMessage(bigBlind.ToString());
-                hand.AddMessage(bigBlind);
+                //bigBlind.Signature = bob_secret.PrivateKey.SignMessage(bigBlind.ToString());
+                //hand.AddMessage(bigBlind);
 
                 this.handRepo.Add(hand);
                 return hand;

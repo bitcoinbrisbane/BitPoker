@@ -59,7 +59,7 @@ namespace BitPoker.MVC.Controllers
             //    }
             //}
 
-            BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(message.PublicKey);
+            BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(message.BitcoinAddress);
             bool verified = address.VerifyMessage(message.ToString(), message.Signature);
 
             if (verified != true)
@@ -90,7 +90,19 @@ namespace BitPoker.MVC.Controllers
                     case "POST BIG BLIND":
                     case "BIG BLIND":
                     case "BB":
+                        break;
+                }
 
+                switch(message.Action.ToUpper())
+                {
+                    case "POST SMALL BLIND":
+                    case "SMALL BLIND":
+                    case "SB":
+                        
+                        break;
+                    case "POST BIG BLIND":
+                    case "BIG BLIND":
+                    case "BB":
                         break;
                 }
 
