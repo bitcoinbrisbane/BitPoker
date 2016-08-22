@@ -61,6 +61,7 @@
     <None Include="mockplayers.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="mocktables.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
