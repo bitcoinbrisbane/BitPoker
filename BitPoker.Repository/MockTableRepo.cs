@@ -10,25 +10,24 @@ namespace BitPoker.Repository
 
         public MockTableRepo()
         {
-            _tables = new List<Table>(1);
+            _tables = new List<Table>(2);
 
-            _tables.Add(new Table(2, 10)
-            {
-                Id = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363"),
-                BigBlind = 10000,
-                SmallBlind = 5000,
-                MaxBuyIn = 20000000,
-                MinBuyIn = 10000000
-            });
-
-            Table mockTable = new Table(2, 2) { Id = new Guid("29a67f70-ac8d-4280-947a-d42e97224bd8"), BigBlind = 10000, SmallBlind = 5000 };
+            //Table as per the readme
+            Table mockHeadsUpTable = new Table(2, 2) { Id = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"), BigBlind = 10000, SmallBlind = 5000 };
 
             Models.TexasHoldemPlayer alice = new Models.TexasHoldemPlayer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", Stack = 100000 };
             Models.TexasHoldemPlayer bob = new Models.TexasHoldemPlayer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", Stack = 100000 };
-            mockTable.Players.Add(alice);
-            mockTable.Players.Add(bob);
+            mockHeadsUpTable.Players.Add(alice);
+            mockHeadsUpTable.Players.Add(bob);
 
-            _tables.Add(mockTable);
+            _tables.Add(mockHeadsUpTable);
+
+            //Empty table
+            Table mockEmptyTable = new Table(2, 10) { Id = new Guid("35bc5692-6781-4a79-a5d2-89752edd882e"), BigBlind = 10000, SmallBlind = 5000 };
+            mockEmptyTable.Players.Add(alice);
+
+            _tables.Add(mockHeadsUpTable);
+            _tables.Add(mockEmptyTable);
         }
 
         /// <summary>
@@ -37,6 +36,7 @@ namespace BitPoker.Repository
         /// <param name="fileName"></param>
         public MockTableRepo(String fileName)
         {
+            throw new NotImplementedException();
         }
 
         public Table Find(Guid id)

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitPoker.Models.Helpers
+namespace BitPoker.Helpers
 {
-    public class Signature
+    public class HandChainVerification
     {
-        public static Boolean IsValid(String signature)
+        public static Boolean Verify(IEnumerable<Models.Messages.ActionMessage> messges)
         {
-            return true;
+
         }
     }
 }

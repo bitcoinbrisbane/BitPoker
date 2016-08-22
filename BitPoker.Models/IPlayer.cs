@@ -21,5 +21,7 @@ namespace BitPoker.Models
         String BitcoinAddress { get; set; }
 
         Int64 Stack { get; set; }
+
+        String IPAddress { get; set; }
     }
 }

@@ -14,20 +14,28 @@ namespace BitPoker.MVC.Controllers
             BitPoker.Repository.IPlayerRepository playerRepo = Repository.Factory.GetPlayerRepository();
             BitPoker.Repository.IPlayerRepository mockPlayerRepo = new BitPoker.Repository.MockPlayerRepo();
 
+            Int32 playerCount = 0;
             foreach(BitPoker.Models.PlayerInfo player in mockPlayerRepo.All())
             {
                 playerRepo.Add(player);
+                playerCount++;
             }
+
+            playerRepo.Save();
 
             BitPoker.Repository.ITableRepository tableRepo = Repository.Factory.GetTableRepository();
             BitPoker.Repository.ITableRepository mockTableRepo = new BitPoker.Repository.MockTableRepo();
 
-            foreach (BitPoker.Models.Contracts.Table player in mockTableRepo.All())
+            Int32 tableCount = 0;
+            foreach (BitPoker.Models.Contracts.Table table in mockTableRepo.All())
             {
-                tableRepo.Add(player);
+                tableRepo.Add(table);
+                tableCount++;
             }
 
-            return "ok";
+            tableRepo.Save();
+
+            return String.Format("{0} players added, {1} tables added", playerCount, tableCount);
         }
     }
 }

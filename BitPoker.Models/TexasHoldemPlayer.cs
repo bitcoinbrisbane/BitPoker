@@ -22,7 +22,7 @@ namespace BitPoker.Models
 
 		//public ICollection<BitPoker.Models.IMessage> AllowedActions { get; set; }
 
-		//public String IpAddress { get; set; }
+		public String IPAddress { get; set; }
 
 		public String BitcoinAddress { get; set; }
 

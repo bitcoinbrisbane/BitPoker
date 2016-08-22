@@ -18,6 +18,10 @@ namespace BitPoker.Models.ExtensionMethods
 
         public static Boolean IsValid(this Hand value)
         {
+            if (value.History != null)
+            {
+
+            }
             return false;
         }
     }
