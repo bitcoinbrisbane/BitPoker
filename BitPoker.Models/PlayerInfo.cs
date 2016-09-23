@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace BitPoker.Models
 {
     /// <summary>
-    /// Player not in a game perhaps
+    /// Player DTO
     /// </summary>
 	public class PlayerInfo
 	{

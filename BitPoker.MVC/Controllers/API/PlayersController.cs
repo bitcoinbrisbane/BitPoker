@@ -32,6 +32,22 @@ namespace BitPoker.MVC.Controllers
             return player;
         }
 
+        /// <summary>
+        /// Poll for next action
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="handId"></param>
+        /// <returns></returns>
+        public BitPoker.Models.Hand Get(String address, String handId)
+        {
+            BitPoker.Models.PlayerInfo player = _repo.Find(address);
+
+            //Do actions
+
+
+            return new BitPoker.Models.Hand();
+        }
+
         [HttpPost]
         public String Post(BitPoker.Models.Messages.AddPlayerRequest model)
         {

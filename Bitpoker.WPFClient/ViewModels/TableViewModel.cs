@@ -29,10 +29,10 @@ namespace Bitpoker.WPFClient.ViewModels
             call.Signature = secret.PrivateKey.SignMessage(call.ToString());
 
             Bitpoker.WPFClient.Clients.INetworkClient client = new Bitpoker.WPFClient.Clients.APIClient("https://bitpoker.azurewebsites.net/api/");
-            if (client.IsConnected)
-            {
-                client.SendMessage(call);
-            }
+            //if (client.IsConnected)
+            //{
+            //    client.SendMessage(call);
+            //}
         }
     }
 }

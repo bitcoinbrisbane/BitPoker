@@ -9,6 +9,10 @@ namespace BitPoker.MVC.Controllers
 {
     public class MocksController : ApiController
     {
+        /// <summary>
+        /// Add mock repo to in memory repo
+        /// </summary>
+        /// <returns></returns>
         public String Get()
         {
             BitPoker.Repository.IPlayerRepository playerRepo = Repository.Factory.GetPlayerRepository();

@@ -1,4 +1,6 @@
-﻿using BitPoker.Models;
+﻿using Bitpoker.WPFClient.Clients;
+using Bitpoker.WPFClient.Models;
+using BitPoker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,9 @@ namespace Bitpoker.WPFClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Clients.ChatBackend _backend;
+
+
         SocketPermission permission;
         Socket sListener;
         IPEndPoint ipEndPoint;
@@ -46,6 +51,8 @@ namespace Bitpoker.WPFClient
 
         public MainWindow()
         {
+            InitializeComponent();
+
             const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
             const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
 
@@ -66,50 +73,67 @@ namespace Bitpoker.WPFClient
 
             this.DataContext = _viewModel;
 
-            Start();
+            //Start();
 
-            InitializeComponent();
+            _backend = new ChatBackend(this.DisplayMessage);
+            
         }
 
-        private void Start()
+        public void DisplayMessage(CompositeType composite)
         {
-            try
+            string username = composite.Username == null ? "" : composite.Username;
+            string message = composite.Message == null ? "" : composite.Message;
+            textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
+        }
+
+        private void textBoxEntryField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                // Creates one SocketPermission object for access restrictions
-                permission = new SocketPermission(
-                NetworkAccess.Accept,     // Allowed to accept connections 
-                TransportType.Tcp,        // Defines transport types 
-                "",                       // The IP addresses of local host 
-                SocketPermission.AllPorts // Specifies all ports 
-                );
-
-                // Listening Socket object 
-                sListener = null;
-
-                // Ensures the code to have permission to access a Socket 
-                permission.Demand();
-
-                // Resolves a host name to an IPHostEntry instance 
-                IPHostEntry ipHost = Dns.GetHostEntry("");
-
-                // Gets first IP address associated with a localhost 
-                IPAddress ipAddr = ipHost.AddressList[0];
-
-                // Creates a network endpoint 
-                ipEndPoint = new IPEndPoint(ipAddr, 4510);
-
-                // Create one Socket object to listen the incoming connection 
-                sListener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-                // Associates a Socket with a local endpoint 
-                sListener.Bind(ipEndPoint);
-
-            }
-            catch (Exception exc) 
-            { 
-                MessageBox.Show(exc.ToString()); 
+                _backend.SendMessage(textBoxEntryField.Text);
+                textBoxEntryField.Clear();
             }
         }
+
+        //private void Start()
+        //{
+        //    try
+        //    {
+        //        // Creates one SocketPermission object for access restrictions
+        //        permission = new SocketPermission(
+        //        NetworkAccess.Accept,     // Allowed to accept connections 
+        //        TransportType.Tcp,        // Defines transport types 
+        //        "",                       // The IP addresses of local host 
+        //        SocketPermission.AllPorts // Specifies all ports 
+        //        );
+
+        //        // Listening Socket object 
+        //        sListener = null;
+
+        //        // Ensures the code to have permission to access a Socket 
+        //        permission.Demand();
+
+        //        // Resolves a host name to an IPHostEntry instance 
+        //        IPHostEntry ipHost = Dns.GetHostEntry("");
+
+        //        // Gets first IP address associated with a localhost 
+        //        IPAddress ipAddr = ipHost.AddressList[0];
+
+        //        // Creates a network endpoint 
+        //        ipEndPoint = new IPEndPoint(ipAddr, 4510);
+
+        //        // Create one Socket object to listen the incoming connection 
+        //        sListener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+        //        // Associates a Socket with a local endpoint 
+        //        sListener.Bind(ipEndPoint);
+
+        //    }
+        //    catch (Exception exc) 
+        //    { 
+        //        MessageBox.Show(exc.ToString()); 
+        //    }
+        //}
 
         //private void Listen_Click(object sender, RoutedEventArgs e)
         //{

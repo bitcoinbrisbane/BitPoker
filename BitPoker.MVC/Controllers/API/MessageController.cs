@@ -13,6 +13,7 @@ namespace BitPoker.MVC.Controllers
     {
         //private readonly BitPoker.Repository.IMessagesRepository repo;
         private readonly BitPoker.Repository.IHandRepository handRepo;
+        private readonly BitPoker.Repository.ITableRepository tableRepo;
 
         //ALICE AS PER READ ME
         private const String ALICE_WIF = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
@@ -23,10 +24,10 @@ namespace BitPoker.MVC.Controllers
         public MessageController()
         {
             this.handRepo = new Repository.InMemoryHandRepo();
+            this.tableRepo = new Repository.InMemoryTableRepo();
         }
 
         ///Get a mock message
-        // GET api/<controller>/5
         public BitPoker.Models.Messages.ActionMessage Get(Guid handId, Int32 index)
         {
             BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
@@ -36,8 +37,14 @@ namespace BitPoker.MVC.Controllers
             return new BitPoker.Models.Messages.ActionMessage();
         }
 
+        /// <summary>
+        /// Message controller either adds to 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
-        public Boolean Post(BitPoker.Models.Messages.ActionMessage message)
+        public Boolean Post(BitPoker.Models.Messages.ActionMessage message, String id)
         {
             //NOTE:  THIS IS WHERE THE STUB AI LOGIC SHOULD EXIST.
             //
@@ -103,12 +110,42 @@ namespace BitPoker.MVC.Controllers
                     case "POST BIG BLIND":
                     case "BIG BLIND":
                     case "BB":
+                        AddBigBlind(message);
                         break;
                 }
 
+                //Now notify next player for their action:
+                hand = this.handRepo.Find(message.HandId);
+                lastAction = hand.History.Last();
+
+                String bitcoinAddress = lastAction.BitcoinAddress;
+                var player = hand.Players[hand.PlayerToAct];
             }
 
             return verified;
+        }
+
+        public void AddSmallBlind(BitPoker.Models.Messages.ActionMessage message)
+        {
+
+        }
+
+        public void AddBigBlind(BitPoker.Models.Messages.ActionMessage message)
+        {
+            if (message != null)
+            {
+                //Is the blind the correct amount?
+                var table = tableRepo.Find(message.TableId);
+
+                if (table != null && message.Action == "POST BIG BLIND" && message.Amount == table.BigBlind)
+                {
+                    //handRepo.AddMessage(message);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
         }
     }
 }

@@ -44,6 +44,9 @@ namespace BitPoker
         private const String MOCK_HAND_ID = "398b5fe2-da27-4772-81ce-37fa615719b5";
         private const String TABLE_ID = "";
 
+        System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
+
+
         public static async Task MainAsync()
         {
 
@@ -61,20 +64,53 @@ namespace BitPoker
             //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
             //};
 
-            IDestination d = new BitcoinScriptAddress("2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85", NBitcoin.Network.TestNet);
-            var alice_tx = CreateTransaction(alice_secret, d, 10000).Result;
-            String alice_tx_hex = alice_tx.ToHex();
 
-            Repository.IHandRepository handRepo = new Repository.MockHandRepo();
-            var hand = handRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
+            //IDestination d = new BitcoinScriptAddress("2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85", NBitcoin.Network.TestNet);
+            //var alice_tx = CreateTransaction(alice_secret, d, 10000).Result;
+            //String alice_tx_hex = alice_tx.ToHex();
 
-            String json = JsonConvert.SerializeObject(hand);
+            //Repository.IHandRepository handRepo = new Repository.MockHandRepo();
+            //var hand = handRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
+
+            //String json = JsonConvert.SerializeObject(hand);
 
 
-            Repository.MockTableRepo tableRepo = new Repository.MockTableRepo();
-            var tables = tableRepo.All();
+            //Repository.MockTableRepo tableRepo = new Repository.MockTableRepo();
+            //var tables = tableRepo.All();
 
-            String tableJSON = JsonConvert.SerializeObject(tables);
+            //String tableJSON = JsonConvert.SerializeObject(tables);
+
+
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    TcpListener serverSocket = new TcpListener(8888);
+            //    TcpClient clientSocket = default(TcpClient);
+            //    int counter = 0;
+
+            //    serverSocket.Start();
+            //    Console.WriteLine(" >> " + "Server Started");
+
+            //    counter = 0;
+            //    while (true)
+            //    {
+            //        counter += 1;
+            //        clientSocket = serverSocket.AcceptTcpClient();
+            //        Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
+            //        //handleClinet client = new handleClinet();
+            //        //client.startClient(clientSocket, Convert.ToString(counter));
+            //    }
+
+            //    //clientSocket.Close();
+            //    //serverSocket.Stop();
+            //    //Console.WriteLine(" >> " + "exit");
+            //});
+
+
+
+
+
+
 
 
             Console.WriteLine("***");
@@ -86,6 +122,7 @@ namespace BitPoker
             Console.WriteLine("3. Add table");
             Console.WriteLine("4. List tables");
             Console.WriteLine("5. Buy in (Table ID {0})", TABLE_ID);
+            Console.WriteLine("Get Hand");
             Console.WriteLine("6. Fold / Muck");
             Console.WriteLine("7. Call");
             Console.WriteLine("8. Bet / Raise");
@@ -117,6 +154,10 @@ namespace BitPoker
                     case "k":
                     case "K":
                         CreateKeys(52, 16);
+                        break;
+                    case "R":
+                        String response = RefreshAsync().Result;
+                        Console.WriteLine(response);
                         break;
                 }
 
@@ -522,6 +563,67 @@ namespace BitPoker
             //return blockr.BroadCastTx(tx.ToHex());
 
             Console.WriteLine(tx.ToHex());
+        }
+
+        public static async Task<String> RefreshAsync()
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Uri uri = new Uri(String.Format("{0}mocks", API_URL));
+                String json = await httpClient.GetStringAsync(uri);
+
+                return json;
+            }
+        }
+
+        private static void Connect()
+        {
+            //clientSocket.Connect("127.0.0.1", 8888);
+        }
+
+        public static void Listen()
+        {
+            TcpListener serverSocket = new TcpListener(8888);
+            int requestCount = 0;
+
+            TcpClient clientSocket = default(TcpClient);
+            serverSocket.Start();
+
+            Console.WriteLine(" >> Server Started");
+            clientSocket = serverSocket.AcceptTcpClient();
+
+            Console.WriteLine(" >> Accept connection from client");
+            requestCount = 0;
+
+            while ((true))
+            {
+                try
+                {
+                    requestCount = requestCount + 1;
+                    NetworkStream networkStream = clientSocket.GetStream();
+                    byte[] bytesFrom = new byte[10025];
+                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
+                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+                    Console.WriteLine(" >> Data from client - " + dataFromClient);
+
+                    string serverResponse = "Last Message from client" + dataFromClient;
+                    Byte[] sendBytes = Encoding.ASCII.GetBytes(serverResponse);
+                    networkStream.Write(sendBytes, 0, sendBytes.Length);
+                    networkStream.Flush();
+
+                    Console.WriteLine(" >> " + serverResponse);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+            }
+
+            clientSocket.Close();
+            serverSocket.Stop();
+            Console.WriteLine(" >> exit");
+            Console.ReadLine();
         }
     }
 }
