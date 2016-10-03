@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using BitPoker.Models.ExtensionMethods;
 
 namespace Bitpoker.WPFClient.ViewModels
 {
@@ -33,33 +34,63 @@ namespace Bitpoker.WPFClient.ViewModels
         public ObservableCollection<BitPoker.Models.PlayerInfo> NetworkPlayers { get; set; }
 
         //public BitPoker.Models.Contracts.Table Table { get; set; }
-        public ViewModels.TableViewModel Table { get; set; }
+        public TableViewModel Table { get; set; }
 
         internal ICollection<Byte[]> Keys { get; set; }
 
         internal Byte[] IV { get; set; }
 
-        public ViewModels.WalletViewModel Wallet { get; set; }
+        public WalletViewModel Wallet { get; set; }
+
+        public BitPoker.Repository.ITableRepository TableRepo { get; set; }
 
         public MainViewModel()
         {
             this.NetworkPlayers = new ObservableCollection<BitPoker.Models.PlayerInfo>();
             this.Clients = new List<Clients.INetworkClient>(1);
             
-            this.Clients.Add(new Clients.APIClient("https://bitpoker.azurewebsites.net/api/"));
+            this.Clients.Add(new Clients.APIClient("https://www.bitpoker.io/api/"));
             //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
             Wallet = new WalletViewModel("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
         }
 
-        public void NewTable(Int16 minPlayers, Int16 maxPlayers)
+        public void AddNewTable(UInt64 smallBlind, UInt64 bigBlind)
         {
-            //this.Table = new BitPoker.Models.Contracts.Table(minPlayers, maxPlayers);
+            AddNewTable(smallBlind, bigBlind, 2, 10);
+        }
+
+        public void AddNewTable(UInt64 smallBlind, UInt64 bigBlind, Int16 minPlayers, Int16 maxPlayers)
+        {
+            AddNewTable(smallBlind, bigBlind, bigBlind * 20, bigBlind * 100, 2, 10);
+        }
+
+        public void AddNewTable(UInt64 smallBlind, UInt64 bigBlind, UInt64 minBuyIn, UInt64 maxBuyIn, Int16 minPlayers, Int16 maxPlayers)
+        {
+            BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table()
+            {
+                SmallBlind = smallBlind,
+                BigBlind = bigBlind,
+                MinBuyIn = minBuyIn,
+                MaxBuyIn = maxBuyIn,
+                MinPlayers = minPlayers,
+                MaxPlayers = maxPlayers
+            };
+
+            if (!table.IsValid())
+            {
+                throw new AggregateException("Invalid table params");
+            }
+
+            using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+            {
+                TableRepo.Add(table);
+            }
         }
 
         public void GetPlayers()
         {
-            foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
+            foreach (Clients.INetworkClient client in this.Clients)
             {
                 if (client.IsConnected)
                 {
@@ -86,8 +117,6 @@ namespace Bitpoker.WPFClient.ViewModels
             return 0;
         }
 
-
-
         public void CreateKeys()
         {
             Byte[] allKeys = new Byte[832];
@@ -103,40 +132,6 @@ namespace Bitpoker.WPFClient.ViewModels
             }
 
             //Calculate hash on allKeys
-        }
-
-        public void Connect(IPAddress ipAddr)
-        {
-            try
-            {
-                // Create one SocketPermission for socket access restrictions  
-                SocketPermission permission = new SocketPermission(NetworkAccess.Connect, TransportType.Tcp, "", SocketPermission.AllPorts);
-
-                // Ensures the code to have permission to access a Socket  
-                permission.Demand();
-
-                //// Resolves a host name to an IPHostEntry instance             
-                //IPHostEntry ipHost = Dns.GetHostEntry("");
-
-                //// Gets first IP address associated with a localhost  
-                //IPAddress ipAddr = ipHost.AddressList[0];
-
-                // Creates a network endpoint  
-                IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, 4510);
-
-                // Create one Socket object to setup Tcp connection  
-                senderSock = new Socket(ipAddr.AddressFamily, SocketType.Stream,  ProtocolType.Tcp );
-
-                senderSock.NoDelay = false;   // Using the Nagle algorithm  
-
-                // Establishes a connection to a remote host  
-                senderSock.Connect(ipEndPoint);
-
-            }
-            catch (Exception exc)
-            {
-
-            };
         }
 
         public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)

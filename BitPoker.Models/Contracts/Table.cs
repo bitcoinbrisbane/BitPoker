@@ -13,6 +13,7 @@ namespace BitPoker.Models.Contracts
         public Table()
         {
             this.Players = new List<TexasHoldemPlayer>(10);
+            this.HashAlgorithm = "SHA256";
         }
 
 		public Table (Int16 minPlayers, Int16 maxPlayers)

@@ -13,9 +13,9 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public ICollection<BitPoker.Models.PlayerInfo> Players { get; set;}
 
-        public ICollection<ViewModels.HandViewModel> Hands { get; set; }
+        public ICollection<HandViewModel> Hands { get; set; }
 
-        public void Call(Int64 amount)
+        public void Call(UInt64 amount)
         {
             BitPoker.Models.Messages.ActionMessage call = new BitPoker.Models.Messages.ActionMessage()
             {

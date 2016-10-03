@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
     <Compile Include="HandRepository.cs" />
+    <Compile Include="PlayerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

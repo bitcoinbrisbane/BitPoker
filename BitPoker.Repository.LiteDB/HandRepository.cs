@@ -8,10 +8,8 @@ using LiteDB;
 
 namespace BitPoker.Repository.LiteDB
 {
-    public class HandRepository : IHandRepository, IRepository
+    public class HandRepository : BaseRepository, IHandRepository, IRepository
     {
-        private readonly String _filePath;
-
         public HandRepository(String filePath)
         {
             _filePath = filePath;

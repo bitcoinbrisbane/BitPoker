@@ -6,17 +6,17 @@ namespace BitPoker.Models.Contracts
     {
         public Guid Id { get; set; }
 
-        public Int64 SmallBlind { get; set; }
+        public UInt64 SmallBlind { get; set; }
 
-        public Int64 BigBlind { get; set; }
+        public UInt64 BigBlind { get; set; }
 
         public Int16 MaxPlayers { get; set; }
 
         public Int16 MinPlayers { get; set; }
 
-        public Int64 MinBuyIn { get; set; }
+        public UInt64 MinBuyIn { get; set; }
 
-        public Int64 MaxBuyIn { get; set; }
+        public UInt64 MaxBuyIn { get; set; }
 
 		public String HashAlgorithm { get; set; }
     }

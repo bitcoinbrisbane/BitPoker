@@ -33,20 +33,16 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NBitcoin, Version=3.0.0.21, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NBitcoin.3.0.0.21\lib\net45\NBitcoin.dll</HintPath>
+    <Reference Include="NBitcoin, Version=3.0.0.57, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.3.0.0.57\lib\net45\NBitcoin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NBitcoin.BouncyCastle, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NBitcoin.3.0.0.21\lib\net45\NBitcoin.BouncyCastle.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+    <Reference Include="protobuf-net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.1.0\lib\net451\protobuf-net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -129,6 +125,14 @@
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.LiteDB\BitPoker.Repository.LiteDB.csproj">
+      <Project>{9d248950-d9e5-43ec-8eef-cc9d350bae38}</Project>
+      <Name>BitPoker.Repository.LiteDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
+      <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>
+      <Name>BitPoker.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

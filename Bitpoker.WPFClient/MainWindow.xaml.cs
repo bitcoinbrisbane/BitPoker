@@ -19,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using BitPoker.Models.ExtensionMethods;
 
 namespace Bitpoker.WPFClient
 {
@@ -32,10 +33,9 @@ namespace Bitpoker.WPFClient
     {
         private Clients.ChatBackend _backend;
 
-
-        SocketPermission permission;
-        Socket sListener;
-        IPEndPoint ipEndPoint;
+        //SocketPermission permission;
+        //Socket sListener;
+        //IPEndPoint ipEndPoint;
         Socket handler;
 
         public IList<Byte[]> Deck { get; set; }
@@ -62,7 +62,7 @@ namespace Bitpoker.WPFClient
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
             NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
 
-            BitPoker.Models.TexasHoldemPlayer alice = new TexasHoldemPlayer()
+            TexasHoldemPlayer alice = new TexasHoldemPlayer()
             {
                 Position = 0,
                 BitcoinAddress = alice_address.ToString(),
@@ -84,13 +84,54 @@ namespace Bitpoker.WPFClient
             string username = composite.Username == null ? "" : composite.Username;
             string message = composite.Message == null ? "" : composite.Message;
             textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
+
+            String value = composite.Message.ToUpper().Trim();
+            if (value.StartsWith("GET TABLES"))
+            {
+                using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+                {
+                    var tables = tableRepo.All();
+                    String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+                    _backend.SendMessage(json);
+                }
+            }
         }
 
         private void textBoxEntryField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                _backend.SendMessage(textBoxEntryField.Text);
+                String value = textBoxEntryField.Text.ToUpper().Trim();
+                if (value.StartsWith("HELP"))
+                {
+                    textBoxChatPane.Text += "ADDTABLE SmallBlind BigBlind MinBuyIn MaxBuyIn MinPlayers MaxPlayers" + Environment.NewLine;
+                    textBoxChatPane.Text = "GETTABLES";
+                    //...
+                }
+                else if (value.StartsWith("GETTABLES"))
+                {
+                    _backend.SendMessage("GETTABLES");
+                }
+                else if (value.StartsWith("ADDTABLE"))
+                {
+                    String[] tableParams = value.Substring(0, 7).Split(' ');
+
+                    BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table()
+                    {
+                        SmallBlind = Convert.ToUInt64(tableParams[0]),
+                        BigBlind = Convert.ToUInt64(tableParams[1]),
+                        MinBuyIn = Convert.ToUInt64(tableParams[2]),
+                        MaxBuyIn = Convert.ToUInt64(tableParams[3]),
+                        HashAlgorithm = "SHA256",
+                        MinPlayers = Convert.ToInt16(tableParams[4]),
+                        MaxPlayers = Convert.ToInt16(tableParams[5])
+                    };
+
+                }
+                else
+                {
+                    _backend.SendMessage(textBoxEntryField.Text);
+                }
                 textBoxEntryField.Clear();
             }
         }
@@ -155,104 +196,7 @@ namespace Bitpoker.WPFClient
         //    catch (Exception exc) { MessageBox.Show(exc.ToString()); }
         //}
 
-        public void AcceptCallback(IAsyncResult ar)
-        {
-            Socket listener = null;
-
-            // A new Socket to handle remote host communication 
-            Socket handler = null;
-            try
-            {
-                // Receiving byte array 
-                byte[] buffer = new byte[1024];
-                // Get Listening Socket object 
-                listener = (Socket)ar.AsyncState;
-                // Create a new socket 
-                handler = listener.EndAccept(ar);
-
-                // Using the Nagle algorithm 
-                handler.NoDelay = false;
-
-                // Creates one object array for passing data 
-                object[] obj = new object[2];
-                obj[0] = buffer;
-                obj[1] = handler;
-
-                // Begins to asynchronously receive data 
-                handler.BeginReceive(
-                    buffer,        // An array of type Byt for received data 
-                    0,             // The zero-based position in the buffer  
-                    buffer.Length, // The number of bytes to receive 
-                    SocketFlags.None,// Specifies send and receive behaviors 
-                    new AsyncCallback(ReceiveCallback),//An AsyncCallback delegate 
-                    obj            // Specifies infomation for receive operation 
-                    );
-
-                // Begins an asynchronous operation to accept an attempt 
-                AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
-                listener.BeginAccept(aCallback, listener);
-            }
-            catch (Exception exc) 
-            {
-                MessageBox.Show(exc.ToString());
-            }
-        }
-
-        public void ReceiveCallback(IAsyncResult ar)
-        {
-            try
-            {
-                // Fetch a user-defined object that contains information 
-                object[] obj = new object[2];
-                obj = (object[])ar.AsyncState;
-
-                // Received byte array 
-                byte[] buffer = (byte[])obj[0];
-
-                // A Socket to handle remote host communication. 
-                handler = (Socket)obj[1];
-
-                // Received message 
-                String content = string.Empty;
-
-                // The number of bytes received. 
-                int bytesRead = handler.EndReceive(ar);
-
-                if (bytesRead > 0)
-                {
-                    content += Encoding.Unicode.GetString(buffer, 0, bytesRead);
-
-                    // If message contains "<Client Quit>", finish receiving
-                    if (content.IndexOf("<Client Quit>") > -1)
-                    {
-                        // Convert byte array to string
-                        string str = content.Substring(0, content.LastIndexOf("<Client Quit>"));
-
-                        //this is used because the UI couldn't be accessed from an external Thread
-                        this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
-                        {
-                            //tbAux.Text = "Read " + str.Length * 2 + " bytes from client.\n Data: " + str;
-                        }
-                        );
-                    }
-                    else
-                    {
-                        // Continues to asynchronously receive data
-                        byte[] buffernew = new byte[1024];
-                        obj[0] = buffernew;
-                        obj[1] = handler;
-                        handler.BeginReceive(buffernew, 0, buffernew.Length, SocketFlags.None, new AsyncCallback(ReceiveCallback), obj);
-                    }
-
-                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
-                    {
-                        //tbAux.Text = content;
-                    }
-                    );
-                }
-            }
-            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
-        }
+        
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
@@ -262,40 +206,46 @@ namespace Bitpoker.WPFClient
                 string message = "test message";
 
                 // Prepare the reply message 
-                byte[] byteData = Encoding.Unicode.GetBytes(message);
+                //byte[] byteData = Encoding.Unicode.GetBytes(message);
 
                 // Sends data asynchronously to a connected Socket 
-                handler.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), handler);
+                //handler.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), handler);
+
+
+                //IMessageClient client = new ChatBackend();
 
                 //Send_Button.IsEnabled = false;
                 //Close_Button.IsEnabled = true;
             }
-            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
-        }
-
-        public void SendCallback(IAsyncResult ar)
-        {
-            try
+            catch (Exception exc)
             {
-                // A Socket which has sent the data to remote host 
-                Socket handler = (Socket)ar.AsyncState;
-
-                // The number of bytes sent to the Socket 
-                int bytesSend = handler.EndSend(ar);
-                Console.WriteLine("Sent {0} bytes to Client", bytesSend);
+                MessageBox.Show(exc.ToString());
             }
-            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
         }
+
+        //public void SendCallback(IAsyncResult ar)
+        //{
+        //    try
+        //    {
+        //        // A Socket which has sent the data to remote host 
+        //        Socket handler = (Socket)ar.AsyncState;
+
+        //        // The number of bytes sent to the Socket 
+        //        int bytesSend = handler.EndSend(ar);
+        //        Console.WriteLine("Sent {0} bytes to Client", bytesSend);
+        //    }
+        //    catch (Exception exc) { MessageBox.Show(exc.ToString()); }
+        //}
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (sListener.Connected)
-                {
-                    sListener.Shutdown(SocketShutdown.Receive);
-                    sListener.Close();
-                }
+                //if (sListener.Connected)
+                //{
+                //    sListener.Shutdown(SocketShutdown.Receive);
+                //    sListener.Close();
+                //}
 
                 //Close_Button.IsEnabled = false;
             }
@@ -307,27 +257,30 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.NewTable(2, 10);
+            //_viewModel.NewTable(2, 10);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Places a Socket in a listening state and specifies the maximum 
-                // Length of the pending connections queue 
-                sListener.Listen(10);
+            //try
+            //{
+            //    // Places a Socket in a listening state and specifies the maximum 
+            //    // Length of the pending connections queue 
+            //    sListener.Listen(10);
 
-                // Begins an asynchronous operation to accept an attempt 
-                AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
-                sListener.BeginAccept(aCallback, sListener);
+            //    // Begins an asynchronous operation to accept an attempt 
+            //    AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
+            //    sListener.BeginAccept(aCallback, sListener);
 
-                //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
+            //    //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
 
-                //StartListen_Button.IsEnabled = false;
-                //Send_Button.IsEnabled = true;
-            }
-            catch (Exception exc) { MessageBox.Show(exc.ToString()); }
+            //    //StartListen_Button.IsEnabled = false;
+            //    //Send_Button.IsEnabled = true;
+            //}
+            //catch (Exception exc)
+            //{
+            //    MessageBox.Show(exc.ToString());
+            //}
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

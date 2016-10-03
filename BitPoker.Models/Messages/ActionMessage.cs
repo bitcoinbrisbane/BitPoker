@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace BitPoker.Models.Messages
 {
+    [DataContract]
 	public class ActionMessage : BaseMessage
 	{
         public String PublicKey { get; set; }
@@ -17,7 +19,7 @@ namespace BitPoker.Models.Messages
 
         public String Action { get; set; }
 
-        public Int64 Amount { get; set; }
+        public UInt64 Amount { get; set; }
 
         public String Tx { get; set; }
 
