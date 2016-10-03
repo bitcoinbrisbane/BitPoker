@@ -5,7 +5,7 @@ Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer 
 
 Most chains are too slow for turned based games, but not all tunrs need to persisted back to the chain.  For example, in poker, turns can be stored in memory on clients.  Only when the outcome of the game is required, such as awarding the pot, is the data required to be persisted back to the chain.  Futhermore, players could agree this could be a higher cadence, such as each orbit, to save on fees.
 
-Different clients developed in different programming languages are encouraged.
+Its hoped, that different clients developed in different programming languages will be built.
 
 ### Notation
 
