@@ -3,7 +3,7 @@
 ## Abstract
 Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer protocol of turn based games, such as online poker, in which no central actor can control the outcome and thus rig the game and is proovably fair.  The game uses bitcoin (or other digital tokens) and lightning network to settle bets between actors, and a blockchain to persist the state of the game.
 
-Most chains are too slow for turned based games, but not all tunrs need to persisted back to the chain.  For example, in poker, turns can be stored in memory on clients.  Only when the outcome of the game is required, such as awarding the pot, is the data required to be persisted back to the chain.  Futhermore, players could agree this could be a higher cadence, such as each orbit, to save on fees.
+Most blockchains are too slow for turned based games, but not all turns need to persisted back to the blockchain.  For example, in poker, turns can be stored in memory on clients as "mini chains".  Only when the outcome of the game is required such as awarding the pot, is the data required to be persisted back to the blockchain.  Futhermore, players could agree this could be a higher cadence, such as each orbit, to save on fees.
 
 Its hoped, that different clients developed in different programming languages will be built.
 
