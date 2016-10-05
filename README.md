@@ -185,14 +185,20 @@ In the below *table contract* the below game Texas Holdem is defined as an Enum.
 These are out side the scope of this paper.
 
 ## Messages
-All actions are sent as messages.  They must include a public key be signed.  The payload must also reference there previous message hash.
+All actions are sent as messages.  They must include a public key hash and be signed.  The payload must also reference there previous message hash.
+
+Messages are signed by first concatinating the values.
+
+General message format
 
 | Property | Eg |
 | -------- | -- |
-| Version | 1 |
-| Public Key Hash | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
+| Version | Message Version |
+| Id | GUID |
+| Bitcoin Address (Public Key Hash) | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
 | Action | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
-| Payload | TODO |
+| Payload | See specific action message |
+| Payload Hash | SHA256 |
 | Message Signature | TODO |
 | Pervious Hash | TODO |
 
@@ -200,18 +206,18 @@ Example action message (payload)
 
 | Property  | Eg |
 | --------- | -- |
-| Id | 4bc7f305-aa16-450a-a3be-aad8fba7f425 |
-| Hand | 398b5fe2-da27-4772-81ce-37fa615719b5 |
+| Bitcoin Address (Public Key Hash) | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
 | Index | 2 |
 | Action | CALL 5000000 |
-| TX | |
-| Previous Hash | |
+| TX | TODO |
+| Previous Hash | TODO |
+| Time stamp | 2016-08-17 00:00:00 |
 
 The hash (SHA-256) is of the property values concantinated, thus seriliazation format agnostic.
 
 Eg of above message.
 ```
-1msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL 5000000
+msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL500000020160817000000
 ```
 
 Eg in XML
@@ -237,6 +243,11 @@ b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
   <Hash Algorithm="SHA256"></Hash>
 </Message>
 ```
+
+## Sample messages
+### Buy In
+
+### Call
 
 ## Table Contract
 The paramaters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
