@@ -6,7 +6,7 @@ namespace BitPoker.Models.Messages
     [DataContract]
 	public class ActionMessage : BaseMessage
 	{
-        public String PublicKey { get; set; }
+        //public String PublicKey { get; set; }
 
         /// <summary>
         /// Include table id to make searching on hands more efficent
@@ -37,7 +37,7 @@ namespace BitPoker.Models.Messages
 
         public override string ToString()
         {
-            return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, PublicKey, HandId, Index, Action, Amount, TimeStamp, Signature);
+            return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp);
         }
 	}
 }

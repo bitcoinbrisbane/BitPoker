@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BitPoker.Models
 {
@@ -20,7 +16,7 @@ namespace BitPoker.Models
 
         String BitcoinAddress { get; set; }
 
-        Int64 Stack { get; set; }
+        UInt64 Stack { get; set; }
 
         String IPAddress { get; set; }
     }

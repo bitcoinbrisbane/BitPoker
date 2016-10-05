@@ -54,7 +54,7 @@ namespace BitPoker.MVC.Controllers
                     Amount = table.SmallBlind,
                     BitcoinAddress = sb.BitcoinAddress,
                     HandId = hand.Id,
-                    PublicKey = alice_pubkey,
+                    //PublicKey = alice_pubkey,
                     TableId = request.TableId
                 };
 

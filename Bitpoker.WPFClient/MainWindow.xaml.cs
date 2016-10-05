@@ -36,7 +36,7 @@ namespace Bitpoker.WPFClient
         //SocketPermission permission;
         //Socket sListener;
         //IPEndPoint ipEndPoint;
-        Socket handler;
+        //Socket handler;
 
         public IList<Byte[]> Deck { get; set; }
 
@@ -53,30 +53,20 @@ namespace Bitpoker.WPFClient
         {
             InitializeComponent();
 
-            const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-            const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+            String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+            //const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
 
             NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
-            NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
+            //NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
 
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
-            NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
-
-            TexasHoldemPlayer alice = new TexasHoldemPlayer()
-            {
-                Position = 0,
-                BitcoinAddress = alice_address.ToString(),
-                IsDealer = true,
-                IsBigBlind = true,
-                Stack = 50000000
-            };
+            //NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
 
             this.DataContext = _viewModel;
 
             //Start();
 
-            _backend = new ChatBackend(this.DisplayMessage);
-            
+            _backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
         }
 
         public void DisplayMessage(CompositeType composite)
@@ -86,7 +76,7 @@ namespace Bitpoker.WPFClient
             textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
 
             String value = composite.Message.ToUpper().Trim();
-            if (value.StartsWith("GET TABLES"))
+            if (value.StartsWith("GETTABLES"))
             {
                 using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
                 {
@@ -101,6 +91,8 @@ namespace Bitpoker.WPFClient
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
+                String messageToSend = String.Empty;
+
                 String value = textBoxEntryField.Text.ToUpper().Trim();
                 if (value.StartsWith("HELP"))
                 {
@@ -108,30 +100,39 @@ namespace Bitpoker.WPFClient
                     textBoxChatPane.Text = "GETTABLES";
                     //...
                 }
-                else if (value.StartsWith("GETTABLES"))
+
+                if (value.StartsWith("NEWADDRESS"))
                 {
-                    _backend.SendMessage("GETTABLES");
+                    messageToSend = _viewModel.NewAddress();
                 }
-                else if (value.StartsWith("ADDTABLE"))
+
+                if (value.StartsWith("GETTABLES"))
+                {
+                    messageToSend = "GETTABLES";
+                }
+
+                if (value.StartsWith("ADDTABLE"))
                 {
                     String[] tableParams = value.Substring(0, 7).Split(' ');
+                    _viewModel.AddNewTable(Convert.ToUInt64(tableParams[0]), Convert.ToUInt64(tableParams[1]), Convert.ToUInt64(tableParams[2]), Convert.ToUInt64(tableParams[3]), Convert.ToInt16(tableParams[4]), Convert.ToInt16(tableParams[5]));
+                }
 
-                    BitPoker.Models.Contracts.Table table = new BitPoker.Models.Contracts.Table()
-                    {
-                        SmallBlind = Convert.ToUInt64(tableParams[0]),
-                        BigBlind = Convert.ToUInt64(tableParams[1]),
-                        MinBuyIn = Convert.ToUInt64(tableParams[2]),
-                        MaxBuyIn = Convert.ToUInt64(tableParams[3]),
-                        HashAlgorithm = "SHA256",
-                        MinPlayers = Convert.ToInt16(tableParams[4]),
-                        MaxPlayers = Convert.ToInt16(tableParams[5])
-                    };
-
+                if (value.StartsWith("JOINTABLE"))
+                {
+                    String[] buyInParms = value.Substring(0, 8).Split(' ');
+                    //_viewModel.BuyIn();
                 }
                 else
                 {
                     _backend.SendMessage(textBoxEntryField.Text);
                 }
+
+                if (!String.IsNullOrEmpty(messageToSend))
+                {
+                    _backend.SendMessage(messageToSend);
+                    messageToSend = String.Empty;
+                }
+
                 textBoxEntryField.Clear();
             }
         }
@@ -298,16 +299,14 @@ namespace Bitpoker.WPFClient
             Guid selectedTableId = new Guid();
 
             //_viewModel.Players
-
-            
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            if (_viewModel.Table != null)
-            {
-                _viewModel.Table.Call(5000);
-            }
+            //if (_viewModel.Table != null)
+            //{
+            //    _viewModel.Table.Call(5000);
+            //}
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

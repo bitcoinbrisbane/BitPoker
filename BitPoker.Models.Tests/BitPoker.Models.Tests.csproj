@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NBitcoin, Version=3.0.0.61, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NBitcoin.3.0.0.61\lib\net45\NBitcoin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="ActionMessageTests.cs" />
+    <Compile Include="BuyInMessageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Models.Mocks\BitPoker.Models.Mocks.csproj">

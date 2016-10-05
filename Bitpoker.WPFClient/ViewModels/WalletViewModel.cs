@@ -9,14 +9,14 @@ namespace Bitpoker.WPFClient.ViewModels
 {
     public class WalletViewModel
     {
-        private NBitcoin.BitcoinAddress _address;
+        public BitcoinAddress Address { get; private set; }
 
-        public IObservable<Decimal> Balance { get; set; }
+        public IObservable<Decimal> Balance { get; private set; }
 
         public WalletViewModel(String wifKey)
         {
-            NBitcoin.BitcoinSecret secret = new BitcoinSecret(wifKey, NBitcoin.Network.TestNet);
-            _address = secret.GetAddress();
+            BitcoinSecret secret = new BitcoinSecret(wifKey, Network.TestNet);
+            Address = secret.GetAddress();
         }
 
         public async Task LoadBalance()

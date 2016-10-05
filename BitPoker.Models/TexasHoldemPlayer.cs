@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BitPoker.Models
 {
@@ -26,7 +21,7 @@ namespace BitPoker.Models
 
 		public String BitcoinAddress { get; set; }
 
-		public Int64 Stack { get; set; }
+		public UInt64 Stack { get; set; }
 
 		public TexasHoldemPlayer()
 		{

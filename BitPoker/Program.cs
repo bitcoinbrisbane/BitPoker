@@ -416,13 +416,13 @@ namespace BitPoker
             }
         }
 
-        private static void BuyIn(Int64 amount, Guid tableId)
+        private static void BuyIn(UInt64 amount, Guid tableId)
         {
             Models.Messages.BuyInRequestMessage message = new Models.Messages.BuyInRequestMessage();
             message.BitcoinAddress = carol.ToString();
             message.Amount = amount;
             
-            message.Signature = carol_secret.PrivateKey.SignMessage(message.Id.ToString());
+            message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
 
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");

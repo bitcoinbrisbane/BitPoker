@@ -19,6 +19,7 @@
         <Button Content="Call" HorizontalAlignment="Left" Margin="415,387,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_5"/>
         <Button Content="Raise" HorizontalAlignment="Left" Margin="506,387,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Fold" HorizontalAlignment="Left" Margin="596,387,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="{Binding Path=CalculatorOutput}" HorizontalAlignment="Left" Margin="19,4,0,0" VerticalAlignment="Top"/>
         <Label Content="Players" HorizontalAlignment="Left" Margin="19,23,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Stretch" Margin="19,203,312,54" Name="textBoxChatPane" VerticalAlignment="Stretch" Width="Auto" Grid.Row="0" />
         <TextBox Height="23" HorizontalAlignment="Stretch" Margin="17,410,396,11" Name="textBoxEntryField" VerticalAlignment="Stretch" Width="Auto" KeyDown="textBoxEntryField_KeyDown" />

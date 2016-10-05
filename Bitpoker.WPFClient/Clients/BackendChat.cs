@@ -27,8 +27,9 @@ namespace Bitpoker.WPFClient.Clients
         /// ChatBackend constructor should be called with a delegate that is capable of displaying messages.
         /// </summary>
         /// <param name="dmd">DisplayMessageDelegate</param>
-        public ChatBackend(DisplayMessageDelegate dmd)
+        public ChatBackend(DisplayMessageDelegate dmd, String bitcoinAddress)
         {
+            _myUserName = bitcoinAddress;
             _displayMessageDelegate = dmd;
             StartService();
         }
@@ -66,9 +67,11 @@ namespace Bitpoker.WPFClient.Clients
         /// <param name="text"></param>
         public void SendMessage(string text)
         {
-            if (text.StartsWith("setname:", StringComparison.OrdinalIgnoreCase))
+            //TODO:  MOVE OUT BUSINESS LOGIC HERE.
+            //Local command
+            if (text.ToUpper().StartsWith("SETNAME:", StringComparison.OrdinalIgnoreCase))
             {
-                _myUserName = text.Substring("setname:".Length).Trim();
+                _myUserName = text.Substring("SETNAME:".Length).Trim();
                 _displayMessageDelegate(new CompositeType("Event", "Setting your name to " + _myUserName));
             }
             else
@@ -80,19 +83,7 @@ namespace Bitpoker.WPFClient.Clients
 
         public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
         {
-            _displayMessageDelegate(new CompositeType("Event", message.ToString()));
-
-            //if (text.StartsWith("setname:", StringComparison.OrdinalIgnoreCase))
-            //{
-            //    _myUserName = text.Substring("setname:".Length).Trim();
-            //    _displayMessageDelegate(new CompositeType("Event", "Setting your name to " + _myUserName));
-            //}
-            //else
-            //{
-            //    // In order to send a message, we call our friends' DisplayMessage method
-            //    _channel.DisplayMessage(new CompositeType(_myUserName, text));
-            //}
-        }
+            _channel.DisplayMessage(new CompositeType(_myUserName, message.ToString()));        }
 
         private void StartService()
         {

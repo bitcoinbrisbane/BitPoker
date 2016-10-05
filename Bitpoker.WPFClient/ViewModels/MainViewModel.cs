@@ -10,31 +10,35 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using BitPoker.Models.ExtensionMethods;
+using System.ComponentModel;
+using BitPoker.Models;
 
 namespace Bitpoker.WPFClient.ViewModels
 {
     /// <summary>
     /// View model for table really.
     /// </summary>
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         //SocketPermission permission;
         //Socket sListener;
         //IPEndPoint ipEndPoint;
         //Socket handler;
-        public Socket senderSock; 
+        //public Socket senderSock; 
+
+        private Key _bitcoinKey;
+        private BitcoinSecret _secret;
 
         private static Random rng = new Random();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public IList<Clients.INetworkClient> Clients { get; set; }
 
         /// <summary>
         /// Players on the entire network
         /// </summary>
-        public ObservableCollection<BitPoker.Models.PlayerInfo> NetworkPlayers { get; set; }
-
-        //public BitPoker.Models.Contracts.Table Table { get; set; }
-        public TableViewModel Table { get; set; }
+        public ObservableCollection<PlayerInfo> NetworkPlayers { get; set; }
 
         internal ICollection<Byte[]> Keys { get; set; }
 
@@ -42,7 +46,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public WalletViewModel Wallet { get; set; }
 
-        public BitPoker.Repository.ITableRepository TableRepo { get; set; }
+        public TexasHoldemPlayer Player { get; set; }
 
         public MainViewModel()
         {
@@ -53,6 +57,29 @@ namespace Bitpoker.WPFClient.ViewModels
             //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
             Wallet = new WalletViewModel("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
+
+            _secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", NBitcoin.Network.TestNet);
+            BitcoinAddress address = _secret.GetAddress();
+
+            //move this
+            this.Player = new TexasHoldemPlayer()
+            {
+                Position = 0,
+                BitcoinAddress = address.ToString(),
+                IsDealer = true,
+                IsBigBlind = true,
+                Stack = 50000000
+            };
+        }
+
+        public String NewAddress()
+        {
+            PubKey pubKey = _bitcoinKey.PubKey;
+            BitcoinAddress address = pubKey.GetAddress(Network.TestNet);
+
+            this.Wallet = new WalletViewModel(_bitcoinKey.GetWif(Network.TestNet).ToString());
+
+            return String.Format("SETNAME:{0}", address);
         }
 
         public void AddNewTable(UInt64 smallBlind, UInt64 bigBlind)
@@ -84,7 +111,8 @@ namespace Bitpoker.WPFClient.ViewModels
 
             using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
             {
-                TableRepo.Add(table);
+                tableRepo.Add(table);
+                tableRepo.Save();
             }
         }
 
@@ -103,18 +131,6 @@ namespace Bitpoker.WPFClient.ViewModels
                     }
                 }
             }
-        }
-
-        public Int32 BuyIn(Guid tableId, Int64 amount)
-        {
-            //foreach (Bitpoker.WPFClient.Clients.INetworkClient client in this.Clients)
-            //{
-            //    if (client.IsConnected)
-            //    {
-            //        var players = client.GetPlayers();
-            //    }
-            //}
-            return 0;
         }
 
         public void CreateKeys()
