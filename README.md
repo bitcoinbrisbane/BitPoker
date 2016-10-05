@@ -185,9 +185,12 @@ In the below *table contract* the below game Texas Holdem is defined as an Enum.
 These are out side the scope of this paper.
 
 ## Messages
-All actions are sent as messages.  They must include a public key hash and be signed.  The payload must also reference there previous message hash.
+All actions are sent as messages.  They must include a public key hash and be signed.  The payload must also reference their previous message hash.
 
-Messages are signed by first concatinating the values.
+1.  Concatinate the payload the values
+2.  Hash the payload of step 1
+3.  Sign the output of step 2
+
 
 General message format
 
