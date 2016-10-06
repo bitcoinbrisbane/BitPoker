@@ -215,7 +215,7 @@ Example action message (payload)
 | Previous Hash | TODO |
 | Time stamp | 2016-08-17 00:00:00 |
 
-The hash (SHA-256) is of the property values concantinated, thus seriliazation format agnostic.
+The hash (SHA-256) is of the property values concatenated, thus serialisation format agnostic.
 
 Eg of above message.
 ```
@@ -256,8 +256,8 @@ b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
 
 ### Call
 
-## Table Contract
-The parameters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
+## Adding a Table Contract
+A client will define the table contract and store that locally.  They become the table starter and thus define the conditions of that game.  The parameters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
 
 1.  Encryption Algorithm (Enum AES-256)
 2.  Hash Algorithm (Enum SHA-256)
@@ -306,15 +306,18 @@ The parameters for a table are defined in the following schema.  Developers are 
 </Message>
 ```
 
+## Joining a Table
+Users send their intent to join a table by the JOINTABLE message.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
+
+## Buying in
+A player buying in opens a lightning payment channel with the multi signature address of the table.  Players must add BTC within the range for the table contract (MinBuyIn, MaxBuyIn)
+
+"Through this network of interconnected payment channels, Lightning provides a scalable, decentralised micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
+
 ## Witness nodes
 Game witness can also be allowed or chosen to arbitrate a game.  The witness could also help network propagation.  A witness would be choose by the table starter and a small rake paid to the witness.
 
-There will become a market for reputable witnesses based off a HTTPS DNS endpoint and earn small revenues for witnessing hands.
-
-## Buying in
-A player buying in opens a lightning payment channel with all players.
-
-"Through this network of interconnected payment channels, Lightning provides a scalable, decentralized micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
+There might become a market for reputable witnesses based off a HTTPS DNS endpoint and earn small revenues for witnessing hands.
 
 ### Process
 1.  Alice and Bob create a 2 of 2 address
