@@ -1,9 +1,9 @@
 # BitPoker.IO
 
 ## Abstract
-Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer protocol of turn based games, such as online poker, in which no central actor can control the outcome and thus rig the game and is proovably fair.  The game uses bitcoin (or other digital tokens) and lightning network to settle bets between actors, and a blockchain to persist the state of the game.
+Inspired by OpenBazaar.com, the goal of the project is to design a peer to peer protocol of turn based games, such as online poker, in which no central actor can control the outcome and thus rig the game and is provably fair.  The game uses bitcoin (or other digital tokens) and lightning network to settle bets between actors, and a blockchain to persist the state of the game.
 
-Most blockchains are too slow for turned based games, but not all turns need to persisted back to the blockchain.  For example, in poker, turns can be stored in memory on clients as "mini chains".  Only when the outcome of the game is required such as awarding the pot, is the data required to be persisted back to the blockchain.  Futhermore, players could agree this could be a higher cadence, such as each orbit, to save on fees.
+Most blockchains are too slow for turned based games, but not all turns need to persisted back to the blockchain.  For example, in poker, turns can be stored in memory on clients as "mini chains".  Only when the outcome of the game is required such as awarding the pot, is the data required to be persisted back to the blockchain.  Furthermore, players could agree this could be a higher cadence, such as each orbit, to save on fees.
 
 Its hoped, that different clients developed in different programming languages will be built.
 
@@ -39,7 +39,7 @@ Suites
 | H  | Heart | +26 | {0x1A} |
 | D  | Diamond  | +39  | {0x27} |
 
-*Eg
+\*Eg
 Ace of clubs = { 0x0D }
 
 Poker terminology
@@ -62,21 +62,20 @@ Poker terminology
 - 04C82B8E2D6EA7F17665C4A1070F340E84D4C02DA72AE5018574001841C10E8009A04E2C333D3EB90102E71B324BFE595430D4C654BBFF0F66EDBFE63798C7A271
 - 93C4fbYtv8VXWDnbJLzQiVfBGuQgfz1hBF1QwQeJxQepe9oE876
 
-*2 of 3 address
+\*2 of 3 address
 2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85
 https://testnet.blockexplorer.com/address/2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85
 
 *Redeem Script* 524104c82b8e2d6ea7f17665c4a1070f340e84d4c02da72ae5018574001841c10e8009a04e2c333d3eb90102e71b324bfe595430d4c654bbff0f66edbfe63798c7a2714104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d4104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d53ae
 
-References:
-http://ms-brainwallet.org
+Created from http://ms-brainwallet.org
 
 https://coinb.in/?verify=524104c82b8e2d6ea7f17665c4a1070f340e84d4c02da72ae5018574001841c10e8009a04e2c333d3eb90102e71b324bfe595430d4c654bbff0f66edbfe63798c7a2714104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d4104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d53ae#verify
 
 ### Test PGP Private and Public Keys (NOTE BITCOIN MESSAGE SIGNING TO BE USED INSTEAD)
 
 *Alice*
------BEGIN PGP PRIVATE KEY BLOCK-----
+\-----BEGIN PGP PRIVATE KEY BLOCK-----
 Version: OpenPGP.js v.1.20130420
 Comment: http://openpgpjs.org
 
@@ -90,9 +89,9 @@ IDx0ZXN0QGV4YW1wbGUuY29tPsJcBBABCAAQBQJW+hNTCRBx4oH3PIZldwAA
 DO8B/0Lf1eqIfbBCIhqq4n7ge/qy5ITQKtMT1+P2pSqGj2+6/hUQhmHcvqBq
 Sp07i29QBZiup2mExktQMaMvCLD40Vo=
 =tIvp
------END PGP PRIVATE KEY BLOCK-----
+\-----END PGP PRIVATE KEY BLOCK-----
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+\-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: OpenPGP.js v.1.20130420
 Comment: http://openpgpjs.org
 
@@ -102,10 +101,10 @@ c3Rpbmd0b24gPHRlc3RAZXhhbXBsZS5jb20+wlwEEAEIABAFAlb6E1MJEHHi
 gfc8hmV3AAAM7wH/Qt/V6oh9sEIiGqrifuB7+rLkhNAq0xPX4/alKoaPb7r+
 FRCGYdy+oGpKnTuLb1AFmK6naYTGS1Axoy8IsPjRWg==
 =cWad
------END PGP PUBLIC KEY BLOCK-----
+\-----END PGP PUBLIC KEY BLOCK-----
 
 *Bob*
------BEGIN PGP PRIVATE KEY BLOCK-----
+\-----BEGIN PGP PRIVATE KEY BLOCK-----
 Version: OpenPGP.js v.1.20130420
 Comment: http://openpgpjs.org
 
@@ -119,9 +118,9 @@ IDx0ZXN0QGV4YW1wbGUuY29tPsJcBBABCAAQBQJW+hSrCRAT+yaNasjJggAA
 1W0CAJRnrk8vd6PJhoBrH22U8ninyQahVmdmQ31jwdvVuENUNNPmxVD2UPQJ
 nuiaFDXyQsyWs/nnbliJdS4F1HtGOCA=
 =B2vt
------END PGP PRIVATE KEY BLOCK-----
+\-----END PGP PRIVATE KEY BLOCK-----
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+\-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: OpenPGP.js v.1.20130420
 Comment: http://openpgpjs.org
 
@@ -131,13 +130,13 @@ c3Rpbmd0b24gPHRlc3RAZXhhbXBsZS5jb20+wlwEEAEIABAFAlb6FKsJEBP7
 Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
 0+bFUPZQ9Ame6JoUNfJCzJaz+eduWIl1LgXUe0Y4IA==
 =Amq+
------END PGP PUBLIC KEY BLOCK-----
+\-----END PGP PUBLIC KEY BLOCK-----
 
 ## The protocol
 Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
-- Table reaches consensus on whos turn to act based off the game contract
-- Table reaches conesnsus on the legal moves / actions a player can make
+- Table reaches consensus on who’s turn to act based off the game contract
+- Table reaches consensus on the legal moves / actions a player can make
 - Table waits for a signed message from that player
 - All other players validate that message
 - Repeat
@@ -155,15 +154,15 @@ If the game is to be developed using Etherum contracts:
 1.  The game is defined an an Etherum contract
 2.  Players agree to the table contract
 3.  Each players actions are defined as inputs for the hand contract
-4.  After the hand has ended, each player verifies the integrety of the hand contract.  Its in everyones best interest to verify correctly [Game Theory Citation]
-5.  The hand message chain is then excuted on the Etherum network for the pot to be awarded
+4.  After the hand has ended, each player verifies the integrity of the hand contract.  Its in everyones best interest to verify correctly [Game Theory Citation]
+5.  The hand message chain is then executed on the Etherum network for the pot to be awarded
 
 Less use of Etherum
 
-1.  Players connect to each other via P2P
-2.  A player either looks to join a table and reviews the contract
-3.  A palyer can choose to start a table be defining a table contract
-4.  Tables should also broad cast their game, status and number of current players to other tables for better network properation
+1.  Players connect to each other via a P2P network protocol.
+2.  A player either looks to join a table and reviews the contract.
+3.  A player can choose to start a table be defining a table contract.
+4.  Tables should also broad cast their game, status and number of current .players to other tables for better network propergation.
 5.  Leaving the table (closing the channel)
 5.  Lightning network will facilitate micro payments "off chain".  The table can agree to bring them "on chain" after n hands are dealt.
 
@@ -171,23 +170,23 @@ Less use of Etherum
 
 *How it Works.* 
 
-Funds are placed into a two-party, multisignature "channel" bitcoin address. This channel is represented as an entry on the bitcoin public ledger. In order to spend funds from the channel, both parties must agree on the new balance. The current balance is stored as the most recent transaction signed by both parties, spending from the channel address. To make a payment, both parties sign a new exit transaction spending from the channel address. All old exit transactions are invalidated by doing so.
+Funds are placed into a two-party, multi signature "channel" bitcoin address. This channel is represented as an entry on the bitcoin public ledger. In order to spend funds from the channel, both parties must agree on the new balance. The current balance is stored as the most recent transaction signed by both parties, spending from the channel address. To make a payment, both parties sign a new exit transaction spending from the channel address. All old exit transactions are invalidated by doing so.
 
-The Lightning Network does not require cooperation from the counterparty to exit the channel. Both parties have the option to unilaterally close the channel, ending their relationship. Since all parties have multiple multisignature channels with many di erent users on this network, one can send a payment to any other party across this network.
+The Lightning Network does not require cooperation from the counterparty to exit the channel. Both parties have the option to unilaterally close the channel, ending their relationship. Since all parties have multiple multi signature channels with many different users on this network, one can send a payment to any other party across this network.
 
 By embedding the payment conditional upon knowledge of a secure cryptographic hash, payments can be made across a network of channels without the need for any party to have unilateral custodial ownership of funds. The Lightning Network enables what was previously not possible with trusted financial systems vulnerable to monopolies—without the need for custodial trust and ownership, participation on the network can be dynamic and open for all.
 
 [https://lightning.network/lightning-network-summary.pdf]
 
 ## Game as a contract
-In the below *table contract* the below game Texas Holdem is defined as an Enum.  The whole rules of the game could be defined as a contract, thus allowing anyone to develop variations of the game, such as the "Seven Duce" rule, other variations of poker such as Ohmaha or even other games.  
+In the below *table contract* the below game Texas Holdem is defined as an Enum.  The whole rules of the game could be defined as a contract, thus allowing anyone to develop variations of the game, such as the "Seven Duce" rule, other variations of poker such as Omaha or even other games.  
 
 These are out side the scope of this paper.
 
 ## Messages
 All actions are sent as messages.  They must include a public key hash and be signed.  The payload must also reference their previous message hash.
 
-1.  Concatinate the payload the values
+1.  Concatenate the payload the values
 2.  Hash the payload of step 1
 3.  Sign the output of step 2
 
@@ -258,18 +257,18 @@ b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
 ### Call
 
 ## Table Contract
-The paramaters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
+The parameters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
 
 1.  Encryption Algorithm (Enum AES-256)
 2.  Hash Algorithm (Enum SHA-256)
 3.  Id (GUID)
 3.  Currency (Enum)
 3.  Blinds
-4.  Rake*
+4.  Rake\*
 5.  Min players
 6.  Max players
-7.  Game type (Enum, No Limit Texas Holdem) *
-8.  Other (straddles, "run it twice") *
+7.  Game type (Enum, No Limit Texas Holdem) \*
+8.  Other (straddles, "run it twice") \*
 9.  Channel Address / multisig
 10.  Consensus Algorithm
 11.  Anti Collusion Algorithm / Contract
@@ -308,9 +307,9 @@ The paramaters for a table are defined in the following schema.  Developers are 
 ```
 
 ## Witness nodes
-Game witness can also be allowed or chosen to arbitrate a game.  The witness could also help network propigation.  A witness would be choose by the table starter and a small rake paid to the witness.
+Game witness can also be allowed or chosen to arbitrate a game.  The witness could also help network propagation.  A witness would be choose by the table starter and a small rake paid to the witness.
 
-There will become a market for reputable witnesses based off a https dns endpoint and earn small revenues for witnessing hands.
+There will become a market for reputable witnesses based off a HTTPS DNS endpoint and earn small revenues for witnessing hands.
 
 ## Buying in
 A player buying in opens a lightning payment channel with all players.
@@ -324,7 +323,7 @@ A player buying in opens a lightning payment channel with all players.
 4.  Alice creates a refund transaction but does not broadcast
 5.  Bob creates a refund transaction but does not broadcast
 
-*2 of 2 Redeem Script and Address for Alice and Bob
+\*2 of 2 Redeem Script and Address for Alice and Bob
 ```
 2 041fa97efd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba53
 5a3ee89a62238c5afc7f8bf1fa0985dc4e1a06c25209bab78bd1 041fa97efd760f26e93e91e29fd
@@ -334,13 +333,13 @@ df3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62238c5afc7f8bf1fa098
 2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi
 ```
 
-###Funding TXs
-Both Alice and Bob now deposit their buy in to the address 2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi.  Note:  The table contract could include a minumum confirmation count.
+### Funding TXs
+Both Alice and Bob now deposit their buy in to the address 2Mx377XSXhvqqVyLaXsPDAAEsJFzGeWunKi.  Note:  The table contract could include a minimum confirmation count.
 
 Alice tx  f5c5e008f0cb9fc52487deb7531a8019e2d78c51c3c40e53a45248e0712102a3
 Bob tx c60193a33174a1252df9deb522bac3e5532e0c756d053e4ac9999ca17a79c74e
 
-*Sample C# NBitcoin code
+\*Sample C# NBitcoin code
 ```
 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
 
@@ -368,7 +367,7 @@ NBitcoin.Coin[] aliceCoins = transaction
 var txBuilder = new NBitcoin.TransactionBuilder();
 
 var tx = txBuilder
-	.AddKeys(alice_secret.PrivateKey)
+    .AddKeys(alice_secret.PrivateKey)
         .AddCoins(aliceCoins)
         .Send(msigAddress, new NBitcoin.Money(50000000))
         .SetChange(alice)
@@ -380,7 +379,7 @@ Boolean ok = txBuilder.Verify(tx);
 Console.WriteLine(tx.ToHex());
 ```
 
-*Raw TX Alice buy in of 0.5 BTC
+\*Raw TX Alice buy in of 0.5 BTC
 ```
 0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
 008b483045022100c21e5c296d3024f64dbd948b1999933206a3d3d757ff1004ce874fa4b9277acc
@@ -391,7 +390,7 @@ fd760f26e93e91e29fddf3ddddd3f543841cf9435bdc156fb73854f4bf22557798ba535a3ee89a62
 4956a88a9322be8d2834148700000000
 ```
 
-*In JSON
+\*In JSON
 ```
 {
   "txid": "0e7ae471ffd578c64b142c232f36c3f7810e1fcb2e31b8c1b02f4c61c07859dc",
@@ -453,7 +452,7 @@ TODO
 Alice and Bob must also create a refund transaction to themselves, but *not* broadcast it.
 
 ## Game play
-The dealer's client is responsible for the orchastration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intnet is to limit network traffic.
+The dealer's client is responsible for the orchestration of the game.  As the dealer position rotates, this isn't a centralisation risk.  The intent is to limit network traffic.
 1.  Define the hand contract
 2.  Shuffle the deck
 3.  Post blinds
@@ -469,11 +468,11 @@ The dealer's client is responsible for the orchastration of the game.  As the de
 ### Hand Contract
 At the start of each hand, the dealer defines the hand contract which references the table contract.  
 
-1.  The players and seat postions
+1.  The players and seat positions
 2.  The stack of each player
 3.  A ID as a GUID
 
-*Example hand contract seralized in XML Downlaod from test data folder
+\*Example hand contract serialised in XML Download from test data folder
 ```
 <?xml version="1.0" encoding="utf-8" ?>
 <ArrayOfActionMessage xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -614,13 +613,13 @@ The deck needs to be encrypted using a commutative algorithm, such as RSA.  Alic
 - Card[2] = AH
 - Card[3] = 2S
 
-Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.  *See test data for full set.
+Create an array of 52 private keys, 16 bytes represented as base64.  These do not leave Alices computer.  \*See test data for full set.
 - Key[0]=ro4So+aeT6VJt9/OKTa/Ag==
 - Key[1]=GcL2OvzsDg54RIZZ5ruMFA==
 - Key[2]=HEKFpbtQnjl715X5P+8Y8g==
 - Key[3]=2cXOWr/IQcJ/AyqhF/W/jg==
 
-~~Each card is double encrypted.  First round of encryption with the hand key.  In the example key = HBFwc/qnlFqkxwiXTmNkXw== (1c 11 70 73 fa a7 94 5a a4 c7 08 97 4e 63 64 5f) in hex.~~
+\~\~Each card is double encrypted.  First round of encryption with the hand key.  In the example key = HBFwc/qnlFqkxwiXTmNkXw== (1c 11 70 73 fa a7 94 5a a4 c7 08 97 4e 63 64 5f) in hex.\~\~
 
 - Card[0]=
 - Card[1]=
@@ -646,7 +645,7 @@ As the deck is encrypted, and assumed shuffled, Bob has no way to known the cont
 </Message>
 ```
 
-*Note:  The deck could also be shuffled by a witness.
+\*Note:  The deck could also be shuffled by a witness.
 
 ### Post blinds
 In our example, Bob is SB and Alice is BB.  Using the lightning proposal, Bob creates an unsigned TX of 0.001 to Alice.  
@@ -661,17 +660,17 @@ Eg SB message in XML
 ### Pre flop
 We know how the distribution of cards that will be dealt.  In Holdem, each card is dealt one at a time, starting left of the dealer (small blind) [Citation 1]
 
-- Card[0] => Bob
-- Card[1] => Alice
-- Card[2] => Bob
-- Card[3] => Alice
+- Card[0] =\> Bob
+- Card[1] =\> Alice
+- Card[2] =\> Bob
+- Card[3] =\> Alice
 
-- Alice -> Action request message to Bob.
-- Bob -> Returns signed action message to Alice
-- Alice -> Checks signature, and adds action response to the block
-- Alice -> Broadcasts the concatinated block to all players
-- All players -> Verifiy the block and signature
-- All players -> Return verification message
+- Alice -\> Action request message to Bob.
+- Bob -\> Returns signed action message to Alice
+- Alice -\> Checks signature, and adds action response to the block
+- Alice -\> Broadcasts the concatenated block to all players
+- All players -\> Verify the block and signature
+- All players -\> Return verification message
 
 *TODO: CREATE SEQUENCE DIAGRAM*
 
@@ -707,9 +706,9 @@ b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
 ```
 
 ### Award the pot. (Post hand consensus)
-Once the hand has been played, the table then reaches consensus.  The signed game history could then be persistend into an Ethereum block chain referencing previous hands.  
+Once the hand has been played, the table then reaches consensus.  The signed game history could then be persisted into an Ethereum block chain referencing previous hands.  
 
-Fee vs Payouts.  The table would also include a paramater when to commite the hand, or hand history, to a chain.  The more frequently it is done the more fees it will incure. 
+Fee vs Payouts.  The table would also include a parameter when to commit the hand, or hand history, to a chain.  The more frequently it is done the more fees it will incur. 
 
 ## Cashing out
 Closing the channel
@@ -726,7 +725,7 @@ Players (in seats)
 5. Phil mgXqH7yA6Djx5Wqpaspsw25mNLTx2yaPeB
 6. Mike mre7fKPYqyKjACfb74rSjVNubE9ZX3t7Cb
 7. Tom mxeHrRd239QgwYZtEtNo8eGrnmGeDbCFPB
-9. Gus mkcuSxhM5F76vzbAXyhXayXUw4sTitJXhc * Button
+9. Gus mkcuSxhM5F76vzbAXyhXayXUw4sTitJXhc \* Button
 
 The hand is decribed in Poker Stars Hand History format.
 ```
