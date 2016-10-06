@@ -191,7 +191,6 @@ All actions are sent as messages.  They must include a public key hash and be si
 2.  Hash the payload of step 1
 3.  Sign the output of step 2
 
-
 General message format
 
 | Property | Eg |
@@ -209,6 +208,7 @@ Example action message (payload)
 
 | Property  | Eg |
 | --------- | -- |
+| Id | 47b466e4-c852-49f3-9a6d-5e59c62a98b6 |
 | Bitcoin Address (Public Key Hash) | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
 | Index | 2 |
 | Action | CALL 5000000 |
@@ -220,7 +220,12 @@ The hash (SHA-256) is of the property values concantinated, thus seriliazation f
 
 Eg of above message.
 ```
-msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL500000020160817000000
+47b466e4-c852-49f3-9a6d-5e59c62a98b6msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL500000020160817000000
+```
+
+SHA-256 hash of the payload
+```
+1a7bf11c87e74c22b5d6fa99b28e5d28b715d3f392bb58a35da18dec3c697975
 ```
 
 Eg in XML
@@ -243,7 +248,7 @@ b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
     <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
   <Action>
   <MessageSignature>Gztf4/3oNvanh51g11W4NlPOEyAhTCURaPTOF13Yl3iYHHh+SUvGk/5dtuZDKQdteuLAwIt8K5uthLTYsyf90rI=</MessageSignature>
-  <Hash Algorithm="SHA256"></Hash>
+  <Hash Algorithm="SHA-256">1a7bf11c87e74c22b5d6fa99b28e5d28b715d3f392bb58a35da18dec3c697975</Hash>
 </Message>
 ```
 
@@ -471,33 +476,33 @@ At the start of each hand, the dealer defines the hand contract which references
 *Example hand contract seralized in XML
 ```
 <ArrayOfActionMessage xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<ActionMessage>
-<Version>1.0</Version>
-<Id>47b466e4-c852-49f3-9a6d-5e59c62a98b6</Id>
-<BitcoinAddress>msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</BitcoinAddress>
-<Signature>HEVF2mU1K0MmgeaP/zlxjCDkgbz43I638QaWwM/ipcrfWbSZwfx96MDxcqDr3dTBzzKMr9EnNqBjJlIQLk6Tdmg=</Signature>
-<TimeStamp>2016-08-17T00:00:00</TimeStamp>
-<TableId>bf368921-346a-42d8-9cb8-621f9cad5e16</TableId>
-<HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
-<Index>0</Index>
-<Action>SMALL BLIND</Action>
-<Amount>50000</Amount>
-<HashAlgorithm>SHA256</HashAlgorithm>
-</ActionMessage>
-<ActionMessage>
-<Version>1.0</Version>
-<Id>a29bc370-9492-4b60-ad4f-7c7513064383</Id>
-<BitcoinAddress>mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</BitcoinAddress>
-<Signature>HATytRG1kIsPUVxELt7/m40EwCn4ryaV2p6Xmr38rijmAsm3pra8vvRPipNdYzAF5fgNr8HuLKZH2wUkpvEJ8CM=</Signature>
-<TimeStamp>2016-08-17T00:00:10</TimeStamp>
-<TableId>bf368921-346a-42d8-9cb8-621f9cad5e16</TableId>
-<HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
-<Index>1</Index>
-<Action>BIG BLIND</Action>
-<Amount>100000</Amount>
-<PreviousHash>be0c3991bdc569a94e57bec2afbfc7a8283be8c85ab16bb6e009d6f73270f7a0</PreviousHash>
-<HashAlgorithm>SHA256</HashAlgorithm>
-</ActionMessage>
+  <ActionMessage>
+    <Version>1</Version>
+    <Id>47b466e4-c852-49f3-9a6d-5e59c62a98b6</Id>
+    <BitcoinAddress>msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv</BitcoinAddress>
+    <Signature>HEVF2mU1K0MmgeaP/zlxjCDkgbz43I638QaWwM/ipcrfWbSZwfx96MDxcqDr3dTBzzKMr9EnNqBjJlIQLk6Tdmg=</Signature>
+    <TimeStamp>2016-08-17T00:00:00</TimeStamp>
+    <TableId>bf368921-346a-42d8-9cb8-621f9cad5e16</TableId>
+    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
+    <Index>0</Index>
+    <Action>SMALL BLIND</Action>
+    <Amount>50000</Amount>
+    <HashAlgorithm>SHA256</HashAlgorithm>
+  </ActionMessage>
+  <ActionMessage>
+  <Version>1</Version>
+    <Id>a29bc370-9492-4b60-ad4f-7c7513064383</Id>
+    <BitcoinAddress>mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</BitcoinAddress>
+    <Signature>HATytRG1kIsPUVxELt7/m40EwCn4ryaV2p6Xmr38rijmAsm3pra8vvRPipNdYzAF5fgNr8HuLKZH2wUkpvEJ8CM=</Signature>
+    <TimeStamp>2016-08-17T00:00:10</TimeStamp>
+    <TableId>bf368921-346a-42d8-9cb8-621f9cad5e16</TableId>
+    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
+    <Index>1</Index>
+    <Action>BIG BLIND</Action>
+    <Amount>100000</Amount>
+    <PreviousHash>be0c3991bdc569a94e57bec2afbfc7a8283be8c85ab16bb6e009d6f73270f7a0</PreviousHash>
+    <HashAlgorithm>SHA256</HashAlgorithm>
+  </ActionMessage>
 <ActionMessage>
 <Version>1.0</Version>
 <Id>e299ebc5-b50f-425e-b839-cb69ef69a12e</Id>
