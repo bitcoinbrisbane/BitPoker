@@ -125,12 +125,17 @@ namespace Bitpoker.WPFClient.ViewModels
                     //TODO: Check player does not exist in collection and zip
                     var players = client.GetPlayers();
 
-                    foreach (BitPoker.Models.PlayerInfo player in players)
+                    foreach (PlayerInfo player in players)
                     {
                         this.NetworkPlayers.Add(player);
                     }
                 }
             }
+        }
+
+        public async Task RefreshWalletBalance()
+        {
+
         }
 
         public void CreateKeys()

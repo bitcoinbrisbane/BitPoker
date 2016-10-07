@@ -22,6 +22,29 @@ namespace Bitpoker.WPFClient.ViewModels
             _table = table;
         }
 
+        public async Task<Boolean> JoinTable(BitPoker.Models.Messages.JoinTableRequest request)
+        {
+            //Check if seat is allocated
+
+            //Check BTC of that address to stop spamming
+            Clients.Blockr client = new Clients.Blockr();
+            Decimal balance = await client.GetAddressBalanceAsync(request.Player.BitcoinAddress, 2);
+
+            if (balance > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<Boolean> StartTable()
+        {
+            return true;
+        }
+
         public async Task<String> BuyIn(Int16 seat, UInt64 amount)
         {
             if (amount >= _table.MinBuyIn && amount <= _table.MaxBuyIn)

@@ -2,11 +2,13 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class AddTableRequest : BaseMessage
+    public class JoinTableRequest : BaseMessage
     {
-        public Contracts.Table Table { get; set; }
+        public PlayerInfo Player { get; set; }
 
-        public AddTableRequest()
+        public UInt16 Seat { get; set; }
+
+        public JoinTableRequest()
         {
             base.TimeStamp = DateTime.UtcNow;
             base.Id = Guid.NewGuid();

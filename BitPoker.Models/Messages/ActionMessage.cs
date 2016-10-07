@@ -37,7 +37,7 @@ namespace BitPoker.Models.Messages
 
         public override string ToString()
         {
-            return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp);
+            return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
         }
 	}
 }
