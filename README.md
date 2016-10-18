@@ -162,9 +162,9 @@ Less use of Etherum
 1.  Players connect to each other via a P2P network protocol.
 2.  A player either looks to join a table and reviews the contract.
 3.  A player can choose to start a table be defining a table contract.
-4.  Tables should also broad cast their game, status and number of current .players to other tables for better network propergation.
+4.  Tables should also broad cast their game, status and number of current .players to other tables for better network propagation.
 5.  Leaving the table (closing the channel)
-5.  Lightning network will facilitate micro payments "off chain".  The table can agree to bring them "on chain" after n hands are dealt.
+6.  Lightning network will facilitate micro payments "off chain".  The table can agree to bring them "on chain" after n hands are dealt.
 
 ### Aside:  Lightning Network
 

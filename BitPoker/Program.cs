@@ -283,7 +283,11 @@ namespace BitPoker
         {
             Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
             message.BitcoinAddress = carol.ToString();
-            message.Player = new PlayerInfo() { BitcoinAddress = carol.ToString(), IPAddress = "localhost" };
+            message.Player = new PlayerInfo() 
+			{ 
+				BitcoinAddress = carol.ToString(), 
+				IPAddress = "localhost" 
+			};
 
             message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
