@@ -8,7 +8,7 @@ namespace BitPoker.Models.ExtensionMethods
 {
     public static class ActionExtension
     {
-        public static Boolean IsValid(this IEnumerable<Models.Messages.ActionMessage> value)
+        public static Boolean IsValid(this IEnumerable<Messages.ActionMessage> value)
         {
             return false;
         }

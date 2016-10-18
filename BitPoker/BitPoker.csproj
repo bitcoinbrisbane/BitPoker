@@ -93,7 +93,9 @@
       <Name>BitPoker.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestData\samplehand.xml" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="TestData\AliceKeys.txt">

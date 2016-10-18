@@ -58,27 +58,7 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-            //Create a hand chain for example.
-            //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
-            //{
-            //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-            //};
 
-
-            //IDestination d = new BitcoinScriptAddress("2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85", NBitcoin.Network.TestNet);
-            //var alice_tx = CreateTransaction(alice_secret, d, 10000).Result;
-            //String alice_tx_hex = alice_tx.ToHex();
-
-            //Repository.IHandRepository handRepo = new Repository.MockHandRepo();
-            //var hand = handRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
-
-            //String json = JsonConvert.SerializeObject(hand);
-
-
-            //Repository.MockTableRepo tableRepo = new Repository.MockTableRepo();
-            //var tables = tableRepo.All();
-
-            //String tableJSON = JsonConvert.SerializeObject(tables);
 
 
 
@@ -274,6 +254,31 @@ namespace BitPoker
             {
                 throw new FileNotFoundException();
             }
+        }
+
+        private static void CreateHandChain()
+        {
+            //Create a hand chain for example.
+            //TexasHoldemPlayer alice2 = new TexasHoldemPlayer()
+            //{
+            //    BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
+            //};
+
+
+            //IDestination d = new BitcoinScriptAddress("2NCSTuV27SC1BF122Xe1wmkNkjo4MJw4W85", NBitcoin.Network.TestNet);
+            //var alice_tx = CreateTransaction(alice_secret, d, 10000).Result;
+            //String alice_tx_hex = alice_tx.ToHex();
+
+            Repository.IHandRepository handRepo = new Repository.MockHandRepo();
+            var hand = handRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
+
+            //String json = JsonConvert.SerializeObject(hand);
+
+
+            //Repository.MockTableRepo tableRepo = new Repository.MockTableRepo();
+            //var tables = tableRepo.All();
+
+            //String tableJSON = JsonConvert.SerializeObject(tables);
         }
 
         /// <summary>
