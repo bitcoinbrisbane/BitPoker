@@ -5,10 +5,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using BitPoker.Models;
+using BitPoker.Models.Messages;
 
-namespace BitPoker.Clients
+namespace BitPoker.NetworkClient
 {
-	public class APIClient : BitPoker.Clients.IPlayerClient
+	public class APIClient : IPlayerClient, ITableClient, IMessageClient, INetworkClient
 	{
 		private readonly String _apiUrl;
 
@@ -22,17 +24,22 @@ namespace BitPoker.Clients
 			_apiUrl = apiUrl;
 		}
 
-		public IEnumerable<BitPoker.Models.PlayerInfo> GetPlayers()
+		public IEnumerable<PlayerInfo> GetPlayers()
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
-				String json = httpClient.GetStringAsync(String.Format("{0}/api/players",_apiUrl)).Result;
+				String json = httpClient.GetStringAsync(String.Format("{0}/api/players", _apiUrl)).Result;
 				IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
 				return result;
 			}
 		}
 
-		public async Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync()
+        public async Task AddPlayer(PlayerInfo player)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<PlayerInfo>> GetPlayersAsync()
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
@@ -42,7 +49,7 @@ namespace BitPoker.Clients
 			}
 		}
 
-		public void BuyIn(BitPoker.Models.Messages.BuyInRequestMessage buyIn)
+		public void BuyIn(Models.Messages.BuyInRequestMessage buyIn)
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
@@ -55,7 +62,7 @@ namespace BitPoker.Clients
 		}
 
 
-		public BitPoker.Models.Contracts.Table GetTable(Guid id)
+		public Models.Contracts.Table GetTable(Guid id)
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
@@ -65,8 +72,7 @@ namespace BitPoker.Clients
 			}
 		}
 
-
-		public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
+		public void SendMessage(ActionMessage message)
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
@@ -89,8 +95,25 @@ namespace BitPoker.Clients
 			}
 		}
 
-		public void Dispose()
-		{
-		}
-	}
+        public async Task<IEnumerable<Models.Contracts.Table>> GetTablesAsync()
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                Uri uri = new Uri(String.Format("{0}tables", _apiUrl));
+                String json = await httpClient.GetStringAsync(uri);
+                List<Models.Contracts.Table> response = JsonConvert.DeserializeObject<List<Models.Contracts.Table>>(json);
+
+                return response;
+            }
+        }
+
+        public Task SendMessageAsync(ActionMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+        }
+    }
 }

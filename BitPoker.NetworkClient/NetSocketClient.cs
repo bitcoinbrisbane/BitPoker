@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitpoker.WPFClient.Clients
+namespace BitPoker.NetworkClient
 {
     /// <summary>
     /// Test class for Netsocket implmenation
@@ -71,22 +71,23 @@ namespace Bitpoker.WPFClient.Clients
             };
         }
 
-
         public bool IsConnected
         {
             get { return senderSock.Connected; }
         }
-
 
         public BitPoker.Models.Contracts.Table GetTable(Guid id)
         {
             throw new NotImplementedException();
         }
 
-
         public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

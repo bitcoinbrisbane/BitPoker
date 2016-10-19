@@ -75,7 +75,6 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions.cs" />
@@ -87,6 +86,10 @@
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
       <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.NetworkClient\BitPoker.NetworkClient.csproj">
+      <Project>{630cf422-2c7d-4cd5-990f-71d50c02c3c4}</Project>
+      <Name>BitPoker.NetworkClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
       <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>

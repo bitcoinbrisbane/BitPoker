@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -27,21 +27,33 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIClient.cs" />
+    <Compile Include="Blockr.cs" />
+    <Compile Include="IBroadCastClient.cs" />
+    <Compile Include="NetSocketClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="INetworkClient.cs" />
     <Compile Include="IPlayerClient.cs" />
     <Compile Include="IMessageClient.cs" />
-    <Compile Include="HttpClient.cs" />
     <Compile Include="ITableClient.cs" />
+    <Compile Include="TCPClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
       <Name>BitPoker.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

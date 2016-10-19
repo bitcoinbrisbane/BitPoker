@@ -33,6 +33,9 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blockr\AddressResponse.cs" />
+    <Compile Include="Blockr\Data.cs" />
+    <Compile Include="Blockr\Tx.cs" />
     <Compile Include="Contracts\BaseTable.cs" />
     <Compile Include="ExtensionMethods\ActionExtension.cs" />
     <Compile Include="ExtensionMethods\HandExtensions.cs" />

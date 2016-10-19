@@ -6,9 +6,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitPoker
+namespace BitPoker.NetworkClient
 {
-    public class Client
+    public class TCPClient
     {
         private TcpClient _client;
 
@@ -17,7 +17,7 @@ namespace BitPoker
 
         private Boolean _isConnected;
 
-        public Client(String ipAddress, int portNum)
+        public TCPClient(String ipAddress, int portNum)
         {
             _client = new TcpClient();
             _client.Connect(ipAddress, portNum);

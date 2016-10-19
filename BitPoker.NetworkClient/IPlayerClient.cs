@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BitPoker.NetworkClient
 {
-	public interface IPlayerClient
+	public interface IPlayerClient : IDisposable
 	{
 		Task AddPlayer(Models.PlayerInfo player);
 

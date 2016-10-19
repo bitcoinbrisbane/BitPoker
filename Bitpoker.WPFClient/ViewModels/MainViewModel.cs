@@ -33,7 +33,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public IList<Clients.INetworkClient> Clients { get; set; }
+        public IList<BitPoker.NetworkClient.INetworkClient> Clients { get; set; }
 
         /// <summary>
         /// Players on the entire network
@@ -50,15 +50,15 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public MainViewModel()
         {
-            this.NetworkPlayers = new ObservableCollection<BitPoker.Models.PlayerInfo>();
-            this.Clients = new List<Clients.INetworkClient>(1);
+            this.NetworkPlayers = new ObservableCollection<PlayerInfo>();
+            this.Clients = new List<BitPoker.NetworkClient.INetworkClient>(1);
             
-            this.Clients.Add(new Clients.APIClient("https://www.bitpoker.io/api/"));
+            this.Clients.Add(new BitPoker.NetworkClient.APIClient("https://www.bitpoker.io/api/"));
             //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
             Wallet = new WalletViewModel("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
 
-            _secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", NBitcoin.Network.TestNet);
+            _secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", Network.TestNet);
             BitcoinAddress address = _secret.GetAddress();
 
             //move this
@@ -116,26 +116,36 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public void GetPlayers()
+        public async Task GetPlayers()
         {
-            foreach (Clients.INetworkClient client in this.Clients)
+            using (BitPoker.NetworkClient.IPlayerClient client = new BitPoker.NetworkClient.APIClient(""))
             {
-                if (client.IsConnected)
-                {
-                    //TODO: Check player does not exist in collection and zip
-                    var players = client.GetPlayers();
-
-                    foreach (PlayerInfo player in players)
-                    {
-                        this.NetworkPlayers.Add(player);
-                    }
-                }
+                var players = await client.GetPlayersAsync();
             }
+               
+
+            //foreach (BitPoker.NetworkClient.INetworkClient client in this.Clients)
+            //{
+            //    if (client.IsConnected)
+            //    {
+            //        //TODO: Check player does not exist in collection and zip
+            //        var players = client.GetPlayers();
+
+            //        foreach (PlayerInfo player in players)
+            //        {
+            //            this.NetworkPlayers.Add(player);
+            //        }
+            //    }
+            //}
         }
 
         public async Task RefreshWalletBalance()
         {
-
+            using (BitPoker.NetworkClient.Blockr client = new BitPoker.NetworkClient.Blockr())
+            {
+                String address = this.Wallet.Address.ToString();
+                var x = await client.GetAddressBalanceAsync(address, 1);
+            }
         }
 
         public void CreateKeys()
@@ -149,10 +159,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 key.CopyTo(allKeys, i * 16);
 
                 this.Keys.Add(key);
-                //Console.WriteLine(Convert.ToBase64String(key));
             }
-
-            //Calculate hash on allKeys
         }
 
         public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)

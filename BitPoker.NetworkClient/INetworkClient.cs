@@ -1,8 +1,9 @@
 ﻿using System;
+
 namespace BitPoker.NetworkClient
 {
-	public interface INetworkClient
+	public interface INetworkClient : IDisposable
 	{
-		Boolean IsConnected { get; set; }
+		Boolean IsConnected { get; }
 	}
 }

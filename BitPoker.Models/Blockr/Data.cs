@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Bitpoker.WPFClient.Models.Blockr
+namespace BitPoker.Models.Blockr
 {
     public class Data
     {

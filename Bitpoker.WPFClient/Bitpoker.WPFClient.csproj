@@ -68,18 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Clients\APIClient.cs" />
     <Compile Include="Clients\BackendChat.cs" />
-    <Compile Include="Clients\Blockr.cs" />
     <Compile Include="Clients\IChatBackend.cs" />
-    <Compile Include="Clients\IMessageClient.cs" />
-    <Compile Include="Clients\INetworkClient.cs" />
-    <Compile Include="Clients\NetSocketClient.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="KeyRepository.cs" />
-    <Compile Include="Models\Blockr\AddressResponse.cs" />
-    <Compile Include="Models\Blockr\Data.cs" />
-    <Compile Include="Models\Blockr\Tx.cs" />
     <Compile Include="Models\CompositeType.cs" />
     <Compile Include="ViewModels\HandViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -130,6 +122,10 @@
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.NetworkClient\BitPoker.NetworkClient.csproj">
+      <Project>{630cf422-2c7d-4cd5-990f-71d50c02c3c4}</Project>
+      <Name>BitPoker.NetworkClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\BitPoker.Repository.LiteDB\BitPoker.Repository.LiteDB.csproj">
       <Project>{9d248950-d9e5-43ec-8eef-cc9d350bae38}</Project>

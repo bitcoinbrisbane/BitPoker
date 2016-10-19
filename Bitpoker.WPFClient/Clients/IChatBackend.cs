@@ -1,4 +1,5 @@
 ﻿using Bitpoker.WPFClient.Models;
+using BitPoker.NetworkClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;

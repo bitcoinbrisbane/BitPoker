@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bitpoker.WPFClient.Models.Blockr
+namespace BitPoker.Models.Blockr
 {
     public class Tx
     {

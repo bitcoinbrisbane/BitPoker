@@ -9,6 +9,9 @@ namespace Bitpoker.WPFClient.ViewModels
 {
     public class TableViewModel
     {
+        //TODO: REMOVE
+        private const String apiUrl = "https://www.bitpoker.io/api";
+
         private readonly BitPoker.Models.Contracts.Table _table;
 
         public String Address { get; set; }
@@ -25,18 +28,22 @@ namespace Bitpoker.WPFClient.ViewModels
         public async Task<Boolean> JoinTable(BitPoker.Models.Messages.JoinTableRequest request)
         {
             //Check if seat is allocated
+            
 
             //Check BTC of that address to stop spamming
-            Clients.Blockr client = new Clients.Blockr();
-            Decimal balance = await client.GetAddressBalanceAsync(request.Player.BitcoinAddress, 2);
+            using (BitPoker.NetworkClient.Blockr client = new BitPoker.NetworkClient.Blockr())
+            {
+                //Clients.Blockr client = new Clients.Blockr();
+                Decimal balance = await client.GetAddressBalanceAsync(request.Player.BitcoinAddress, 2);
 
-            if (balance > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
+                if (balance > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -56,7 +63,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 {
                     BitcoinAddress = address.ToString(),
                     Amount = amount,
-                    Seat = seat,
+                    //Seat = seat,
                     TimeStamp = DateTime.UtcNow
                 };
 
@@ -88,7 +95,7 @@ namespace Bitpoker.WPFClient.ViewModels
             BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", NBitcoin.Network.TestNet);
             call.Signature = secret.PrivateKey.SignMessage(call.ToString());
 
-            Bitpoker.WPFClient.Clients.INetworkClient client = new Bitpoker.WPFClient.Clients.APIClient("https://bitpoker.azurewebsites.net/api/");
+            BitPoker.NetworkClient.IMessageClient client = new BitPoker.NetworkClient.APIClient(apiUrl);
             //if (client.IsConnected)
             //{
             //    client.SendMessage(call);

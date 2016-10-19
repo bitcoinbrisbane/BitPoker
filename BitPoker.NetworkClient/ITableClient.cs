@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace BitPoker.NetworkClient
 {
-	public interface ITableClient
+	public interface ITableClient : IDisposable
 	{
 		Task<IEnumerable<Models.Contracts.Table>> GetTablesAsync();
 	}

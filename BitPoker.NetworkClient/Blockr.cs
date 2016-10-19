@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Bitpoker.WPFClient.Clients
+namespace BitPoker.NetworkClient
 {
-    public class Blockr
+    public class Blockr : IBroadCastClient, IDisposable
     {
+        public async Task<string> BroadCaastAsync(string tx)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+        }
+
         public async Task<Decimal> GetAddressBalanceAsync(String address, Int16 confirmations)
         {
             //http://btc.blockr.io/api/v1/address/info/198aMn6ZYAczwrE5NvNTUMyJ5qkfy4g3Hi?confirmations=2
@@ -13,7 +22,7 @@ namespace Bitpoker.WPFClient.Clients
             using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
             {
                 String json = await client.GetStringAsync(url);
-                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<Bitpoker.WPFClient.Models.Blockr.AddressResponse>(json);
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.Blockr.AddressResponse>(json);
 
                 return response.data.balance;
             }

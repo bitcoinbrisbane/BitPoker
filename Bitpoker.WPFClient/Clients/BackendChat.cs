@@ -5,13 +5,13 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using BitPoker.Models.Messages;
 
 namespace Bitpoker.WPFClient.Clients
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ChatBackend : IChatBackend
     {
-
         #region Everything we need to receive messages
 
         DisplayMessageDelegate _displayMessageDelegate = null;
@@ -83,7 +83,8 @@ namespace Bitpoker.WPFClient.Clients
 
         public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
         {
-            _channel.DisplayMessage(new CompositeType(_myUserName, message.ToString()));        }
+            _channel.DisplayMessage(new CompositeType(_myUserName, message.ToString()));
+        }
 
         private void StartService()
         {
@@ -112,8 +113,11 @@ namespace Bitpoker.WPFClient.Clients
             }
         }
 
+        public Task SendMessageAsync(ActionMessage message)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion // Everything we need for bi-directional communication
-
     }
 }
