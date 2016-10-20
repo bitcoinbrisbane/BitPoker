@@ -33,20 +33,6 @@ namespace Bitpoker.WPFClient
     {
         private Clients.ChatBackend _backend;
 
-        //SocketPermission permission;
-        //Socket sListener;
-        //IPEndPoint ipEndPoint;
-        //Socket handler;
-
-        public IList<Byte[]> Deck { get; set; }
-
-        //internal for testing
-        internal List<Byte[]> _keys;
-
-        public Byte[] KeyHash { get; private set; }
-
-        private Byte[] IV = new Byte[16];
-
         private ViewModels.MainViewModel _viewModel = new ViewModels.MainViewModel();
 
         public MainWindow()
@@ -137,68 +123,6 @@ namespace Bitpoker.WPFClient
             }
         }
 
-        //private void Start()
-        //{
-        //    try
-        //    {
-        //        // Creates one SocketPermission object for access restrictions
-        //        permission = new SocketPermission(
-        //        NetworkAccess.Accept,     // Allowed to accept connections 
-        //        TransportType.Tcp,        // Defines transport types 
-        //        "",                       // The IP addresses of local host 
-        //        SocketPermission.AllPorts // Specifies all ports 
-        //        );
-
-        //        // Listening Socket object 
-        //        sListener = null;
-
-        //        // Ensures the code to have permission to access a Socket 
-        //        permission.Demand();
-
-        //        // Resolves a host name to an IPHostEntry instance 
-        //        IPHostEntry ipHost = Dns.GetHostEntry("");
-
-        //        // Gets first IP address associated with a localhost 
-        //        IPAddress ipAddr = ipHost.AddressList[0];
-
-        //        // Creates a network endpoint 
-        //        ipEndPoint = new IPEndPoint(ipAddr, 4510);
-
-        //        // Create one Socket object to listen the incoming connection 
-        //        sListener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-        //        // Associates a Socket with a local endpoint 
-        //        sListener.Bind(ipEndPoint);
-
-        //    }
-        //    catch (Exception exc) 
-        //    { 
-        //        MessageBox.Show(exc.ToString()); 
-        //    }
-        //}
-
-        //private void Listen_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        // Places a Socket in a listening state and specifies the maximum 
-        //        // Length of the pending connections queue 
-        //        sListener.Listen(10);
-
-        //        // Begins an asynchronous operation to accept an attempt 
-        //        AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
-        //        sListener.BeginAccept(aCallback, sListener);
-
-        //        //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
-
-        //        //StartListen_Button.IsEnabled = false;
-        //        //Send_Button.IsEnabled = true;
-        //    }
-        //    catch (Exception exc) { MessageBox.Show(exc.ToString()); }
-        //}
-
-        
-
         private void Send_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -223,20 +147,6 @@ namespace Bitpoker.WPFClient
                 MessageBox.Show(exc.ToString());
             }
         }
-
-        //public void SendCallback(IAsyncResult ar)
-        //{
-        //    try
-        //    {
-        //        // A Socket which has sent the data to remote host 
-        //        Socket handler = (Socket)ar.AsyncState;
-
-        //        // The number of bytes sent to the Socket 
-        //        int bytesSend = handler.EndSend(ar);
-        //        Console.WriteLine("Sent {0} bytes to Client", bytesSend);
-        //    }
-        //    catch (Exception exc) { MessageBox.Show(exc.ToString()); }
-        //}
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
@@ -312,7 +222,6 @@ namespace Bitpoker.WPFClient
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Get user pubkey
-
             //Load tables
         }
     }

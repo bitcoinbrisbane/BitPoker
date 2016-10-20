@@ -39,11 +39,11 @@ namespace BitPoker.MVC.Controllers
             {
                 //Is seat empty?
 
-                table.Players[buyInRequest.Seat] = new BitPoker.Models.TexasHoldemPlayer()
+                table.Players[0] = new BitPoker.Models.TexasHoldemPlayer()
                 {
                     BitcoinAddress = buyInRequest.BitcoinAddress,
                     Stack = buyInRequest.Amount,
-                    Position = buyInRequest.Seat, //Assume no hand played for this mock
+                    //Position = buyInRequest.Seat, //Assume no hand played for this mock
                     IsBigBlind = false,
                     IsDealer = true,
                     IsSmallBlind = false,

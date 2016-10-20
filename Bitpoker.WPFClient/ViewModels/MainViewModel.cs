@@ -35,10 +35,14 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public IList<BitPoker.NetworkClient.INetworkClient> Clients { get; set; }
 
+        public BitPoker.NetworkClient.INetworkClient NetworkClient { get; set; }
+
         /// <summary>
         /// Players on the entire network
         /// </summary>
         public ObservableCollection<PlayerInfo> NetworkPlayers { get; set; }
+
+        public ObservableCollection<TableViewModel> Tables { get; set; }
 
         internal ICollection<Byte[]> Keys { get; set; }
 
@@ -55,6 +59,8 @@ namespace Bitpoker.WPFClient.ViewModels
             
             this.Clients.Add(new BitPoker.NetworkClient.APIClient("https://www.bitpoker.io/api/"));
             //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
+
+            this.Tables = new ObservableCollection<TableViewModel>();
 
             Wallet = new WalletViewModel("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
 
@@ -146,6 +152,16 @@ namespace Bitpoker.WPFClient.ViewModels
                 String address = this.Wallet.Address.ToString();
                 var x = await client.GetAddressBalanceAsync(address, 1);
             }
+        }
+
+        public TableViewModel GetTableFromClient(String id)
+        {
+            //
+            //using ()
+            //{
+
+            //}
+            return new TableViewModel();
         }
 
         public void CreateKeys()
