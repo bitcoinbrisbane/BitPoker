@@ -28,14 +28,20 @@ namespace Bitpoker.WPFClient.ViewModels
 
         private Key _bitcoinKey;
         private BitcoinSecret _secret;
-
-        private static Random rng = new Random();
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Not yet used
+        /// </summary>
         public IList<BitPoker.NetworkClient.INetworkClient> Clients { get; set; }
 
+        /// <summary>
+        /// For single client
+        /// </summary>
         public BitPoker.NetworkClient.INetworkClient NetworkClient { get; set; }
+
+        public Bitpoker.WPFClient.Clients.IChatBackend Backend { get; set; }
 
         /// <summary>
         /// Players on the entire network
@@ -44,13 +50,11 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public ObservableCollection<TableViewModel> Tables { get; set; }
 
-        internal ICollection<Byte[]> Keys { get; set; }
-
-        internal Byte[] IV { get; set; }
-
         public WalletViewModel Wallet { get; set; }
 
         public TexasHoldemPlayer Player { get; set; }
+
+        public IObservable<IMessage> InComingMessage { get; set; }
 
         public MainViewModel()
         {
@@ -107,7 +111,8 @@ namespace Bitpoker.WPFClient.ViewModels
                 MinBuyIn = minBuyIn,
                 MaxBuyIn = maxBuyIn,
                 MinPlayers = minPlayers,
-                MaxPlayers = maxPlayers
+                MaxPlayers = maxPlayers,
+                NetworkAddress = "p2p"
             };
 
             if (!table.IsValid())
@@ -115,6 +120,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 throw new AggregateException("Invalid table params");
             }
 
+            //Check for duplicates
             using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
             {
                 tableRepo.Add(table);
@@ -122,7 +128,25 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public async Task GetPlayers()
+        public void JoinTable(Guid tableId)
+        {
+            using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+            {
+                IMessage message = new BitPoker.Models.Messages.Request();
+                var table = tableRepo.Find(tableId);
+
+                BitPoker.Models.Messages.JoinTableRequest request = new BitPoker.Models.Messages.JoinTableRequest()
+                {
+                    Seat = 1
+                };
+
+                //TODO: use reflection
+                message.Type = "JoinTableRequest";
+                message.Payload = request;
+            }
+        }
+
+        public async Task GetPeers()
         {
             using (BitPoker.NetworkClient.IPlayerClient client = new BitPoker.NetworkClient.APIClient(""))
             {
@@ -154,72 +178,16 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public TableViewModel GetTableFromClient(String id)
+        public async Task<TableViewModel> GetTableFromClientAsync(String id)
         {
             //
             //using ()
             //{
 
             //}
-            return new TableViewModel();
-        }
+            //return new TableViewModel();
 
-        public void CreateKeys()
-        {
-            Byte[] allKeys = new Byte[832];
-
-            for (Int32 i = 0; i < 52; i++)
-            {
-                Byte[] key = new Byte[16];
-                rng.NextBytes(key);
-                key.CopyTo(allKeys, i * 16);
-
-                this.Keys.Add(key);
-            }
-        }
-
-        public static byte[] EncryptStringToBytes_Aes(string plainText, byte[] Key, byte[] IV)
-        {
-            // Check arguments.
-            if (plainText == null || plainText.Length <= 0)
-                throw new ArgumentNullException("plainText");
-
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("Key");
-
-            byte[] encrypted;
-
-            // Create an Aes object
-            // with the specified key and IV.
-            using (Aes aesAlg = Aes.Create())
-            {
-                aesAlg.Key = Key;
-                aesAlg.IV = IV;
-
-                // Create a decrytor to perform the stream transform.
-                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-
-                // Create the streams used for encryption.
-                using (MemoryStream msEncrypt = new MemoryStream())
-                {
-                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                        {
-                            //Write all data to the stream.
-                            swEncrypt.Write(plainText);
-                        }
-                        encrypted = msEncrypt.ToArray();
-                    }
-                }
-            }
-
-            // Return the encrypted bytes from the memory stream.
-            return encrypted;
-
+            throw new NotImplementedException();
         }
     }
 }

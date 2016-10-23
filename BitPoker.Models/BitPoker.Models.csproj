@@ -53,11 +53,13 @@
     <Compile Include="Messages\BaseResponse.cs" />
     <Compile Include="Messages\BuyInRequestMessage.cs" />
     <Compile Include="Messages\BuyInResponseMessage.cs" />
+    <Compile Include="Messages\CompositeType.cs" />
     <Compile Include="Messages\DealRequest.cs" />
     <Compile Include="Messages\DeckRequestMessage.cs" />
     <Compile Include="Messages\DeckResponseMessage.cs" />
     <Compile Include="Messages\JoinTableRequest.cs" />
     <Compile Include="Messages\JoinTableResponse.cs" />
+    <Compile Include="Messages\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />

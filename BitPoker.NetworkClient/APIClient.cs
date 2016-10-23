@@ -115,5 +115,10 @@ namespace BitPoker.NetworkClient
         public void Dispose()
         {
         }
+
+        public void SendIMessage(IMessage message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

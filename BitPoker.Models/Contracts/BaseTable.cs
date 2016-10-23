@@ -19,5 +19,9 @@ namespace BitPoker.Models.Contracts
         public UInt64 MaxBuyIn { get; set; }
 
 		public String HashAlgorithm { get; set; }
+
+        public String NetworkAddress { get; set; }
+
+        //last seen?
     }
 }

@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class JoinTableRequest : BaseMessage
+    public class JoinTableRequest
     {
         public PlayerInfo Player { get; set; }
 
@@ -10,8 +10,6 @@ namespace BitPoker.Models.Messages
 
         public JoinTableRequest()
         {
-            base.TimeStamp = DateTime.UtcNow;
-            base.Id = Guid.NewGuid();
         }
     }
 }

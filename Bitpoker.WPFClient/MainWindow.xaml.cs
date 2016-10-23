@@ -1,5 +1,4 @@
 ﻿using Bitpoker.WPFClient.Clients;
-using Bitpoker.WPFClient.Models;
 using BitPoker.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using BitPoker.Models.ExtensionMethods;
+using BitPoker.Models.Messages;
 
 namespace Bitpoker.WPFClient
 {
@@ -31,7 +31,9 @@ namespace Bitpoker.WPFClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Clients.ChatBackend _backend;
+        //use client on view model
+        [Obsolete]
+        private ChatBackend _backend;
 
         private ViewModels.MainViewModel _viewModel = new ViewModels.MainViewModel();
 
@@ -50,11 +52,13 @@ namespace Bitpoker.WPFClient
 
             this.DataContext = _viewModel;
 
-            //Start();
-
-            _backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+            _backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
         }
 
+        /// <summary>
+        /// Display messages and peform any actions
+        /// </summary>
+        /// <param name="composite"></param>
         public void DisplayMessage(CompositeType composite)
         {
             string username = composite.Username == null ? "" : composite.Username;
@@ -71,7 +75,23 @@ namespace Bitpoker.WPFClient
                     _backend.SendMessage(json);
                 }
             }
+
+            if (value.StartsWith("JOINTABLE"))
+            {
+                using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+                {
+                    var tables = tableRepo.All();
+                    String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+                    _backend.SendMessage(json);
+                }
+            }
         }
+
+        public void DisplayIMessage(IMessage message)
+        {
+            textBoxChatPane.Text += (message.Type + Environment.NewLine);
+        }
+
 
         private void textBoxEntryField_KeyDown(object sender, KeyEventArgs e)
         {
@@ -84,6 +104,7 @@ namespace Bitpoker.WPFClient
                 {
                     textBoxChatPane.Text += "ADDTABLE SmallBlind BigBlind MinBuyIn MaxBuyIn MinPlayers MaxPlayers" + Environment.NewLine;
                     textBoxChatPane.Text = "GETTABLES";
+                    textBoxChatPane.Text = "JOINTABLE";
                     //...
                 }
 
@@ -105,6 +126,18 @@ namespace Bitpoker.WPFClient
 
                 if (value.StartsWith("JOINTABLE"))
                 {
+                    String[] joinParams = value.Substring(0, 9).Split(' ');
+                    Guid tableId = new Guid(joinParams[1]);
+                    _viewModel.JoinTable(tableId);
+                    //_viewModel.BuyIn();
+                }
+                else
+                {
+                    _backend.SendMessage(textBoxEntryField.Text);
+                }
+
+                if (value.StartsWith("BUYIN"))
+                {
                     String[] buyInParms = value.Substring(0, 8).Split(' ');
                     //_viewModel.BuyIn();
                 }
@@ -123,49 +156,6 @@ namespace Bitpoker.WPFClient
             }
         }
 
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Convert byte array to string 
-                string message = "test message";
-
-                // Prepare the reply message 
-                //byte[] byteData = Encoding.Unicode.GetBytes(message);
-
-                // Sends data asynchronously to a connected Socket 
-                //handler.BeginSend(byteData, 0, byteData.Length, 0, new AsyncCallback(SendCallback), handler);
-
-
-                //IMessageClient client = new ChatBackend();
-
-                //Send_Button.IsEnabled = false;
-                //Close_Button.IsEnabled = true;
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.ToString());
-            }
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //if (sListener.Connected)
-                //{
-                //    sListener.Shutdown(SocketShutdown.Receive);
-                //    sListener.Close();
-                //}
-
-                //Close_Button.IsEnabled = false;
-            }
-            catch (Exception exc) 
-            { 
-                MessageBox.Show(exc.ToString()); 
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //_viewModel.NewTable(2, 10);
@@ -173,35 +163,15 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    // Places a Socket in a listening state and specifies the maximum 
-            //    // Length of the pending connections queue 
-            //    sListener.Listen(10);
-
-            //    // Begins an asynchronous operation to accept an attempt 
-            //    AsyncCallback aCallback = new AsyncCallback(AcceptCallback);
-            //    sListener.BeginAccept(aCallback, sListener);
-
-            //    //tbStatus.Text = "Server is now listening on " + ipEndPoint.Address + " port: " + ipEndPoint.Port;
-
-            //    //StartListen_Button.IsEnabled = false;
-            //    //Send_Button.IsEnabled = true;
-            //}
-            //catch (Exception exc)
-            //{
-            //    MessageBox.Show(exc.ToString());
-            //}
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            _viewModel.GetPlayers();
+            //_viewModel.GetPlayers();
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -213,10 +183,6 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            //if (_viewModel.Table != null)
-            //{
-            //    _viewModel.Table.Call(5000);
-            //}
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

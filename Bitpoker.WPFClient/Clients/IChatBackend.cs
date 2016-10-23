@@ -1,11 +1,7 @@
-﻿using Bitpoker.WPFClient.Models;
-using BitPoker.NetworkClient;
+﻿using BitPoker.NetworkClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
+using BitPoker.Models.Messages;
 
 namespace Bitpoker.WPFClient.Clients
 {
@@ -15,8 +11,14 @@ namespace Bitpoker.WPFClient.Clients
         [OperationContract(IsOneWay = true)]
         void DisplayMessage(CompositeType composite);
 
+        [OperationContract(IsOneWay = true)]
+        void DisplayIMessage(BitPoker.Models.IMessage message);
+
+        [Obsolete]
         void SendMessage(string text);
     }
 
     public delegate void DisplayMessageDelegate(CompositeType data);
+
+    public delegate void DisplayIMessageDelegate(BitPoker.Models.IMessage message);
 }

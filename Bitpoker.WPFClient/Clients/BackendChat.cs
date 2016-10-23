@@ -1,11 +1,10 @@
-﻿using Bitpoker.WPFClient.Models;
+﻿using BitPoker.Models.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using BitPoker.Models.Messages;
 
 namespace Bitpoker.WPFClient.Clients
 {
@@ -15,6 +14,7 @@ namespace Bitpoker.WPFClient.Clients
         #region Everything we need to receive messages
 
         DisplayMessageDelegate _displayMessageDelegate = null;
+        DisplayIMessageDelegate _displayIMessageDelegate = null;
 
         /// <summary>
         /// The default constructor is only here for testing purposes.
@@ -23,6 +23,7 @@ namespace Bitpoker.WPFClient.Clients
         {
         }
 
+        [Obsolete]
         /// <summary>
         /// ChatBackend constructor should be called with a delegate that is capable of displaying messages.
         /// </summary>
@@ -31,6 +32,17 @@ namespace Bitpoker.WPFClient.Clients
         {
             _myUserName = bitcoinAddress;
             _displayMessageDelegate = dmd;
+            StartService();
+        }
+
+        /// <summary>
+        /// ChatBackend constructor should be called with a delegate that is capable of displaying messages.
+        /// </summary>
+        /// <param name="dmd">DisplayMessageDelegate</param>
+        public ChatBackend(DisplayIMessageDelegate dmd, String bitcoinAddress)
+        {
+            _myUserName = bitcoinAddress;
+            _displayIMessageDelegate = dmd;
             StartService();
         }
 
@@ -49,6 +61,18 @@ namespace Bitpoker.WPFClient.Clients
             if (_displayMessageDelegate != null)
             {
                 _displayMessageDelegate(composite);
+            }
+        }
+
+        public void DisplayIMessage(BitPoker.Models.IMessage message)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException("message");
+            }
+            else
+            {
+                _displayIMessageDelegate(message);
             }
         }
 
@@ -81,7 +105,7 @@ namespace Bitpoker.WPFClient.Clients
             }
         }
 
-        public void SendMessage(BitPoker.Models.Messages.ActionMessage message)
+        public void SendMessage(ActionMessage message)
         {
             _channel.DisplayMessage(new CompositeType(_myUserName, message.ToString()));
         }
@@ -97,7 +121,7 @@ namespace Bitpoker.WPFClient.Clients
             _channel.DisplayMessage(new CompositeType("Event", _myUserName + " has entered the conversation."));
 
             // Information to display locally
-            _displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
+            //_displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
         }
 
         private void StopService()
@@ -118,6 +142,12 @@ namespace Bitpoker.WPFClient.Clients
             throw new NotImplementedException();
         }
 
-        #endregion // Everything we need for bi-directional communication
+        public void SendIMessage(BitPoker.Models.IMessage message)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion 
+        // Everything we need for bi-directional communication
     }
 }

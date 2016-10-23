@@ -3,25 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="476" Width="718">
     <Grid>
-        <Button Content="New Table" HorizontalAlignment="Left" Margin="118,172,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Visibility="Hidden" Content="New Table" HorizontalAlignment="Left" Margin="118,172,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Listen" HorizontalAlignment="Left" Margin="625,35,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1" Visibility="Hidden"/>
         <Button Content="Connect" HorizontalAlignment="Left" Margin="625,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2" Visibility="Hidden"/>
-        <Button Content="Find Players" HorizontalAlignment="Left" Margin="323,156,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <Button Content="Find Players" HorizontalAlignment="Left" Margin="323,137,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
 
-        <DataGrid HorizontalAlignment="Left" Height="100" Margin="19,51,0,0" VerticalAlignment="Top" Width="379" Background="#FFAEA9A9" ItemsSource="{Binding NetworkPlayers}"
+        <DataGrid HorizontalAlignment="Left" Height="100" Margin="19,32,0,0" VerticalAlignment="Top" Width="379" Background="#FFAEA9A9" ItemsSource="{Binding NetworkPlayers}"
                   AutoGenerateColumns="True" SelectionChanged="DataGrid_SelectionChanged" />
-
-        <ListBox HorizontalAlignment="Left" Height="100" Margin="403,51,0,0" VerticalAlignment="Top" Width="297"/>
-        <Grid HorizontalAlignment="Left" Height="168" Margin="415,172,0,0" VerticalAlignment="Top" Width="266" Background="#FF8F1010"/>
-        <Button Content="Join Table" HorizontalAlignment="Left" Margin="19,168,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_4"/>
+        <Button Visibility="Hidden" Content="Join Table" HorizontalAlignment="Left" Margin="19,168,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_4"/>
         <Label Content="{Binding Wallet.Address}" HorizontalAlignment="Left" Margin="19,172,0,0" VerticalAlignment="Top"/>
         <Label Content="{Binding Wallet.Balance}" HorizontalAlignment="Left" Margin="19,203,0,0" VerticalAlignment="Top"/>
         <Button Content="Call" HorizontalAlignment="Left" Margin="415,387,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_5"/>
         <Button Content="Raise" HorizontalAlignment="Left" Margin="506,387,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="Fold" HorizontalAlignment="Left" Margin="596,387,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content="{Binding Path=CalculatorOutput}" HorizontalAlignment="Left" Margin="19,4,0,0" VerticalAlignment="Top"/>
-        <Label Content="Players" HorizontalAlignment="Left" Margin="19,23,0,0" VerticalAlignment="Top"/>
+        <Label Content="Peers" HorizontalAlignment="Left" Margin="19,4,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Stretch" Margin="19,203,312,54" Name="textBoxChatPane" VerticalAlignment="Stretch" Width="Auto" Grid.Row="0" />
-        <TextBox Height="23" HorizontalAlignment="Stretch" Margin="17,410,396,11" Name="textBoxEntryField" VerticalAlignment="Stretch" Width="Auto" KeyDown="textBoxEntryField_KeyDown" />
+        <TextBox Height="23" HorizontalAlignment="Stretch" Margin="17,410,312,11" Name="textBoxEntryField" VerticalAlignment="Stretch" Width="Auto" KeyDown="textBoxEntryField_KeyDown" />
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="350" Margin="403,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="297"/>
+        <Label Content="Log" HorizontalAlignment="Left" Margin="403,4,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

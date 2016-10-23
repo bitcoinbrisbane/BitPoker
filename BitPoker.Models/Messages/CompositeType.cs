@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitpoker.WPFClient.Models
+namespace BitPoker.Models.Messages
 {
     [DataContract]
     public class CompositeType
