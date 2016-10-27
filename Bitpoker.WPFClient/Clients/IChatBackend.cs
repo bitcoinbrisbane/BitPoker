@@ -12,7 +12,7 @@ namespace Bitpoker.WPFClient.Clients
         void DisplayMessage(CompositeType composite);
 
         [OperationContract(IsOneWay = true)]
-        void DisplayIMessage(BitPoker.Models.IMessage message);
+        void DisplayIMessage(BitPoker.Models.IRequest message);
 
         [Obsolete]
         void SendMessage(string text);
@@ -20,5 +20,5 @@ namespace Bitpoker.WPFClient.Clients
 
     public delegate void DisplayMessageDelegate(CompositeType data);
 
-    public delegate void DisplayIMessageDelegate(BitPoker.Models.IMessage message);
+    public delegate void DisplayIMessageDelegate(BitPoker.Models.IRequest message);
 }

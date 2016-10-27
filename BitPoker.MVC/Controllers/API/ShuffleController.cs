@@ -15,9 +15,9 @@ namespace BitPoker.MVC.Controllers
         /// Get deck to shuffle
         /// </summary>
         /// <param name="tableId"></param>
-        public BitPoker.Models.Messages.DeckResponseMessage Get(Guid tableId)
+        public BitPoker.Models.Messages.DeckResponse Get(Guid tableId)
         {
-            var message = new BitPoker.Models.Messages.DeckResponseMessage();
+            var message = new BitPoker.Models.Messages.DeckResponse();
 
             message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
             message.Deck.Shuffle();
@@ -45,9 +45,9 @@ namespace BitPoker.MVC.Controllers
         }
 
         [HttpPost]
-        public BitPoker.Models.Messages.DeckResponseMessage Post(Guid tableId)
+        public BitPoker.Models.Messages.DeckResponse Post(Guid tableId)
         {
-            var message = new BitPoker.Models.Messages.DeckResponseMessage();
+            var message = new BitPoker.Models.Messages.DeckResponse();
 
             message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
             message.Deck.Shuffle();

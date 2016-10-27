@@ -87,9 +87,9 @@ namespace Bitpoker.WPFClient
             }
         }
 
-        public void DisplayIMessage(IMessage message)
+        public void DisplayIMessage(IRequest message)
         {
-            textBoxChatPane.Text += (message.Type + Environment.NewLine);
+            textBoxChatPane.Text += (message.Method + Environment.NewLine);
         }
 
 

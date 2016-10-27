@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class BuyInRequestMessage : BaseMessage
+    public class BuyInRequest: BaseRequest
     {
         public Guid TableId { get; set; }
 
@@ -10,15 +10,15 @@ namespace BitPoker.Models.Messages
 
         public String Transaction { get; set; }
 
-        public BuyInRequestMessage()
+        public BuyInRequest()
         {
-            this.Version = 1;
-            this.Id = Guid.NewGuid();
+            base.Version = 1.0M;
         }
 
         public override string ToString()
         {
-            return String.Format("{0}{1}{2}{3}{4}{5:yyyyMMddHHmmss}{6}", BitcoinAddress, TableId, Amount, TimeStamp, Signature);
+            return base.ToString();
+            //return String.Format("{0}{1}{2}{3}{4}{5:yyyyMMddHHmmss}{6}", BitcoinAddress, TableId, Amount, TimeStamp, Signature);
         }
     }
 }

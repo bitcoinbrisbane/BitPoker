@@ -63,16 +63,16 @@ namespace BitPoker.Repository
             {
                 Action = "SMALL BLIND",
                 Amount = 50000,
-                Id = new Guid("47b466e4-c852-49f3-9a6d-5e59c62a98b6"),
+                //Id = new Guid("47b466e4-c852-49f3-9a6d-5e59c62a98b6"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
-                BitcoinAddress = alice_address,
-                Index = 0,
-                TimeStamp = new DateTime(2016, 08, 17, 0, 0, 0)
+                //BitcoinAddress = alice_address,
+                Index = 0
+                //TimeStamp = new DateTime(2016, 08, 17, 0, 0, 0)
             };
 
             //Sign
-            sb.Signature = alice_secret.PrivateKey.SignMessage(sb.ToString());
+            //sb.Signature = alice_secret.PrivateKey.SignMessage(sb.ToString());
             hand.AddMessage(sb);
 
             //BIG BLIND
@@ -84,7 +84,7 @@ namespace BitPoker.Repository
             {
                 Action = "BIG BLIND",
                 Amount = 100000,
-                Id = new Guid("a29bc370-9492-4b60-ad4f-7c7513064383"),
+                //Id = new Guid("a29bc370-9492-4b60-ad4f-7c7513064383"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = bob_address,
@@ -93,7 +93,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            bb.Signature = bob_secret.PrivateKey.SignMessage(bb.ToString());
+            //bb.Signature = bob_secret.PrivateKey.SignMessage(bb.ToString());
             hand.AddMessage(bb);
 
             //Reset
@@ -107,7 +107,7 @@ namespace BitPoker.Repository
             {
                 Action = "CALL",
                 Amount = 50000,
-                Id = new Guid("e299ebc5-b50f-425e-b839-cb69ef69a12e"),
+                //Id = new Guid("e299ebc5-b50f-425e-b839-cb69ef69a12e"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = alice_address,
@@ -116,7 +116,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            sb_call.Signature = alice_secret.PrivateKey.SignMessage(sb_call.ToString());
+            //sb_call.Signature = alice_secret.PrivateKey.SignMessage(sb_call.ToString());
             hand.AddMessage(sb_call);
 
             data = null;
@@ -129,7 +129,7 @@ namespace BitPoker.Repository
             Models.Messages.ActionMessage option = new Models.Messages.ActionMessage()
             {
                 Action = "CHECK",
-                Id = new Guid("54c5c3c1-306a-4f1b-863c-aba29b22cb5c"),
+                //Id = new Guid("54c5c3c1-306a-4f1b-863c-aba29b22cb5c"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = bob_address,
@@ -138,7 +138,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            option.Signature = bob_secret.PrivateKey.SignMessage(option.ToString());
+            //option.Signature = bob_secret.PrivateKey.SignMessage(option.ToString());
             hand.AddMessage(option);
 
             //Reset
@@ -153,7 +153,7 @@ namespace BitPoker.Repository
             {
                 Action = "BET",
                 Amount = 100000,
-                Id = new Guid("0e9053eb-288c-44be-81e0-d6ad57e42ded"),
+                //Id = new Guid("0e9053eb-288c-44be-81e0-d6ad57e42ded"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = alice_address,
@@ -162,7 +162,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            pre_flop_bet.Signature = bob_secret.PrivateKey.SignMessage(pre_flop_bet.ToString());
+            //pre_flop_bet.Signature = bob_secret.PrivateKey.SignMessage(pre_flop_bet.ToString());
             hand.AddMessage(pre_flop_bet);
 
             //Reset
@@ -176,7 +176,7 @@ namespace BitPoker.Repository
             {
                 Action = "CALL",
                 Amount = 50000,
-                Id = new Guid("93cae6c4-4dbf-4d5d-8df1-bf7e0d6baa71"),
+                //Id = new Guid("93cae6c4-4dbf-4d5d-8df1-bf7e0d6baa71"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = bob_address,
@@ -185,7 +185,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            pre_flop_call.Signature = alice_secret.PrivateKey.SignMessage(pre_flop_call.ToString());
+            //pre_flop_call.Signature = alice_secret.PrivateKey.SignMessage(pre_flop_call.ToString());
             hand.AddMessage(pre_flop_call);
 
             //Reset
@@ -200,7 +200,7 @@ namespace BitPoker.Repository
             {
                 Action = "BET",
                 Amount = 50000,
-                Id = new Guid("3ea0a3de-2595-476f-b1b4-20d37fc25197"),
+                //Id = new Guid("3ea0a3de-2595-476f-b1b4-20d37fc25197"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = alice_address,
@@ -209,7 +209,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            turn_bet.Signature = alice_secret.PrivateKey.SignMessage(turn_bet.ToString());
+            //turn_bet.Signature = alice_secret.PrivateKey.SignMessage(turn_bet.ToString());
             hand.AddMessage(turn_bet);
 
             //Reset
@@ -223,7 +223,7 @@ namespace BitPoker.Repository
             {
                 Action = "CALL",
                 Amount = 50000,
-                Id = new Guid("52cf418b-3b8b-4d91-b2fb-35d7a9ee0d1f"),
+                //Id = new Guid("52cf418b-3b8b-4d91-b2fb-35d7a9ee0d1f"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = bob_address,
@@ -232,7 +232,7 @@ namespace BitPoker.Repository
                 PreviousHash = NBitcoin.DataEncoders.Encoders.Hex.EncodeData(hash)
             };
 
-            turn_call.Signature = alice_secret.PrivateKey.SignMessage(turn_call.ToString());
+            //turn_call.Signature = alice_secret.PrivateKey.SignMessage(turn_call.ToString());
             hand.AddMessage(turn_call);
 
             //Reset
@@ -255,7 +255,7 @@ namespace BitPoker.Repository
             {
                 Action = "SMALL BLIND",
                 Amount = 50000,
-                Id = new Guid("a150ad8d-acd8-4627-93be-0d50e4466a14"),
+                //Id = new Guid("a150ad8d-acd8-4627-93be-0d50e4466a14"),
                 TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
                 HandId = id,
                 BitcoinAddress = alice_address,
@@ -264,7 +264,7 @@ namespace BitPoker.Repository
             };
 
             //Sign
-            sb.Signature = alice_secret.PrivateKey.SignMessage(sb.ToString());
+            //sb.Signature = alice_secret.PrivateKey.SignMessage(sb.ToString());
             hand.AddMessage(sb);
         }
 

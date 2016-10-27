@@ -6,8 +6,8 @@ namespace BitPoker.WPFClient.Tests
     [TestClass]
     public class MainViewModelTests
     {
-        [TestMethod]
-        public void Should_Add_New_Table()
+        [TestMethod, TestCategory("ViewModels"), Ignore]
+        public void Should_Add_New_Table_To_ViewModel()
         {
         }
     }

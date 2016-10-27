@@ -29,6 +29,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
@@ -46,28 +50,32 @@
     <Compile Include="IDeck.cs" />
     <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="IResponse.cs" />
     <Compile Include="Messages\ActionMessageResponse.cs" />
     <Compile Include="Messages\AddPlayerRequest.cs" />
     <Compile Include="Messages\AddTableRequest.cs" />
-    <Compile Include="Messages\BaseMessage.cs" />
-    <Compile Include="Messages\BaseResponse.cs" />
-    <Compile Include="Messages\BuyInRequestMessage.cs" />
-    <Compile Include="Messages\BuyInResponseMessage.cs" />
+    <Compile Include="Messages\BaseRequest.cs" />
+    <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\RPCRequest.cs" />
+    <Compile Include="Messages\RCPResponse.cs" />
+    <Compile Include="Messages\BuyInRequest.cs" />
+    <Compile Include="Messages\BuyInResponse.cs" />
     <Compile Include="Messages\CompositeType.cs" />
     <Compile Include="Messages\DealRequest.cs" />
-    <Compile Include="Messages\DeckRequestMessage.cs" />
-    <Compile Include="Messages\DeckResponseMessage.cs" />
+    <Compile Include="Messages\DeckRequest.cs" />
+    <Compile Include="Messages\DeckResponse.cs" />
     <Compile Include="Messages\JoinTableRequest.cs" />
     <Compile Include="Messages\JoinTableResponse.cs" />
-    <Compile Include="Messages\Request.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />
-    <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="IRequest.cs" />
     <Compile Include="PlayerInfo.cs" />
-    <Compile Include="Messages\ShuffleMessage.cs" />
+    <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
 </Project>

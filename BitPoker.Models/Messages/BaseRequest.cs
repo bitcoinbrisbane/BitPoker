@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.Serialization;
 
 namespace BitPoker.Models.Messages
 {
-    public abstract class BaseMessage
+    public abstract class BaseRequest
     {
         [DataMember]
         public Decimal Version { get; set; }
-
-        [DataMember]
-        public Guid Id { get; set; }
 
         [DataMember]
         /// <summary>
@@ -19,9 +16,10 @@ namespace BitPoker.Models.Messages
         public String BitcoinAddress { get; set; }
 
         [DataMember]
-        public String Signature { get; set; }
-
-        [DataMember]
         public DateTime TimeStamp { get; set; }
+
+        //[DataMember]
+        //[JsonProperty(PropertyName = "signature")]
+        //public String Signature { get; set; }
     }
 }

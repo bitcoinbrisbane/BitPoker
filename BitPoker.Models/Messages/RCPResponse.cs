@@ -2,12 +2,14 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class BaseResponse
+    public class RCPResponse
     {
         public Guid Id { get; set; }
 
         public DateTime TimeStamp { get; set; }
 
-        public String Status { get; set; }
+        public Object Error { get; set; }
+
+        public Object Result { get; set; }
     }
 }

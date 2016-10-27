@@ -27,25 +27,26 @@ namespace BitPoker.MVC.Controllers
             this.tableRepo = new Repository.InMemoryTableRepo();
         }
 
-        ///Get a mock message
-        public BitPoker.Models.Messages.ActionMessage Get(Guid handId, Int32 index)
-        {
-            BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
-            BitcoinSecret bob_secret = new BitcoinSecret(BOB_WIF, NBitcoin.Network.Main);
+        /////Get a mock message
+        //public BitPoker.Models.Messages.ActionMessage Get(Guid handId, Int32 index)
+        //{
+        //    BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
+        //    BitcoinSecret bob_secret = new BitcoinSecret(BOB_WIF, NBitcoin.Network.Main);
 
-            BitPoker.Models.Messages.ActionMessage message = handRepo.Find(handId).History[index];
-            return new BitPoker.Models.Messages.ActionMessage();
-        }
+        //    BitPoker.Models.Messages.ActionMessage message = handRepo.Find(handId).History[index];
+        //    return new BitPoker.Models.Messages.ActionMessage();
+        //}
 
         /// <summary>
         /// Message controller either adds to 
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="id"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public Boolean Post(BitPoker.Models.Messages.ActionMessage message, String id)
+        public Boolean Post(BitPoker.Models.IRequest request)
         {
+
+
             //NOTE:  THIS IS WHERE THE STUB AI LOGIC SHOULD EXIST.
             //
             //if (MemoryCache.Default.Contains(message.TableId.ToString()))
@@ -66,63 +67,67 @@ namespace BitPoker.MVC.Controllers
             //    }
             //}
 
-            BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(message.BitcoinAddress);
-            bool verified = address.VerifyMessage(message.ToString(), message.Signature);
 
-            if (verified != true)
-            {
-                throw new Exceptions.SignatureNotValidException();
-            }
-            else
-            {
-                //Some API
-                var hand = this.handRepo.Find(message.HandId);
 
-                foreach(BitPoker.Models.Messages.ActionMessage previousAction in hand.History)
-                {
-                    //verify
-                }
 
-                var lastAction = hand.History.Last();
-                String[] allowedAction = new String[1];
+            //BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(request.BitcoinAddress);
+            //bool verified = address.VerifyMessage(request.ToString(), request.Signature);
 
-                switch (lastAction.Action.ToUpper())
-                {
-                    case "POST SMALL BLIND":
-                    case "SMALL BLIND":
-                    case "SB":
-                        allowedAction[0] = "BIG BLIND";
-                        break;
+            //if (verified != true)
+            //{
+            //    throw new Exceptions.SignatureNotValidException();
+            //}
+            //else
+            //{
+            //    //Some API
+            //    var hand = this.handRepo.Find(request.HandId);
 
-                    case "POST BIG BLIND":
-                    case "BIG BLIND":
-                    case "BB":
-                        break;
-                }
+            //    foreach(BitPoker.Models.Messages.ActionMessage previousAction in hand.History)
+            //    {
+            //        //verify
+            //    }
 
-                switch(message.Action.ToUpper())
-                {
-                    case "POST SMALL BLIND":
-                    case "SMALL BLIND":
-                    case "SB":
-                        
-                        break;
-                    case "POST BIG BLIND":
-                    case "BIG BLIND":
-                    case "BB":
-                        AddBigBlind(message);
-                        break;
-                }
+            //    var lastAction = hand.History.Last();
+            //    String[] allowedAction = new String[1];
 
-                //Now notify next player for their action:
-                hand = this.handRepo.Find(message.HandId);
-                lastAction = hand.History.Last();
+            //    switch (lastAction.Action.ToUpper())
+            //    {
+            //        case "POST SMALL BLIND":
+            //        case "SMALL BLIND":
+            //        case "SB":
+            //            allowedAction[0] = "BIG BLIND";
+            //            break;
 
-                String bitcoinAddress = lastAction.BitcoinAddress;
-                var player = hand.Players[hand.PlayerToAct];
-            }
+            //        case "POST BIG BLIND":
+            //        case "BIG BLIND":
+            //        case "BB":
+            //            break;
+            //    }
 
-            return verified;
+            //    switch(request.Action.ToUpper())
+            //    {
+            //        case "POST SMALL BLIND":
+            //        case "SMALL BLIND":
+            //        case "SB":
+
+            //            break;
+            //        case "POST BIG BLIND":
+            //        case "BIG BLIND":
+            //        case "BB":
+            //            AddBigBlind(request);
+            //            break;
+            //    }
+
+            //    //Now notify next player for their action:
+            //    hand = this.handRepo.Find(request.HandId);
+            //    lastAction = hand.History.Last();
+
+            //    String bitcoinAddress = lastAction.BitcoinAddress;
+            //    var player = hand.Players[hand.PlayerToAct];
+            //}
+
+            //return verified;
+            return false;
         }
 
         public void AddSmallBlind(BitPoker.Models.Messages.ActionMessage message)

@@ -20,7 +20,7 @@ namespace BitPoker.MVC.Controllers
         /// <param name="tableId"></param>
         /// <param name="handId"></param>
         /// <returns></returns>
-        public BitPoker.Models.Messages.DeckResponseMessage Get(Guid handId)
+        public BitPoker.Models.Messages.DeckResponse Get(Guid handId)
         {
             //As its heads up, create the first hand and deck
             BitPoker.Models.Hand hand = repo.Find(handId);
@@ -30,16 +30,16 @@ namespace BitPoker.MVC.Controllers
             NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
             NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
 
-            BitPoker.Models.Messages.DeckResponseMessage response = new BitPoker.Models.Messages.DeckResponseMessage()
+            BitPoker.Models.Messages.DeckResponse response = new BitPoker.Models.Messages.DeckResponse()
             {
                 TableId = new Guid(),
                 HandId = handId,
-                BitcoinAddress = alice_address.ToString(),
+                //BitcoinAddress = alice_address.ToString(),
                 Deck = hand.Deck
             };
 
             String message = response.ToString();
-            response.Signature = alice_secret.PrivateKey.SignMessage(message);
+            //response.Signature = alice_secret.PrivateKey.SignMessage(message);
 
             return response;
         }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitPoker.Models.Messages
+namespace BitPoker.Models
 {
-    public class JoinTableResponse
+    public interface IResponse
     {
 
     }

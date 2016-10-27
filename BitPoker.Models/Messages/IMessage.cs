@@ -1,24 +1,14 @@
 ﻿using System;
 
-namespace BitPoker.Models
+namespace BitPoker.Models.Messages
 {
-	public interface IMessage
-	{
-        Guid Id { get; set; }
+    /// <summary>
+    /// Interface that all messages must implement
+    /// </summary>
+    public interface IMessage
+    {
+        Decimal Version { get; }
 
-        Decimal Version { get; set; }
-
-        String Type { get; set; }
-
-        /// <summary>
-        /// Pub Key Hash
-        /// </summary>
-        String BitcoinAddress { get; set; }
-
-        String Signature { get; set; }
-
-        DateTime TimeStamp { get; set; }
-
-        Object Payload { get; set; }
+        //String Signature { get; set; }
     }
 }

@@ -59,7 +59,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 BitcoinSecret secret = new BitcoinSecret(KeyRepository.GetWif(), Network.TestNet);
                 BitcoinAddress address = secret.PubKey.GetAddress(Network.TestNet);
 
-                BitPoker.Models.Messages.BuyInRequestMessage buyIn = new BitPoker.Models.Messages.BuyInRequestMessage()
+                BitPoker.Models.Messages.BuyInRequest message = new BitPoker.Models.Messages.BuyInRequest()
                 {
                     BitcoinAddress = address.ToString(),
                     Amount = amount,
@@ -67,9 +67,15 @@ namespace Bitpoker.WPFClient.ViewModels
                     TimeStamp = DateTime.UtcNow
                 };
 
-                buyIn.Signature = secret.PrivateKey.SignMessage(buyIn.ToString());
+                //buyIn.Signature = secret.PrivateKey.SignMessage(buyIn.ToString());
+                BitPoker.Models.IRequest request = new BitPoker.Models.Messages.RPCRequest()
+                {
+                    Method = "BuyInRequest"
+                };
 
-                return Newtonsoft.Json.JsonConvert.SerializeObject(buyIn);
+                request.Params = message;
+
+                return Newtonsoft.Json.JsonConvert.SerializeObject(message);
             }
             else
             {
@@ -84,7 +90,7 @@ namespace Bitpoker.WPFClient.ViewModels
         /// <returns></returns>
         public async Task Call(UInt64 amount)
         {
-            BitPoker.Models.Messages.ActionMessage call = new BitPoker.Models.Messages.ActionMessage()
+            BitPoker.Models.Messages.ActionMessage message = new BitPoker.Models.Messages.ActionMessage()
             {
                 Action = "CALL",
                 Amount = amount,
@@ -93,13 +99,17 @@ namespace Bitpoker.WPFClient.ViewModels
 
             //Sign message
             BitcoinSecret secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", NBitcoin.Network.TestNet);
-            call.Signature = secret.PrivateKey.SignMessage(call.ToString());
+            //message.Signature = secret.PrivateKey.SignMessage(message.ToString());
 
-            BitPoker.NetworkClient.IMessageClient client = new BitPoker.NetworkClient.APIClient(apiUrl);
-            //if (client.IsConnected)
-            //{
-            //    client.SendMessage(call);
-            //}
+            BitPoker.Models.IRequest request = new BitPoker.Models.Messages.RPCRequest()
+            {
+                Method = "BuyInRequest"
+            };
+
+            request.Params = message;
+
+            //BitPoker.NetworkClient.IMessageClient client = new BitPoker.NetworkClient.APIClient(apiUrl);
+
         }
     }
 }

@@ -11,6 +11,6 @@ namespace BitPoker.NetworkClient
         [Obsolete]
         Task SendMessageAsync(Models.Messages.ActionMessage message);
 
-        void SendIMessage(Models.IMessage message);
+        void SendIMessage(Models.IRequest message);
     }
 }

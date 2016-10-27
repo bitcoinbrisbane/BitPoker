@@ -148,8 +148,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\API\AliceController.cs" />
     <Compile Include="Controllers\API\BaseController.cs" />
-    <Compile Include="Controllers\API\BuyInController.cs" />
     <Compile Include="Controllers\API\DealController.cs" />
     <Compile Include="Controllers\API\DeckController.cs" />
     <Compile Include="Controllers\API\HandController.cs" />
@@ -161,6 +161,7 @@
     <Compile Include="Controllers\API\TablesController.cs" />
     <Compile Include="Controllers\ExplorerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvestController.cs" />
     <Compile Include="Exceptions\HandNotFoundException.cs" />
     <Compile Include="Exceptions\PlayerNotFoundException.cs" />
     <Compile Include="Exceptions\SignatureNotValidException.cs" />
@@ -172,7 +173,10 @@
     <Compile Include="Models\HandContainer.cs" />
     <Compile Include="Models\IAiPlayer.cs" />
     <Compile Include="Models\Logic.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PlayerContainer.cs" />
+    <Compile Include="Models\Rate.cs" />
+    <Compile Include="Models\RateViewModel.cs" />
     <Compile Include="Models\TableContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Factory.cs" />
@@ -236,11 +240,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Invest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Explorer\" />
-    <Folder Include="Views\Invest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

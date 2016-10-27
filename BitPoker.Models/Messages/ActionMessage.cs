@@ -4,10 +4,8 @@ using System.Runtime.Serialization;
 namespace BitPoker.Models.Messages
 {
     [DataContract]
-	public class ActionMessage : BaseMessage
+	public class ActionMessage : BaseRequest, IMessage
 	{
-        //public String PublicKey { get; set; }
-
         /// <summary>
         /// Include table id to make searching on hands more efficent
         /// </summary>
@@ -29,15 +27,14 @@ namespace BitPoker.Models.Messages
 
         public ActionMessage ()
 		{
-            this.Id = Guid.NewGuid();
-            this.TimeStamp = DateTime.UtcNow;
             this.HashAlgorithm = "SHA256";
             this.Version = 1.0M;
 		}
 
         public override string ToString()
         {
-            return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
+            return base.ToString();
+            //return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
         }
 	}
 }

@@ -64,7 +64,7 @@ namespace Bitpoker.WPFClient.Clients
             }
         }
 
-        public void DisplayIMessage(BitPoker.Models.IMessage message)
+        public void DisplayIMessage(BitPoker.Models.IRequest message)
         {
             if (message == null)
             {
@@ -142,7 +142,7 @@ namespace Bitpoker.WPFClient.Clients
             throw new NotImplementedException();
         }
 
-        public void SendIMessage(BitPoker.Models.IMessage message)
+        public void SendIMessage(BitPoker.Models.IRequest message)
         {
             throw new NotImplementedException();
         }

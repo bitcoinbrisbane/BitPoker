@@ -6,7 +6,7 @@ namespace BitPoker.MVC.Tests.Controllers
     [TestClass]
     public class DealControllerTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Controllers"), Ignore]
         public void Should_Get_New_Deal()
         {
             BitPoker.Repository.ITableRepository mockRepo = new BitPoker.Repository.MockTableRepo();

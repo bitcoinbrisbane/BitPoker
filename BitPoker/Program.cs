@@ -60,8 +60,6 @@ namespace BitPoker
 		{
 
 
-
-
             //Task.Factory.StartNew(() =>
             //{
             //    TcpListener serverSocket = new TcpListener(8888);
@@ -85,11 +83,6 @@ namespace BitPoker
             //    //serverSocket.Stop();
             //    //Console.WriteLine(" >> " + "exit");
             //});
-
-
-
-
-
 
 
 
@@ -294,7 +287,14 @@ namespace BitPoker
 				IPAddress = "localhost" 
 			};
 
-            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+            //message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+
+            Models.IRequest request = new Models.Messages.RPCRequest()
+            {
+                Method = "AddPlayerRequest"
+            };
+
+            request.Params = message;
 
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -326,7 +326,13 @@ namespace BitPoker
             message.BitcoinAddress = carol.ToString();
             message.Player = new PlayerInfo() { BitcoinAddress = carol.ToString(), IPAddress = "localhost" };
 
-            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+            //message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+            Models.IRequest request = new Models.Messages.RPCRequest()
+            {
+                Method = "AddPlayerRequest"
+            };
+
+            request.Params = message;
 
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -400,9 +406,16 @@ namespace BitPoker
             };
 
             Models.Messages.AddTableRequest message = new Models.Messages.AddTableRequest();
-            message.BitcoinAddress = carol.ToString();
-            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
+            //message.BitcoinAddress = carol.ToString();
+            //message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
+            Models.IRequest request = new Models.Messages.RPCRequest()
+            {
+                Method = "AddTableRequest"
+            };
+
+            request.Params = message;
+            
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}tables", API_URL);
@@ -427,11 +440,17 @@ namespace BitPoker
 
         private static void BuyIn(UInt64 amount, Guid tableId)
         {
-            Models.Messages.BuyInRequestMessage message = new Models.Messages.BuyInRequestMessage();
+            Models.Messages.BuyInRequest message = new Models.Messages.BuyInRequest();
             message.BitcoinAddress = carol.ToString();
             message.Amount = amount;
-            
-            message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
+
+            Models.IRequest request = new Models.Messages.RPCRequest()
+            {
+                Method = "BuyInRequest"
+            };
+
+            request.Params = message;
+            //message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
 
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");

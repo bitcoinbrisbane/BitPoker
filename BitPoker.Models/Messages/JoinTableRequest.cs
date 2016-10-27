@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class JoinTableRequest
+    public class JoinTableRequest : BaseRequest
     {
         public PlayerInfo Player { get; set; }
 
@@ -10,6 +10,7 @@ namespace BitPoker.Models.Messages
 
         public JoinTableRequest()
         {
+            base.Version = 1.0M;
         }
     }
 }

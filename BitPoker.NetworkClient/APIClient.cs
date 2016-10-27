@@ -49,7 +49,7 @@ namespace BitPoker.NetworkClient
 			}
 		}
 
-		public void BuyIn(Models.Messages.BuyInRequestMessage buyIn)
+		public void BuyIn(Models.Messages.BuyInRequest buyIn)
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
@@ -116,7 +116,7 @@ namespace BitPoker.NetworkClient
         {
         }
 
-        public void SendIMessage(IMessage message)
+        public void SendIMessage(IRequest message)
         {
             throw new NotImplementedException();
         }

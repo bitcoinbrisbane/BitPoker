@@ -5,11 +5,8 @@ using System.Web;
 
 namespace BitPoker.MVC.Models
 {
-    public class Logic
+    public class RateViewModel : Rate
     {
-        public static void GetRound(IEnumerable<BitPoker.Models.IRequest> actions)
-        {
-
-        }
+        public Int64 AmountSold { get; set; }
     }
 }

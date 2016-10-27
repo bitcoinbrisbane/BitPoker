@@ -38,7 +38,7 @@ namespace BitPoker.Models.Tests
             Assert.IsTrue(bb.BitcoinAddress == "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Repo")]
         public void Should_Get_Big_Blind_Player_In_Heads_Up()
         {
             Repository.IHandRepository mockHandRepo = new Repository.MockHandRepo();
@@ -52,7 +52,7 @@ namespace BitPoker.Models.Tests
             Assert.IsTrue(bb.BitcoinAddress == "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo");
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Models")]
         public void Should_Get_Hand_ToString()
         {
             String actual = headsUpHand.ToString();

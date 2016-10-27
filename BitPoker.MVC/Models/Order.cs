@@ -5,11 +5,7 @@ using System.Web;
 
 namespace BitPoker.MVC.Models
 {
-    public class Logic
+    public class Order
     {
-        public static void GetRound(IEnumerable<BitPoker.Models.IRequest> actions)
-        {
-
-        }
     }
 }

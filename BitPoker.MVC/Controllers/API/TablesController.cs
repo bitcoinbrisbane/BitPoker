@@ -37,15 +37,24 @@ namespace BitPoker.MVC.Controllers
         }
 
         [HttpPost]
-        public void Post(BitPoker.Models.Messages.AddTableRequest model)
+        public void Post(BitPoker.Models.IRequest request)
         {
-            if (!base.Verify(model.BitcoinAddress, model.ToString(), model.Signature))
+            if (request.Method == "AddTableRequest")
             {
-                throw new Exceptions.SignatureNotValidException();
+                BitPoker.Models.Messages.AddTableRequest model = request.Params as BitPoker.Models.Messages.AddTableRequest;
+
+                if (!base.Verify(model.BitcoinAddress, model.ToString(), request.Signature))
+                {
+                    throw new Exceptions.SignatureNotValidException();
+                }
+                else
+                {
+                    _repo.Add(model.Table);
+                }
             }
             else
             {
-                _repo.Add(model.Table);
+                throw new NotImplementedException();
             }
         }
     }

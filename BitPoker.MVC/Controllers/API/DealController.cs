@@ -48,17 +48,17 @@ namespace BitPoker.MVC.Controllers
 
                 BitPoker.Models.Messages.ActionMessage smallBlind = new BitPoker.Models.Messages.ActionMessage()
                 {
-                    Id = new Guid("4bc7f305-aa16-450a-a3be-aad8fba7f425"),
+                    //Id = new Guid("4bc7f305-aa16-450a-a3be-aad8fba7f425"),
                     Index = 0,
                     Action = "SMALL BLIND",
                     Amount = table.SmallBlind,
-                    BitcoinAddress = sb.BitcoinAddress,
+                    //BitcoinAddress = sb.BitcoinAddress,
                     HandId = hand.Id,
                     //PublicKey = alice_pubkey,
                     TableId = request.TableId
                 };
 
-                smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
+                //smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
                 hand.AddMessage(smallBlind);
 
                 //var bb = table.Players[1];

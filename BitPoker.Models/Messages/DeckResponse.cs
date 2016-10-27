@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class DeckResponseMessage : BaseMessage
+    public class DeckResponse
     {
         public Guid TableId { get; set; }
 
@@ -10,9 +10,8 @@ namespace BitPoker.Models.Messages
 
         public IDeck Deck { get; set; }
 
-        public DeckResponseMessage()
+        public DeckResponse()
         {
-            base.Id = Guid.NewGuid();
         }
 
         public override string ToString()

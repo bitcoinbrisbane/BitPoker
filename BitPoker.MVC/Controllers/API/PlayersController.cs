@@ -49,28 +49,54 @@ namespace BitPoker.MVC.Controllers
         }
 
         [HttpPost]
-        public String Post(BitPoker.Models.Messages.AddPlayerRequest model)
+        public String Post(BitPoker.Models.IRequest model)
         {
-            if (model.BitcoinAddress == model.Player.BitcoinAddress)
-            {
-                //need to include timestamp too
-                Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
+            //if (model.BitcoinAddress == model.Player.BitcoinAddress)
+            //{
+            //    //need to include timestamp too
+            //    Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
 
-                if (valid)
-                {
-                    _repo.Add(model.Player);
-                    return "ok";
-                }
-                else
-                {
-                    return "invalid";
-                }
-            }
-            else
-            {
-                return "addresses do not match";
-            }
+            //    if (valid)
+            //    {
+            //        _repo.Add(model.Player);
+            //        return "ok";
+            //    }
+            //    else
+            //    {
+            //        return "invalid";
+            //    }
+            //}
+            //else
+            //{
+            //    return "addresses do not match";
+            //}
+
+            throw new NotImplementedException();
         }
+
+        //[HttpPost]
+        //public String Post(BitPoker.Models.Messages.AddPlayerRequest model)
+        //{
+        //    if (model.BitcoinAddress == model.Player.BitcoinAddress)
+        //    {
+        //        //need to include timestamp too
+        //        Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
+
+        //        if (valid)
+        //        {
+        //            _repo.Add(model.Player);
+        //            return "ok";
+        //        }
+        //        else
+        //        {
+        //            return "invalid";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return "addresses do not match";
+        //    }
+        //}
 
         [HttpPost]
         public String Post(String id, BitPoker.Models.Messages.ActionMessage model)

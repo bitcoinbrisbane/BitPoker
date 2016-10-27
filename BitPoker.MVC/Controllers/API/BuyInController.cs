@@ -21,14 +21,14 @@ namespace BitPoker.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<BitPoker.Models.Messages.BuyInResponseMessage> Post(BitPoker.Models.Messages.BuyInRequestMessage buyInRequest)
+        public async Task<BitPoker.Models.Messages.BuyInResponse> Post(BitPoker.Models.Messages.BuyInRequest buyInRequest)
         {
-            if (!base.Verify(buyInRequest.BitcoinAddress, buyInRequest.ToString(), buyInRequest.Signature))
-            {
-                throw new Exceptions.SignatureNotValidException();
-            }
+            //if (!base.Verify(buyInRequest.BitcoinAddress, buyInRequest.ToString(), buyInRequest.Signature))
+            //{
+            //    throw new Exceptions.SignatureNotValidException();
+            //}
 
-            BitPoker.Models.Messages.BuyInResponseMessage response = new BitPoker.Models.Messages.BuyInResponseMessage()
+            BitPoker.Models.Messages.BuyInResponse response = new BitPoker.Models.Messages.BuyInResponseMessage()
             {
                 TimeStamp = DateTime.UtcNow
             };
@@ -41,7 +41,7 @@ namespace BitPoker.MVC.Controllers
 
                 table.Players[0] = new BitPoker.Models.TexasHoldemPlayer()
                 {
-                    BitcoinAddress = buyInRequest.BitcoinAddress,
+                    //BitcoinAddress = buyInRequest.BitcoinAddress,
                     Stack = buyInRequest.Amount,
                     //Position = buyInRequest.Seat, //Assume no hand played for this mock
                     IsBigBlind = false,
@@ -60,7 +60,7 @@ namespace BitPoker.MVC.Controllers
                     BitPoker.Models.Messages.ActionMessage smallBlindRequest = new BitPoker.Models.Messages.ActionMessage()
                     {
                         Action = "POST SMALL BLIND",
-                        TimeStamp = DateTime.UtcNow,
+                        //TimeStamp = DateTime.UtcNow,
                         TableId = buyInRequest.TableId
                     };
 

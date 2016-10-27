@@ -14,21 +14,21 @@ namespace BitPoker.MVC.Tests
         private static BitcoinAddress alice = alice_secret.GetAddress();
         private static BitcoinAddress bob = bob_secret.GetAddress();
 
-        [TestMethod]
+        [TestMethod, TestCategory("Controllers")]
         public void Add_Player_To_InMemory_Repo()
         {
+            BitPoker.Models.IRequest request = new BitPoker.Models.Messages.RPCRequest();
             BitPoker.Models.Messages.AddPlayerRequest message = new BitPoker.Models.Messages.AddPlayerRequest();
             message.BitcoinAddress = alice.ToString();
             message.Player = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
 
-            message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
-
-            BitPoker.MVC.Controllers.PlayersController controller = new BitPoker.MVC.Controllers.PlayersController();
-            controller.Post(message);
+            request.Signature = alice_secret.PrivateKey.SignMessage(request.Id.ToString());
+            request.Params = message;
+            MVC.Controllers.PlayersController controller = new BitPoker.MVC.Controllers.PlayersController();
+            controller.Post(request);
 
             var players = controller.Get();
             Assert.IsNotNull(players);
-            
         }
     }
 }

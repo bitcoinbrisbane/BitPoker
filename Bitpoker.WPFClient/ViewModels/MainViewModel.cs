@@ -54,7 +54,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public TexasHoldemPlayer Player { get; set; }
 
-        public IObservable<IMessage> InComingMessage { get; set; }
+        public IObservable<IRequest> InComingMessage { get; set; }
 
         public MainViewModel()
         {
@@ -132,7 +132,7 @@ namespace Bitpoker.WPFClient.ViewModels
         {
             using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
             {
-                IMessage message = new BitPoker.Models.Messages.Request();
+                IRequest message = new BitPoker.Models.Messages.RPCRequest();
                 var table = tableRepo.Find(tableId);
 
                 BitPoker.Models.Messages.JoinTableRequest request = new BitPoker.Models.Messages.JoinTableRequest()
@@ -141,8 +141,8 @@ namespace Bitpoker.WPFClient.ViewModels
                 };
 
                 //TODO: use reflection
-                message.Type = "JoinTableRequest";
-                message.Payload = request;
+                message.Method = "JoinTableRequest";
+                message.Params = request;
             }
         }
 
