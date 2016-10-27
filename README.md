@@ -133,7 +133,7 @@ Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
 \-----END PGP PUBLIC KEY BLOCK-----
 
 ## The protocol
-Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
+Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players via JSON RPC, signed, and referencing the existing message.  Thus like a block chain of messages.
 
 - Table reaches consensus on who’s turn to act based off the game contract
 - Table reaches consensus on the legal moves / actions a player can make
@@ -827,3 +827,4 @@ The following colour coin asset will be sold to raise funds for the development 
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
 6. http://ms-brainwallet.org
+7. http://www.jsonrpc.org/specification
