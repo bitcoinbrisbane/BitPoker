@@ -7,8 +7,7 @@ using System.Web.Http;
 
 namespace BitPoker.MVC.Controllers.API
 {
-    public class AliceController : ApiController
+    public class AliceController : MessageController
     {
-        //public BitPoker.Models.ir
     }
 }

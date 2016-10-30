@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace BitPoker.Models.Messages
 {
-    [DataContract]
+    //[DataContract]
 	public class ActionMessage : BaseRequest, IMessage
 	{
         /// <summary>
@@ -25,16 +25,20 @@ namespace BitPoker.Models.Messages
 
         public String HashAlgorithm { get; set; }
 
-        public ActionMessage ()
+        //public ActionMessage()
+        //{
+        //}
+
+        public ActionMessage()
 		{
             this.HashAlgorithm = "SHA256";
             this.Version = 1.0M;
 		}
 
-        public override string ToString()
-        {
-            return base.ToString();
-            //return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
-        }
+        //public override string ToString()
+        //{
+        //    return base.ToString();
+        //    //return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
+        //}
 	}
 }
