@@ -72,68 +72,9 @@ Created from http://ms-brainwallet.org
 
 https://coinb.in/?verify=524104c82b8e2d6ea7f17665c4a1070f340e84d4c02da72ae5018574001841c10e8009a04e2c333d3eb90102e71b324bfe595430d4c654bbff0f66edbfe63798c7a2714104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d4104f48396ac675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24fd8c041ca55de8bae62c7315b0ba66fe5f96c20d53ae#verify
 
-### Test PGP Private and Public Keys (NOTE BITCOIN MESSAGE SIGNING TO BE USED INSTEAD)
-
-*Alice*
-\-----BEGIN PGP PRIVATE KEY BLOCK-----
-Version: OpenPGP.js v.1.20130420
-Comment: http://openpgpjs.org
-
-xcA4BFb6E1MBAf9pyMRXuXc9A7DR8dDe7zkVEksMfOIDuYAE/Kd4cfbpRLRJ
-5Ph0iVi69XU3GV1KS+1ThkqrlU94p8/WKAQRjdt7ABEBAAEAAf4gqwavjLAd
-IJmnjEUTw87eCgMxPRPTUKMPZzMUyCUXTmFs3q+DGVnIDs928fgNS0RIovSB
-GXZnx6uH74qKqg8BAQCxcsy4qvapXHAHmHVgxvgkQFa7xec/nXNKcCJ8xZiq
-gQEAmJyuUqmFxaa9FtOOz+9lHqVG5L6E/1V0jupaWHsRL/sA/RDQgcmIZlo3
-jGDX1zK6kt5H65pUKjZqFSFdS5vwT1HXUInNJFRlc3QgTWNUZXN0aW5ndG9u
-IDx0ZXN0QGV4YW1wbGUuY29tPsJcBBABCAAQBQJW+hNTCRBx4oH3PIZldwAA
-DO8B/0Lf1eqIfbBCIhqq4n7ge/qy5ITQKtMT1+P2pSqGj2+6/hUQhmHcvqBq
-Sp07i29QBZiup2mExktQMaMvCLD40Vo=
-=tIvp
-\-----END PGP PRIVATE KEY BLOCK-----
-
-\-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: OpenPGP.js v.1.20130420
-Comment: http://openpgpjs.org
-
-xk0EVvoTUwEB/2nIxFe5dz0DsNHx0N7vORUSSwx84gO5gAT8p3hx9ulEtEnk
-+HSJWLr1dTcZXUpL7VOGSquVT3inz9YoBBGN23sAEQEAAc0kVGVzdCBNY1Rl
-c3Rpbmd0b24gPHRlc3RAZXhhbXBsZS5jb20+wlwEEAEIABAFAlb6E1MJEHHi
-gfc8hmV3AAAM7wH/Qt/V6oh9sEIiGqrifuB7+rLkhNAq0xPX4/alKoaPb7r+
-FRCGYdy+oGpKnTuLb1AFmK6naYTGS1Axoy8IsPjRWg==
-=cWad
-\-----END PGP PUBLIC KEY BLOCK-----
-
-*Bob*
-\-----BEGIN PGP PRIVATE KEY BLOCK-----
-Version: OpenPGP.js v.1.20130420
-Comment: http://openpgpjs.org
-
-xcA4BFb6FKoBAgC5MgyxxJSELbTHZpN6T8H5ncblOmZkXrFlXtxC9acdReg/
-15PWiB0omxzDRI0PvUsRHIcgJvd9h97Nq2F6eUITABEBAAEAAf9nk9SBwD6I
-Rr/rHjWxnNYSc+n/3s/Rpxx0Y7+xO49B0RmLVBEt8QljZIkc/tXC4HqwzpwW
-FmLQFrPqUWoKtkWhAQDmINi1D92m3B4zjgqQ94ZPgiWrGsN+hoPJlWj0JyPc
-eQEAzgQGc5iRhOSQJ+35Rw0ma0h/kAOHB6nUYWywE7P3F+sBAIOkByxHtuQi
-z2PmIxN9pRa6VQrm84HBpOWfzXEqS2J0UULNJFRlc3QgTWNUZXN0aW5ndG9u
-IDx0ZXN0QGV4YW1wbGUuY29tPsJcBBABCAAQBQJW+hSrCRAT+yaNasjJggAA
-1W0CAJRnrk8vd6PJhoBrH22U8ninyQahVmdmQ31jwdvVuENUNNPmxVD2UPQJ
-nuiaFDXyQsyWs/nnbliJdS4F1HtGOCA=
-=B2vt
-\-----END PGP PRIVATE KEY BLOCK-----
-
-\-----BEGIN PGP PUBLIC KEY BLOCK-----
-Version: OpenPGP.js v.1.20130420
-Comment: http://openpgpjs.org
-
-xk0EVvoUqgECALkyDLHElIQttMdmk3pPwfmdxuU6ZmResWVe3EL1px1F6D/X
-k9aIHSibHMNEjQ+9SxEchyAm932H3s2rYXp5QhMAEQEAAc0kVGVzdCBNY1Rl
-c3Rpbmd0b24gPHRlc3RAZXhhbXBsZS5jb20+wlwEEAEIABAFAlb6FKsJEBP7
-Jo1qyMmCAADVbQIAlGeuTy93o8mGgGsfbZTyeKfJBqFWZ2ZDfWPB29W4Q1Q0
-0+bFUPZQ9Ame6JoUNfJCzJaz+eduWIl1LgXUe0Y4IA==
-=Amq+
-\-----END PGP PUBLIC KEY BLOCK-----
 
 ## The protocol
-Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players via JSON RPC, signed, and referencing the existing message.  Thus like a block chain of messages.
+Each client connects to one another in the "lobby".  They can then look for players who are looking to start a game, or request to join a running game.  Messages are sent to all players, signed, and referencing the existing message.  Thus like a block chain of messages.
 
 - Table reaches consensus on who’s turn to act based off the game contract
 - Table reaches consensus on the legal moves / actions a player can make
@@ -149,15 +90,15 @@ Each client connects to one another in the "lobby".  They can then look for play
 - Shuffle
 
 ### Overview
-If the game is to be developed using Etherum contracts:
+If the game is to be developed using Ethereum contracts:
 
-1.  The game is defined an an Etherum contract
+1.  The game is defined as an Ethereum contract
 2.  Players agree to the table contract
 3.  Each players actions are defined as inputs for the hand contract
 4.  After the hand has ended, each player verifies the integrity of the hand contract.  Its in everyones best interest to verify correctly [Game Theory Citation]
-5.  The hand message chain is then executed on the Etherum network for the pot to be awarded
+5.  The hand message chain is then executed on the Ethereum network for the pot to be awarded
 
-Less use of Etherum
+Less use of Ethereum
 
 1.  Players connect to each other via a P2P network protocol.
 2.  A player either looks to join a table and reviews the contract.
@@ -184,13 +125,13 @@ In the below *table contract* the below game Texas Holdem is defined as an Enum.
 These are out side the scope of this paper.
 
 ## Messages
-All actions are sent as messages.  They must include a public key hash and be signed.  The payload must also reference their previous message hash.
+All actions are sent as JSON RPC.  They must include a public key hash and be signed.  The payload must also reference their previous message hash.
 
 1.  Concatenate the payload the values
 2.  Hash the payload of step 1
 3.  Sign the output of step 2
 
-General message format
+General message structure
 
 | Property | Eg |
 | -------- | -- |
@@ -215,40 +156,15 @@ Example action message (payload)
 | Previous Hash | TODO |
 | Time stamp | 2016-08-17 00:00:00 |
 
-The hash (SHA-256) is of the property values concatenated, thus serialisation format agnostic.
 
-Eg of above message.
+Eg in Json
 ```
-47b466e4-c852-49f3-9a6d-5e59c62a98b6msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv398b5fe2-da27-4772-81ce-37fa615719b52CALL500000020160817000000
-```
-
-SHA-256 hash of the payload
-```
-1a7bf11c87e74c22b5d6fa99b28e5d28b715d3f392bb58a35da18dec3c697975
+{"TableId":"bf368921-346a-42d8-9cb8-621f9cad5e16","HandId":"398b5fe2-da27-4772-81ce-37fa615719b5","Index":2,"Action":"CALL","Amount":5000000,"Tx":null,"PreviousHash":"8ab9f91c002d8ccdbd8a49f7e028d27ca6ef01cf1fdaa4eca637868d8e4adf31","HashAlgorithm":"SHA256","Version":1.0,"BitcoinAddress":"msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv","TimeStamp":"2016-08-17T00:00:00"}
 ```
 
-Eg in XML
+SHA-256 hash of the JSON RPC method
 ```
-<Message Version="1" Type="Action">
-  <PublicKeyHash>mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo</PublicKeyHash>
-  <Action Position="1">
-    <Id>4bc7f305-aa16-450a-a3be-aad8fba7f425</Id>
-    <HandId>398b5fe2-da27-4772-81ce-37fa615719b5</HandId>
-    <Index>2</Index>
-    <Action>CALL 5000000<</Action>
-    <Tx>0100000001a3022171e04852a4530ec4c3518cd7e219801a53b7de8724c59fcbf008e0c5f5000000
-008a47304402205530f19e6cad5f2f4e04a92c3d4438907ac29a4ab50e6861088d2ad9e59ee61002
-20134b57cce3157f0ccaf47d9928d85713611062521900941460d677ccc884da20014104f48396ac
-675b97eeb54e57554827cc2b937c2dae285a9198f9582b15c920d91309bc567858dc63357bcd5d24
-fd8c041ca55de8bae62c7315b0ba66fe5f96c20dffffffff0380c6ef05000000001976a9141518ab
-b3523718f0231c7c6239a8e5887a4360c888aca08601000000000017a914348de5f6c91078c12849
-56a88a9322be8d28341487a08601000000000017a914348de5f6c91078c1284956a88a9322be8d28
-34148700000000</Tx>
-    <PreviousHash Algorithm="SHA256">d4f235a5f120224ca290c8bd76ba182db67873c04bfddffe13355a0f752f7b37</PreviousHash>
-  <Action>
-  <MessageSignature>Gztf4/3oNvanh51g11W4NlPOEyAhTCURaPTOF13Yl3iYHHh+SUvGk/5dtuZDKQdteuLAwIt8K5uthLTYsyf90rI=</MessageSignature>
-  <Hash Algorithm="SHA-256">1a7bf11c87e74c22b5d6fa99b28e5d28b715d3f392bb58a35da18dec3c697975</Hash>
-</Message>
+cb19bc14bca61bee174e5d6591530ad72b3ab58e0c5a904baec5b5de85c65e88
 ```
 
 ## Sample messages
@@ -307,7 +223,10 @@ A client will define the table contract and store that locally.  They become the
 ```
 
 ## Joining a Table
-Users send their intent to join a table by the JOINTABLE message.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
+Users send their intent to join a table by the JoinTableRequest method.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
+
+```
+```
 
 ## Buying in
 A player buying in opens a lightning payment channel with the multi signature address of the table.  Players must add BTC within the range for the table contract (MinBuyIn, MaxBuyIn)
@@ -818,7 +737,8 @@ An REST API is located at https://www.bitpoker.io/api for users to develop clien
 | GET | /Tables |
 
 ## Coloured coin crowd sale
-The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
+The following colour coin asset will be sold to raise funds for the development of the project. Asset Id 
+From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
@@ -827,4 +747,3 @@ The following colour coin asset will be sold to raise funds for the development 
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
 6. http://ms-brainwallet.org
-7. http://www.jsonrpc.org/specification
