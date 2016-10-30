@@ -17,9 +17,5 @@ namespace BitPoker.Models.Messages
 
         [DataMember]
         public DateTime TimeStamp { get; set; }
-
-        //[DataMember]
-        //[JsonProperty(PropertyName = "signature")]
-        //public String Signature { get; set; }
     }
 }

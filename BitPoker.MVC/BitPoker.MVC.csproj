@@ -157,7 +157,6 @@
     <Compile Include="Controllers\API\MessageController.cs" />
     <Compile Include="Controllers\API\MocksController.cs" />
     <Compile Include="Controllers\API\PlayersController.cs" />
-    <Compile Include="Controllers\API\ShuffleController.cs" />
     <Compile Include="Controllers\API\TablesController.cs" />
     <Compile Include="Controllers\ExplorerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,10 +240,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Invest\Index.cshtml" />
+    <Content Include="Views\Explorer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Explorer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

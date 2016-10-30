@@ -27,16 +27,6 @@ namespace BitPoker.MVC.Controllers
             this.tableRepo = new Repository.InMemoryTableRepo();
         }
 
-        /////Get a mock message
-        //public BitPoker.Models.Messages.ActionMessage Get(Guid handId, Int32 index)
-        //{
-        //    BitcoinSecret alice_secret = new BitcoinSecret(ALICE_WIF, NBitcoin.Network.Main);
-        //    BitcoinSecret bob_secret = new BitcoinSecret(BOB_WIF, NBitcoin.Network.Main);
-
-        //    BitPoker.Models.Messages.ActionMessage message = handRepo.Find(handId).History[index];
-        //    return new BitPoker.Models.Messages.ActionMessage();
-        //}
-
         /// <summary>
         /// Message controller either adds to 
         /// </summary>
@@ -46,6 +36,19 @@ namespace BitPoker.MVC.Controllers
         public Boolean Post(BitPoker.Models.IRequest request)
         {
 
+            switch (request.Method.ToUpper())
+            {
+                case "POST SMALL BLIND":
+                case "SMALL BLIND":
+                case "SB":
+                    AddSmallBlind(request.Params as BitPoker.Models.Messages.ActionMessage);
+                    break;
+                case "POST BIG BLIND":
+                case "BIG BLIND":
+                case "BB":
+                    //AddBigBlind(request);
+                    break;
+            }
 
             //NOTE:  THIS IS WHERE THE STUB AI LOGIC SHOULD EXIST.
             //
@@ -132,7 +135,20 @@ namespace BitPoker.MVC.Controllers
 
         public void AddSmallBlind(BitPoker.Models.Messages.ActionMessage message)
         {
+            if (message != null)
+            {
+                //Is the blind the correct amount?
+                var table = tableRepo.Find(message.TableId);
 
+                if (table != null && message.Action == "POST SMALL BLIND" && message.Amount == table.BigBlind)
+                {
+                    //handRepo.AddMessage(message);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
         }
 
         public void AddBigBlind(BitPoker.Models.Messages.ActionMessage message)
@@ -151,6 +167,22 @@ namespace BitPoker.MVC.Controllers
                     throw new ArgumentException();
                 }
             }
+        }
+
+        internal void Shuffle()
+        {
+            var message = new BitPoker.Models.Messages.DeckResponse();
+
+            message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
+            message.Deck.Shuffle();
+        }
+
+        internal void Deck()
+        {
+            var message = new BitPoker.Models.Messages.DeckResponse();
+
+            message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
+            message.Deck.Shuffle();
         }
     }
 }

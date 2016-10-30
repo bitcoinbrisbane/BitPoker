@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BitPoker.Models.PlayerInfo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Explorer</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserAgent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BitcoinAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicKey)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IPAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastSeen)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserAgent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BitcoinAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicKey)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IPAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastSeen)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+        </td>
+    </tr>
+}
+
+</table>
