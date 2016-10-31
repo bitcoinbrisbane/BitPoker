@@ -52,7 +52,8 @@ namespace Bitpoker.WPFClient
 
             this.DataContext = _viewModel;
 
-            _backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
+            //_backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
+            _backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Bitpoker.WPFClient
             string message = composite.Message == null ? "" : composite.Message;
             textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
 
-            String value = composite.Message.ToUpper().Trim();
+            String value = composite.Message;
             if (value.StartsWith("GETTABLES"))
             {
                 using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
@@ -92,7 +93,6 @@ namespace Bitpoker.WPFClient
             textBoxChatPane.Text += (message.Method + Environment.NewLine);
         }
 
-
         private void textBoxEntryField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
@@ -115,7 +115,9 @@ namespace Bitpoker.WPFClient
 
                 if (value.StartsWith("GETTABLES"))
                 {
-                    messageToSend = "GETTABLES";
+                    RPCRequest request = new RPCRequest();
+                    request.Method = "GETTABLES"; 
+                    messageToSend = Newtonsoft.Json.JsonConvert.SerializeObject(request);
                 }
 
                 if (value.StartsWith("ADDTABLE"))
@@ -131,10 +133,10 @@ namespace Bitpoker.WPFClient
                     _viewModel.JoinTable(tableId);
                     //_viewModel.BuyIn();
                 }
-                else
-                {
-                    _backend.SendMessage(textBoxEntryField.Text);
-                }
+                //else
+                //{
+                //    _backend.SendMessage(textBoxEntryField.Text);
+                //}
 
                 if (value.StartsWith("BUYIN"))
                 {

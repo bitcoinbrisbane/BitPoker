@@ -121,7 +121,7 @@ namespace Bitpoker.WPFClient.Clients
             _channel.DisplayMessage(new CompositeType("Event", _myUserName + " has entered the conversation."));
 
             // Information to display locally
-            //_displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
+            _displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
         }
 
         private void StopService()

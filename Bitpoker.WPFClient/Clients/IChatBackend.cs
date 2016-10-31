@@ -6,7 +6,7 @@ using BitPoker.Models.Messages;
 namespace Bitpoker.WPFClient.Clients
 {
     [ServiceContract]
-    public interface IChatBackend : IMessageClient
+    public interface IChatBackend //: IMessageClient
     {
         [OperationContract(IsOneWay = true)]
         void DisplayMessage(CompositeType composite);
@@ -16,6 +16,8 @@ namespace Bitpoker.WPFClient.Clients
 
         [Obsolete]
         void SendMessage(string text);
+
+        void SendIMessage(BitPoker.Models.IRequest message);
     }
 
     public delegate void DisplayMessageDelegate(CompositeType data);

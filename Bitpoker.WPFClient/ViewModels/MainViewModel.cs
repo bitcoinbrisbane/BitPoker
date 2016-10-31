@@ -143,6 +143,8 @@ namespace Bitpoker.WPFClient.ViewModels
                 //TODO: use reflection
                 message.Method = "JoinTableRequest";
                 message.Params = request;
+
+                //send
             }
         }
 
