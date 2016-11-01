@@ -80,7 +80,7 @@ namespace Bitpoker.WPFClient.Clients
 
         #region Everything we need for bi-directional communication
 
-        private string _myUserName = "Anonymous";
+        public string _myUserName = "Anonymous";
         private ServiceHost host = null;
         private ChannelFactory<IChatBackend> channelFactory = null;
         private IChatBackend _channel;
@@ -91,18 +91,18 @@ namespace Bitpoker.WPFClient.Clients
         /// <param name="text"></param>
         public void SendMessage(string text)
         {
-            //TODO:  MOVE OUT BUSINESS LOGIC HERE.
-            //Local command
-            if (text.ToUpper().StartsWith("SETNAME:", StringComparison.OrdinalIgnoreCase))
-            {
-                _myUserName = text.Substring("SETNAME:".Length).Trim();
-                _displayMessageDelegate(new CompositeType("Event", "Setting your name to " + _myUserName));
-            }
-            else
-            {
+            ////TODO:  MOVE OUT BUSINESS LOGIC HERE.
+            ////Local command
+            //if (text.ToUpper().StartsWith("SETNAME:", StringComparison.OrdinalIgnoreCase))
+            //{
+            //    _myUserName = text.Substring("SETNAME:".Length).Trim();
+            //    //_displayMessageDelegate(new CompositeType("Event", "Setting your name to " + _myUserName));
+            //}
+            //else
+            //{
                 // In order to send a message, we call our friends' DisplayMessage method
                 _channel.DisplayMessage(new CompositeType(_myUserName, text));
-            }
+            //}
         }
 
         public void SendMessage(ActionMessage message)
@@ -118,10 +118,16 @@ namespace Bitpoker.WPFClient.Clients
             _channel = channelFactory.CreateChannel();
 
             // Information to send to the channel
-            _channel.DisplayMessage(new CompositeType("Event", _myUserName + " has entered the conversation."));
+            BitPoker.Models.IRequest request = new RPCRequest()
+            {
+                Method = "Peer"
+            };
+
+            String message = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+            _channel.DisplayMessage(new CompositeType("Event", message));
 
             // Information to display locally
-            _displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
+            //_displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
         }
 
         private void StopService()

@@ -20,7 +20,7 @@
         <Label Content="Peers" HorizontalAlignment="Left" Margin="19,4,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Stretch" Margin="19,203,312,54" Name="textBoxChatPane" VerticalAlignment="Stretch" Width="Auto" Grid.Row="0" />
         <TextBox Height="23" HorizontalAlignment="Stretch" Margin="17,410,312,11" Name="textBoxEntryField" VerticalAlignment="Stretch" Width="Auto" KeyDown="textBoxEntryField_KeyDown" />
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="350" Margin="403,32,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="297"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="350" Margin="403,32,0,0" TextWrapping="Wrap" Text="{Binding LastMessage}" VerticalAlignment="Top" Width="297"/>
         <Label Content="Log" HorizontalAlignment="Left" Margin="403,4,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

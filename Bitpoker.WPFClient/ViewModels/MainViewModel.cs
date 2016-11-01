@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using BitPoker.Models.ExtensionMethods;
 using System.ComponentModel;
 using BitPoker.Models;
+using Bitpoker.WPFClient.Clients;
+using BitPoker.Models.Messages;
 
 namespace Bitpoker.WPFClient.ViewModels
 {
@@ -41,7 +43,7 @@ namespace Bitpoker.WPFClient.ViewModels
         /// </summary>
         public BitPoker.NetworkClient.INetworkClient NetworkClient { get; set; }
 
-        public Bitpoker.WPFClient.Clients.IChatBackend Backend { get; set; }
+        public IChatBackend Backend { get; private set; }
 
         /// <summary>
         /// Players on the entire network
@@ -55,6 +57,18 @@ namespace Bitpoker.WPFClient.ViewModels
         public TexasHoldemPlayer Player { get; set; }
 
         public IObservable<IRequest> InComingMessage { get; set; }
+
+        private String _lastMessage;
+
+        public String LastMessage
+        {
+            get { return _lastMessage; }
+            set
+            {
+                _lastMessage = value;
+                NotifyPropertyChanged("LastMessage");
+            }
+        }
 
         public MainViewModel()
         {
@@ -80,6 +94,8 @@ namespace Bitpoker.WPFClient.ViewModels
                 IsBigBlind = true,
                 Stack = 50000000
             };
+
+            this.Backend = new ChatBackend(this.DisplayMessage, "");
         }
 
         public String NewAddress()
@@ -145,6 +161,8 @@ namespace Bitpoker.WPFClient.ViewModels
                 message.Params = request;
 
                 //send
+                String json = Newtonsoft.Json.JsonConvert.SerializeObject(message);
+                Backend.SendMessage(json);
             }
         }
 
@@ -182,14 +200,30 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public async Task<TableViewModel> GetTableFromClientAsync(String id)
         {
-            //
-            //using ()
-            //{
-
-            //}
-            //return new TableViewModel();
-
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Display messages and peform any actions
+        /// </summary>
+        /// <param name="composite"></param>
+        public void DisplayMessage(CompositeType composite)
+        {
+            string username = composite.Username == null ? "" : composite.Username;
+            string message = composite.Message == null ? "" : composite.Message;
+            //this.InComingMessage = composite.Message;
+
+            IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
+
+            this.LastMessage = composite.Message;
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

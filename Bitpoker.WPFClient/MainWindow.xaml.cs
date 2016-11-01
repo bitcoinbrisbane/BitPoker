@@ -54,6 +54,9 @@ namespace Bitpoker.WPFClient
 
             //_backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
             _backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+            //_viewModel.Backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+
+            this.DataContext = _viewModel;
         }
 
         /// <summary>
@@ -66,25 +69,36 @@ namespace Bitpoker.WPFClient
             string message = composite.Message == null ? "" : composite.Message;
             textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
 
-            String value = composite.Message;
-            if (value.StartsWith("GETTABLES"))
-            {
-                using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
-                {
-                    var tables = tableRepo.All();
-                    String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
-                    _backend.SendMessage(json);
-                }
-            }
+            IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
 
-            if (value.StartsWith("JOINTABLE"))
+            switch (request.Method.ToUpper())
             {
-                using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
-                {
-                    var tables = tableRepo.All();
-                    String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
-                    _backend.SendMessage(json);
-                }
+                case "GETTABLES" :
+                
+                    using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+                    {
+                        var tables = tableRepo.All();
+                        String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+                        _backend.SendMessage(json);
+                    }
+
+                    break;
+
+                case "JOINTABLE" :
+
+                    using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+                    {
+                        var tables = tableRepo.All();
+                        String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+                        _backend.SendMessage(json);
+                    }
+
+                    break;
+                case "BUYIN" :
+                    break;
+                case "CHECK":
+                    request.Method = "check";
+                    break;
             }
         }
 
