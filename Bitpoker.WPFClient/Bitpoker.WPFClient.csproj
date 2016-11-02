@@ -72,6 +72,7 @@
     <Compile Include="Clients\IChatBackend.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="KeyRepository.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\HandViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
@@ -135,7 +136,9 @@
       <Name>BitPoker.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
