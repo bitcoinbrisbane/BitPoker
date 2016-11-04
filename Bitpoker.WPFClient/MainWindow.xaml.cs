@@ -31,81 +31,77 @@ namespace Bitpoker.WPFClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        //use client on view model
-        [Obsolete]
-        private ChatBackend _backend;
-
         private ViewModels.MainViewModel _viewModel = new ViewModels.MainViewModel();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-            //const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+            //String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+            ////const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
 
-            NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
-            //NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
+            //NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
+            ////NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
 
-            NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
+            //NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
             //NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
 
             this.DataContext = _viewModel;
 
             //_backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
-            _backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+            //_backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
             //_viewModel.Backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
 
             this.DataContext = _viewModel;
         }
 
-        /// <summary>
-        /// Display messages and peform any actions
-        /// </summary>
-        /// <param name="composite"></param>
-        public void DisplayMessage(CompositeType composite)
-        {
-            string username = composite.Username == null ? "" : composite.Username;
-            string message = composite.Message == null ? "" : composite.Message;
-            textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
+        ///// <summary>
+        ///// Display messages and peform any actions
+        ///// </summary>
+        ///// <param name="composite"></param>
+        //public void DisplayMessage(CompositeType composite)
+        //{
+        //    string username = composite.Username == null ? "" : composite.Username;
+        //    string message = composite.Message == null ? "" : composite.Message;
+        //    textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
 
-            IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
+        //    IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
 
-            switch (request.Method.ToUpper())
-            {
-                case "GETTABLES" :
+        //    switch (request.Method.ToUpper())
+        //    {
+        //        case "GETTABLES" :
                 
-                    using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
-                    {
-                        var tables = tableRepo.All();
-                        String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
-                        _backend.SendMessage(json);
-                    }
+        //            using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+        //            {
+        //                var tables = tableRepo.All();
+        //                String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+        //                _backend.SendMessage(json);
+        //            }
 
-                    break;
+        //            break;
 
-                case "JOINTABLE" :
+        //        case "JOINTABLE" :
 
-                    using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
-                    {
-                        var tables = tableRepo.All();
-                        String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
-                        _backend.SendMessage(json);
-                    }
+        //            using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
+        //            {
+        //                var tables = tableRepo.All();
+        //                String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
+        //                _backend.SendMessage(json);
+        //            }
 
-                    break;
-                case "BUYIN" :
-                    break;
-                case "CHECK":
-                    request.Method = "check";
-                    break;
-            }
-        }
+        //            break;
+        //        case "BUYIN" :
+        //            break;
+        //        case "CHECK":
+        //            request.Method = "check";
+        //            break;
+        //    }
+        //}
 
-        public void DisplayIMessage(IRequest message)
-        {
-            textBoxChatPane.Text += (message.Method + Environment.NewLine);
-        }
+        //public void DisplayIMessage(IRequest message)
+        //{
+        //    textBoxChatPane.Text += (message.Method + Environment.NewLine);
+        //}
 
         private void textBoxEntryField_KeyDown(object sender, KeyEventArgs e)
         {
@@ -159,12 +155,12 @@ namespace Bitpoker.WPFClient
                 }
                 else
                 {
-                    _backend.SendMessage(textBoxEntryField.Text);
+                    _viewModel.Backend.SendMessage(textBoxEntryField.Text);
                 }
 
                 if (!String.IsNullOrEmpty(messageToSend))
                 {
-                    _backend.SendMessage(messageToSend);
+                    _viewModel.Backend.SendMessage(messageToSend);
                     messageToSend = String.Empty;
                 }
 

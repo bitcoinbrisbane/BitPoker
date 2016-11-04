@@ -20,7 +20,7 @@ namespace Bitpoker.WPFClient.ViewModels
     /// <summary>
     /// View model for table really.
     /// </summary>
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel, INotifyPropertyChanged
     {
         //SocketPermission permission;
         //Socket sListener;
@@ -31,7 +31,7 @@ namespace Bitpoker.WPFClient.ViewModels
         private Key _bitcoinKey;
         private BitcoinSecret _secret;
         
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Not yet used
@@ -216,14 +216,6 @@ namespace Bitpoker.WPFClient.ViewModels
             IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
 
             this.LastMessage = composite.Message;
-        }
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
     }
 }
