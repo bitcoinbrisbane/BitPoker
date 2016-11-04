@@ -120,7 +120,7 @@ namespace Bitpoker.WPFClient.Clients
             // Information to send to the channel
             BitPoker.Models.IRequest request = new RPCRequest()
             {
-                Method = "Peer"
+                Method = "NewPeer"
             };
 
             String message = Newtonsoft.Json.JsonConvert.SerializeObject(request);

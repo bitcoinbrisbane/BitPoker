@@ -56,6 +56,7 @@
     <Compile Include="Messages\AddTableRequest.cs" />
     <Compile Include="Messages\BaseRequest.cs" />
     <Compile Include="Messages\IMessage.cs" />
+    <Compile Include="Messages\NewPeer.cs" />
     <Compile Include="Messages\RPCRequest.cs" />
     <Compile Include="Messages\RCPResponse.cs" />
     <Compile Include="Messages\BuyInRequest.cs" />

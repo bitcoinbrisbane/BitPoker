@@ -53,8 +53,7 @@ namespace Bitpoker.WPFClient
             this.DataContext = _viewModel;
 
             //_backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
-            _backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
-            //_viewModel.Backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+            //_backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
 
             this.DataContext = _viewModel;
         }
@@ -102,6 +101,7 @@ namespace Bitpoker.WPFClient
             }
         }
 
+        [Obsolete]
         public void DisplayIMessage(IRequest message)
         {
             textBoxChatPane.Text += (message.Method + Environment.NewLine);
@@ -125,6 +125,13 @@ namespace Bitpoker.WPFClient
                 if (value.StartsWith("NEWADDRESS"))
                 {
                     messageToSend = _viewModel.NewAddress();
+                }
+
+                if (value.StartsWith("GETTABLES"))
+                {
+                    RPCRequest request = new RPCRequest();
+                    request.Method = "GETTABLES";
+                    messageToSend = Newtonsoft.Json.JsonConvert.SerializeObject(request);
                 }
 
                 if (value.StartsWith("GETTABLES"))
@@ -157,10 +164,10 @@ namespace Bitpoker.WPFClient
                     String[] buyInParms = value.Substring(0, 8).Split(' ');
                     //_viewModel.BuyIn();
                 }
-                else
-                {
-                    _backend.SendMessage(textBoxEntryField.Text);
-                }
+                //else
+                //{
+                //    _backend.SendMessage(textBoxEntryField.Text);
+                //}
 
                 if (!String.IsNullOrEmpty(messageToSend))
                 {
