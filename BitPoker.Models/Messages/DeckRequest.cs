@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class DeckRequest : BaseRequest
+    public class DeckRequest : BaseRequest, IMessage
     {
         public Guid HandId { get; set; }
 

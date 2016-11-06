@@ -56,7 +56,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public TexasHoldemPlayer Player { get; set; }
 
-        public IObservable<IRequest> InComingMessage { get; set; }
+        public ObservableCollection<IRequest> InComingMessages { get; set; }
 
         private String _lastMessage;
 
@@ -96,6 +96,8 @@ namespace Bitpoker.WPFClient.ViewModels
             };
 
             this.Backend = new ChatBackend(this.DisplayMessage, "");
+
+            this.InComingMessages = new ObservableCollection<IRequest>();
         }
 
         public String NewAddress()
@@ -151,7 +153,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 IRequest message = new BitPoker.Models.Messages.RPCRequest();
                 var table = tableRepo.Find(tableId);
 
-                BitPoker.Models.Messages.JoinTableRequest request = new BitPoker.Models.Messages.JoinTableRequest()
+                JoinTableRequest request = new BitPoker.Models.Messages.JoinTableRequest()
                 {
                     Seat = 1
                 };
@@ -211,11 +213,18 @@ namespace Bitpoker.WPFClient.ViewModels
         {
             string username = composite.Username == null ? "" : composite.Username;
             string message = composite.Message == null ? "" : composite.Message;
-            //this.InComingMessage = composite.Message;
 
             IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
 
             this.LastMessage = composite.Message;
+
+            switch (request.Method)
+            {
+                case "NewPeer" :
+                    BitPoker.Models.Messages.NewPeer newPeer = null;
+                    //NetworkPlayers.Add();
+                    break;
+            }
         }
     }
 }

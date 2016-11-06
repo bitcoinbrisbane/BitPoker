@@ -126,6 +126,13 @@ namespace Bitpoker.WPFClient
                 if (value.StartsWith("GETTABLES"))
                 {
                     RPCRequest request = new RPCRequest();
+                    request.Method = "GETTABLES";
+                    messageToSend = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                }
+
+                if (value.StartsWith("GETTABLES"))
+                {
+                    RPCRequest request = new RPCRequest();
                     request.Method = "GETTABLES"; 
                     messageToSend = Newtonsoft.Json.JsonConvert.SerializeObject(request);
                 }
@@ -153,10 +160,10 @@ namespace Bitpoker.WPFClient
                     String[] buyInParms = value.Substring(0, 8).Split(' ');
                     //_viewModel.BuyIn();
                 }
-                else
-                {
-                    _viewModel.Backend.SendMessage(textBoxEntryField.Text);
-                }
+                //else
+                //{
+                //    _backend.SendMessage(textBoxEntryField.Text);
+                //}
 
                 if (!String.IsNullOrEmpty(messageToSend))
                 {
