@@ -31,8 +31,6 @@ namespace Bitpoker.WPFClient.ViewModels
         private Key _bitcoinKey;
         private BitcoinSecret _secret;
         
-        //public event PropertyChangedEventHandler PropertyChanged;
-
         /// <summary>
         /// Not yet used
         /// </summary>
@@ -54,7 +52,17 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public WalletViewModel Wallet { get; set; }
 
-        public TexasHoldemPlayer Player { get; set; }
+        private TexasHoldemPlayer _me;
+
+        public TexasHoldemPlayer Me
+        {
+            get { return _me; }
+            set
+            {
+                _me = value;
+                NotifyPropertyChanged("Me");
+            }
+        }
 
         public ObservableCollection<IRequest> InComingMessages { get; set; }
 
@@ -86,18 +94,35 @@ namespace Bitpoker.WPFClient.ViewModels
             BitcoinAddress address = _secret.GetAddress();
 
             //move this
-            this.Player = new TexasHoldemPlayer()
+            this.Me = new TexasHoldemPlayer()
             {
                 Position = 0,
                 BitcoinAddress = address.ToString(),
                 IsDealer = true,
                 IsBigBlind = true,
-                Stack = 50000000
+                Stack = 0
             };
 
-            this.Backend = new ChatBackend(this.DisplayMessage, "");
-
+            this.Backend = new ChatBackend(this.ProcessMessage, Wallet.Address.ToString());
             this.InComingMessages = new ObservableCollection<IRequest>();
+
+            //Announce
+            IRequest request = new RPCRequest()
+            {
+                Method = "NewPeer",
+                Params = new NewPeer()
+                {
+                    BitcoinAddress = Wallet.Address.ToString(),
+                    Version = 1.0M,
+                    Player = new PlayerInfo()
+                    {
+                        BitcoinAddress = Wallet.Address.ToString()
+                    },
+                    TimeStamp = DateTime.UtcNow
+                }
+            };
+
+            this.Backend.SendRequest(request);
         }
 
         public String NewAddress()
@@ -146,6 +171,14 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
+        /// <summary>
+        /// Get local tables.  TODO: add a filter
+        /// </summary>
+        public void GetTables()
+        {
+            
+        }
+
         public void JoinTable(Guid tableId)
         {
             using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
@@ -153,7 +186,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 IRequest message = new BitPoker.Models.Messages.RPCRequest();
                 var table = tableRepo.Find(tableId);
 
-                JoinTableRequest request = new BitPoker.Models.Messages.JoinTableRequest()
+                JoinTableRequest request = new JoinTableRequest()
                 {
                     Seat = 1
                 };
@@ -174,7 +207,6 @@ namespace Bitpoker.WPFClient.ViewModels
             {
                 var players = await client.GetPlayersAsync();
             }
-               
 
             //foreach (BitPoker.NetworkClient.INetworkClient client in this.Clients)
             //{
@@ -196,7 +228,9 @@ namespace Bitpoker.WPFClient.ViewModels
             using (BitPoker.NetworkClient.Blockr client = new BitPoker.NetworkClient.Blockr())
             {
                 String address = this.Wallet.Address.ToString();
-                var x = await client.GetAddressBalanceAsync(address, 1);
+                Decimal balance = await client.GetAddressBalanceAsync(address, 1);
+
+                this.Me.Stack = Convert.ToUInt64(balance * 1000000);
             }
         }
 
@@ -209,10 +243,10 @@ namespace Bitpoker.WPFClient.ViewModels
         /// Display messages and peform any actions
         /// </summary>
         /// <param name="composite"></param>
-        public void DisplayMessage(CompositeType composite)
+        public void ProcessMessage(CompositeType composite)
         {
-            string username = composite.Username == null ? "" : composite.Username;
-            string message = composite.Message == null ? "" : composite.Message;
+            //string username = composite.Username == null ? "" : composite.Username;
+            //string message = composite.Message == null ? "" : composite.Message;
 
             IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
 
@@ -221,8 +255,36 @@ namespace Bitpoker.WPFClient.ViewModels
             switch (request.Method)
             {
                 case "NewPeer" :
-                    BitPoker.Models.Messages.NewPeer newPeer = null;
-                    //NetworkPlayers.Add();
+                    NewPeer newPeer = Newtonsoft.Json.JsonConvert.DeserializeObject<NewPeer>(request.Params.ToString());
+                    NetworkPlayers.Add(newPeer.Player);
+                    break;
+                case "NewTable": //Peer has announced a new table
+                    break;
+
+                case "GetTables": //Give me your tables
+
+                    using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository("data.db"))
+                    {
+                        IEnumerable<BitPoker.Models.Contracts.Table> tables = tableRepo.All();
+                    }
+
+                    //now send
+                    IResponse response = new RCPResponse()
+                    {
+                        Id = request.Id
+                    };
+
+                    break;
+
+                case "GetTablesResponse": //Add resultant tables
+                    GetTablesResponse tableResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BitPoker.Models.Messages.GetTablesResponse>(request.Params.ToString());
+
+                    foreach (BitPoker.Models.Contracts.Table table in tableResponse.Tables)
+                    {
+                        TableViewModel tableViewModel = new TableViewModel(table);
+                        this.Tables.Add(tableViewModel);
+                    }
+
                     break;
             }
         }

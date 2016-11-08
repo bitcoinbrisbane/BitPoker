@@ -55,6 +55,8 @@
     <Compile Include="Messages\AddPlayerRequest.cs" />
     <Compile Include="Messages\AddTableRequest.cs" />
     <Compile Include="Messages\BaseRequest.cs" />
+    <Compile Include="Messages\GetTableRequest.cs" />
+    <Compile Include="Messages\GetTablesResponse.cs" />
     <Compile Include="Messages\IMessage.cs" />
     <Compile Include="Messages\NewPeer.cs" />
     <Compile Include="Messages\RPCRequest.cs" />
@@ -78,5 +80,8 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Methods\" />
   </ItemGroup>
 </Project>
