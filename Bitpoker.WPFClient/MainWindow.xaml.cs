@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using BitPoker.Models.ExtensionMethods;
 using BitPoker.Models.Messages;
+using Bitpoker.WPFClient.ViewModels;
 
 namespace Bitpoker.WPFClient
 {
@@ -157,7 +158,10 @@ namespace Bitpoker.WPFClient
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Get user pubkey
+            PlayerInfo player = (PlayerInfo)PlayersGrid.SelectedItem;
+            
             //Load tables
+            _viewModel.GetPeersTables(player.BitcoinAddress);
         }
     }
 }

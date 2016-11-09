@@ -179,11 +179,28 @@ namespace Bitpoker.WPFClient.ViewModels
             
         }
 
+        public void GetPeersTables(String address)
+        {
+            IRequest message = new RPCRequest();
+
+            GetTableRequest request = new GetTableRequest()
+            {
+                Recipient = address 
+            };
+
+            message.Method = request.GetType().Name;
+            message.Params = request;
+
+            //send
+            String json = Newtonsoft.Json.JsonConvert.SerializeObject(message);
+            Backend.SendMessage(json);
+        }
+
         public void JoinTable(Guid tableId)
         {
             using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
             {
-                IRequest message = new BitPoker.Models.Messages.RPCRequest();
+                IRequest message = new RPCRequest();
                 var table = tableRepo.Find(tableId);
 
                 JoinTableRequest request = new JoinTableRequest()
@@ -191,8 +208,7 @@ namespace Bitpoker.WPFClient.ViewModels
                     Seat = 1
                 };
 
-                //TODO: use reflection
-                message.Method = "JoinTableRequest";
+                message.Method = request.GetType().Name;
                 message.Params = request;
 
                 //send

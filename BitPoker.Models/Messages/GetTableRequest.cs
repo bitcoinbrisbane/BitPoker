@@ -4,6 +4,8 @@ namespace BitPoker.Models.Messages
 {
     public class GetTableRequest : BaseRequest, IMessage
     {
+        public String Recipient { get; set; }
+
         /// <summary>
         /// Buy in filter
         /// </summary>
