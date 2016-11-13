@@ -746,3 +746,4 @@ The following colour coin asset will be sold to raise funds for the development 
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
 6. http://ms-brainwallet.org
+7. https://msdn.microsoft.com/en-us/library/bb756931.aspx?tduid=(fc4ef1dccc45eb37dfbbbf748821ac83)(256380)(2459594)(TnL5HPStwNw-fIrr3XMwfP4kdvb3oN5V_A)()
