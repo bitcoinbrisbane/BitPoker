@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BitPoker.Models.ExtensionMethods
 {
+    [Obsolete]
     public static class ActionExtension
     {
         public static Boolean IsValid(this IEnumerable<Messages.ActionMessage> value)

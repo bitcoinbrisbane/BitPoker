@@ -31,7 +31,7 @@ namespace Bitpoker.WPFClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewModels.MainViewModel _viewModel = new ViewModels.MainViewModel();
+        private ViewModels.LobbyViewModel _viewModel = new ViewModels.LobbyViewModel();
 
         public MainWindow()
         {
@@ -146,9 +146,6 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Guid selectedTableId = new Guid();
-
-            //_viewModel.Players
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -162,6 +159,11 @@ namespace Bitpoker.WPFClient
             
             //Load tables
             _viewModel.GetPeersTables(player.BitcoinAddress);
+        }
+
+        private void tablesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.SelectedTable = (BitPoker.Models.Contracts.Table)tablesGrid.SelectedItem;
         }
     }
 }

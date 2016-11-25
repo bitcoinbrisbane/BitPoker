@@ -95,12 +95,15 @@
     </ApplicationDefinition>
     <Compile Include="Clients\BackendChat.cs" />
     <Compile Include="Clients\IChatBackend.cs" />
-    <Compile Include="Clients\SignalRClient.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="KeyRepository.cs" />
+    <Compile Include="Table.xaml.cs">
+      <DependentUpon>Table.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\HandViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\TableViewModel.cs" />
     <Compile Include="ViewModels\WalletViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -115,6 +118,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Table.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

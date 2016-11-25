@@ -21,6 +21,6 @@
         <TextBox Height="23" HorizontalAlignment="Stretch" Margin="17,410,312,11" Name="textBoxEntryField" VerticalAlignment="Stretch" Width="Auto" KeyDown="textBoxEntryField_KeyDown" />
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="350" Margin="403,32,0,0" TextWrapping="Wrap" Text="{Binding LastMessage}" VerticalAlignment="Top" Width="297"/>
         <Label Content="Log" HorizontalAlignment="Left" Margin="403,4,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="19,150,0,0" VerticalAlignment="Top" Height="98" Width="384" ItemsSource="{Binding Tables}"/>
+        <DataGrid x:Name="tablesGrid" HorizontalAlignment="Left" Margin="19,150,0,0" VerticalAlignment="Top" Height="98" Width="384" ItemsSource="{Binding Tables}" SelectionChanged="tablesGrid_SelectionChanged"/>
     </Grid>
 </Window>
