@@ -8,7 +8,5 @@ namespace BitPoker.Models.Messages
     public interface IMessage
     {
         Decimal Version { get; }
-
-        //String Signature { get; set; }
     }
 }

@@ -738,8 +738,7 @@ An REST API is located at https://www.bitpoker.io/api for users to develop clien
 | GET | /Tables |
 
 ## Coloured coin crowd sale
-The following colour coin asset will be sold to raise funds for the development of the project. Asset Id 
-From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
+The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
@@ -748,4 +747,8 @@ From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
 6. http://ms-brainwallet.org
+<<<<<<< HEAD
 7. http://json-rpc.org/wiki/specification
+=======
+7. https://msdn.microsoft.com/en-us/library/bb756931.aspx?tduid=(fc4ef1dccc45eb37dfbbbf748821ac83)(256380)(2459594)(TnL5HPStwNw-fIrr3XMwfP4kdvb3oN5V_A)()
+>>>>>>> d850bdceaad47763d9b430f6f3a14e748e1dfcdc

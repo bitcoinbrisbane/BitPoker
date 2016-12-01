@@ -64,15 +64,27 @@ namespace Bitpoker.WPFClient.Clients
             }
         }
 
-        public void DisplayIMessage(BitPoker.Models.IRequest message)
+        public void DisplayIRequest(BitPoker.Models.IRequest request)
         {
-            if (message == null)
+            if (request == null)
             {
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException("request");
             }
             else
             {
-                _displayIMessageDelegate(message);
+                _displayIMessageDelegate(request);
+            }
+        }
+
+        public void DisplayIResponse(BitPoker.Models.IResponse response)
+        {
+            if (response == null)
+            {
+                throw new ArgumentNullException("response");
+            }
+            else
+            {
+                //_displayIMessageDelegate(request);
             }
         }
 
@@ -80,7 +92,7 @@ namespace Bitpoker.WPFClient.Clients
 
         #region Everything we need for bi-directional communication
 
-        private string _myUserName = "Anonymous";
+        public string _myUserName = "Anonymous";
         private ServiceHost host = null;
         private ChannelFactory<IChatBackend> channelFactory = null;
         private IChatBackend _channel;
@@ -91,23 +103,19 @@ namespace Bitpoker.WPFClient.Clients
         /// <param name="text"></param>
         public void SendMessage(string text)
         {
-            //TODO:  MOVE OUT BUSINESS LOGIC HERE.
-            //Local command
-            if (text.ToUpper().StartsWith("SETNAME:", StringComparison.OrdinalIgnoreCase))
-            {
-                _myUserName = text.Substring("SETNAME:".Length).Trim();
-                _displayMessageDelegate(new CompositeType("Event", "Setting your name to " + _myUserName));
-            }
-            else
-            {
-                // In order to send a message, we call our friends' DisplayMessage method
-                _channel.DisplayMessage(new CompositeType(_myUserName, text));
-            }
+            _channel.DisplayMessage(new CompositeType(_myUserName, text));
         }
 
-        public void SendMessage(ActionMessage message)
+        public void SendRequest(BitPoker.Models.IRequest request)
         {
-            _channel.DisplayMessage(new CompositeType(_myUserName, message.ToString()));
+            String json = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+            SendMessage(json);
+        }
+
+        public void SendResponse(BitPoker.Models.IResponse response)
+        {
+            String json = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+            SendMessage(json);
         }
 
         private void StartService()
@@ -116,12 +124,6 @@ namespace Bitpoker.WPFClient.Clients
             host.Open();
             channelFactory = new ChannelFactory<IChatBackend>("ChatEndpoint");
             _channel = channelFactory.CreateChannel();
-
-            // Information to send to the channel
-            _channel.DisplayMessage(new CompositeType("Event", _myUserName + " has entered the conversation."));
-
-            // Information to display locally
-            //_displayMessageDelegate(new CompositeType("Info", "To change your name, type setname: NEW_NAME"));
         }
 
         private void StopService()
@@ -135,16 +137,6 @@ namespace Bitpoker.WPFClient.Clients
                     host.Close();
                 }
             }
-        }
-
-        public Task SendMessageAsync(ActionMessage message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SendIMessage(BitPoker.Models.IRequest message)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion 

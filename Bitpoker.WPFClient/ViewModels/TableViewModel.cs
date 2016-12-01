@@ -1,16 +1,17 @@
 ﻿using NBitcoin;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bitpoker.WPFClient.ViewModels
 {
-    public class TableViewModel
+    public class TableViewModel : BaseViewModel, INotifyPropertyChanged
     {
         //TODO: REMOVE
-        private const String apiUrl = "https://www.bitpoker.io/api";
+        //private const String apiUrl = "https://www.bitpoker.io/api";
 
         private readonly BitPoker.Models.Contracts.Table _table;
 
@@ -20,17 +21,24 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public ICollection<HandViewModel> Hands { get; set; }
 
+        /// <summary>
+        /// Not yet used
+        /// </summary>
+        public IList<BitPoker.NetworkClient.INetworkClient> Clients { get; set; }
+
+        public Clients.IChatBackend Client { get; set; }
+
         public TableViewModel(BitPoker.Models.Contracts.Table table)
         {
             _table = table;
+            //this.Client = new Clients.ChatBackend();
         }
 
         public async Task<Boolean> JoinTable(BitPoker.Models.Messages.JoinTableRequest request)
         {
             //Check if seat is allocated
             
-
-            //Check BTC of that address to stop spamming
+            //Check amount of BTC in that address to stop spamming
             using (BitPoker.NetworkClient.Blockr client = new BitPoker.NetworkClient.Blockr())
             {
                 //Clients.Blockr client = new Clients.Blockr();

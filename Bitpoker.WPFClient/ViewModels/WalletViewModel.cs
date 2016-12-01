@@ -1,13 +1,14 @@
 ﻿using NBitcoin;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bitpoker.WPFClient.ViewModels
 {
-    public class WalletViewModel
+    public class WalletViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public BitcoinAddress Address { get; private set; }
 
@@ -19,7 +20,7 @@ namespace Bitpoker.WPFClient.ViewModels
             Address = secret.GetAddress();
         }
 
-        public async Task LoadBalance()
+        public async Task RefreshBalance()
         {
 
         }

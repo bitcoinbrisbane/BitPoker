@@ -289,14 +289,15 @@ namespace BitPoker
 
             //message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
-            Models.IRequest request = new Models.Messages.RPCRequest()
+            IRequest request = new Models.Messages.RPCRequest()
             {
                 Method = "AddPlayerRequest"
             };
 
             request.Params = message;
+            request.Signature = alice_secret.PrivateKey.SignMessage(JsonConvert.SerializeObject(request));
 
-            String json = JsonConvert.SerializeObject(message);
+            String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}players", API_URL);
 

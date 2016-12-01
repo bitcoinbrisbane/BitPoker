@@ -18,7 +18,6 @@ namespace BitPoker.Models.Messages
         public override string ToString()
         {
             return base.ToString();
-            //return String.Format("{0}{1}{2}{3}{4}{5:yyyyMMddHHmmss}{6}", BitcoinAddress, TableId, Amount, TimeStamp, Signature);
         }
     }
 }

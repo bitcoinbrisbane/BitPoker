@@ -20,78 +20,39 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using BitPoker.Models.ExtensionMethods;
 using BitPoker.Models.Messages;
+using Bitpoker.WPFClient.ViewModels;
 
 namespace Bitpoker.WPFClient
 {
     //Thanks http://www.codeproject.com/Articles/463947/Working-with-Sockets-in-Csharp
-
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        //use client on view model
-        [Obsolete]
-        private ChatBackend _backend;
-
-        private ViewModels.MainViewModel _viewModel = new ViewModels.MainViewModel();
+        private ViewModels.LobbyViewModel _viewModel = new ViewModels.LobbyViewModel();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-            //const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+            //String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+            ////const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
 
-            NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
-            //NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
+            //NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
+            ////NBitcoin.BitcoinSecret bob_secret = new NBitcoin.BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
 
-            NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
+            //NBitcoin.BitcoinAddress alice_address = alice_secret.GetAddress();
             //NBitcoin.BitcoinAddress bob_address = bob_secret.GetAddress();
 
+
+            //_backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
+            //_backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+            //_viewModel.Backend = new ChatBackend(this.DisplayMessage, alice_address.ToString());
+
             this.DataContext = _viewModel;
-
-            _backend = new ChatBackend(this.DisplayIMessage, alice_address.ToString());
         }
-
-        /// <summary>
-        /// Display messages and peform any actions
-        /// </summary>
-        /// <param name="composite"></param>
-        public void DisplayMessage(CompositeType composite)
-        {
-            string username = composite.Username == null ? "" : composite.Username;
-            string message = composite.Message == null ? "" : composite.Message;
-            textBoxChatPane.Text += (username + ": " + message + Environment.NewLine);
-
-            String value = composite.Message.ToUpper().Trim();
-            if (value.StartsWith("GETTABLES"))
-            {
-                using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
-                {
-                    var tables = tableRepo.All();
-                    String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
-                    _backend.SendMessage(json);
-                }
-            }
-
-            if (value.StartsWith("JOINTABLE"))
-            {
-                using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
-                {
-                    var tables = tableRepo.All();
-                    String json = Newtonsoft.Json.JsonConvert.SerializeObject(tables);
-                    _backend.SendMessage(json);
-                }
-            }
-        }
-
-        public void DisplayIMessage(IRequest message)
-        {
-            textBoxChatPane.Text += (message.Method + Environment.NewLine);
-        }
-
 
         private void textBoxEntryField_KeyDown(object sender, KeyEventArgs e)
         {
@@ -115,7 +76,16 @@ namespace Bitpoker.WPFClient
 
                 if (value.StartsWith("GETTABLES"))
                 {
-                    messageToSend = "GETTABLES";
+                    RPCRequest request = new RPCRequest();
+                    request.Method = "GETTABLES";
+                    messageToSend = Newtonsoft.Json.JsonConvert.SerializeObject(request);
+                }
+
+                if (value.StartsWith("GETTABLES"))
+                {
+                    RPCRequest request = new RPCRequest();
+                    request.Method = "GETTABLES"; 
+                    messageToSend = Newtonsoft.Json.JsonConvert.SerializeObject(request);
                 }
 
                 if (value.StartsWith("ADDTABLE"))
@@ -131,24 +101,24 @@ namespace Bitpoker.WPFClient
                     _viewModel.JoinTable(tableId);
                     //_viewModel.BuyIn();
                 }
-                else
-                {
-                    _backend.SendMessage(textBoxEntryField.Text);
-                }
+                //else
+                //{
+                //    _backend.SendMessage(textBoxEntryField.Text);
+                //}
 
                 if (value.StartsWith("BUYIN"))
                 {
                     String[] buyInParms = value.Substring(0, 8).Split(' ');
                     //_viewModel.BuyIn();
                 }
-                else
-                {
-                    _backend.SendMessage(textBoxEntryField.Text);
-                }
+                //else
+                //{
+                //    _backend.SendMessage(textBoxEntryField.Text);
+                //}
 
                 if (!String.IsNullOrEmpty(messageToSend))
                 {
-                    _backend.SendMessage(messageToSend);
+                    _viewModel.Backend.SendMessage(messageToSend);
                     messageToSend = String.Empty;
                 }
 
@@ -176,9 +146,6 @@ namespace Bitpoker.WPFClient
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Guid selectedTableId = new Guid();
-
-            //_viewModel.Players
         }
 
         private void Button_Click_5(object sender, RoutedEventArgs e)
@@ -188,7 +155,15 @@ namespace Bitpoker.WPFClient
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Get user pubkey
+            PlayerInfo player = (PlayerInfo)PlayersGrid.SelectedItem;
+            
             //Load tables
+            _viewModel.GetPeersTables(player.BitcoinAddress);
+        }
+
+        private void tablesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.SelectedTable = (BitPoker.Models.Contracts.Table)tablesGrid.SelectedItem;
         }
     }
 }

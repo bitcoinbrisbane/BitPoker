@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BitPoker.Models.Contracts
+namespace BitPoker.Models
 {
     public abstract class BaseTable
     {

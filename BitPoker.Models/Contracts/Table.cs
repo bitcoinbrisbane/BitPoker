@@ -3,17 +3,26 @@ using System.Collections.Generic;
 
 namespace BitPoker.Models.Contracts
 {
-	public class Table : BaseTable
+    /// <summary>
+    /// The table is the concrete implementation of the contract type
+    /// </summary>
+	public class Table : NoLimitTexasHoldem, IPokerContract, ITable
 	{
+        public Guid Id { get; set; }
+
+        public String HashAlgorithm { get; set; }
+
+        public String NetworkAddress { get; set; }
+
         /// <summary>
         /// Array of players in their seats
         /// </summary>
-        public IList<TexasHoldemPlayer> Players { get; private set; }
+        public IList<IPlayer> Players { get; private set; }
 
         public Table()
         {
             this.Id = new Guid();
-            this.Players = new List<TexasHoldemPlayer>(10);
+            this.Players = new List<IPlayer>(10);
             this.HashAlgorithm = "SHA256";
         }
 
@@ -23,7 +32,8 @@ namespace BitPoker.Models.Contracts
             this.MinPlayers = minPlayers;
             this.MaxPlayers = maxPlayers;
 
-            this.Players = new List<TexasHoldemPlayer>(maxPlayers);
+            this.HashAlgorithm = "SHA256";
+            this.Players = new List<IPlayer>(maxPlayers);
 		}
 	}
 }
