@@ -223,9 +223,10 @@ A client will define the table contract and store that locally.  They become the
 ```
 
 ## Joining a Table
-Users send their intent to join a table by the JoinTableRequest method.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
+Users send their intent to join a table by the JoinTable method.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
 
 ```
+
 ```
 
 ## Buying in
@@ -747,3 +748,4 @@ From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
 6. http://ms-brainwallet.org
+7. http://json-rpc.org/wiki/specification
