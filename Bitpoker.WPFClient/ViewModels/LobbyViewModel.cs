@@ -71,13 +71,15 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public ObservableCollection<IRequest> InComingRequests { get; set; }
+        public ObservableCollection<IRequest> InComingRequests { get; private set; }
 
         public ObservableCollection<IResponse> InComingResponses { get; set; }
 
         public ObservableCollection<IRequest> SentRequests { get; set; }
 
         public ObservableCollection<IResponse> SentResponses { get; set; }
+
+        public ObservableCollection<Models.Log> Logs { get; set; }
 
         private String _lastMessage;
 
@@ -144,6 +146,8 @@ namespace Bitpoker.WPFClient.ViewModels
 
             this.Backend.SendRequest(request);
             this.SentRequests.Add(request);
+
+            this.Logs = new ObservableCollection<Models.Log>();
         }
 
         public String NewAddress()

@@ -12,6 +12,8 @@ using System.Text;
 using System.Net.Http;
 using NBitcoin.BouncyCastle.Security;
 using System.Threading.Tasks;
+using Microsoft.Owin.Hosting;
+using Org.BouncyCastle.Security;
 
 namespace BitPoker
 {
@@ -58,35 +60,40 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
+            String baseUrl = "http://localhost:8080";
+
+            using (WebApp.Start<StartUp>(url: baseUrl))
+            {
+                Console.WriteLine("started");
+                System.Threading.Thread.Sleep(-1);
+            }
+                //Task.Factory.StartNew(() =>
+                //{
+                //    TcpListener serverSocket = new TcpListener(8888);
+                //    TcpClient clientSocket = default(TcpClient);
+                //    int counter = 0;
+
+                //    serverSocket.Start();
+                //    Console.WriteLine(" >> " + "Server Started");
+
+                //    counter = 0;
+                //    while (true)
+                //    {
+                //        counter += 1;
+                //        clientSocket = serverSocket.AcceptTcpClient();
+                //        Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
+                //        //handleClinet client = new handleClinet();
+                //        //client.startClient(clientSocket, Convert.ToString(counter));
+                //    }
+
+                //    //clientSocket.Close();
+                //    //serverSocket.Stop();
+                //    //Console.WriteLine(" >> " + "exit");
+                //});
 
 
-            //Task.Factory.StartNew(() =>
-            //{
-            //    TcpListener serverSocket = new TcpListener(8888);
-            //    TcpClient clientSocket = default(TcpClient);
-            //    int counter = 0;
 
-            //    serverSocket.Start();
-            //    Console.WriteLine(" >> " + "Server Started");
-
-            //    counter = 0;
-            //    while (true)
-            //    {
-            //        counter += 1;
-            //        clientSocket = serverSocket.AcceptTcpClient();
-            //        Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
-            //        //handleClinet client = new handleClinet();
-            //        //client.startClient(clientSocket, Convert.ToString(counter));
-            //    }
-
-            //    //clientSocket.Close();
-            //    //serverSocket.Stop();
-            //    //Console.WriteLine(" >> " + "exit");
-            //});
-
-
-
-            Console.WriteLine("***");
+                Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
             Console.WriteLine("***");
 
