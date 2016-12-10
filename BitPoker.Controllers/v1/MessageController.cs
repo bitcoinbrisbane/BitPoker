@@ -65,11 +65,11 @@ namespace BitPoker.Controllers.v1
 
             switch (request.Method.ToUpper())
             {
-                case "JoinTable":
+                case "JOINTABLE":
                     Models.Messages.JoinTableRequest joinTableRequest = request.Params as Models.Messages.JoinTableRequest;
                     response.Result = JoinTable(joinTableRequest);
                     break;
-                case "BuyIn":
+                case "BUYIN":
                     break;
                 case "POST SMALL BLIND":
                 case "SMALL BLIND":
@@ -80,6 +80,9 @@ namespace BitPoker.Controllers.v1
                 case "BIG BLIND":
                 case "BB":
                     //AddBigBlind(request);
+                    break;
+                default:
+                    response.Error = "Method not found";
                     break;
             }
 
@@ -183,7 +186,7 @@ namespace BitPoker.Controllers.v1
             }
         }
 
-        public void AddBigBlind(Models.Messages.ActionMessage message)
+        private void AddBigBlind(Models.Messages.ActionMessage message)
         {
             if (message != null)
             {
@@ -201,7 +204,7 @@ namespace BitPoker.Controllers.v1
             }
         }
 
-        public Models.Messages.JoinTableResponse JoinTable(Models.Messages.JoinTableRequest request)
+        private Models.Messages.JoinTableResponse JoinTable(Models.Messages.JoinTableRequest request)
         {
             Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
             var table = this.TableRepo.Find(request.TableId);
