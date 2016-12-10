@@ -6,7 +6,7 @@ namespace BitPoker.Controllers.Tests
     [TestClass]
     public class MessageControllerTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Controllers")]
         public void Should_Join_Table_In_Seat_3()
         {
             //private key 93GnRYsUXD4FPCiV46n8vqKvwHSZQgjnyuBvhNtqRvq3Ac26kVc
@@ -17,16 +17,18 @@ namespace BitPoker.Controllers.Tests
 
             Models.Messages.JoinTableRequest request = new Models.Messages.JoinTableRequest()
             {
-                BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ"
+                BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ",
+                TableId = tableId,
+                TimeStamp = new DateTime(2016, 12, 12)
             };
 
             var result = controller.JoinTable(request);
 
             Assert.IsNotNull(result, "Object is null");
-            Assert.AreEqual(result.Seat, 3);
+            Assert.AreEqual(result.Seat, 2);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod, Ignore, TestCategory("Controllers")]
         public void Should_Not_Join_Full_Table()
         {
 

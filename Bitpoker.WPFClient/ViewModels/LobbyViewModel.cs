@@ -227,10 +227,10 @@ namespace Bitpoker.WPFClient.ViewModels
                 IRequest request = new RPCRequest();
                 var table = tableRepo.Find(tableId);
 
-                JoinTableRequest joinTableRequest = new JoinTableRequest()
-                {
-                    Seat = 1
-                };
+                JoinTableRequest joinTableRequest = new JoinTableRequest();
+                //{
+                //    Seat = 1
+                //};
 
                 request.Method = joinTableRequest.GetType().Name;
                 request.Params = joinTableRequest;

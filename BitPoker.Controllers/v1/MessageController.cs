@@ -203,12 +203,21 @@ namespace BitPoker.Controllers.v1
 
         public Models.Messages.JoinTableResponse JoinTable(Models.Messages.JoinTableRequest request)
         {
+            Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
             var table = this.TableRepo.Find(request.TableId);
 
             if (table != null)
             {
-                table.Peers.Where(p => p.Position);
-                return new Models.Messages.JoinTableResponse();
+                for (Int32 i = 0; i < table.MaxPlayers; i++)
+                {
+                    if (table.Peers[i] == null)
+                    {
+                        response.Seat = i;
+                        break;
+                    }
+                }
+
+                return response;
             }
             else
             {
