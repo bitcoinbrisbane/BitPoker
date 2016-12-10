@@ -15,16 +15,16 @@ namespace BitPoker.Repository.LiteDB
             _filePath = filePath;
         }
 
-        public void Add(PlayerInfo entity)
+        public void Add(Peer entity)
         {
             using (var db = new LiteDatabase(_filePath))
             {
-                var players = db.GetCollection<PlayerInfo>("players");
+                var players = db.GetCollection<Peer>("players");
                 players.Insert(entity);
             }
         }
 
-        public IEnumerable<PlayerInfo> All()
+        public IEnumerable<Peer> All()
         {
             throw new NotImplementedException();
         }
@@ -33,7 +33,7 @@ namespace BitPoker.Repository.LiteDB
         {
         }
 
-        public PlayerInfo Find(string address)
+        public Peer Find(string address)
         {
             throw new NotImplementedException();
         }

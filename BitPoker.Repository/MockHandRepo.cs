@@ -9,8 +9,8 @@ namespace BitPoker.Repository
 {
     public class MockHandRepo : IHandRepository
     {
-        private PlayerInfo alice;
-        private PlayerInfo bob;
+        private Peer alice;
+        private Peer bob;
 
         private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
         private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
@@ -27,7 +27,7 @@ namespace BitPoker.Repository
 
         public MockHandRepo()
         {
-            alice = new PlayerInfo()
+            alice = new Peer()
             {
                 BitcoinAddress = alice_address,
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),
@@ -35,7 +35,7 @@ namespace BitPoker.Repository
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
-            bob = new PlayerInfo()
+            bob = new Peer()
             {
                 BitcoinAddress = bob_address,
                 LastSeen = DateTime.UtcNow.AddSeconds(-1),
@@ -47,7 +47,7 @@ namespace BitPoker.Repository
             _hands = new List<Hand>(2);
 
             //Add mocks
-            PlayerInfo[] players = new PlayerInfo[2];
+            Peer[] players = new Peer[2];
             players[0] = alice;
             players[1] = bob;
 
@@ -241,7 +241,7 @@ namespace BitPoker.Repository
             _hands.Add(hand);
 
             //Begin a simple heads up
-            players = new PlayerInfo[2];
+            players = new Peer[2];
             players[0] = alice;
 
             id = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516");

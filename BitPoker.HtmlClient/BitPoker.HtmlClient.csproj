@@ -66,6 +66,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Hands.html" />
+    <Content Include="js\jquery.jsonrpcclient.js" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -76,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Index.html" />
+    <Content Include="Me.html" />
+    <Content Include="Table.html" />
+    <Content Include="Tables.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using System;
 
 namespace BitPoker.Models.Messages
 {
-    public class RCPResponse : IResponse
+    public class RPCResponse : IResponse
     {
         [JsonProperty(PropertyName = "id")]
         public Guid Id { get; set; }

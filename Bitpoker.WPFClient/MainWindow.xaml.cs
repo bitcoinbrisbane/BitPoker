@@ -155,7 +155,7 @@ namespace Bitpoker.WPFClient
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Get user pubkey
-            PlayerInfo player = (PlayerInfo)PlayersGrid.SelectedItem;
+            Peer player = (Peer)PlayersGrid.SelectedItem;
             
             //Load tables
             _viewModel.GetPeersTables(player.BitcoinAddress);

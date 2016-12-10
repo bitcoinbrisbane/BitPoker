@@ -21,14 +21,14 @@ namespace BitPoker.MVC.Controllers
             _repo = repo;
         }
 
-        public IEnumerable<BitPoker.Models.PlayerInfo> Get()
+        public IEnumerable<BitPoker.Models.Peer> Get()
         {
             return _repo.All();
         }
 
-        public BitPoker.Models.PlayerInfo Get(String address)
+        public BitPoker.Models.Peer Get(String address)
         {
-            BitPoker.Models.PlayerInfo player = _repo.Find(address);
+            BitPoker.Models.Peer player = _repo.Find(address);
             return player;
         }
 
@@ -40,7 +40,7 @@ namespace BitPoker.MVC.Controllers
         /// <returns></returns>
         public BitPoker.Models.Hand Get(String address, String handId)
         {
-            BitPoker.Models.PlayerInfo player = _repo.Find(address);
+            BitPoker.Models.Peer player = _repo.Find(address);
 
             //Do actions
 
@@ -49,59 +49,36 @@ namespace BitPoker.MVC.Controllers
         }
 
         [HttpPost]
-        public String Post(BitPoker.Models.IRequest model)
+        public BitPoker.Models.IResponse Post(BitPoker.Models.IRequest model)
         {
-            //if (model.BitcoinAddress == model.Player.BitcoinAddress)
-            //{
-            //    //need to include timestamp too
-            //    Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
+            BitPoker.Models.Messages.RPCResponse response = new BitPoker.Models.Messages.RPCResponse()
+            {
+                Id = model.Id
+            };
 
-            //    if (valid)
-            //    {
-            //        _repo.Add(model.Player);
-            //        return "ok";
-            //    }
-            //    else
-            //    {
-            //        return "invalid";
-            //    }
-            //}
-            //else
-            //{
-            //    return "addresses do not match";
-            //}
+            if (model.Method == "AddPlayer")
+            {
+                BitPoker.Models.Messages.AddPlayerRequest request = model.Params as BitPoker.Models.Messages.AddPlayerRequest;
 
-            throw new NotImplementedException();
-        }
+                //need to include timestamp too
+                Boolean valid = base.Verify(request.BitcoinAddress, model.Id.ToString(), model.Signature);
 
-        //[HttpPost]
-        //public String Post(BitPoker.Models.Messages.AddPlayerRequest model)
-        //{
-        //    if (model.BitcoinAddress == model.Player.BitcoinAddress)
-        //    {
-        //        //need to include timestamp too
-        //        Boolean valid = base.Verify(model.BitcoinAddress, model.Id.ToString(), model.Signature);
-
-        //        if (valid)
-        //        {
-        //            _repo.Add(model.Player);
-        //            return "ok";
-        //        }
-        //        else
-        //        {
-        //            return "invalid";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return "addresses do not match";
-        //    }
-        //}
-
-        [HttpPost]
-        public String Post(String id, BitPoker.Models.Messages.ActionMessage model)
-        {
-            return "ok";
+                if (valid)
+                {
+                    _repo.Add(request.Player);
+                    return response;
+                }
+                else
+                {
+                    response.Error = "invalid siganture";
+                    return response;
+                }
+            }
+            else
+            {
+                response.Error = "invalid method";
+                return response;
+            }
         }
     }
 }

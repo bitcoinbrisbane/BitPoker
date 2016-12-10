@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    [Obsolete]
+    //[Obsolete]
     public class AddTableRequest : BaseRequest
     {
         public Contracts.Table Table { get; set; }

@@ -5,6 +5,7 @@ using System.Web.Http;
 
 namespace BitPoker.MVC.Controllers
 {
+    [Obsolete]
     public class DeckController : BaseController
     {
         private readonly BitPoker.Repository.IHandRepository repo;

@@ -5,10 +5,10 @@ namespace BitPoker.Repository
 {
     public interface IPlayerRepository : IDisposable, IRepository
     {
-        IEnumerable<Models.PlayerInfo> All();
+        IEnumerable<Models.Peer> All();
 
-        Models.PlayerInfo Find(String address);
+        Models.Peer Find(String address);
 
-        void Add(Models.PlayerInfo entity);
+        void Add(Models.Peer entity);
     }
 }

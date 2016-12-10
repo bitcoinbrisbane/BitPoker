@@ -18,6 +18,19 @@ namespace BitPoker
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            //config.Routes.
+
+            //config.Routes.MapHttpRoute(name: "Default", url: "{controller}/{action}/{id}",
+            //    namespaces: new[] { "[Namespace of the Project that contains your controllers]" },
+            //    defaults: new { controller = "Home", action = "Index", id = RouteParameter.Optional });
+
+            //config.Routes.MapRoute(
+            //    "External",
+            //    "{controller}/{action}/{id}",
+            //    new { controller = "Home", action = "Index", id = "" },
+            //    new[] { "BitPoker.Controllers" }
+            //);
+
             appBuilder.UseWebApi(config);
         }
     }

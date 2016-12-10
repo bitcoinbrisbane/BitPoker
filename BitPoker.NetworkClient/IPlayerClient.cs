@@ -6,8 +6,8 @@ namespace BitPoker.NetworkClient
 {
 	public interface IPlayerClient : IDisposable
 	{
-		Task AddPlayer(Models.PlayerInfo player);
+		Task AddPlayer(Models.Peer player);
 
-		Task<IEnumerable<Models.PlayerInfo>> GetPlayersAsync();
+		Task<IEnumerable<Models.Peer>> GetPlayersAsync();
 	}
 }

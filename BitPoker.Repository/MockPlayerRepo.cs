@@ -7,11 +7,11 @@ namespace BitPoker.Repository
 {
     public class MockPlayerRepo : IPlayerRepository
     {
-        List<PlayerInfo> _players = new List<PlayerInfo>();
+        List<Peer> _players = new List<Peer>();
 
         public MockPlayerRepo()
         {
-            PlayerInfo alice = new PlayerInfo()
+            Peer alice = new Peer()
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),
@@ -19,7 +19,7 @@ namespace BitPoker.Repository
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
-            PlayerInfo bob = new PlayerInfo()
+            Peer bob = new Peer()
             {
                 BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
                 LastSeen = DateTime.UtcNow.AddSeconds(-1),
@@ -34,19 +34,19 @@ namespace BitPoker.Repository
         public MockPlayerRepo(String fileName)
         {
             String json = System.IO.File.ReadAllText(fileName);
-            _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<PlayerInfo>>(json);
+            _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Peer>>(json);
         }
 
-        public void Add(PlayerInfo item)
+        public void Add(Peer item)
         {
         }
 
-        public IEnumerable<PlayerInfo> All()
+        public IEnumerable<Peer> All()
         {
             return _players;
         }
 
-        public PlayerInfo Find(String address)
+        public Peer Find(String address)
         {
             return _players.FirstOrDefault(p => p.BitcoinAddress == address);
         }

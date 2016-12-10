@@ -17,7 +17,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public String Address { get; set; }
 
-        public ICollection<BitPoker.Models.PlayerInfo> Players { get; set;}
+        public ICollection<BitPoker.Models.Peer> Players { get; set;}
 
         public ICollection<HandViewModel> Hands { get; set; }
 

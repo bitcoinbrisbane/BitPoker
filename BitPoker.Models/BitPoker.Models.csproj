@@ -59,12 +59,13 @@
     <Compile Include="Messages\AddPlayerRequest.cs" />
     <Compile Include="Messages\AddTableRequest.cs" />
     <Compile Include="Messages\BaseRequest.cs" />
+    <Compile Include="Messages\Code.cs" />
     <Compile Include="Messages\GetTableRequest.cs" />
     <Compile Include="Messages\GetTablesResponse.cs" />
     <Compile Include="Messages\IMessage.cs" />
-    <Compile Include="Messages\NewPeer.cs" />
+    <Compile Include="Messages\NewPeerRequest.cs" />
     <Compile Include="Messages\RPCRequest.cs" />
-    <Compile Include="Messages\RCPResponse.cs" />
+    <Compile Include="Messages\RPCResponse.cs" />
     <Compile Include="Messages\BuyInRequest.cs" />
     <Compile Include="Messages\BuyInResponse.cs" />
     <Compile Include="Messages\CompositeType.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />
     <Compile Include="IRequest.cs" />
-    <Compile Include="PlayerInfo.cs" />
+    <Compile Include="Peer.cs" />
     <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
   </ItemGroup>

@@ -97,17 +97,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
-    <Compile Include="PlayersController.cs" />
+    <Compile Include="IPlayersController.cs" />
+    <Compile Include="ITablesController.cs" />
+    <Compile Include="Rest\PlayersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rest\TablesController.cs" />
+    <Compile Include="v1\MessageController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BitPoker.Repository.SQLite\BitPoker.Repository.SQLite.csproj">
-      <Project>{b1eb6156-fd0b-4304-9124-6cbb7625f9a4}</Project>
-      <Name>BitPoker.Repository.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
       <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>
@@ -128,6 +128,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

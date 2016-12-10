@@ -17,14 +17,14 @@ namespace BitPoker.Repository
 
             Models.TexasHoldemPlayer alice = new Models.TexasHoldemPlayer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", Stack = 100000 };
             Models.TexasHoldemPlayer bob = new Models.TexasHoldemPlayer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", Stack = 100000 };
-            mockHeadsUpTable.Players.Add(alice);
-            mockHeadsUpTable.Players.Add(bob);
+            mockHeadsUpTable.Peers.Add(alice);
+            mockHeadsUpTable.Peers.Add(bob);
 
             _tables.Add(mockHeadsUpTable);
 
             //Empty table
             Table mockEmptyTable = new Table(2, 10) { Id = new Guid("35bc5692-6781-4a79-a5d2-89752edd882e"), BigBlind = 10000, SmallBlind = 5000 };
-            mockEmptyTable.Players.Add(alice);
+            mockEmptyTable.Peers.Add(alice);
 
             _tables.Add(mockHeadsUpTable);
             _tables.Add(mockEmptyTable);
@@ -50,8 +50,8 @@ namespace BitPoker.Repository
 
                 //4bc7f305-aa16-450a-a3be-aad8fba7f425
                 Table table = new Table(2, 10) { Id = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363"), BigBlind = 10000, SmallBlind = 5000 };
-                table.Players.Add(alice);
-                table.Players.Add(bob);
+                table.Peers.Add(alice);
+                table.Peers.Add(bob);
 
                 return table;
             }
@@ -77,13 +77,13 @@ namespace BitPoker.Repository
 
             Models.TexasHoldemPlayer alice = new Models.TexasHoldemPlayer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", Stack = 100000 };
             Models.TexasHoldemPlayer bob = new Models.TexasHoldemPlayer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", Stack = 100000 };
-            mockTable.Players.Add(alice);
-            mockTable.Players.Add(bob);
+            mockTable.Peers.Add(alice);
+            mockTable.Peers.Add(bob);
 
             tables.Add(mockTable);
 
             Table lonelyTable = new Table(2, 10) { Id = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516"), BigBlind = 10000, SmallBlind = 5000 };
-            lonelyTable.Players.Add(alice);
+            lonelyTable.Peers.Add(alice);
 
             return tables;
         }

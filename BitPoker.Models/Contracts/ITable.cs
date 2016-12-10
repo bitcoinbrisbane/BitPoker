@@ -14,6 +14,6 @@ namespace BitPoker.Models.Contracts
         /// <summary>
         /// Array of players in their seats
         /// </summary>
-        IList<IPlayer> Players { get; }
+        IList<Peer> Peers { get; }
     }
 }

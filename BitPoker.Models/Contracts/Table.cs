@@ -17,12 +17,12 @@ namespace BitPoker.Models.Contracts
         /// <summary>
         /// Array of players in their seats
         /// </summary>
-        public IList<IPlayer> Players { get; private set; }
+        public IList<Peer> Peers { get; private set; }
 
         public Table()
         {
             this.Id = new Guid();
-            this.Players = new List<IPlayer>(10);
+            this.Peers = new List<Peer>(10);
             this.HashAlgorithm = "SHA256";
         }
 
@@ -33,7 +33,7 @@ namespace BitPoker.Models.Contracts
             this.MaxPlayers = maxPlayers;
 
             this.HashAlgorithm = "SHA256";
-            this.Players = new List<IPlayer>(maxPlayers);
+            this.Peers = new List<Peer>(maxPlayers);
 		}
 	}
 }

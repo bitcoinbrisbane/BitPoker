@@ -47,7 +47,7 @@ namespace Bitpoker.WPFClient.ViewModels
         /// <summary>
         /// Players on the entire network
         /// </summary>
-        public ObservableCollection<PlayerInfo> NetworkPlayers { get; set; }
+        public ObservableCollection<Peer> NetworkPlayers { get; set; }
 
         public ObservableCollection<BitPoker.Models.Contracts.Table> Tables { get; set; }
 
@@ -97,7 +97,7 @@ namespace Bitpoker.WPFClient.ViewModels
         {
             this._wifPrivateKey = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
 
-            this.NetworkPlayers = new ObservableCollection<PlayerInfo>();
+            this.NetworkPlayers = new ObservableCollection<Peer>();
             this.Clients = new List<BitPoker.NetworkClient.INetworkClient>(1);
             
             this.Clients.Add(new BitPoker.NetworkClient.APIClient("https://www.bitpoker.io/api/"));
@@ -132,11 +132,11 @@ namespace Bitpoker.WPFClient.ViewModels
             IRequest request = new RPCRequest()
             {
                 Method = "NewPeer",
-                Params = new NewPeer()
+                Params = new NewPeerRequest()
                 {
                     BitcoinAddress = Wallet.Address.ToString(),
                     Version = 1.0M,
-                    Player = new PlayerInfo()
+                    Player = new Peer()
                     {
                         BitcoinAddress = Wallet.Address.ToString()
                     },
@@ -247,7 +247,7 @@ namespace Bitpoker.WPFClient.ViewModels
             {
                 var players = await client.GetPlayersAsync();
 
-                foreach (PlayerInfo player in players)
+                foreach (Peer player in players)
                 {
                     this.NetworkPlayers.Add(player);
                 }
@@ -283,7 +283,7 @@ namespace Bitpoker.WPFClient.ViewModels
             switch (request.Method)
             {
                 case "NewPeer" :
-                    NewPeer newPeer = Newtonsoft.Json.JsonConvert.DeserializeObject<NewPeer>(request.Params.ToString());
+                    NewPeerRequest newPeer = Newtonsoft.Json.JsonConvert.DeserializeObject<NewPeerRequest>(request.Params.ToString());
                     NetworkPlayers.Add(newPeer.Player);
                     break;
                 case "NewTable": //Peer has announced a new table
@@ -296,7 +296,7 @@ namespace Bitpoker.WPFClient.ViewModels
                         IEnumerable<BitPoker.Models.Contracts.Table> tables = tableRepo.All();
 
                         //now send
-                        IResponse response = new RCPResponse()
+                        IResponse response = new RPCResponse()
                         {
                             Id = request.Id,
                             Result = tables

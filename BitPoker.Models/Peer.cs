@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace BitPoker.Models
 {
     /// <summary>
-    /// Player DTO
+    /// Peer
     /// </summary>
-	public class PlayerInfo
+	public class Peer
 	{
 		public String UserAgent { get; set; }
 
@@ -20,9 +20,7 @@ namespace BitPoker.Models
 
 		public DateTime LastSeen { get; set; }
 
-        //public IEnumerable<Guid> Tables { get; set; }
-
-		public PlayerInfo ()
+		public Peer ()
 		{
 		}
 	}

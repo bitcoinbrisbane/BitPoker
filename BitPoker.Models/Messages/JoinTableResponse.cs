@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BitPoker.Models.Messages
 {
-    public class JoinTableResponse
+    public class JoinTableResponse : RPCResponse, IResponse
     {
-
+        public Int32 Seat { get; set; }
     }
 }

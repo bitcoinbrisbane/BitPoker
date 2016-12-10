@@ -4,7 +4,7 @@ namespace BitPoker.Models.Messages
 {
     public class AddPlayerRequest : BaseRequest
     {
-        public PlayerInfo Player { get; set; }
+        public Peer Player { get; set; }
 
         public AddPlayerRequest()
         {
