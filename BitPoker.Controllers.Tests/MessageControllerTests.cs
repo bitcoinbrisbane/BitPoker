@@ -45,6 +45,33 @@ namespace BitPoker.Controllers.Tests
             Assert.AreEqual(2, response.Seat);
         }
 
+        [TestMethod, TestCategory("Controllers")]
+        public void Should_Join_Table_In_First_Empty_Seat()
+        {
+            //private key 91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf
+
+            Guid tableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c");
+            MessageController controller = new MessageController();
+            controller.TableRepo = new Repository.MockTableRepo();
+
+            request.Method = "JoinTable";
+            request.Params = new Models.Messages.JoinTableRequest()
+            {
+                BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
+                TableId = tableId,
+                TimeStamp = new DateTime(2016, 12, 12)
+            };
+
+            var result = controller.Post(request);
+
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Error);
+            Assert.AreEqual(result.Id.ToString(), REQUEST_ID);
+
+            Models.Messages.JoinTableResponse response = result.Result as Models.Messages.JoinTableResponse;
+            Assert.AreEqual(1, response.Seat);
+        }
+
         [TestMethod, Ignore, TestCategory("Controllers")]
         public void Should_Not_Join_Full_Table()
         {

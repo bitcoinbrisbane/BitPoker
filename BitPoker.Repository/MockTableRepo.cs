@@ -9,9 +9,9 @@ namespace BitPoker.Repository
     {
         private List<Table> _tables = new List<Table>();
 
-        public MockTableRepo()
+        public MockTableRepo(Int32 n = 3)
         {
-            _tables = new List<Table>(2);
+            _tables = new List<Table>(n);
 
             //Table as per the readme
             Table mockHeadsUpTable = new Table(2, 2) { Id = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"), BigBlind = 10000, SmallBlind = 5000 };
@@ -27,8 +27,13 @@ namespace BitPoker.Repository
             Table mockEmptyTable = new Table(2, 10) { Id = new Guid("35bc5692-6781-4a79-a5d2-89752edd882e"), BigBlind = 10000, SmallBlind = 5000 };
             mockHeadsUpTable.Peers[0] = alice;
 
+            Table mockTableWithEmptySeat = new Table(2, 10) { Id = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c"), BigBlind = 10000, SmallBlind = 5000 };
+            mockTableWithEmptySeat.Peers[0] = alice;
+            mockTableWithEmptySeat.Peers[2] = bob;
+
             _tables.Add(mockHeadsUpTable);
             _tables.Add(mockEmptyTable);
+            _tables.Add(mockTableWithEmptySeat);
         }
 
         /// <summary>
