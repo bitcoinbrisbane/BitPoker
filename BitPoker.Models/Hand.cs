@@ -46,6 +46,16 @@ namespace BitPoker.Models
             this.Deck = new FiftyTwoCardDeck();
         }
 
+        public Hand(Peer[] players, Guid id)
+        {
+            this.Players = players;
+            this.PlayerToAct = 1;
+            Id = id;
+            _history = new List<Messages.ActionMessage>();
+
+            this.Deck = new FiftyTwoCardDeck();
+        }
+
         public Boolean AddMessage(Messages.ActionMessage message)
         {
             //validate first

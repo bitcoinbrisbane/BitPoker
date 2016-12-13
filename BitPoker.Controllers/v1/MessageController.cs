@@ -71,10 +71,14 @@ namespace BitPoker.Controllers.v1
                     break;
                 case "BUYIN":
                     break;
+                case "SHUFFLE":
+                    //AddBigBlind(request);
+                    break;
                 case "POST SMALL BLIND":
                 case "SMALL BLIND":
                 case "SB":
-                    AddSmallBlind(request.Params as Models.Messages.ActionMessage);
+                    var smallBlindRequest = request.Params as Models.Messages.ActionMessage;
+                    AddSmallBlind(smallBlindRequest);
                     break;
                 case "POST BIG BLIND":
                 case "BIG BLIND":
@@ -168,14 +172,14 @@ namespace BitPoker.Controllers.v1
             return response;
         }
 
-        public void AddSmallBlind(Models.Messages.ActionMessage message)
+        private void AddSmallBlind(Models.Messages.ActionMessage message)
         {
             if (message != null)
             {
                 //Is the blind the correct amount?
                 var table = TableRepo.Find(message.TableId);
 
-                if (table != null && message.Action == "POST SMALL BLIND" && message.Amount == table.BigBlind)
+                if (message.Amount == table.BigBlind)
                 {
                     //handRepo.AddMessage(message);
                 }
