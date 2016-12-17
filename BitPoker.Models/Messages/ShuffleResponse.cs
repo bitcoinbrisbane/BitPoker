@@ -2,11 +2,11 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class DeckResponse : RPCResponse
+    public class ShuffleResponse : RPCResponse
     {
         public IDeck Deck { get; set; }
 
-        public DeckResponse()
+        public ShuffleResponse()
         {
         }
 

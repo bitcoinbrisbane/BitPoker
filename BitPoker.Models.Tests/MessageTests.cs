@@ -6,12 +6,12 @@ namespace BitPoker.Models.Tests
     [TestClass]
     public class MessageTests
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Models")]
         public void Should_Get_BuyIn_Message_ToString()
         {
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Models")]
         public void Should_Get_NewPeer_ToString()
         {
 
