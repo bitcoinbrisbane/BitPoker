@@ -181,39 +181,35 @@ namespace Bitpoker.WPFClient.ViewModels
 
         public void GetPeersTables(String address)
         {
-            IRequest message = new RPCRequest();
+            IRequest request = new RPCRequest();
 
-            GetTableRequest request = new GetTableRequest()
+            GetTableRequest method = new GetTableRequest()
             {
                 Recipient = address 
             };
 
-            message.Method = request.GetType().Name;
-            message.Params = request;
+            request.Method = method.GetType().Name;
+            request.Params = method;
 
-            //send
-            String json = Newtonsoft.Json.JsonConvert.SerializeObject(message);
-            Backend.SendMessage(json);
+            Backend.SendRequest(request);
         }
 
         public void JoinTable(Guid tableId)
         {
             using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository(@"poker.db"))
             {
-                IRequest message = new RPCRequest();
+                IRequest request = new RPCRequest();
                 var table = tableRepo.Find(tableId);
 
-                JoinTableRequest request = new JoinTableRequest()
+                JoinTableRequest method = new JoinTableRequest()
                 {
                     Seat = 1
                 };
 
-                message.Method = request.GetType().Name;
-                message.Params = request;
+                request.Method = method.GetType().Name;
+                request.Params = method;
 
-                //send
-                String json = Newtonsoft.Json.JsonConvert.SerializeObject(message);
-                Backend.SendMessage(json);
+                Backend.SendRequest(request);
             }
         }
 
@@ -273,8 +269,14 @@ namespace Bitpoker.WPFClient.ViewModels
                 case "NewPeer" :
                     NewPeer newPeer = Newtonsoft.Json.JsonConvert.DeserializeObject<NewPeer>(request.Params.ToString());
                     NetworkPlayers.Add(newPeer.Player);
+
                     break;
                 case "NewTable": //Peer has announced a new table
+
+                    BitPoker.Models.Contracts.Table newTable = Newtonsoft.Json.JsonConvert.DeserializeObject<BitPoker.Models.Contracts.Table>(request.Params.ToString());
+                    TableViewModel newTableViewModel = new TableViewModel(newTable);
+                    this.Tables.Add(newTableViewModel);
+
                     break;
 
                 case "GetTables": //Give me your tables
@@ -293,7 +295,7 @@ namespace Bitpoker.WPFClient.ViewModels
                     break;
 
                 case "GetTablesResponse": //Add resultant tables
-                    GetTablesResponse tableResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<BitPoker.Models.Messages.GetTablesResponse>(request.Params.ToString());
+                    GetTablesResponse tableResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetTablesResponse>(request.Params.ToString());
 
                     foreach (BitPoker.Models.Contracts.Table table in tableResponse.Tables)
                     {
@@ -305,4 +307,5 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
     }
+
 }
