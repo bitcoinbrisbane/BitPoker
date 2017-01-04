@@ -8,6 +8,8 @@ namespace BitPoker.Models.Messages
 
         public Peer Player { get; set; }
 
+        public String PublicKey { get; set; }
+
         public JoinTableRequest()
         {
             base.Version = 1.0M;

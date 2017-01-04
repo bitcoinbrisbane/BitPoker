@@ -63,31 +63,36 @@ namespace BitPoker.Controllers.v1
                 Id = request.Id
             };
 
-            switch (request.Method.ToUpper())
+            try
             {
-                case "JOINTABLE":
-                    Models.Messages.JoinTableRequest joinTableRequest = request.Params as Models.Messages.JoinTableRequest;
-                    response.Result = JoinTable(joinTableRequest);
-                    break;
-                case "BUYIN":
-                    break;
-                case "SHUFFLE":
-                    //AddBigBlind(request);
-                    break;
-                case "POST SMALL BLIND":
-                case "SMALL BLIND":
-                case "SB":
-                    var smallBlindRequest = request.Params as Models.Messages.ActionMessage;
-                    AddSmallBlind(smallBlindRequest);
-                    break;
-                case "POST BIG BLIND":
-                case "BIG BLIND":
-                case "BB":
-                    //AddBigBlind(request);
-                    break;
-                default:
-                    response.Error = "Method not found";
-                    break;
+                switch (request.Method.ToUpper())
+                {
+                    case "JOINTABLE":
+                        Models.Messages.JoinTableRequest joinTableRequest = request.Params as Models.Messages.JoinTableRequest;
+                        response.Result = JoinTable(joinTableRequest);
+                        break;
+                    case "BUYIN":
+                        break;
+                    case "SHUFFLE":
+                        response.Result = Shuffle();
+                        break;
+                    case "SMALLBLIND":
+                    case "SB":
+                        var smallBlindRequest = request.Params as Models.Messages.ActionMessage;
+                        response.Result = AddSmallBlind(smallBlindRequest);
+                        break;
+                    case "BIGBLIND":
+                    case "BB":
+                        //AddBigBlind(request);
+                        break;
+                    default:
+                        response.Error = "Method not found";
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Error = ex.Message;
             }
 
             //NOTE:  THIS IS WHERE THE STUB AI LOGIC SHOULD EXIST.
@@ -111,8 +116,6 @@ namespace BitPoker.Controllers.v1
             //}
 
 
-
-
             //BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(request.BitcoinAddress);
             //bool verified = address.VerifyMessage(request.ToString(), request.Signature);
 
@@ -120,59 +123,11 @@ namespace BitPoker.Controllers.v1
             //{
             //    throw new Exceptions.SignatureNotValidException();
             //}
-            //else
-            //{
-            //    //Some API
-            //    var hand = this.handRepo.Find(request.HandId);
-
-            //    foreach(BitPoker.Models.Messages.ActionMessage previousAction in hand.History)
-            //    {
-            //        //verify
-            //    }
-
-            //    var lastAction = hand.History.Last();
-            //    String[] allowedAction = new String[1];
-
-            //    switch (lastAction.Action.ToUpper())
-            //    {
-            //        case "POST SMALL BLIND":
-            //        case "SMALL BLIND":
-            //        case "SB":
-            //            allowedAction[0] = "BIG BLIND";
-            //            break;
-
-            //        case "POST BIG BLIND":
-            //        case "BIG BLIND":
-            //        case "BB":
-            //            break;
-            //    }
-
-            //    switch(request.Action.ToUpper())
-            //    {
-            //        case "POST SMALL BLIND":
-            //        case "SMALL BLIND":
-            //        case "SB":
-
-            //            break;
-            //        case "POST BIG BLIND":
-            //        case "BIG BLIND":
-            //        case "BB":
-            //            AddBigBlind(request);
-            //            break;
-            //    }
-
-            //    //Now notify next player for their action:
-            //    hand = this.handRepo.Find(request.HandId);
-            //    lastAction = hand.History.Last();
-
-            //    String bitcoinAddress = lastAction.BitcoinAddress;
-            //    var player = hand.Players[hand.PlayerToAct];
-            //}
 
             return response;
         }
 
-        private void AddSmallBlind(Models.Messages.ActionMessage message)
+        private Models.Messages.ActionMessageResponse AddSmallBlind(Models.Messages.ActionMessage message)
         {
             if (message != null)
             {
@@ -182,29 +137,39 @@ namespace BitPoker.Controllers.v1
                 if (message.Amount == table.BigBlind)
                 {
                     //handRepo.AddMessage(message);
+                    return new Models.Messages.ActionMessageResponse();
                 }
                 else
                 {
                     throw new ArgumentException();
                 }
             }
+            else
+            {
+                throw new ArgumentNullException();
+            }
         }
 
-        private void AddBigBlind(Models.Messages.ActionMessage message)
+        private Models.Messages.ActionMessageResponse AddBigBlind(Models.Messages.ActionMessage message)
         {
             if (message != null)
             {
                 //Is the blind the correct amount?
                 var table = TableRepo.Find(message.TableId);
 
-                if (table != null && message.Action == "POST BIG BLIND" && message.Amount == table.BigBlind)
+                if (table != null && message.Amount == table.BigBlind)
                 {
                     //handRepo.AddMessage(message);
+                    return new Models.Messages.ActionMessageResponse();
                 }
                 else
                 {
                     throw new ArgumentException();
                 }
+            }
+            else
+            {
+                throw new ArgumentNullException();
             }
         }
 
@@ -232,20 +197,49 @@ namespace BitPoker.Controllers.v1
             }
         }
 
-        internal void Shuffle()
+        private Models.Messages.DeckResponse Shuffle()
         {
-            var message = new Models.Messages.DeckResponse();
-
-            message.Deck = new Models.FiftyTwoCardDeck();
-            message.Deck.Shuffle();
+            return Shuffle(new Models.FiftyTwoCardDeck());
         }
 
-        internal void Deck()
+        private Models.Messages.DeckResponse Shuffle(Models.IDeck deck)
         {
-            var message = new BitPoker.Models.Messages.DeckResponse();
+            var message = new Models.Messages.DeckResponse()
+            {
+                Deck = deck
+            };
 
-            message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
             message.Deck.Shuffle();
+            return message;
+        }
+
+        private Models.Messages.DeckResponse NewDeck()
+        {
+            var response = new Models.Messages.DeckResponse()
+            {
+                Deck = new Models.FiftyTwoCardDeck()
+            };
+
+            return response;
+        }
+
+        private Models.Messages.DealResponse NewDeal(Guid handId)
+        {
+            var hand = HandRepo.Find(handId);
+
+            if (hand != null)
+            {
+                var response = new Models.Messages.DealResponse()
+                {
+                    Deck = hand.Deck
+                };
+
+                return response;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
     }
 }

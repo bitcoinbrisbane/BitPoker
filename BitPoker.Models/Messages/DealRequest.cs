@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BitPoker.Models.Messages
 {
     public class DealRequest : BaseRequest
     {
-        public Guid TableId { get; set; }
+        public Guid HandId { get; set; }
 
+        [Obsolete]
         public IDeck Deck { get; set; }
 
         public DealRequest()
