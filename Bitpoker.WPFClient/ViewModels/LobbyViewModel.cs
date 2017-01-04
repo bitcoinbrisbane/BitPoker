@@ -229,11 +229,10 @@ namespace Bitpoker.WPFClient.ViewModels
 
                 JoinTableRequest method = new JoinTableRequest()
                 {
-                    Seat = 1
                 };
 
-                request.Method = joinTableRequest.GetType().Name;
-                request.Params = joinTableRequest;
+                request.Method = request.GetType().Name;
+                request.Params = request;
 
                 //send
                 String json = Newtonsoft.Json.JsonConvert.SerializeObject(request);
