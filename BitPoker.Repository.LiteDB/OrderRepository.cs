@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BitPoker.Models;
-using LiteDB;
 
 namespace BitPoker.Repository.LiteDB
 {
-    public class HandRepository : BaseRepository, IHandRepository, IRepository
+    public class OrderRepository : BaseRepository, IRepository
     {
-        public HandRepository(String filePath)
+        public OrderRepository(String filePath)
         {
             _filePath = filePath;
         }
 
-        public void Add(Hand entity)
+        public void Add(Order entity)
         {
             using (var db = new LiteDatabase(_filePath))
             {
@@ -29,7 +27,8 @@ namespace BitPoker.Repository.LiteDB
             using (var db = new LiteDatabase(_filePath))
             {
                 var hands = db.GetCollection<Hand>("hands");
-                return hands.FindAll();
+                //return hands;
+                throw new NotImplementedException();
             }
         }
 
