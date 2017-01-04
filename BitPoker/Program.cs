@@ -498,13 +498,14 @@ namespace BitPoker
         {
             Models.Messages.BuyInRequest message = new Models.Messages.BuyInRequest();
             message.BitcoinAddress = carol.ToString();
-            message.Amount = amount;
+            //message.Amount = amount;
 
-            Models.IRequest request = new Models.Messages.RPCRequest()
+            IRequest request = new Models.Messages.RPCRequest()
             {
-                Method = "BuyInRequest"
+                Method = "BuyIn"
             };
 
+            //TODO: CREATE TX
             request.Params = message;
             //message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
 

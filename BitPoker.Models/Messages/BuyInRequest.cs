@@ -2,13 +2,14 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class BuyInRequest: BaseRequest
+    public class BuyInRequest : BaseRequest
     {
         public Guid TableId { get; set; }
 
-        public UInt64 Amount { get; set; }
+        //[Obsolete("Just use the tx")]
+        //public UInt64 Amount { get; set; }
 
-        public String Transaction { get; set; }
+        public String TxID { get; set; }
 
         public BuyInRequest()
         {

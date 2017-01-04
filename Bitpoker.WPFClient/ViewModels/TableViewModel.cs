@@ -70,7 +70,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 BitPoker.Models.Messages.BuyInRequest message = new BitPoker.Models.Messages.BuyInRequest()
                 {
                     BitcoinAddress = address.ToString(),
-                    Amount = amount,
+                    //Amount = amount,
                     //Seat = seat,
                     TimeStamp = DateTime.UtcNow
                 };

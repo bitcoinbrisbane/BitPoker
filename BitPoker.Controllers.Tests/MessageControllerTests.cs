@@ -1,5 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NBitcoin;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BitPoker.Controllers.Tests
 {
@@ -68,7 +72,6 @@ namespace BitPoker.Controllers.Tests
                 BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
                 TableId = tableId,
                 TimeStamp = new DateTime(2016, 12, 12),
-                Version = 1,
                 PublicKey = secret.PubKey.ToString()
             };
 
@@ -88,14 +91,39 @@ namespace BitPoker.Controllers.Tests
 
         }
 
-        [TestMethod, Ignore, TestCategory("Buy In")]
+        [TestMethod, TestCategory("Buy In")]
         public void Should_Buy_In_To_Joined_Table()
         {
-            //private key 91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf
+            BitcoinSecret secret = new BitcoinSecret("91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf", Network.TestNet);
 
             Guid tableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c");
             MessageController controller = new MessageController();
             controller.TableRepo = new Repository.MockTableRepo();
+
+            //"2NAxESoeuyA4KqudU3v9fh5idiBorgLpkUj";
+            BitcoinScriptAddress tableAddress = new BitcoinScriptAddress("2NAxESoeuyA4KqudU3v9fh5idiBorgLpkUj", Network.TestNet);
+
+            BlockrTransactionRepository repo = new BlockrTransactionRepository(Network.TestNet);
+            BitcoinAddress myAddress = BitcoinAddress.Create("mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt", Network.TestNet);
+
+            //TODO:  MAKE A JSON OBJECT
+            //var utxos = await repo.GetUnspentAsync(myAddress.ToString());
+
+            //Coin[] coins = utxos.OrderByDescending(u => u.Amount).Select(u => new Coin(u.Outpoint, u.TxOut)).ToArray();
+
+            //Money minersFee = new Money(50000);
+
+            //var txBuilder = new TransactionBuilder();
+            //var tx = txBuilder
+            //    //.AddCoins(coins)
+            //    .AddCoins(utxos)
+            //    .AddKeys(secret)
+            //    .Send(tableAddress, new Money(100000))
+            //    .SendFees(minersFee)
+            //    .SetChange(myAddress)
+            //    .BuildTransaction(true);
+
+            //Debug.Assert(txBuilder.Verify(tx)); //check fully signed
 
             request.Method = "BuyIn";
             request.Params = new Models.Messages.BuyInRequest()
@@ -103,8 +131,7 @@ namespace BitPoker.Controllers.Tests
                 BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
                 TableId = tableId,
                 TimeStamp = new DateTime(2016, 12, 12),
-                Amount = 10000,
-                Version = 1
+                TxID = "af651c3435b5a11a8d7792dbc1d20a20a23fce0beb0b6931bf0ce407bfd28a0a"
             };
 
             var response = controller.Post(request);
@@ -113,8 +140,8 @@ namespace BitPoker.Controllers.Tests
             Assert.IsNull(response.Error);
             Assert.AreEqual(response.Id.ToString(), REQUEST_ID);
 
-            Models.Messages.JoinTableResponse tableResponse = response.Result as Models.Messages.JoinTableResponse;
-            Assert.AreEqual(1, tableResponse.Seat);
+            Models.Messages.BuyInResponse buyInResponse = response.Result as Models.Messages.BuyInResponse;
+            Assert.IsNotNull(buyInResponse);
         }
 
         [TestMethod, TestCategory("Buy In")]
@@ -200,9 +227,10 @@ namespace BitPoker.Controllers.Tests
             Assert.IsNotNull(response);
             Assert.AreEqual(REQUEST_ID, response.Id.ToString());
 
-            Models.Messages.ShuffleRequest
+            Assert.IsNotNull(response.Result);
+            Models.Messages.ShuffleResponse shuffleResponse = response.Result as Models.Messages.ShuffleResponse;
 
-            Assert.AreEqual(response.Result)
+            Assert.AreEqual(52, shuffleResponse.Deck.Cards.Count);
         }
 
         [TestMethod, TestCategory("Shuffle")]
@@ -227,14 +255,14 @@ namespace BitPoker.Controllers.Tests
         [TestMethod, TestCategory("Deal")]
         public void Should_Deal_Cards_Heads_Up()
         {
-            Guid handId = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516");
+            Guid tableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16");
             _controller = new MessageController();
             _controller.HandRepo = new Repository.MockHandRepo();
 
             request.Method = "Deal";
             request.Params = new Models.Messages.DealRequest()
             {
-                HandId = handId
+                TableId = tableId
             };
 
             var response = _controller.Post(request);
@@ -243,6 +271,10 @@ namespace BitPoker.Controllers.Tests
             Assert.AreEqual(REQUEST_ID, response.Id.ToString());
 
             Assert.IsNotNull(response.Result);
+            //Assert.IsNotNull(response.Result);
+
+            Models.Messages.DealResponse dealResponse = response.Result as Models.Messages.DealResponse;
+            Assert.AreEqual(52, dealResponse.Deck.Cards.Count);
         }
 
         [TestCleanup]

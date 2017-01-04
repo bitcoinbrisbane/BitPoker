@@ -27,7 +27,7 @@ namespace BitPoker.Repository
             Table mockEmptyTable = new Table(2, 10) { Id = new Guid("35bc5692-6781-4a79-a5d2-89752edd882e"), BigBlind = 10000, SmallBlind = 5000 };
             mockHeadsUpTable.Peers[0] = alice;
 
-            Table mockTableWithEmptySeat = new Table(2, 10) { Id = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c"), BigBlind = 10000, SmallBlind = 5000 };
+            Table mockTableWithEmptySeat = new Table(2, 10) { Id = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c"), BigBlind = 10000, SmallBlind = 5000, MinBuyIn = 100000, MaxBuyIn = 200000 };
             mockTableWithEmptySeat.Peers[0] = alice;
             mockTableWithEmptySeat.Peers[2] = bob;
 

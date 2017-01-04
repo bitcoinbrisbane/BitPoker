@@ -9,6 +9,12 @@ namespace BitPoker.Models
 
         public Peer[] Players { get; private set; }
 
+        /// <summary>
+        /// Hand number of the table
+        /// </summary>
+        public Int64 Index { get; set; }
+
+        [Obsolete("Use index")]
         public Guid Id { get; set; }
 
         public Guid TableId { get; set; }
@@ -30,7 +36,7 @@ namespace BitPoker.Models
         public Hand()
         {
             this.PlayerToAct = 1;
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
             _history = new List<Messages.ActionMessage>();
 
             this.Deck = new FiftyTwoCardDeck();
@@ -40,7 +46,7 @@ namespace BitPoker.Models
         {
             this.Players = players;
             this.PlayerToAct = 1;
-            Id = Guid.NewGuid();
+            //Id = Guid.NewGuid();
             _history = new List<Messages.ActionMessage>();
 
             this.Deck = new FiftyTwoCardDeck();

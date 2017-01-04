@@ -72,21 +72,31 @@ namespace BitPoker.Controllers.v1
                         response.Result = JoinTable(joinTableRequest);
                         break;
                     case "BUYIN":
+                        Models.Messages.BuyInRequest buyInRequest = request.Params as Models.Messages.BuyInRequest;
+                        response.Result = BuyIn(buyInRequest);
                         break;
                     case "SHUFFLE":
                         response.Result = Shuffle();
                         break;
+                    case "DEAL":
+                        Models.Messages.DealRequest dealRequest = request.Params as Models.Messages.DealRequest;
+                        break;
                     case "SMALLBLIND":
                     case "SB":
                         var smallBlindRequest = request.Params as Models.Messages.ActionMessage;
-                        response.Result = AddSmallBlind(smallBlindRequest);
+                        response.Result = ProcessSmallBlind(smallBlindRequest);
                         break;
                     case "BIGBLIND":
                     case "BB":
-                        //AddBigBlind(request);
+                        var bigBlindRequest = request.Params as Models.Messages.ActionMessage;
+                        response.Result = ProcessBigBlind(bigBlindRequest);
                         break;
                     default:
-                        response.Error = "Method not found";
+                        response.Error = new Models.Messages.Code()
+                        {
+                            code = "-32601",
+                            message = "method not found"
+                        };
                         break;
                 }
             }
@@ -127,7 +137,7 @@ namespace BitPoker.Controllers.v1
             return response;
         }
 
-        private Models.Messages.ActionMessageResponse AddSmallBlind(Models.Messages.ActionMessage message)
+        private Models.Messages.ActionMessageResponse ProcessSmallBlind(Models.Messages.ActionMessage message)
         {
             if (message != null)
             {
@@ -150,7 +160,7 @@ namespace BitPoker.Controllers.v1
             }
         }
 
-        private Models.Messages.ActionMessageResponse AddBigBlind(Models.Messages.ActionMessage message)
+        private Models.Messages.ActionMessageResponse ProcessBigBlind(Models.Messages.ActionMessage message)
         {
             if (message != null)
             {
@@ -170,30 +180,6 @@ namespace BitPoker.Controllers.v1
             else
             {
                 throw new ArgumentNullException();
-            }
-        }
-
-        private Models.Messages.JoinTableResponse JoinTable(Models.Messages.JoinTableRequest request)
-        {
-            Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
-            var table = this.TableRepo.Find(request.TableId);
-
-            if (table != null)
-            {
-                for (Int32 i = 0; i < table.MaxPlayers; i++)
-                {
-                    if (table.Peers[i] == null)
-                    {
-                        response.Seat = i;
-                        break;
-                    }
-                }
-
-                return response;
-            }
-            else
-            {
-                throw new ArgumentException("Table id not found");
             }
         }
 
@@ -240,6 +226,58 @@ namespace BitPoker.Controllers.v1
             {
                 throw new ArgumentException();
             }
+        }
+
+        private Models.Messages.JoinTableResponse JoinTable(Models.Messages.JoinTableRequest request)
+        {
+            Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
+            var table = this.TableRepo.Find(request.TableId);
+
+            if (table != null)
+            {
+                for (Int32 i = 0; i < table.MaxPlayers; i++)
+                {
+                    if (table.Peers[i] == null)
+                    {
+                        response.Seat = i;
+                        break;
+                    }
+                }
+
+                return response;
+            }
+            else
+            {
+                throw new ArgumentException("Table id not found");
+            }
+        }
+
+        private Models.Messages.BuyInResponse BuyIn(Models.Messages.BuyInRequest request)
+        {
+            var table = this.TableRepo.Find(request.TableId);
+
+            if (table != null)
+            {
+                NBitcoin.Transaction tx = new NBitcoin.Transaction(request.TxID);
+                NBitcoin.TransactionBuilder builder = new NBitcoin.TransactionBuilder();
+                Boolean isValid = true; // builder.Verify(tx);
+
+                if (isValid)
+                {
+                    var utxos = tx.Outputs;
+                    var sum = tx.Outputs.Sum(u => u.Value);
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Table id not found");
+            }
+
+            return new Models.Messages.BuyInResponse();
         }
     }
 }
