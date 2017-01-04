@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <h1>BitPoker.io Lobby</h1>
+
+    <h2>Players</h2>
+    <table id="players">
+
+    </table>
+
+    <button>Refresh</button>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    
+    <script>
+        var uri = 'http://localhost:8080/players';
+
+        $(document).ready(function () {
+          // Send an AJAX request
+          $.getJSON(uri)
+              .done(function (data) {
+                // On success, 'data' contains a list of products.
+                $.each(data, function (key, item) {
+                  // Add a list item for the product.
+                    $('<tr>', { text: item.BitcoinAddress }).appendTo($('#players'));
+                });
+              });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>BitPoker.io Tables</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <h1>Tables</h1>
+
+    <table>
+        <tr>
+            <th></th>
+        </tr>
+    </table>
+
+    <button>Refresh</button>
+
+    <h2>Add new table</h2>
+
+    <form action="/api/tables">
+        Max players<br>
+        <input type="text" name="maxplayers" value="10"><br>
+        Small blind<br>
+        <input type="text" name="smallBlind" value="0.001"><br>
+        Big blind<br>
+        <input type="text" name="bigBlind" value="0.002"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+
+        var client = new $.JsonRpcClient({ ajaxUrl: 'https://www.bitpoker.io/api/table' });
+        client.call(
+          'bar', [ 'A parameter', 'B parameter' ],
+          function(result) { alert('Foo bar answered: ' + result.my_answer); },
+          function(error)  { console.log('There was an error', error); }
+        );
+    </script>
+</body>
+</html>

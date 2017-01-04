@@ -10,7 +10,7 @@ namespace BitPoker.Models.Tests
         [TestMethod, TestCategory("RPC")]
         public void Should_Get_Player_As_ToString()
         {
-            PlayerInfo alice = new PlayerInfo()
+            Peer alice = new Peer()
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),
@@ -26,7 +26,7 @@ namespace BitPoker.Models.Tests
         [TestMethod, TestCategory("RPC")]
         public void Should_Get_Player_As_Json()
         {
-            PlayerInfo alice = new PlayerInfo()
+            Peer alice = new Peer()
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),

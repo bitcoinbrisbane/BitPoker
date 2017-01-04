@@ -7,7 +7,7 @@ namespace BitPoker.Models
     {
         private List<Messages.ActionMessage> _history;
 
-        public PlayerInfo[] Players { get; private set; }
+        public Peer[] Players { get; private set; }
 
         public Guid Id { get; set; }
 
@@ -36,11 +36,21 @@ namespace BitPoker.Models
             this.Deck = new FiftyTwoCardDeck();
         }
 
-        public Hand(PlayerInfo[] players)
+        public Hand(Peer[] players)
         {
             this.Players = players;
             this.PlayerToAct = 1;
             Id = Guid.NewGuid();
+            _history = new List<Messages.ActionMessage>();
+
+            this.Deck = new FiftyTwoCardDeck();
+        }
+
+        public Hand(Peer[] players, Guid id)
+        {
+            this.Players = players;
+            this.PlayerToAct = 1;
+            Id = id;
             _history = new List<Messages.ActionMessage>();
 
             this.Deck = new FiftyTwoCardDeck();

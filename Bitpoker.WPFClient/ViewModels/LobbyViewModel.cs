@@ -20,14 +20,14 @@ namespace Bitpoker.WPFClient.ViewModels
     /// <summary>
     /// View model for table really.
     /// </summary>
-    public class MainViewModel : BaseViewModel, INotifyPropertyChanged
+    public class LobbyViewModel : BaseViewModel, INotifyPropertyChanged
     {
         //SocketPermission permission;
         //Socket sListener;
         //IPEndPoint ipEndPoint;
         //Socket handler;
         //public Socket senderSock; 
-
+        private readonly String _wifPrivateKey;
         private Key _bitcoinKey;
         private BitcoinSecret _secret;
         
@@ -41,20 +41,27 @@ namespace Bitpoker.WPFClient.ViewModels
         /// </summary>
         public BitPoker.NetworkClient.INetworkClient NetworkClient { get; set; }
 
+        [Obsolete]
         public IChatBackend Backend { get; private set; }
 
         /// <summary>
         /// Players on the entire network
         /// </summary>
-        public ObservableCollection<PlayerInfo> NetworkPlayers { get; set; }
+        public ObservableCollection<Peer> NetworkPlayers { get; set; }
 
-        public ObservableCollection<TableViewModel> Tables { get; set; }
+        public ObservableCollection<BitPoker.Models.Contracts.Table> Tables { get; set; }
+
+        public BitPoker.Models.Contracts.Table SelectedTable
+        {
+            get;
+            internal set;
+        }
 
         public WalletViewModel Wallet { get; set; }
 
-        private TexasHoldemPlayer _me;
+        private IPlayer _me;
 
-        public TexasHoldemPlayer Me
+        public IPlayer Me
         {
             get { return _me; }
             set
@@ -64,7 +71,15 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public ObservableCollection<IRequest> InComingMessages { get; set; }
+        public ObservableCollection<IRequest> InComingRequests { get; private set; }
+
+        public ObservableCollection<IResponse> InComingResponses { get; set; }
+
+        public ObservableCollection<IRequest> SentRequests { get; set; }
+
+        public ObservableCollection<IResponse> SentResponses { get; set; }
+
+        public ObservableCollection<Models.Log> Logs { get; set; }
 
         private String _lastMessage;
 
@@ -78,19 +93,21 @@ namespace Bitpoker.WPFClient.ViewModels
             }
         }
 
-        public MainViewModel()
+        public LobbyViewModel()
         {
-            this.NetworkPlayers = new ObservableCollection<PlayerInfo>();
+            this._wifPrivateKey = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+
+            this.NetworkPlayers = new ObservableCollection<Peer>();
             this.Clients = new List<BitPoker.NetworkClient.INetworkClient>(1);
             
             this.Clients.Add(new BitPoker.NetworkClient.APIClient("https://www.bitpoker.io/api/"));
             //this.Clients.Add(new Clients.NetSocketClient(IPAddress.Parse("127.0.0.1")));
 
-            this.Tables = new ObservableCollection<TableViewModel>();
+            this.Tables = new ObservableCollection<BitPoker.Models.Contracts.Table>();
 
-            Wallet = new WalletViewModel("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS");
+            Wallet = new WalletViewModel(_wifPrivateKey);
 
-            _secret = new BitcoinSecret("93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS", Network.TestNet);
+            _secret = new BitcoinSecret(_wifPrivateKey, Constants.Network);
             BitcoinAddress address = _secret.GetAddress();
 
             //move this
@@ -104,17 +121,22 @@ namespace Bitpoker.WPFClient.ViewModels
             };
 
             this.Backend = new ChatBackend(this.ProcessMessage, Wallet.Address.ToString());
-            this.InComingMessages = new ObservableCollection<IRequest>();
+
+            this.InComingRequests = new ObservableCollection<IRequest>();
+            this.SentRequests = new ObservableCollection<IRequest>();
+
+            this.InComingResponses = new ObservableCollection<IResponse>();
+            this.SentResponses = new ObservableCollection<IResponse>();
 
             //Announce
             IRequest request = new RPCRequest()
             {
                 Method = "NewPeer",
-                Params = new NewPeer()
+                Params = new NewPeerRequest()
                 {
                     BitcoinAddress = Wallet.Address.ToString(),
                     Version = 1.0M,
-                    Player = new PlayerInfo()
+                    Player = new Peer()
                     {
                         BitcoinAddress = Wallet.Address.ToString()
                     },
@@ -123,14 +145,17 @@ namespace Bitpoker.WPFClient.ViewModels
             };
 
             this.Backend.SendRequest(request);
+            this.SentRequests.Add(request);
+
+            this.Logs = new ObservableCollection<Models.Log>();
         }
 
         public String NewAddress()
         {
             PubKey pubKey = _bitcoinKey.PubKey;
-            BitcoinAddress address = pubKey.GetAddress(Network.TestNet);
+            BitcoinAddress address = pubKey.GetAddress(Constants.Network);
 
-            this.Wallet = new WalletViewModel(_bitcoinKey.GetWif(Network.TestNet).ToString());
+            this.Wallet = new WalletViewModel(_bitcoinKey.GetWif(Constants.Network).ToString());
 
             return String.Format("SETNAME:{0}", address);
         }
@@ -183,15 +208,16 @@ namespace Bitpoker.WPFClient.ViewModels
         {
             IRequest request = new RPCRequest();
 
-            GetTableRequest method = new GetTableRequest()
+            GetTableRequest tableRequest = new GetTableRequest()
             {
                 Recipient = address 
             };
 
-            request.Method = method.GetType().Name;
-            request.Params = method;
+            request.Method = tableRequest.GetType().Name;
+            request.Params = tableRequest;
 
             Backend.SendRequest(request);
+            this.SentRequests.Add(request);
         }
 
         public void JoinTable(Guid tableId)
@@ -206,9 +232,11 @@ namespace Bitpoker.WPFClient.ViewModels
                     Seat = 1
                 };
 
-                request.Method = method.GetType().Name;
-                request.Params = method;
+                request.Method = joinTableRequest.GetType().Name;
+                request.Params = joinTableRequest;
 
+                //send
+                String json = Newtonsoft.Json.JsonConvert.SerializeObject(request);
                 Backend.SendRequest(request);
             }
         }
@@ -218,21 +246,12 @@ namespace Bitpoker.WPFClient.ViewModels
             using (BitPoker.NetworkClient.IPlayerClient client = new BitPoker.NetworkClient.APIClient(""))
             {
                 var players = await client.GetPlayersAsync();
+
+                foreach (Peer player in players)
+                {
+                    this.NetworkPlayers.Add(player);
+                }
             }
-
-            //foreach (BitPoker.NetworkClient.INetworkClient client in this.Clients)
-            //{
-            //    if (client.IsConnected)
-            //    {
-            //        //TODO: Check player does not exist in collection and zip
-            //        var players = client.GetPlayers();
-
-            //        foreach (PlayerInfo player in players)
-            //        {
-            //            this.NetworkPlayers.Add(player);
-            //        }
-            //    }
-            //}
         }
 
         public async Task RefreshWalletBalance()
@@ -242,7 +261,7 @@ namespace Bitpoker.WPFClient.ViewModels
                 String address = this.Wallet.Address.ToString();
                 Decimal balance = await client.GetAddressBalanceAsync(address, 1);
 
-                this.Me.Stack = Convert.ToUInt64(balance * 1000000);
+                this.Me.Stack = Convert.ToUInt64(balance * Constants.SATOSHI);
             }
         }
 
@@ -257,17 +276,14 @@ namespace Bitpoker.WPFClient.ViewModels
         /// <param name="composite"></param>
         public void ProcessMessage(CompositeType composite)
         {
-            //string username = composite.Username == null ? "" : composite.Username;
-            //string message = composite.Message == null ? "" : composite.Message;
-
             IRequest request = Newtonsoft.Json.JsonConvert.DeserializeObject<RPCRequest>(composite.Message);
-
+            this.InComingRequests.Add(request);
             this.LastMessage = composite.Message;
 
             switch (request.Method)
             {
                 case "NewPeer" :
-                    NewPeer newPeer = Newtonsoft.Json.JsonConvert.DeserializeObject<NewPeer>(request.Params.ToString());
+                    NewPeerRequest newPeer = Newtonsoft.Json.JsonConvert.DeserializeObject<NewPeerRequest>(request.Params.ToString());
                     NetworkPlayers.Add(newPeer.Player);
 
                     break;
@@ -284,24 +300,34 @@ namespace Bitpoker.WPFClient.ViewModels
                     using (BitPoker.Repository.ITableRepository tableRepo = new BitPoker.Repository.LiteDB.TableRepository("data.db"))
                     {
                         IEnumerable<BitPoker.Models.Contracts.Table> tables = tableRepo.All();
+
+                        //now send
+                        IResponse response = new RPCResponse()
+                        {
+                            Id = request.Id,
+                            Result = tables
+                        };
+
+                        this.SentRequests.Add(request);
+                        Backend.SendResponse(response);
+
+                        break;
                     }
-
-                    //now send
-                    IResponse response = new RCPResponse()
-                    {
-                        Id = request.Id
-                    };
-
-                    break;
 
                 case "GetTablesResponse": //Add resultant tables
                     GetTablesResponse tableResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<GetTablesResponse>(request.Params.ToString());
 
                     foreach (BitPoker.Models.Contracts.Table table in tableResponse.Tables)
                     {
-                        TableViewModel tableViewModel = new TableViewModel(table);
-                        this.Tables.Add(tableViewModel);
+                        //TableViewModel tableViewModel = new TableViewModel(table);
+                        this.Tables.Add(table);
                     }
+
+                    break;
+                case "ActionMessage":
+                    ActionMessage actionMessage = Newtonsoft.Json.JsonConvert.DeserializeObject<ActionMessage>(request.Params.ToString());
+
+                    //actionMessage.HandId;
 
                     break;
             }

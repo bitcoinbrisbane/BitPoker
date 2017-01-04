@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+
 
 namespace BitPoker.MVC.Controllers.API
 {
     public class AliceController : MessageController
     {
+        public AliceController()
+        {
+            base.privateKey = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+        }
     }
 }

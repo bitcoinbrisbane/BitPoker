@@ -5,13 +5,13 @@ namespace BitPoker.MVC.Models
 {
     public class PlayerContainer
     {
-        public IList<BitPoker.Models.PlayerInfo> Players { get; set; }
+        public IList<BitPoker.Models.Peer> Players { get; set; }
 
         public DateTime Updated { get; set; }
 
         public PlayerContainer()
         {
-            this.Players = new List<BitPoker.Models.PlayerInfo>();
+            this.Players = new List<BitPoker.Models.Peer>();
         }
     }
 }

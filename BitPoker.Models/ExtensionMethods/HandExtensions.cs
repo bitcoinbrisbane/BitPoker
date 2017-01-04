@@ -4,7 +4,7 @@ namespace BitPoker.Models.ExtensionMethods
 {
     public static class HandExtensions
     {
-        public static PlayerInfo GetSmallBlind(this Hand value)
+        public static Peer GetSmallBlind(this Hand value)
         {
             if (value.Players.Length > 0)
             {
@@ -16,7 +16,7 @@ namespace BitPoker.Models.ExtensionMethods
             }
         }
 
-        public static PlayerInfo GetBigBlind(this Hand value)
+        public static Peer GetBigBlind(this Hand value)
         {
             if (value.Players.Length > 0)
             {

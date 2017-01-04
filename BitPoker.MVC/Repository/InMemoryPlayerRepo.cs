@@ -13,7 +13,7 @@ namespace BitPoker.MVC.Repository
         private const string KEY = "players";
         private CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
 
-        public IEnumerable<PlayerInfo> All()
+        public IEnumerable<Peer> All()
         {
             if (MemoryCache.Default.Contains(KEY))
             {
@@ -34,7 +34,7 @@ namespace BitPoker.MVC.Repository
             }
         }
 
-        public PlayerInfo Find(string address)
+        public Peer Find(string address)
         {
             if (MemoryCache.Default.Contains(KEY))
             {
@@ -55,7 +55,7 @@ namespace BitPoker.MVC.Repository
             }
         }
 
-        public void Add(PlayerInfo entity)
+        public void Add(Peer entity)
         {
             if (!MemoryCache.Default.Contains(KEY))
             {

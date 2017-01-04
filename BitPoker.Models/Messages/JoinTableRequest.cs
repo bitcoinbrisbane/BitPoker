@@ -4,9 +4,9 @@ namespace BitPoker.Models.Messages
 {
     public class JoinTableRequest : BaseRequest
     {
-        public PlayerInfo Player { get; set; }
+        public Guid TableId { get; set; }
 
-        public UInt16 Seat { get; set; }
+        public Peer Player { get; set; }
 
         public JoinTableRequest()
         {

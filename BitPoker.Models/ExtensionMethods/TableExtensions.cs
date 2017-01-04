@@ -2,9 +2,10 @@
 
 namespace BitPoker.Models.ExtensionMethods
 {
+    [Obsolete]
     public static class TableExtensions
     {
-        public static Boolean IsValid(this Models.Contracts.Table value)
+        public static Boolean IsValid(this Contracts.Table value)
         {
             //TODO:  MOVE TO HELPER
             //Some assertions

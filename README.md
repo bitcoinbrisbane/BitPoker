@@ -7,12 +7,13 @@ Most blockchains are too slow for turned based games, but not all turns need to 
 
 Its hoped, that different clients developed in different programming languages will be built.
 
-### Notation
+### Notation & Convensions
 
 Ids should be represented as GUIDs, and be in lower case
 All values represented in base16 (hex) should be lower case
+Bitcoin addresses are used the the player identifer
 
-Deck is represented as an array of Bytes.
+Deck is represented as an array of bytes.
 
 | Key  | Value | Decimal | Byte |
 | -----|------ | --------|----- |
@@ -42,7 +43,7 @@ Suites
 \*Eg
 Ace of clubs = { 0x0D }
 
-Poker terminology
+### Poker terminology
 - SB = Small Blind
 - BB = Big Blind
 
@@ -82,11 +83,22 @@ Each client connects to one another in the "lobby".  They can then look for play
 - All other players validate that message
 - Repeat
 
-### Sample Message types (See below for more on messages)
-- Buy In
+### Valid methods (See below for sample messages)
+Methods are of two types.  Game play / action messages that determin a players turn intent.  Methods that do not, such as join a table.
+
+Non action methods
+- BuyIn
+- Deal
 - Quit
-- Sit Out
-- Action (CALL, BET, RAISE, FOLD, MUCK)
+- SitOut
+- Shuffle
+
+Action methods
+- SmallBlind
+- BigBlind
+- Bet
+- Raise
+- Fold
 - Shuffle
 
 ### Overview
@@ -131,15 +143,14 @@ All actions are sent as JSON RPC.  They must include a public key hash and be si
 2.  Hash the payload of step 1
 3.  Sign the output of step 2
 
-General message structure
+General message object as a JSON RPC param
 
 | Property | Eg |
 | -------- | -- |
 | Version | Message Version |
 | Id | GUID |
 | Bitcoin Address (Public Key Hash) | msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv |
-| Action | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
-| Payload | See specific action message |
+| Method | Enum (TABLE, ACTION, BUYIN, SHUFFLE, DECK) |
 | Payload Hash | SHA256 |
 | Message Signature | TODO |
 | Pervious Hash | TODO |
@@ -169,8 +180,12 @@ cb19bc14bca61bee174e5d6591530ad72b3ab58e0c5a904baec5b5de85c65e88
 
 ## Sample messages
 ### Buy In
+```
+```
 
 ### Call
+```
+```
 
 ## Adding a Table Contract
 A client will define the table contract and store that locally.  They become the table starter and thus define the conditions of that game.  The parameters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
@@ -223,9 +238,10 @@ A client will define the table contract and store that locally.  They become the
 ```
 
 ## Joining a Table
-Users send their intent to join a table by the JoinTableRequest method.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
+Users send their intent to join a table by the JoinTable method.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
 
 ```
+
 ```
 
 ## Buying in
@@ -733,12 +749,11 @@ An REST API is located at https://www.bitpoker.io/api for users to develop clien
 | Verb  | Uri |
 | ------------- | ------------- |
 | GET | /Players |
-| GET | /Players/<bitcoinaddress> |
+| GET | /Players/bitcoinaddress |
 | GET | /Tables |
 
 ## Coloured coin crowd sale
-The following colour coin asset will be sold to raise funds for the development of the project. Asset Id 
-From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
+The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
@@ -747,3 +762,10 @@ From bitcoin address 133XHxMte5gtiLZYknEUMXky4ZtZHqUguS
 4. http://www.codeproject.com/Articles/835098/NBitcoin-Build-Them-All
 5. https://www.benjoffe.com/holdem
 6. http://ms-brainwallet.org
+7. http://json-rpc.org/wiki/specification
+8. https://msdn.microsoft.com/en-us/library/bb756931.aspx?tduid=(fc4ef1dccc45eb37dfbbbf748821ac83)(256380)(2459594)(TnL5HPStwNw-fIrr3XMwfP4kdvb3oN5V_A)()
+9. http://www.nongnu.org/libtmcg/MentalPoker.pdf
+10. https://people.csail.mit.edu/rivest/ShamirRivestAdleman-MentalPoker.pdf
+11. http://www.nongnu.org/libtmcg/WEWoRC2005_proc.pdf
+12. http://www.cs.technion.ac.il/~ranjit/papers/poker.pdf
+

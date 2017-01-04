@@ -8,6 +8,7 @@ using BitPoker.Models.ExtensionMethods;
 
 namespace BitPoker.MVC.Controllers
 {
+    [Obsolete]
     public class DealController : BaseController
     {
         private readonly BitPoker.Repository.ITableRepository tableRepo;
@@ -39,7 +40,7 @@ namespace BitPoker.MVC.Controllers
                 };
 
                 //todo:  change to position
-                var sb = table.Players[0];
+                var sb = table.Peers[0];
 
                 const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
                 NBitcoin.BitcoinSecret alice_secret = new NBitcoin.BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);

@@ -40,7 +40,11 @@
     <Compile Include="Blockr\AddressResponse.cs" />
     <Compile Include="Blockr\Data.cs" />
     <Compile Include="Blockr\Tx.cs" />
-    <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="BaseTable.cs" />
+    <Compile Include="Contracts\IPokerContract.cs" />
+    <Compile Include="Contracts\ITable.cs" />
+    <Compile Include="Contracts\NoLimitTexasHoldem.cs" />
+    <Compile Include="Contracts\TexasHoldem.cs" />
     <Compile Include="ExtensionMethods\ActionExtension.cs" />
     <Compile Include="ExtensionMethods\HandExtensions.cs" />
     <Compile Include="ExtensionMethods\TableExtensions.cs" />
@@ -55,12 +59,13 @@
     <Compile Include="Messages\AddPlayerRequest.cs" />
     <Compile Include="Messages\AddTableRequest.cs" />
     <Compile Include="Messages\BaseRequest.cs" />
+    <Compile Include="Messages\Code.cs" />
     <Compile Include="Messages\GetTableRequest.cs" />
     <Compile Include="Messages\GetTablesResponse.cs" />
     <Compile Include="Messages\IMessage.cs" />
-    <Compile Include="Messages\NewPeer.cs" />
+    <Compile Include="Messages\NewPeerRequest.cs" />
     <Compile Include="Messages\RPCRequest.cs" />
-    <Compile Include="Messages\RCPResponse.cs" />
+    <Compile Include="Messages\RPCResponse.cs" />
     <Compile Include="Messages\BuyInRequest.cs" />
     <Compile Include="Messages\BuyInResponse.cs" />
     <Compile Include="Messages\CompositeType.cs" />
@@ -73,7 +78,7 @@
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />
     <Compile Include="IRequest.cs" />
-    <Compile Include="PlayerInfo.cs" />
+    <Compile Include="Peer.cs" />
     <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
   </ItemGroup>

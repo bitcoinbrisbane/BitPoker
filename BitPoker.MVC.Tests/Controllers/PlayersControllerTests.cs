@@ -20,7 +20,7 @@ namespace BitPoker.MVC.Tests
             BitPoker.Models.IRequest request = new BitPoker.Models.Messages.RPCRequest();
             BitPoker.Models.Messages.AddPlayerRequest message = new BitPoker.Models.Messages.AddPlayerRequest();
             message.BitcoinAddress = alice.ToString();
-            message.Player = new BitPoker.Models.PlayerInfo() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
+            message.Player = new BitPoker.Models.Peer() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
 
             request.Signature = alice_secret.PrivateKey.SignMessage(request.Id.ToString());
             request.Params = message;

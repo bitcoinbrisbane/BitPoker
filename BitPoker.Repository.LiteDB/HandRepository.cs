@@ -29,8 +29,7 @@ namespace BitPoker.Repository.LiteDB
             using (var db = new LiteDatabase(_filePath))
             {
                 var hands = db.GetCollection<Hand>("hands");
-                //return hands;
-                throw new NotImplementedException();
+                return hands.FindAll();
             }
         }
 

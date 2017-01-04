@@ -11,20 +11,50 @@ namespace BitPoker.MVC.Controllers
 {
     public class MessageController : BaseController
     {
-        //private readonly BitPoker.Repository.IMessagesRepository repo;
+        private readonly BitPoker.Repository.IPlayerRepository playerRepo;
         private readonly BitPoker.Repository.IHandRepository handRepo;
         private readonly BitPoker.Repository.ITableRepository tableRepo;
 
+        internal String privateKey;
+
         //ALICE AS PER READ ME
-        private const String ALICE_WIF = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
-        
+        //private const String ALICE_WIF = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+
         //BOB
-        private const String BOB_WIF = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
+        //private const String BOB_WIF = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
 
         public MessageController()
         {
+            this.playerRepo = new Repository.InMemoryPlayerRepo();
             this.handRepo = new Repository.InMemoryHandRepo();
             this.tableRepo = new Repository.InMemoryTableRepo();
+        }
+
+        public BitPoker.Models.IResponse Get(BitPoker.Models.IRequest request)
+        {
+            BitPoker.Models.Messages.RPCResponse response = new BitPoker.Models.Messages.RPCResponse()
+            {
+                Id = request.Id
+            };
+
+            switch (request.Method.ToUpper())
+            {
+                case "GetPlayers":
+                    response.Result = this.playerRepo.All();
+                    break;
+                case "GetTables":
+                    response.Result = this.tableRepo.All();
+                    break;
+                default:
+                    response.Error = new BitPoker.Models.Messages.Code()
+                    {
+                        code = "-32601",
+                        message = "method not found"
+                    };
+                    break;
+            }
+
+            return response;
         }
 
         /// <summary>
@@ -33,8 +63,12 @@ namespace BitPoker.MVC.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public Boolean Post(BitPoker.Models.IRequest request)
+        public BitPoker.Models.IResponse Post(BitPoker.Models.IRequest request)
         {
+            BitPoker.Models.Messages.RPCResponse response = new BitPoker.Models.Messages.RPCResponse()
+            {
+                Id = request.Id
+            };
 
             switch (request.Method.ToUpper())
             {
@@ -129,8 +163,7 @@ namespace BitPoker.MVC.Controllers
             //    var player = hand.Players[hand.PlayerToAct];
             //}
 
-            //return verified;
-            return false;
+            return response;
         }
 
         public void AddSmallBlind(BitPoker.Models.Messages.ActionMessage message)

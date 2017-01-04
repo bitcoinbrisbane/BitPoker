@@ -27,12 +27,12 @@ namespace BitPoker.NetworkClient
             clientPort = port;
         }
 
-        public IEnumerable<BitPoker.Models.PlayerInfo> GetPlayers()
+        public IEnumerable<BitPoker.Models.Peer> GetPlayers()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BitPoker.Models.PlayerInfo>> GetPlayersAsync()
+        public Task<IEnumerable<BitPoker.Models.Peer>> GetPlayersAsync()
         {
             throw new NotImplementedException();
         }

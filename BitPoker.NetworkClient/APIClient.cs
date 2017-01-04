@@ -24,27 +24,27 @@ namespace BitPoker.NetworkClient
 			_apiUrl = apiUrl;
 		}
 
-		public IEnumerable<PlayerInfo> GetPlayers()
+		public IEnumerable<Peer> GetPlayers()
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
 				String json = httpClient.GetStringAsync(String.Format("{0}/api/players", _apiUrl)).Result;
-				IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
+				IEnumerable<BitPoker.Models.Peer> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.Peer>>(json);
 				return result;
 			}
 		}
 
-        public async Task AddPlayer(PlayerInfo player)
+        public async Task AddPlayer(Peer player)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<PlayerInfo>> GetPlayersAsync()
+        public async Task<IEnumerable<Peer>> GetPlayersAsync()
 		{
 			using (HttpClient httpClient = new HttpClient())
 			{
 				String json = await httpClient.GetStringAsync(String.Format("{0}/api/players", _apiUrl));
-				IEnumerable<BitPoker.Models.PlayerInfo> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.PlayerInfo>>(json);
+				IEnumerable<BitPoker.Models.Peer> result = JsonConvert.DeserializeObject<IEnumerable<BitPoker.Models.Peer>>(json);
 				return result;
 			}
 		}
