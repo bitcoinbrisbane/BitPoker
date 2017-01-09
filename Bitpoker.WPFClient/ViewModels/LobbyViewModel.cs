@@ -290,7 +290,7 @@ namespace Bitpoker.WPFClient.ViewModels
 
                     BitPoker.Models.Contracts.Table newTable = Newtonsoft.Json.JsonConvert.DeserializeObject<BitPoker.Models.Contracts.Table>(request.Params.ToString());
                     TableViewModel newTableViewModel = new TableViewModel(newTable);
-                    this.Tables.Add(newTableViewModel);
+                    //this.Tables.Add(newTableViewModel);
 
                     break;
 
