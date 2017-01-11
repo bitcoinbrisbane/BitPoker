@@ -93,7 +93,8 @@ namespace BitPoker.Controllers.Tests
         {
             //private key 91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf
 
-            Guid tableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c");
+            
+
             MessageController controller = new MessageController();
             controller.TableRepo = new Repository.MockTableRepo();
 
@@ -101,7 +102,7 @@ namespace BitPoker.Controllers.Tests
             request.Params = new Models.Messages.BuyInRequest()
             {
                 BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
-                TableId = tableId,
+                //TableId = tableId,
                 TimeStamp = new DateTime(2016, 12, 12),
                 Amount = 10000,
                 Version = 1
@@ -200,9 +201,9 @@ namespace BitPoker.Controllers.Tests
             Assert.IsNotNull(response);
             Assert.AreEqual(REQUEST_ID, response.Id.ToString());
 
-            Models.Messages.ShuffleRequest
+            //Models.Messages.ShuffleRequest
 
-            Assert.AreEqual(response.Result)
+            //Assert.AreEqual(response.Result)
         }
 
         [TestMethod, TestCategory("Shuffle")]
@@ -234,7 +235,7 @@ namespace BitPoker.Controllers.Tests
             request.Method = "Deal";
             request.Params = new Models.Messages.DealRequest()
             {
-                HandId = handId
+                Id = handId
             };
 
             var response = _controller.Post(request);
