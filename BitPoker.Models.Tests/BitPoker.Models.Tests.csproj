@@ -68,6 +68,7 @@
     <Compile Include="PlayerTests.cs" />
     <Compile Include="ActionMessageTests.cs" />
     <Compile Include="MessageTests.cs" />
+    <Compile Include="PeerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Models.Mocks\BitPoker.Models.Mocks.csproj">

@@ -33,7 +33,6 @@ namespace BitPoker.MVC.Controllers
 
             BitPoker.Models.Messages.DeckResponse response = new BitPoker.Models.Messages.DeckResponse()
             {
-                TableId = new Guid(),
                 HandId = handId,
                 //BitcoinAddress = alice_address.ToString(),
                 Deck = hand.Deck
