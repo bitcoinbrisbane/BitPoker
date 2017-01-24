@@ -99,6 +99,7 @@
     <Compile Include="BaseController.cs" />
     <Compile Include="IPlayersController.cs" />
     <Compile Include="ITablesController.cs" />
+    <Compile Include="Rest\PeersController.cs" />
     <Compile Include="Rest\PlayersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\TablesController.cs" />

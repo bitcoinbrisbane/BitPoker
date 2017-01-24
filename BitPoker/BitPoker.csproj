@@ -117,6 +117,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Clients.JSONRPC\BitPoker.Clients.JSONRPC.csproj">
+      <Project>{eebc1a57-b303-4f5d-bd13-e4c7b5e5b505}</Project>
+      <Name>BitPoker.Clients.JSONRPC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">
+      <Project>{5758d35e-c5c6-4d21-b571-029b38e85f62}</Project>
+      <Name>BitPoker.Clients</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BitPoker.Controllers\BitPoker.Controllers.csproj">
       <Project>{20bbd36d-d43e-41f9-b980-e98257358935}</Project>
       <Name>BitPoker.Controllers</Name>

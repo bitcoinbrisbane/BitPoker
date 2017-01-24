@@ -7,45 +7,46 @@ using System.Web.Http.Cors;
 namespace BitPoker.Controllers.Rest
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class PlayersController : BaseController, IPlayersController
+    public class PeersController : BaseController //, IPeersController
     {
-        public Repository.IPlayerRepository PlayerRepo { get; set; }
+        public Repository.IGenericRepository<Models.Peer> PeerRepo { get; set; }
 
-        public PlayersController()
+        public PeersController()
         {
-            PlayerRepo = new Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
+            //PlayerRepo = new Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
+            //PlayerRepo.Add(new Models.Peer() { IPAddress = "https://www.bitpoker.io/api/alice" });
         }
 
-        public PlayersController(Repository.IPlayerRepository repo)
+        public PeersController(Repository.IGenericRepository<Models.Peer> repo)
         {
-            PlayerRepo = repo;
+            PeerRepo = repo;
         }
 
-        public IEnumerable<Models.IPlayer> Get()
+        public IEnumerable<Models.Peer> Get()
         {
-            return PlayerRepo.All();
+            return PeerRepo.All();
         }
 
-        public Models.IPlayer Get(String address)
+        public Models.Peer Get(String address)
         {
-            Models.IPlayer player = PlayerRepo.Find(address);
+            Models.Peer player = PeerRepo.Find(address);
             return player;
         }
 
         [HttpPost]
         public Models.IResponse Post(Models.IRequest model)
         {
-            if (model.Method == "AddPlayer")
+            if (model.Method == "AddPeer")
             {
                 Models.Messages.RPCResponse response = new Models.Messages.RPCResponse();
-                Models.Messages.AddPlayerRequest request = model.Params as Models.Messages.AddPlayerRequest;
+                Models.Messages.AddPeerRequest request = model.Params as Models.Messages.AddPeerRequest;
 
                 //need to include timestamp too
                 Boolean valid = base.Verify(request.BitcoinAddress, model.Id.ToString(), model.Signature);
 
                 if (valid)
                 {
-                    //PlayerRepo.Add(request.Player);
+                    PeerRepo.Add(request.Peer);
                     return response;
                 }
                 else

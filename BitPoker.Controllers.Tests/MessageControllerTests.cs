@@ -41,6 +41,7 @@ namespace BitPoker.Controllers.Tests
                 BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ",
                 TableId = tableId,
                 TimeStamp = new DateTime(2016, 12, 12),
+                Seat = 2,
                 Version = 1
             };
 

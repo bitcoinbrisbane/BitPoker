@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BitPoker.Models;
 using System.Runtime.Caching;
 
@@ -13,7 +11,7 @@ namespace BitPoker.MVC.Repository
         private const string KEY = "players";
         private CacheItemPolicy cacheItemPolicy = new CacheItemPolicy();
 
-        public IEnumerable<Peer> All()
+        public IEnumerable<IPlayer> All()
         {
             if (MemoryCache.Default.Contains(KEY))
             {
@@ -34,7 +32,7 @@ namespace BitPoker.MVC.Repository
             }
         }
 
-        public Peer Find(string address)
+        public IPlayer Find(string address)
         {
             if (MemoryCache.Default.Contains(KEY))
             {
@@ -55,7 +53,7 @@ namespace BitPoker.MVC.Repository
             }
         }
 
-        public void Add(Peer entity)
+        public void Add(IPlayer entity)
         {
             if (!MemoryCache.Default.Contains(KEY))
             {

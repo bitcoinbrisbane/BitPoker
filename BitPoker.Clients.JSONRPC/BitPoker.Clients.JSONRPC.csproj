@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D248950-D9E5-43EC-8EEF-CC9D350BAE38}</ProjectGuid>
+    <ProjectGuid>{EEBC1A57-B303-4F5D-BD13-E4C7B5E5B505}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BitPoker.Repository.LiteDB</RootNamespace>
-    <AssemblyName>BitPoker.Repository.LiteDB</AssemblyName>
+    <RootNamespace>BitPoker.Clients.JSONRPC</RootNamespace>
+    <AssemblyName>BitPoker.Clients.JSONRPC</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LiteDB, Version=2.0.2.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
-      <HintPath>..\packages\LiteDB.2.0.2\lib\net35\LiteDB.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,25 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseRepository.cs" />
-    <Compile Include="HandRepository.cs" />
-    <Compile Include="PeerRepository.cs" />
-    <Compile Include="PlayerRepository.cs" />
+    <Compile Include="BaseClient.cs" />
+    <Compile Include="PeerClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableRepository.cs" />
+    <Compile Include="TableClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">
+      <Project>{5758d35e-c5c6-4d21-b571-029b38e85f62}</Project>
+      <Name>BitPoker.Clients</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
-      <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>
-      <Name>BitPoker.Repository</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

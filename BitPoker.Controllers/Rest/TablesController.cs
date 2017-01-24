@@ -52,5 +52,20 @@ namespace BitPoker.Controllers.Rest
                 throw new NotImplementedException();
             }
         }
+
+
+        [HttpPost, Route("join/{id}")]
+        public void Post(Models.Messages.JoinTableRequest request)
+        {
+            if (!base.Verify(request.BitcoinAddress, request.ToString(), ""))
+            {
+                //throw new Exceptions.SignatureNotValidException();
+                throw new Exception();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
     }
 }

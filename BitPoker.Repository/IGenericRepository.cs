@@ -13,6 +13,6 @@ namespace BitPoker.Repository
 
         void Update(T entity);
 
-        T Find(Guid Id);
+        T Find(String id);
     }
 }

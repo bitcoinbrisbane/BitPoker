@@ -29,12 +29,12 @@ namespace BitPoker.Controllers.v1
 
             switch (request.Method.ToUpper())
             {
-                case "GetPlayers":
-                    response.Result = PlayerRepo.All();
-                    break;
-                case "GetTables":
-                    response.Result = TableRepo.All();
-                    break;
+                //case "GetPlayers":
+                //    response.Result = PlayerRepo.All();
+                //    break;
+                //case "GetTables":
+                //    response.Result = TableRepo.All();
+                //    break;
                 case "GetHands":
                     throw new NotImplementedException();
                     //break;
@@ -233,16 +233,18 @@ namespace BitPoker.Controllers.v1
             Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
             var table = this.TableRepo.Find(request.TableId);
 
-            if (table != null)
+            if (table != null && table.Peers[request.Seat] == null)
             {
-                for (Int32 i = 0; i < table.MaxPlayers; i++)
-                {
-                    if (table.Peers[i] == null)
-                    {
-                        response.Seat = i;
-                        break;
-                    }
-                }
+                //for (Int32 i = 0; i < table.MaxPlayers; i++)
+                //{
+                //    if (table.Peers[i] == null)
+                //    {
+                //        response.Seat = i;
+                //        break;
+                //    }
+                //}
+
+                response.Seat = request.Seat;
 
                 return response;
             }

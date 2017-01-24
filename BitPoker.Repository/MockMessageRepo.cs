@@ -16,7 +16,7 @@ namespace BitPoker.Repository
             throw new NotImplementedException();
         }
 
-        public ActionMessage Find(Guid id)
+        public ActionMessage Find(String id)
         {
             ////Get a fake message at that index
             //switch (index)
@@ -40,11 +40,6 @@ namespace BitPoker.Repository
             //        break;
             //}
             throw new NotImplementedException();
-        }
-
-        public Int32 Save()
-        {
-            return 0;
         }
 
         public void Dispose()

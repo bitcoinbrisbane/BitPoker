@@ -22,10 +22,10 @@ namespace BitPoker
 		private static IList<Byte[]> TableDeck;
         private static List<Byte[]> _keys;
 
-        private static Stack<String> actions;
+        //private static Stack<String> actions;
 
-		private static ICollection<TexasHoldemPlayer> Players;
-        private static ICollection<Peer> Peers;
+		//private static ICollection<TexasHoldemPlayer> Players;
+        //private static ICollection<Peer> Peers;
 
         private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
         private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
@@ -42,6 +42,15 @@ namespace BitPoker
         private const String API_URL = "https://www.bitpoker.io/api/";
 
         private const String MOCK_HAND_ID = "398b5fe2-da27-4772-81ce-37fa615719b5";
+
+
+        private static Repository.IPlayerRepository playerRepo;
+        private static Repository.ITableRepository tableRepo;
+        private static Repository.IGenericRepository<Peer> peersRepo;
+
+
+        private static Peer me;
+
         //private const String TABLE_ID = "";
 
         //System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
@@ -68,9 +77,15 @@ namespace BitPoker
 
             String baseUrl = String.Format("http://localhost:{0}", port);
 
-            Players = new List<TexasHoldemPlayer>();
-            Peers = new List<Peer>();
-            Peers.Add(new Peer() { IPAddress = "https://www.bitpoker.io/api/", UserAgent = "Website" });
+            me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App", IPAddress = baseUrl };
+
+            tableRepo = new Repository.LiteDB.TableRepository("bitpoker.db");
+            playerRepo = new Repository.LiteDB.PlayerRepository<TexasHoldemPlayer>("bitpoker.db");
+            peersRepo = new Repository.LiteDB.PeerRepository("bitpoker.db");
+            //peersRepo.Add(new Peer() { IPAddress = "https://www.bitpoker.io/api/", UserAgent = "Website" });
+
+
+            Clients.ITableClient tableClient = new Clients.JSONRPC.TableClient();
 
             Task.Factory.StartNew(() =>
             {
@@ -111,14 +126,16 @@ namespace BitPoker
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
             Console.WriteLine("***");
 
-            Console.WriteLine("1. Add player (Carol) to mock api");
-            Console.WriteLine("2. List players");
+            Console.WriteLine("1. Add me to seed api");
+            Console.WriteLine("2. List peers (local db)");
+            Console.WriteLine("21. Reload all peers");
+            Console.WriteLine("4. List tables (local db)");
+            Console.WriteLine("41. Get tables from know peers");
+            Console.WriteLine("42. Refresh all peer's tables");
             Console.WriteLine("3. Add table");
-            Console.WriteLine("4. List tables");
-            Console.WriteLine("5. Join table");
-            Console.WriteLine("6. Buy in to table");
-            Console.WriteLine("7. Add a peer");
-            Console.WriteLine("8. List peers");
+            Console.WriteLine("6. Join table");
+            Console.WriteLine("7. Buy in to table");
+            Console.WriteLine("8. Add a peer");
 
             //Console.WriteLine("Get Hand");
             //Console.WriteLine("6. Fold / Muck");
@@ -138,14 +155,11 @@ namespace BitPoker
                         AddPlayer();
                         break;
                     case "2":
-                        Parallel.ForEach(Peers, (peer) => {
-                            GetPlayers(peer.IPAddress);
-                        });
-
-                        //foreach (Peer peer in Peers)
-                        //{
-                        //    GetPlayers(peer.IPAddress);
-                        //}
+                        Console.WriteLine("### Dumping all peers in local database:");
+                        foreach (Peer peer in peersRepo.All())
+                        {
+                            Console.WriteLine(peer);
+                        }
                         break;
                     case "3":
                         Console.WriteLine("Small blind? 1000");
@@ -156,12 +170,25 @@ namespace BitPoker
                         AddTable(sb, sb * 2);
                         break;
                     case "4":
-                        IEnumerable<Models.Contracts.Table> tables = GetTables();
-
-                        foreach (Models.Contracts.Table table in tables)
+                        Console.WriteLine("### Dumping all tables in local database:");
+                        foreach (Models.Contracts.Table table in tableRepo.All())
                         {
                             Console.WriteLine("{0} {1} {2}", table.Id, table.SmallBlind, table.BigBlind);
                         }
+                        break;
+                    case "41":
+                        foreach (Peer peer in peersRepo.All())
+                        {
+                            Console.WriteLine("Getting tabls for {0}", peer);
+
+                            IEnumerable<Models.Contracts.ITable> tables = tableClient.GetTablesAsync(peer.IPAddress).Result;
+
+                            foreach (Models.Contracts.Table table in tables)
+                            {
+                                Console.WriteLine("{0} {1} {2}", table.Id, table.SmallBlind, table.BigBlind);
+                            }
+                        }
+
                         break;
                     case "6":
                         UInt64 amount = 10000;
@@ -169,16 +196,37 @@ namespace BitPoker
                         BuyIn(amount, new Guid(tableId));
                         break;
                     case "7":
-                        Console.Write("What is the peers IP or DNS?");
-                        String address = Console.ReadLine();
-                        Peers.Add(new Peer() { IPAddress = address  });
-                        Console.WriteLine("Peer added");
-                        break;
-                    case "8":
-                        foreach (Peer peer in Peers)
+                        Console.Write("What is the table id?");
+                        Guid tableIdToJoin = new Guid(Console.ReadLine());
+
+                        Models.Contracts.Table tableToJoin = tableRepo.Find(tableIdToJoin);
+
+                        Models.Messages.JoinTableRequest joinTableRequest = new Models.Messages.JoinTableRequest()
                         {
-                            Console.WriteLine(peer.ToString());
+                            BitcoinAddress = carol.ToString(),
+                            TableId = tableIdToJoin,
+                            NewPlayer = me,
+                            TimeStamp = DateTime.UtcNow
+                        };
+
+                        String joinTableRequestContent = JsonConvert.SerializeObject(joinTableRequest);
+
+                        //find empty seat
+                        //for (Int32 i = 0; i < table.MaxPlayers; i++)
+                        //{
+                        //    if (table.Peers[i] == null)
+                        //    {
+                        //        response.Seat = i;
+                        //        break;
+                        //    }
+                        //}
+
+                        foreach (Peer tablePeer in tableToJoin.Peers)
+                        {
+                            Console.WriteLine("Posting joing request to {0}", tablePeer);
                         }
+
+                        Console.WriteLine("Peer added");
                         break;
                     case "k":
                     case "K":
@@ -345,7 +393,7 @@ namespace BitPoker
         {
             Models.Messages.AddPlayerRequest message = new Models.Messages.AddPlayerRequest();
             message.BitcoinAddress = carol.ToString();
-            message.Player = new Peer()
+            message.Player = new TexasHoldemPlayer()
             {
                 BitcoinAddress = carol.ToString(),
                 IPAddress = "localhost"
@@ -419,65 +467,6 @@ namespace BitPoker
         //    }
         //}
 
-        public static void GetPlayers()
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                Uri uri = new Uri(String.Format("{0}players", API_URL));
-                String json = httpClient.GetStringAsync(uri).Result;
-
-                if (!String.IsNullOrEmpty(json))
-                {
-                    List<Peer> response = JsonConvert.DeserializeObject<List<Peer>>(json);
-
-                    foreach (Peer player in response)
-                    {
-                        Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
-                    }
-                }
-            }
-        }
-
-        public static void GetPlayers(String address)
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                Uri uri = new Uri(String.Format("{0}players", address));
-                String json = httpClient.GetStringAsync(uri).Result;
-
-                if (!String.IsNullOrEmpty(json))
-                {
-                    List<Peer> response = JsonConvert.DeserializeObject<List<Peer>>(json);
-
-                    if (response != null)
-                    {
-                        foreach (Peer player in response)
-                        {
-                            Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static async Task GetPlayersAsync()
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                Uri uri = new Uri(String.Format("{0}players", API_URL));
-                String json = await httpClient.GetStringAsync(uri);
-
-                if (!String.IsNullOrEmpty(json))
-                {
-                    List<Peer> response = JsonConvert.DeserializeObject<List<Peer>>(json);
-
-                    foreach (Peer player in response)
-                    {
-                        Console.WriteLine("{0} {1} {2}", player.BitcoinAddress, player.IPAddress, player.LastSeen);
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// Adds a table to mock api under carols address
@@ -512,17 +501,6 @@ namespace BitPoker
             Post(requestContent, url);
         }
 
-        private static IEnumerable<Models.Contracts.Table> GetTables()
-        {
-            using (HttpClient httpClient = new HttpClient())
-            {
-                Uri uri = new Uri(String.Format("{0}tables", API_URL));
-                String json = httpClient.GetStringAsync(uri).Result;
-                List<Models.Contracts.Table> response = JsonConvert.DeserializeObject<List<Models.Contracts.Table>>(json);
-
-                return response;
-            }
-        }
 
         private static void BuyIn(UInt64 amount, Guid tableId)
         {
@@ -546,7 +524,7 @@ namespace BitPoker
             Post(requestContent, url);
         }
 
-        private static void Post(StringContent requestContent, string url)
+        private static String Post(StringContent requestContent, string url)
         {
             using (HttpClient httpClient = new HttpClient())
             {
@@ -554,8 +532,7 @@ namespace BitPoker
                 {
                     if (responseMessage.IsSuccessStatusCode)
                     {
-                        String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
-                        Console.WriteLine(responseContent);
+                        return responseMessage.Content.ReadAsStringAsync().Result;
                     }
                     else
                     {
@@ -564,6 +541,24 @@ namespace BitPoker
                 }
             }
         }
+
+        //private static async Task<String> PostAsync(StringContent requestContent, string url)
+        //{
+        //    using (HttpClient httpClient = new HttpClient())
+        //    {
+        //        using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+        //        {
+        //            if (responseMessage.IsSuccessStatusCode)
+        //            {
+        //                return await responseMessage.Content.ReadAsStringAsync();
+        //            }
+        //            else
+        //            {
+        //                throw new InvalidOperationException();
+        //            }
+        //        }
+        //    }
+        //}
 
         private static void CreateKeys(Int32 n, Int32 keyLength)
         {
