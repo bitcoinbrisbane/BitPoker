@@ -260,7 +260,7 @@ namespace BitPoker.Controllers.v1
 
             if (table != null)
             {
-                NBitcoin.Transaction tx = new NBitcoin.Transaction(request.TxID);
+                NBitcoin.Transaction tx = new NBitcoin.Transaction();
                 NBitcoin.TransactionBuilder builder = new NBitcoin.TransactionBuilder();
                 Boolean isValid = true; // builder.Verify(tx);
 

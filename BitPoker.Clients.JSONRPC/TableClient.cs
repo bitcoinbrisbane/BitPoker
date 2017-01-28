@@ -13,17 +13,32 @@ namespace BitPoker.Clients.JSONRPC
 {
     public class TableClient : BaseClient, ITableClient
     {
-        public Task<BuyInResponse> BuyIn(String host, BuyInRequest request)
+        public async Task<BuyInResponse> BuyIn(String host, BuyInRequest param)
+        {
+            IRequest request = new Models.Messages.RPCRequest()
+            {
+                Method = "BuyIn",
+                Params = param
+            };
+
+            //message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
+
+            String endPoint = String.Format("{0}/v1/messages", host);
+
+            String json = JsonConvert.SerializeObject(request);
+            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            String response = await PostAsync(requestContent, endPoint);
+            BuyInResponse buyInResponse = JsonConvert.DeserializeObject<BuyInResponse>(response);
+            return buyInResponse;
+        }
+
+        public async Task<IEnumerable<Hand>> GetHandHistory(Guid tableId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Hand>> GetHandHistory(Guid tableId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<IPlayer>> GetPlayers(string host, Guid tableId)
+        public async Task<IEnumerable<IPlayer>> GetPlayers(string host, Guid tableId)
         {
             throw new NotImplementedException();
         }
@@ -37,8 +52,14 @@ namespace BitPoker.Clients.JSONRPC
             return tables;
         }
 
-        public async Task<JoinTableResponse> Join(String host, JoinTableRequest request)
+        public async Task<JoinTableResponse> Join(String host, JoinTableRequest param)
         {
+            IRequest request = new Models.Messages.RPCRequest()
+            {
+                Method = "BuyIn",
+                Params = param
+            };
+
             String endPoint = String.Format("{0}", host);
 
             String json = JsonConvert.SerializeObject(request);

@@ -21,9 +21,9 @@ namespace BitPoker.Clients
         /// <returns></returns>
         Task<IEnumerable<Models.IPlayer>> GetPlayers(String host, Guid tableId);
 
-        Task<Models.Messages.JoinTableResponse> Join(String host, Models.Messages.JoinTableRequest request);
+        Task<Models.Messages.JoinTableResponse> Join(String host, Models.Messages.JoinTableRequest param);
 
-        Task<Models.Messages.BuyInResponse> BuyIn(String host, Models.Messages.BuyInRequest request);
+        Task<Models.Messages.BuyInResponse> BuyIn(String host, Models.Messages.BuyInRequest param);
 
         Task<IEnumerable<Models.Hand>> GetHandHistory(Guid tableId);
     }

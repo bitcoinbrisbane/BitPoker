@@ -86,6 +86,7 @@ namespace BitPoker
 
 
             Clients.ITableClient tableClient = new Clients.JSONRPC.TableClient();
+            Clients.IPeerClient peerClient = new Clients.JSONRPC.PeerClient(1);
 
             Task.Factory.StartNew(() =>
             {
@@ -128,13 +129,14 @@ namespace BitPoker
 
             Console.WriteLine("1. Add me to seed api");
             Console.WriteLine("2. List peers (local db)");
-            Console.WriteLine("21. Reload all peers");
+            Console.WriteLine("21. Add know peer (local db)");
+            Console.WriteLine("22. Reload all peers");
             Console.WriteLine("4. List tables (local db)");
             Console.WriteLine("41. Get tables from know peers");
             Console.WriteLine("42. Refresh all peer's tables");
             Console.WriteLine("3. Add table");
             Console.WriteLine("6. Join table");
-            Console.WriteLine("7. Buy in to table");
+            Console.WriteLine("7. Buy into table");
             Console.WriteLine("8. Add a peer");
 
             //Console.WriteLine("Get Hand");
@@ -160,6 +162,17 @@ namespace BitPoker
                         {
                             Console.WriteLine(peer);
                         }
+                        break;
+                    case "21":
+                        Console.WriteLine("What is the peers address?");
+                        String peerAddress = Console.ReadLine();
+
+                        Peer newPeer = peerClient.GetPeerInfoAsync(peerAddress).Result;
+                        peersRepo.Add(newPeer);
+
+                        break;
+                    case "22":
+                        Console.WriteLine("*** Reload all peers (todo) ***");
                         break;
                     case "3":
                         Console.WriteLine("Small blind? 1000");
@@ -191,11 +204,6 @@ namespace BitPoker
 
                         break;
                     case "6":
-                        UInt64 amount = 10000;
-                        String tableId = "35bc5692-6781-4a79-a5d2-89752edd882e";
-                        BuyIn(amount, new Guid(tableId));
-                        break;
-                    case "7":
                         Console.Write("What is the table id?");
                         Guid tableIdToJoin = new Guid(Console.ReadLine());
 
@@ -209,17 +217,8 @@ namespace BitPoker
                             TimeStamp = DateTime.UtcNow
                         };
 
-                        String joinTableRequestContent = JsonConvert.SerializeObject(joinTableRequest);
-
-                        //find empty seat
-                        //for (Int32 i = 0; i < table.MaxPlayers; i++)
-                        //{
-                        //    if (table.Peers[i] == null)
-                        //    {
-                        //        response.Seat = i;
-                        //        break;
-                        //    }
-                        //}
+                        //todo:
+                        var xxx = tableClient.Join("", joinTableRequest).Result;
 
                         foreach (Peer tablePeer in tableToJoin.Peers)
                         {
@@ -227,6 +226,16 @@ namespace BitPoker
                         }
 
                         Console.WriteLine("Peer added");
+                        break;
+                    case "7":
+                        Console.Write("What is the table id?");
+                        Guid tableToBuyIn = new Guid(Console.ReadLine());
+
+                        Console.Write("Buy in amount in satoshi?");
+
+
+                        UInt64 buyInAmount = Convert.ToUInt64(Console.ReadLine());
+                        tableClient.BuyIn("", null);
                         break;
                     case "k":
                     case "K":
@@ -487,7 +496,7 @@ namespace BitPoker
             //message.BitcoinAddress = carol.ToString();
             //message.Signature = alice_secret.PrivateKey.SignMessage(message.Id.ToString());
 
-            Models.IRequest request = new Models.Messages.RPCRequest()
+            IRequest request = new Models.Messages.RPCRequest()
             {
                 Method = "AddTableRequest"
             };
@@ -497,29 +506,6 @@ namespace BitPoker
             String json = JsonConvert.SerializeObject(message);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}tables", API_URL);
-
-            Post(requestContent, url);
-        }
-
-
-        private static void BuyIn(UInt64 amount, Guid tableId)
-        {
-            Models.Messages.BuyInRequest message = new Models.Messages.BuyInRequest();
-            message.BitcoinAddress = carol.ToString();
-            //message.Amount = amount;
-
-            IRequest request = new Models.Messages.RPCRequest()
-            {
-                Method = "BuyIn"
-            };
-
-            //TODO: CREATE TX
-            request.Params = message;
-            //message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
-
-            String json = JsonConvert.SerializeObject(message);
-            StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
-            String url = String.Format("{0}buyin", API_URL);
 
             Post(requestContent, url);
         }
@@ -542,24 +528,6 @@ namespace BitPoker
             }
         }
 
-        //private static async Task<String> PostAsync(StringContent requestContent, string url)
-        //{
-        //    using (HttpClient httpClient = new HttpClient())
-        //    {
-        //        using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
-        //        {
-        //            if (responseMessage.IsSuccessStatusCode)
-        //            {
-        //                return await responseMessage.Content.ReadAsStringAsync();
-        //            }
-        //            else
-        //            {
-        //                throw new InvalidOperationException();
-        //            }
-        //        }
-        //    }
-        //}
-
         private static void CreateKeys(Int32 n, Int32 keyLength)
         {
             _keys = new List<byte[]>(n);
@@ -579,13 +547,13 @@ namespace BitPoker
             //Alice tx
             //d74b4bfc99dd46adb7c30877cc3ce7ea13feb51a6fab3b9b15f75f4e213ac0da
             BlockrTransactionRepository repo = new BlockrTransactionRepository(Network.TestNet);
-            var utxos = await repo.GetUnspentAsync(secret.GetAddress().ToString());
+            IEnumerable<Coin> utxos = await repo.GetUnspentAsync(secret.GetAddress().ToString());
 
-            Coin[] coins = utxos.OrderByDescending(u => u.Amount).Select(u => new Coin(u.Outpoint, u.TxOut)).ToArray();
+            //Coin[] coins = utxos.OrderByDescending(u => u.Amount).Select(u => new Coin(u.Outpoint, u.TxOut)).ToArray();
 
             TransactionBuilder txBuilder = new TransactionBuilder();
             Transaction tx = txBuilder
-                .AddCoins(coins)
+                .AddCoins(utxos)
                 .AddKeys(secret)
                 .Send(address, new Money(amount))
                 .SendFees(new Money(10000))
@@ -689,6 +657,27 @@ namespace BitPoker
         private static void Connect()
         {
             //clientSocket.Connect("127.0.0.1", 8888);
+        }
+
+        /// <summary>
+        /// Creates the buy in tx
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static async Task<String> CreateBuyInTx(String tableAddress, UInt64 amount)
+        {
+            BlockrTransactionRepository repo = new BlockrTransactionRepository(NBitcoin.Network.TestNet);
+            IEnumerable<Coin> utxos = await repo.GetUnspentAsync(carol.ToString());
+
+            TransactionBuilder builder = new TransactionBuilder();
+            builder.AddCoins(utxos)
+                .AddKeys(carol_secret)
+                .BuildTransaction(true);
+
+            //return builder.trans
+
+            return "";
         }
 
         public static void Listen()
