@@ -9,7 +9,7 @@ namespace BitPoker.Models.Messages
         //[Obsolete("Just use the tx")]
         //public UInt64 Amount { get; set; }
 
-        public String TxID { get; set; }
+        public String Tx { get; set; }
 
         public BuyInRequest()
         {

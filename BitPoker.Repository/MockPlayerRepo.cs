@@ -7,24 +7,24 @@ namespace BitPoker.Repository
 {
     public class MockPlayerRepo : IPlayerRepository
     {
-        List<Peer> _players = new List<Peer>();
+        private List<IPlayer> _players = new List<IPlayer>();
 
         public MockPlayerRepo()
         {
-            Peer alice = new Peer()
+            TexasHoldemPlayer alice = new TexasHoldemPlayer()
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-                LastSeen = DateTime.UtcNow.AddSeconds(-5),
+                //LastSeen = DateTime.UtcNow.AddSeconds(-5),
                 IPAddress = "https://www.bitpoker.io/api/players/msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-                Latency = new TimeSpan(0, 0, 0, 0, 200)
+                //Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
-            Peer bob = new Peer()
+            TexasHoldemPlayer bob = new TexasHoldemPlayer()
             {
                 BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
-                LastSeen = DateTime.UtcNow.AddSeconds(-1),
+                //LastSeen = DateTime.UtcNow.AddSeconds(-1),
                 IPAddress = "https://www.bitpoker.io/api/players/mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
-                Latency = new TimeSpan(0, 0, 0, 0, 200)
+                //Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
             _players.Add(alice);
@@ -34,19 +34,19 @@ namespace BitPoker.Repository
         public MockPlayerRepo(String fileName)
         {
             String json = System.IO.File.ReadAllText(fileName);
-            _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Peer>>(json);
+            _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<IPlayer>>(json);
         }
 
-        public void Add(Peer item)
+        public void Add(IPlayer item)
         {
         }
 
-        public IEnumerable<Peer> All()
+        public IEnumerable<IPlayer> All()
         {
             return _players;
         }
 
-        public Peer Find(String address)
+        public IPlayer Find(String address)
         {
             return _players.FirstOrDefault(p => p.BitcoinAddress == address);
         }

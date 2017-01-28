@@ -9,12 +9,8 @@ namespace BitPoker.Controllers
     {
         IPlayerRepository PlayerRepo { get; set; }
 
-        IEnumerable<Peer> Get();
+        IEnumerable<IPlayer> Get();
 
-        Peer Get(string address);
-
-        Hand Get(string address, Guid handId);
-
-        IResponse Post(IRequest model);
+        IPlayer Get(string address);
     }
 }

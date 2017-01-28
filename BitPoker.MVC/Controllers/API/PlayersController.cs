@@ -21,31 +21,15 @@ namespace BitPoker.MVC.Controllers
             _repo = repo;
         }
 
-        public IEnumerable<BitPoker.Models.Peer> Get()
+        public IEnumerable<BitPoker.Models.IPlayer> Get()
         {
             return _repo.All();
         }
 
-        public BitPoker.Models.Peer Get(String address)
+        public BitPoker.Models.IPlayer Get(String address)
         {
-            BitPoker.Models.Peer player = _repo.Find(address);
+            BitPoker.Models.IPlayer player = _repo.Find(address);
             return player;
-        }
-
-        /// <summary>
-        /// Poll for next action
-        /// </summary>
-        /// <param name="address"></param>
-        /// <param name="handId"></param>
-        /// <returns></returns>
-        public BitPoker.Models.Hand Get(String address, String handId)
-        {
-            BitPoker.Models.Peer player = _repo.Find(address);
-
-            //Do actions
-
-
-            return new BitPoker.Models.Hand();
         }
 
         [HttpPost]

@@ -19,7 +19,7 @@ namespace BitPoker.MVC.Controllers
             BitPoker.Repository.IPlayerRepository mockPlayerRepo = new BitPoker.Repository.MockPlayerRepo();
 
             Int32 playerCount = 0;
-            foreach(BitPoker.Models.Peer player in mockPlayerRepo.All())
+            foreach(BitPoker.Models.IPlayer player in mockPlayerRepo.All())
             {
                 playerRepo.Add(player);
                 playerCount++;

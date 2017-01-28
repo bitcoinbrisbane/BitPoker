@@ -1,46 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BitPoker.Models;
 using LiteDB;
 
 namespace BitPoker.Repository.LiteDB
 {
-    public class PlayerRepository : BaseRepository, IPlayerRepository
+    public class PlayerRepository<U> : BaseRepository, IPlayerRepository
     {
         public PlayerRepository(String filePath)
         {
             _filePath = filePath;
         }
 
-        public void Add(Peer entity)
+        public void Add(IPlayer entity)
         {
             using (var db = new LiteDatabase(_filePath))
             {
-                var players = db.GetCollection<Peer>("players");
-                players.Insert(entity);
+                var players = db.GetCollection<TexasHoldemPlayer>("players");
+                TexasHoldemPlayer player = entity as TexasHoldemPlayer;
+                players.Insert(player);
             }
         }
 
-        public IEnumerable<Peer> All()
+        public IEnumerable<IPlayer> All()
         {
-            throw new NotImplementedException();
+            using (var db = new LiteDatabase(_filePath))
+            {
+                var players = db.GetCollection<TexasHoldemPlayer>("players");
+                return players.FindAll();
+            }
         }
 
-        public void Dispose()
+        public IPlayer Find(string address)
         {
-        }
-
-        public Peer Find(string address)
-        {
-            throw new NotImplementedException();
+            using (var db = new LiteDatabase(_filePath))
+            {
+                var players = db.GetCollection<TexasHoldemPlayer>("players");
+                return players.FindById(address);
+            }
         }
 
         public int Save()
         {
             return 0;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

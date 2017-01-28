@@ -4,7 +4,7 @@ namespace BitPoker.Models.Messages
 {
     public class AddPlayerRequest : BaseRequest
     {
-        public Peer Player { get; set; }
+        public IPlayer Player { get; set; }
 
         public AddPlayerRequest()
         {

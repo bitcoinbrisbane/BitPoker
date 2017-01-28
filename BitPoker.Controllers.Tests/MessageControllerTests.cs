@@ -41,6 +41,7 @@ namespace BitPoker.Controllers.Tests
                 BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ",
                 TableId = tableId,
                 TimeStamp = new DateTime(2016, 12, 12),
+                Seat = 2,
                 Version = 1
             };
 
@@ -131,8 +132,8 @@ namespace BitPoker.Controllers.Tests
             {
                 BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
                 //TableId = tableId,
-                TimeStamp = new DateTime(2016, 12, 12),
-                TxID = "af651c3435b5a11a8d7792dbc1d20a20a23fce0beb0b6931bf0ce407bfd28a0a"
+                TimeStamp = new DateTime(2016, 12, 12) //,
+                //TxID = "af651c3435b5a11a8d7792dbc1d20a20a23fce0beb0b6931bf0ce407bfd28a0a"
             };
 
             var response = controller.Post(request);

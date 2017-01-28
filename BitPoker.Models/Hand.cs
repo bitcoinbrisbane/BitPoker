@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace BitPoker.Models
 {
-    public class Hand
+    public class Hand : IHand
     {
         private List<Messages.ActionMessage> _history;
 
-        public Peer[] Players { get; private set; }
+        public IPlayer[] Players { get; private set; }
 
         /// <summary>
         /// Hand number of the table
@@ -21,7 +21,7 @@ namespace BitPoker.Models
 
         public Int16 PlayerToAct { get; private set; }
 
-        public Int16 Round { get; set; }
+        //public Int16 Round { get; set; }
 
         public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
 
@@ -42,7 +42,7 @@ namespace BitPoker.Models
             this.Deck = new FiftyTwoCardDeck();
         }
 
-        public Hand(Peer[] players)
+        public Hand(IPlayer[] players)
         {
             this.Players = players;
             this.PlayerToAct = 1;
@@ -52,7 +52,7 @@ namespace BitPoker.Models
             this.Deck = new FiftyTwoCardDeck();
         }
 
-        public Hand(Peer[] players, Guid id)
+        public Hand(IPlayer[] players, Guid id)
         {
             this.Players = players;
             this.PlayerToAct = 1;
