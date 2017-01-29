@@ -29,7 +29,7 @@ namespace BitPoker
 
         private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
         private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
-        private const String carol_wif = "91rahqyxZb6R1MMq2rdYomfB8GWsLVqkBMHrUnaepxks73KgfaQ";
+        private String carol_wif; // = "91rahqyxZb6R1MMq2rdYomfB8GWsLVqkBMHrUnaepxks73KgfaQ";
 
         private static BitcoinSecret alice_secret = new BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
         private static BitcoinSecret bob_secret = new BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
@@ -75,13 +75,15 @@ namespace BitPoker
                 port = "8080";
             }
 
+            Console.WriteLine("{0} Setting client up", DateTime.Now);
             String baseUrl = String.Format("http://localhost:{0}", port);
 
-            me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App", IPAddress = baseUrl };
+            me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App", NetworkAddress = baseUrl };
 
             tableRepo = new Repository.LiteDB.TableRepository("bitpoker.db");
             playerRepo = new Repository.LiteDB.PlayerRepository<TexasHoldemPlayer>("bitpoker.db");
             peersRepo = new Repository.LiteDB.PeerRepository("bitpoker.db");
+
             //peersRepo.Add(new Peer() { IPAddress = "https://www.bitpoker.io/api/", UserAgent = "Website" });
 
 
@@ -128,16 +130,19 @@ namespace BitPoker
             Console.WriteLine("***");
 
             Console.WriteLine("1. Add me to seed api");
-            Console.WriteLine("2. List peers (local db)");
+            Console.WriteLine("2. List know peers (local db)");
             Console.WriteLine("21. Add know peer (local db)");
             Console.WriteLine("22. Reload all peers");
+
+            Console.WriteLine("3. Add table");
             Console.WriteLine("4. List tables (local db)");
             Console.WriteLine("41. Get tables from know peers");
             Console.WriteLine("42. Refresh all peer's tables");
-            Console.WriteLine("3. Add table");
+            
             Console.WriteLine("6. Join table");
             Console.WriteLine("7. Buy into table");
             Console.WriteLine("8. Add a peer");
+            Console.WriteLine("B. Show balance for {0}", carol);
 
             //Console.WriteLine("Get Hand");
             //Console.WriteLine("6. Fold / Muck");
@@ -157,7 +162,7 @@ namespace BitPoker
                         AddPlayer();
                         break;
                     case "2":
-                        Console.WriteLine("### Dumping all peers in local database:");
+                        Console.WriteLine("### {0} Dumping all peers in local database:", DateTime.Now);
                         foreach (Peer peer in peersRepo.All())
                         {
                             Console.WriteLine(peer);
@@ -194,7 +199,7 @@ namespace BitPoker
                         {
                             Console.WriteLine("Getting tabls for {0}", peer);
 
-                            IEnumerable<Models.Contracts.ITable> tables = tableClient.GetTablesAsync(peer.IPAddress).Result;
+                            IEnumerable<Models.Contracts.ITable> tables = tableClient.GetTablesAsync(peer.NetworkAddress).Result;
 
                             foreach (Models.Contracts.Table table in tables)
                             {
@@ -480,7 +485,8 @@ namespace BitPoker
         /// <summary>
         /// Adds a table to mock api under carols address
         /// </summary>
-        private static void AddTable(UInt64 sb, UInt64 bb)
+        [Obsolete]
+        private static String AddTableToAPI(UInt64 sb, UInt64 bb)
         {
             Console.WriteLine("Adds a table to mock api under carols address");
 
@@ -507,7 +513,8 @@ namespace BitPoker
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
             String url = String.Format("{0}tables", API_URL);
 
-            Post(requestContent, url);
+            String response = Post(requestContent, url);
+            return response
         }
 
         private static String Post(StringContent requestContent, string url)
