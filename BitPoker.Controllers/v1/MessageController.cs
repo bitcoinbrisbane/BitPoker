@@ -12,12 +12,13 @@ namespace BitPoker.Controllers.v1
 
         public Repository.ITableRepository TableRepo { get; set; }
 
-        public String privateKey;
+        internal String _privateKey;
 
         public Models.Contracts.IPokerContract Contract { get; set; }
 
-        public MessageController()
+        public MessageController(String privateKey)
         {
+            _privateKey = privateKey;
         }
 
         public Models.IResponse Get(Models.IRequest request)
@@ -29,9 +30,16 @@ namespace BitPoker.Controllers.v1
 
             switch (request.Method.ToUpper())
             {
-                //case "GetPlayers":
+                case "GetInfo":
+                    base.Log = String.Format("Getinfo called by {0}", request.Id);
+                    response.Result = new Models.Peer()
+                    {
+                        LastSeen = DateTime.UtcNow
+                    };
+                    break;
+                case "GetPeers":
                 //    response.Result = PlayerRepo.All();
-                //    break;
+                    break;
                 //case "GetTables":
                 //    response.Result = TableRepo.All();
                 //    break;
@@ -124,7 +132,6 @@ namespace BitPoker.Controllers.v1
             //        //var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
             //    }
             //}
-
 
             //BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(request.BitcoinAddress);
             //bool verified = address.VerifyMessage(request.ToString(), request.Signature);

@@ -134,7 +134,7 @@ namespace BitPoker
             Console.WriteLine("21. Add know peer (local db)");
             Console.WriteLine("22. Reload all peers");
 
-            Console.WriteLine("3. Add table");
+            Console.WriteLine("3. Add new table");
             Console.WriteLine("4. List tables (local db)");
             Console.WriteLine("41. Get tables from know peers");
             Console.WriteLine("42. Refresh all peer's tables");
@@ -185,7 +185,7 @@ namespace BitPoker
 
                         Console.WriteLine("Big blind? {0}", sb * 2);
 
-                        AddTable(sb, sb * 2);
+                        //AddTable(sb, sb * 2);
                         break;
                     case "4":
                         Console.WriteLine("### Dumping all tables in local database:");
@@ -222,22 +222,21 @@ namespace BitPoker
                             TimeStamp = DateTime.UtcNow
                         };
 
-                        //todo:
-                        var xxx = tableClient.Join("", joinTableRequest).Result;
-
                         foreach (Peer tablePeer in tableToJoin.Peers)
                         {
                             Console.WriteLine("Posting joing request to {0}", tablePeer);
+                            var joinTableResponse = tableClient.Join(tablePeer.NetworkAddress, joinTableRequest).Result;
+
+                            Console.WriteLine(joinTableResponse);
                         }
 
-                        Console.WriteLine("Peer added");
+                        //Console.WriteLine("{0} has been added to table {1}");
                         break;
                     case "7":
                         Console.Write("What is the table id?");
                         Guid tableToBuyIn = new Guid(Console.ReadLine());
 
                         Console.Write("Buy in amount in satoshi?");
-
 
                         UInt64 buyInAmount = Convert.ToUInt64(Console.ReadLine());
                         tableClient.BuyIn("", null);

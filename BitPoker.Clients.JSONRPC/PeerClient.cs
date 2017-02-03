@@ -15,7 +15,6 @@ namespace BitPoker.Clients.JSONRPC
 
         public PeerClient(Int16 version = 1)
         {
-
             _version = version;
         }
 
