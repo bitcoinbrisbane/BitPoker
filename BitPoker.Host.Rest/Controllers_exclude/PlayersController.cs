@@ -1,6 +1,6 @@
 ﻿using System.Web.Http.Cors;
 
-namespace BitPoker.Controllers
+namespace BitPoker.Host.Rest.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PlayersController : BitPoker.Controllers.Rest.PlayersController

@@ -22,11 +22,13 @@ namespace BitPoker.Controllers.Rest
 
         public IEnumerable<Models.Contracts.Table> Get()
         {
+            AddLog("Get called");
             return TableRepo.All();
         }
 
         public Models.Contracts.Table Get(Guid id)
         {
+            AddLog("Get called");
             return TableRepo.Find(id);
         }
 
@@ -39,7 +41,8 @@ namespace BitPoker.Controllers.Rest
                 case "AddTableRequest":
                     Models.Messages.AddTableRequest addTableRequest = request.Params as Models.Messages.AddTableRequest;
 
-                    if (!base.Verify(addTableRequest.BitcoinAddress, addTableRequest.ToString(), request.Signature))
+                    Boolean valid = true; //!base.Verify(addTableRequest.BitcoinAddress, addTableRequest.ToString(), request.Signature
+                    if (!valid)
                     {
                         //throw new Exceptions.SignatureNotValidException();
                         throw new Exception();

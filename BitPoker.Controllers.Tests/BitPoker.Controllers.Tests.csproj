@@ -71,10 +71,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BitPoker.Controllers\BitPoker.Controllers.csproj">
-      <Project>{20bbd36d-d43e-41f9-b980-e98257358935}</Project>
-      <Name>BitPoker.Controllers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>

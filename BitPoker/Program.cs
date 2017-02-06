@@ -51,15 +51,6 @@ namespace BitPoker
 
         private static Peer me;
 
-        //private const String TABLE_ID = "";
-
-        //System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
-
-
-        //public static async Task MainAsync()
-        //{
-
-        //}
 
         /// <summary>
         /// Console for test code
@@ -67,14 +58,9 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-            Console.WriteLine("What port to run on? 8080 is default");
-            String port = Console.ReadLine().Trim();
+            Console.WriteLine("This is a console client for bitpoker, making REST or JSON RPC calls to the host");
 
-            if (String.IsNullOrEmpty(port))
-            {
-                port = "8080";
-            }
-
+            Int16 port = 8080; ///for rest
             String baseUrl = String.Format("http://localhost:{0}", port);
 
             me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App", IPAddress = baseUrl };
@@ -87,41 +73,6 @@ namespace BitPoker
 
             Clients.ITableClient tableClient = new Clients.JSONRPC.TableClient();
             Clients.IPeerClient peerClient = new Clients.JSONRPC.PeerClient(1);
-
-            Task.Factory.StartNew(() =>
-            {
-                using (WebApp.Start<StartUp>(url: baseUrl))
-                {
-                    Console.WriteLine("Node started in own thread");
-                    System.Threading.Thread.Sleep(-1);
-                }
-            });
-
-
-            //Task.Factory.StartNew(() =>
-            //{
-            //    TcpListener serverSocket = new TcpListener(8888);
-            //    TcpClient clientSocket = default(TcpClient);
-            //    int counter = 0;
-
-            //    serverSocket.Start();
-            //    Console.WriteLine(" >> " + "Server Started");
-
-            //    counter = 0;
-            //    while (true)
-            //    {
-            //        counter += 1;
-            //        clientSocket = serverSocket.AcceptTcpClient();
-            //        Console.WriteLine(" >> " + "Client No:" + Convert.ToString(counter) + " started!");
-            //        //handleClinet client = new handleClinet();
-            //        //client.startClient(clientSocket, Convert.ToString(counter));
-            //    }
-
-            //    //clientSocket.Close();
-            //    //serverSocket.Stop();
-            //    //Console.WriteLine(" >> " + "exit");
-            //});
-
 
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
@@ -416,7 +367,7 @@ namespace BitPoker
             };
 
             request.Params = message;
-            request.Signature = alice_secret.PrivateKey.SignMessage(JsonConvert.SerializeObject(request));
+            //request.Signature = alice_secret.PrivateKey.SignMessage(JsonConvert.SerializeObject(request));
 
             String json = JsonConvert.SerializeObject(request);
             StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");

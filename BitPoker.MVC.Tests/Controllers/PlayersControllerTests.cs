@@ -23,7 +23,7 @@ namespace BitPoker.MVC.Tests
             message.BitcoinAddress = alice.ToString();
             message.Player = new BitPoker.Models.TexasHoldemPlayer() { BitcoinAddress = alice.ToString(), IPAddress = "localhost" };
 
-            request.Signature = alice_secret.PrivateKey.SignMessage(request.Id.ToString());
+            //request.Signature = alice_secret.PrivateKey.SignMessage(request.Id.ToString());
             request.Params = message;
             MVC.Controllers.PlayersController controller = new BitPoker.MVC.Controllers.PlayersController();
             controller.Post(request);

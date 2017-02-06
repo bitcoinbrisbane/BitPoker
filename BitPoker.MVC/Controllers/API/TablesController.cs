@@ -42,8 +42,9 @@ namespace BitPoker.MVC.Controllers
             if (request.Method == "AddTableRequest")
             {
                 BitPoker.Models.Messages.AddTableRequest model = request.Params as BitPoker.Models.Messages.AddTableRequest;
+                Boolean valid = true; //base.Verify(model.BitcoinAddress, model.ToString(), request.Signature
 
-                if (!base.Verify(model.BitcoinAddress, model.ToString(), request.Signature))
+                if (!valid)
                 {
                     throw new Exceptions.SignatureNotValidException();
                 }

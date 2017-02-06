@@ -9,6 +9,11 @@ namespace BitPoker.Clients.Mocks
 {
     public class PeerClient : IPeerClient
     {
+        public async Task<Peer> GetPeerInfoAsync(string host)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<Peer>> GetPeersAsync(string host)
         {
             List<Peer> peers = new List<Peer>(1);

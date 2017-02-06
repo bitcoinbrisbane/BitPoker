@@ -99,10 +99,7 @@
     <Compile Include="BaseController.cs" />
     <Compile Include="IPlayersController.cs" />
     <Compile Include="ITablesController.cs" />
-    <Compile Include="Rest\PeersController.cs" />
-    <Compile Include="Rest\PlayersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rest\TablesController.cs" />
     <Compile Include="v1\MessageController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +126,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Rest\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

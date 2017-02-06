@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace BitPoker.Repository
 {
+    [Obsolete]
     public class MockPeerRepo : IPeerRepository
     {
         List<Peer> _peers = new List<Peer>();
@@ -13,6 +14,7 @@ namespace BitPoker.Repository
         {
             Peer alice = new Peer()
             {
+                UserAgent = "Mocks",
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),
                 IPAddress = "https://www.bitpoker.io/api/players/msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
@@ -21,6 +23,7 @@ namespace BitPoker.Repository
 
             Peer bob = new Peer()
             {
+                UserAgent = "Mocks",
                 BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
                 LastSeen = DateTime.UtcNow.AddSeconds(-1),
                 IPAddress = "https://www.bitpoker.io/api/players/mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",

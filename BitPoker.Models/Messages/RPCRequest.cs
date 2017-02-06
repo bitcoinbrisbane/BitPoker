@@ -8,7 +8,7 @@ namespace BitPoker.Models.Messages
     [DataContract]
     public class RPCRequest : IRequest
     {
-        [JsonProperty(PropertyName = "jsonRPC")]
+        [JsonProperty(PropertyName = "jsonrpc")]
         public String JsonRPC { get { return "2.0"; } }
 
         [DataMember]
@@ -23,7 +23,7 @@ namespace BitPoker.Models.Messages
         [JsonProperty(PropertyName = "params")]
         public Object Params { get; set; }
 
-        [DataMember]
-        public String Signature { get; set; }
+        //[DataMember]
+        //public String Signature { get; set; }
     }
 }

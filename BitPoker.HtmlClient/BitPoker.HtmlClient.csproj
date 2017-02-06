@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Hands.html" />
+    <Content Include="Peer.html" />
     <Content Include="js\jquery.jsonrpcclient.js" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Web.Http.Cors;
 
-namespace BitPoker.Controllers
+namespace BitPoker.Host.Rest.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TablesController : Rest.TablesController
     {
         public TablesController()
         {
-            base.TableRepo = new Repository.LiteDB.TableRepository("bitpoker.db");
+            base.TableRepo = new BitPoker.Repository.MockTableRepo(); //new Repository.LiteDB.TableRepository("bitpoker.db");
         }
     }
 }

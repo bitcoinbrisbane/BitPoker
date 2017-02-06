@@ -37,7 +37,11 @@ namespace BitPoker.Repository.LiteDB
 
         public Peer Find(String id)
         {
-            throw new NotImplementedException();
+            using (var db = new LiteDatabase(_filePath))
+            {
+                var peer = db.GetCollection<Peer>("peers").FindById(id);
+                return peer;
+            }
         }
 
         public void Update(Peer entity)
