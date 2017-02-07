@@ -172,7 +172,6 @@
     <Compile Include="Models\HandContainer.cs" />
     <Compile Include="Models\IAiPlayer.cs" />
     <Compile Include="Models\Logic.cs" />
-    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PlayerContainer.cs" />
     <Compile Include="Models\Rate.cs" />
     <Compile Include="Models\RateViewModel.cs" />
@@ -253,6 +252,10 @@
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.MVC.Models\BitPoker.MVC.Models.csproj">
+      <Project>{280e0971-ddcd-4fcf-beae-6841d16c3dfd}</Project>
+      <Name>BitPoker.MVC.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
       <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>

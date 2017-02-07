@@ -12,7 +12,7 @@ namespace BitPoker.MVC.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        [TestMethod]
+        [TestMethod, TestCategory("Home Controller")]
         public void Index()
         {
             // Arrange

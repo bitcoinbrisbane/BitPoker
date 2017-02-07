@@ -23,5 +23,10 @@ namespace BitPoker.Models
 		public Peer ()
 		{
 		}
-	}
+
+        public override string ToString()
+        {
+            return String.Format("User Agent {0}, IP Address {1}", UserAgent, IPAddress);
+        }
+    }
 }

@@ -189,8 +189,12 @@ cb19bc14bca61bee174e5d6591530ad72b3ab58e0c5a904baec5b5de85c65e88
 
 ## Sample messages
 ### Buy In
+```
+```
 
 ### Call
+```
+```
 
 ## Adding a Table Contract
 A client will define the table contract and store that locally.  They become the table starter and thus define the conditions of that game.  The parameters for a table are defined in the following schema.  Developers are encouraged to create their own algorithms, such as voting or anti-collusion.
@@ -801,3 +805,8 @@ The following colour coin asset will be sold to raise funds for the development 
 6. http://ms-brainwallet.org
 7. http://json-rpc.org/wiki/specification
 8. https://msdn.microsoft.com/en-us/library/bb756931.aspx?tduid=(fc4ef1dccc45eb37dfbbbf748821ac83)(256380)(2459594)(TnL5HPStwNw-fIrr3XMwfP4kdvb3oN5V_A)()
+9. http://www.nongnu.org/libtmcg/MentalPoker.pdf
+10. https://people.csail.mit.edu/rivest/ShamirRivestAdleman-MentalPoker.pdf
+11. http://www.nongnu.org/libtmcg/WEWoRC2005_proc.pdf
+12. http://www.cs.technion.ac.il/~ranjit/papers/poker.pdf
+

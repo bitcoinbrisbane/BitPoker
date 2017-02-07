@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BitPoker.Models.Messages
 {
@@ -8,6 +6,7 @@ namespace BitPoker.Models.Messages
     {
         public Guid TableId { get; set; }
 
+        [Obsolete]
         public IDeck Deck { get; set; }
 
         public DealRequest()

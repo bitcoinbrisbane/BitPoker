@@ -5,6 +5,8 @@ namespace BitPoker.Models.Messages
 {
 	public class ShuffleRequest : BaseRequest
 	{
+        public Guid HandId { get; set; }
+
 		public IEnumerable<String> Cards { get; set; }
 
         public ShuffleRequest()

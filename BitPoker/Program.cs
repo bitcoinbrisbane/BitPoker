@@ -42,7 +42,7 @@ namespace BitPoker
         private const String API_URL = "https://www.bitpoker.io/api/";
 
         private const String MOCK_HAND_ID = "398b5fe2-da27-4772-81ce-37fa615719b5";
-        private const String TABLE_ID = "";
+        //private const String TABLE_ID = "";
 
         //System.Net.Sockets.TcpClient clientSocket = new System.Net.Sockets.TcpClient();
 
@@ -58,7 +58,15 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-            String baseUrl = "http://localhost:8080";
+            Console.WriteLine("What port to run on? 8080 is default");
+            String port = Console.ReadLine().Trim();
+
+            if (String.IsNullOrEmpty(port))
+            {
+                port = "8080";
+            }
+
+            String baseUrl = String.Format("http://localhost:{0}", port);
 
             Players = new List<TexasHoldemPlayer>();
             Peers = new List<Peer>();
@@ -107,7 +115,11 @@ namespace BitPoker
             Console.WriteLine("2. List players");
             Console.WriteLine("3. Add table");
             Console.WriteLine("4. List tables");
-            Console.WriteLine("5. Buy in (Table ID {0})", TABLE_ID);
+            Console.WriteLine("5. Join table");
+            Console.WriteLine("6. Buy in to table");
+            Console.WriteLine("7. Add a peer");
+            Console.WriteLine("8. List peers");
+
             //Console.WriteLine("Get Hand");
             //Console.WriteLine("6. Fold / Muck");
             //Console.WriteLine("7. Call");
@@ -130,22 +142,43 @@ namespace BitPoker
                             GetPlayers(peer.IPAddress);
                         });
 
-                        foreach (Peer peer in Peers)
-                        {
-                            GetPlayers(peer.IPAddress);
-                        }
+                        //foreach (Peer peer in Peers)
+                        //{
+                        //    GetPlayers(peer.IPAddress);
+                        //}
                         break;
                     case "3":
-                        Console.WriteLine("Small blind?");
-                        Console.WriteLine("Big blind?");
+                        Console.WriteLine("Small blind? 1000");
+                        UInt64 sb = Convert.ToUInt64(Console.ReadLine().Trim());
 
-                        AddTable(1000, 2000);
+                        Console.WriteLine("Big blind? {0}", sb * 2);
+
+                        AddTable(sb, sb * 2);
                         break;
                     case "4":
-                        GetTables();
+                        IEnumerable<Models.Contracts.Table> tables = GetTables();
+
+                        foreach (Models.Contracts.Table table in tables)
+                        {
+                            Console.WriteLine("{0} {1} {2}", table.Id, table.SmallBlind, table.BigBlind);
+                        }
                         break;
-                    case "5":
-                        BuyIn(100000, new Guid("35bc5692-6781-4a79-a5d2-89752edd882e"));
+                    case "6":
+                        UInt64 amount = 10000;
+                        String tableId = "35bc5692-6781-4a79-a5d2-89752edd882e";
+                        BuyIn(amount, new Guid(tableId));
+                        break;
+                    case "7":
+                        Console.Write("What is the peers IP or DNS?");
+                        String address = Console.ReadLine();
+                        Peers.Add(new Peer() { IPAddress = address  });
+                        Console.WriteLine("Peer added");
+                        break;
+                    case "8":
+                        foreach (Peer peer in Peers)
+                        {
+                            Console.WriteLine(peer.ToString());
+                        }
                         break;
                     case "k":
                     case "K":
@@ -479,18 +512,15 @@ namespace BitPoker
             Post(requestContent, url);
         }
 
-        private static void GetTables()
+        private static IEnumerable<Models.Contracts.Table> GetTables()
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 Uri uri = new Uri(String.Format("{0}tables", API_URL));
                 String json = httpClient.GetStringAsync(uri).Result;
                 List<Models.Contracts.Table> response = JsonConvert.DeserializeObject<List<Models.Contracts.Table>>(json);
-                
-                foreach (Models.Contracts.Table table in response)
-                {
-                    Console.WriteLine("{0} {1} {2}", table.Id, table.SmallBlind, table.BigBlind);
-                }
+
+                return response;
             }
         }
 
@@ -498,13 +528,14 @@ namespace BitPoker
         {
             Models.Messages.BuyInRequest message = new Models.Messages.BuyInRequest();
             message.BitcoinAddress = carol.ToString();
-            message.Amount = amount;
+            //message.Amount = amount;
 
-            Models.IRequest request = new Models.Messages.RPCRequest()
+            IRequest request = new Models.Messages.RPCRequest()
             {
-                Method = "BuyInRequest"
+                Method = "BuyIn"
             };
 
+            //TODO: CREATE TX
             request.Params = message;
             //message.Signature = carol_secret.PrivateKey.SignMessage(message.ToString());
 
