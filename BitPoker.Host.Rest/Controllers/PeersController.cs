@@ -15,6 +15,8 @@ namespace BitPoker.Controllers.Rest
         {
             //PlayerRepo = new Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
             //PlayerRepo.Add(new Models.Peer() { IPAddress = "https://www.bitpoker.io/api/alice" });
+
+            PeerRepo = new Repository.MockPeerRepo();
         }
 
         public PeersController(Repository.IGenericRepository<Models.Peer> repo)

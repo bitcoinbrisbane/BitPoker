@@ -22,6 +22,12 @@ namespace BitPoker.Controllers
         public void AddLog(String message)
         {
             Console.WriteLine(message);
+
+            if (_logs == null)
+            {
+                _logs = new List<string>();
+            }
+
             _logs.Add(message);
         }
     }

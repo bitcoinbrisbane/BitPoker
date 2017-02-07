@@ -29,7 +29,7 @@ namespace BitPoker
 
         private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
         private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
-        private String carol_wif; // = "91rahqyxZb6R1MMq2rdYomfB8GWsLVqkBMHrUnaepxks73KgfaQ";
+        private const String carol_wif = "91rahqyxZb6R1MMq2rdYomfB8GWsLVqkBMHrUnaepxks73KgfaQ";
 
         private static BitcoinSecret alice_secret = new BitcoinSecret(alice_wif, NBitcoin.Network.TestNet);
         private static BitcoinSecret bob_secret = new BitcoinSecret(bob_wif, NBitcoin.Network.TestNet);
@@ -463,7 +463,7 @@ namespace BitPoker
             String url = String.Format("{0}tables", API_URL);
 
             String response = Post(requestContent, url);
-            return response
+            return response;
         }
 
         private static String Post(StringContent requestContent, string url)

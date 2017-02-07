@@ -9,38 +9,62 @@
 <body>
     <h1>BitPoker.io Peer</h1>
 
-    <h2 id="peerAddress">Peer</h2>
+    <h2 id="peer">Peer</h2>
 
     <h2>Tables</h2>
 
-    <table id="table">
+    <table id="tables">
 
     </table>
 
     <input id="submit" type="button" name="submit" value="submit">
 
     <script>
-        //var address = $.url().param('address');
-        var uri = 'http://localhost/';
+        $(document).ready(function () {
 
-        //$(document).ready(function () {
-            // click on button submit
-            $("#submit").on('click', function () {
-                var url = 'http://localhost:3333';
+            var url = window.location.href;
+            var address = url().param('address');
+            var peerUri = 'http://localhost8080/peers/' + address;
+            var tableUri = 'http://localhost8080/tables/' + address;
 
-                var request = {};
-                request.method = "gettables";
-                request.id = "1";
-                request.jsonrpc = "2.0";
-                request.params = {};
+            // Send an AJAX request
+            $.getJSON(peerUri)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        //$('#peers').append({ text: formatItem(item) });
+                        $('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="/Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.IPAddress + '</td></tr>');
+                    });
+                });
 
-                $.post(url, JSON.stringify(request), displayResult, "json");
-            });
+            $.getJSON(tableUri)
+                .done(function (data) {
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        //$('#peers').append({ text: formatItem(item) });
+                        $('#tables').append('<tr><td>' + item.NetworkAddress + '</td><td><a href="/table.html?address=' + item.NetworkAddress + '">' + item.NetworkAddress + '</a></td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</td></tr>');
+                    });
+                });
+        });
 
-            function displayResult(response) {
-                alert(response);
-            };
-        //});
+        ////$(document).ready(function () {
+        //    // click on button submit
+        //    $("#submit").on('click', function () {
+        //        var url = 'http://localhost:3333';
+
+        //        var request = {};
+        //        request.method = "gettables";
+        //        request.id = "1";
+        //        request.jsonrpc = "2.0";
+        //        request.params = {};
+
+        //        $.post(url, JSON.stringify(request), displayResult, "json");
+        //    });
+
+        //    function displayResult(response) {
+        //        alert(response);
+        //    };
+        ////});
     </script>
 </body>
 </html>

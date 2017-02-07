@@ -8,7 +8,7 @@ namespace BitPoker.Repository
     [Obsolete]
     public class MockPeerRepo : IPeerRepository
     {
-        List<Peer> _peers = new List<Peer>();
+        private List<Peer> _peers;
 
         public MockPeerRepo()
         {
@@ -29,6 +29,8 @@ namespace BitPoker.Repository
                 NetworkAddress = "https://www.bitpoker.io/api/players/mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
+
+            _peers = new List<Peer>(2);
 
             _peers.Add(alice);
             _peers.Add(bob);
