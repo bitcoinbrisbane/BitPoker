@@ -7,12 +7,16 @@ Most blockchains are too slow for turned based games, but not all turns need to 
 
 Its hoped, that different clients developed in different programming languages will be built.
 
-### Notation & Convensions
+### Notation & Conventions
 
 Ids should be represented as GUIDs, and be in lower case
 All values represented in base16 (hex) should be lower case
-Bitcoin addresses are used the the player identifer
+Bitcoin addresses are used the the player identifier
+Time stamps are EPOCH
+Time durations are in seconds
+Amounts should be in smallest crytocurrency unit, such as Satoshis for Bitcoin
 
+### Enumerations 
 Deck is represented as an array of bytes.
 
 | Key  | Value | Decimal | Byte |
@@ -42,6 +46,11 @@ Suites
 
 \*Eg
 Ace of clubs = { 0x0D }
+
+Crypto Currencies
+BTC Bitcoin
+ETH Ethereum
+ETC Ethereum Classic
 
 ### Poker terminology
 - SB = Small Blind
@@ -223,7 +232,7 @@ A client will define the table contract and store that locally.  They become the
     </Blinds>
     <BuyIn>
       <Min>10000000</Min>
-      <Max<50000000</Max>
+      <Max>50000000</Max>
     </BuyIn>
     <Game>
       <Type>Texas Holdem</Type>
@@ -237,15 +246,47 @@ A client will define the table contract and store that locally.  They become the
 </Message>
 ```
 
+```
+{
+  table : {
+    id : "bf368921-346a-42d8-9cb8-621f9cad5e16"
+    encryption : "AES-256",
+    hash : "SHA-256",
+    currency : "BTC",
+    blinds : {
+      small : 100000,
+      big : 200000
+    },
+    buyIn : {
+      min : 10000000
+      max : 50000000
+    }
+
+  }
+}
+```
+
 ## Joining a Table
 Users send their intent to join a table by the JoinTable method.  This is analogous choosing a seat and sitting down at the table.  Once the table reaches the maximum amount of players, or the players vote to start the table, a multi signature address is created.  The required signatures are part of the agreed table contract.
 
+```
+{
+  method : "JoinTable",
+  version : 1
+  params {
+      publicKey : "04F48396AC675B97EEB54E57554827CC2B937C2DAE285A9198F9582B15C920D91309BC567858DC63357BCD5D24FD8C041CA55DE8BAE62C7315B0BA66FE5F96C20D",
+      minStart : 2
+  }
+}
+```
+
+Response
 ```
 
 ```
 
 ## Buying in
-A player buying in opens a lightning payment channel with the multi signature address of the table.  Players must add BTC within the range for the table contract (MinBuyIn, MaxBuyIn)
+All players buying in open a lightning payment channel with the multi signature address of the table.  Players must add BTC within the range for the table contract (MinBuyIn, MaxBuyIn)
 
 "Through this network of interconnected payment channels, Lightning provides a scalable, decentralised micropayments solution on top of the Bitcoin blockchain." [https://lightning.network/lightning-network-technical-summary.pdf]
 
