@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5758D35E-C5C6-4D21-B571-029B38E85F62}</ProjectGuid>
+    <ProjectGuid>{8BCBDE19-9C6B-44CE-AEE1-CC93EDE3E995}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BitPoker.Clients</RootNamespace>
-    <AssemblyName>BitPoker.Clients</AssemblyName>
+    <RootNamespace>BitPoker.Clients.ReST</RootNamespace>
+    <AssemblyName>BitPoker.Clients.ReST</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMessageClient.cs" />
-    <Compile Include="IPeerClient.cs" />
-    <Compile Include="ITableClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">
+      <Project>{5758d35e-c5c6-4d21-b571-029b38e85f62}</Project>
+      <Name>BitPoker.Clients</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>

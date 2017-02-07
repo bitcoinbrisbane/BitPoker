@@ -17,7 +17,7 @@ namespace BitPoker.Models
 
         public String PublicKey { get; set; }
 
-		public String IPAddress { get; set; }
+		public String NetworkAddress { get; set; }
 
 		public TimeSpan Latency { get; set; }
 
@@ -29,7 +29,7 @@ namespace BitPoker.Models
 
         public override string ToString()
         {
-            return String.Format("{0} User Agent {1}, IP Address {2}", BitcoinAddress, UserAgent, IPAddress);
+            return String.Format("{0} User Agent {1}, IP Address {2}", BitcoinAddress, UserAgent, NetworkAddress);
         }
     }
 }

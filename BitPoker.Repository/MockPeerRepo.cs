@@ -17,7 +17,7 @@ namespace BitPoker.Repository
                 UserAgent = "Mocks",
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 LastSeen = DateTime.UtcNow.AddSeconds(-5),
-                IPAddress = "https://www.bitpoker.io/api/players/msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
+                NetworkAddress = "https://www.bitpoker.io/api/players/msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
@@ -26,7 +26,7 @@ namespace BitPoker.Repository
                 UserAgent = "Mocks",
                 BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
                 LastSeen = DateTime.UtcNow.AddSeconds(-1),
-                IPAddress = "https://www.bitpoker.io/api/players/mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
+                NetworkAddress = "https://www.bitpoker.io/api/players/mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
                 Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
