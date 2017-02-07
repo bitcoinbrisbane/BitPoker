@@ -7,7 +7,7 @@ namespace BitPoker.Controllers
     {
         public PlayersController()
         {
-            base.PlayerRepo = new BitPoker.Repository.LiteDB.PlayerRepository("bitpoker.db");
+            base.PlayerRepo = new BitPoker.Repository.LiteDB.PlayerRepository<Models.TexasHoldemPlayer>("bitpoker.db");
         }
     }
 }

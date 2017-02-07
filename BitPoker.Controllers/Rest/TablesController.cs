@@ -33,23 +33,24 @@ namespace BitPoker.Controllers.Rest
         [HttpPost]
         public void Post(Models.IRequest request)
         {
-            if (request.Method == "AddTableRequest")
+            //if (request.Method == "AddTableRequest")
+            switch (request.Method)
             {
-                Models.Messages.AddTableRequest model = request.Params as Models.Messages.AddTableRequest;
+                case "AddTableRequest":
+                    Models.Messages.AddTableRequest addTableRequest = request.Params as Models.Messages.AddTableRequest;
 
-                if (!base.Verify(model.BitcoinAddress, model.ToString(), request.Signature))
-                {
-                    //throw new Exceptions.SignatureNotValidException();
-                    throw new Exception();
-                }
-                else
-                {
-                    TableRepo.Add(model.Table);
-                }
-            }
-            else
-            {
-                throw new NotImplementedException();
+                    if (!base.Verify(addTableRequest.BitcoinAddress, addTableRequest.ToString(), request.Signature))
+                    {
+                        //throw new Exceptions.SignatureNotValidException();
+                        throw new Exception();
+                    }
+                    else
+                    {
+                        TableRepo.Add(addTableRequest.Table);
+                    }
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
     }

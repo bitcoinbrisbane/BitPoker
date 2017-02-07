@@ -14,7 +14,6 @@ namespace BitPoker.Controllers.Rest
         public PlayersController()
         {
             PlayerRepo = new Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
-            PlayerRepo.Add(new Models.Peer() { IPAddress = "https://www.bitpoker.io/api/alice" });
         }
 
         public PlayersController(Repository.IPlayerRepository repo)
@@ -22,27 +21,15 @@ namespace BitPoker.Controllers.Rest
             PlayerRepo = repo;
         }
 
-        public IEnumerable<Models.Peer> Get()
+        public IEnumerable<Models.IPlayer> Get()
         {
             return PlayerRepo.All();
         }
 
-        public Models.Peer Get(String address)
+        public Models.IPlayer Get(String address)
         {
-            BitPoker.Models.Peer player = PlayerRepo.Find(address);
+            Models.IPlayer player = PlayerRepo.Find(address);
             return player;
-        }
-
-        /// <summary>
-        /// Poll for next action
-        /// </summary>
-        /// <param name="address"></param>
-        /// <param name="handId"></param>
-        /// <returns></returns>
-        public Models.Hand Get(String address, Guid handId)
-        {
-            Models.Peer player = PlayerRepo.Find(address);
-            return new Models.Hand();
         }
 
         [HttpPost]
@@ -58,7 +45,7 @@ namespace BitPoker.Controllers.Rest
 
                 if (valid)
                 {
-                    PlayerRepo.Add(request.Player);
+                    //PlayerRepo.Add(request.Player);
                     return response;
                 }
                 else

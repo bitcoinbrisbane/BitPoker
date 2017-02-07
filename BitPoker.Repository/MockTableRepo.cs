@@ -16,8 +16,8 @@ namespace BitPoker.Repository
             //Table as per the readme
             Table mockHeadsUpTable = new Table(2, 2) { Id = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"), BigBlind = 10000, SmallBlind = 5000 };
 
-            Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", IPAddress = "https://www.bitpoker.io/api/alice" };
-            Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", IPAddress = "http://localhost:8080" };
+            Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", NetworkAddress = "https://www.bitpoker.io/api/alice" };
+            Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", NetworkAddress = "http://localhost:8080" };
             mockHeadsUpTable.Peers[0] = alice;
             mockHeadsUpTable.Peers[1] = bob;
 
@@ -54,8 +54,8 @@ namespace BitPoker.Repository
                 //Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", IsBigBlind = false, IsDealer = false, IsSmallBlind = true, Position = 1, IsTurnToAct = false, Stack = 1000000 };
                 //Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", IsBigBlind = true, IsDealer = false, IsSmallBlind = false, Position = 2, IsTurnToAct = false, Stack = 1000000 };
 
-                Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", IPAddress = "https://www.bitpoker.io/api/alice" };
-                Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", IPAddress = "http://localhost:8080" };
+                Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", NetworkAddress = "https://www.bitpoker.io/api/alice" };
+                Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", NetworkAddress = "http://localhost:8080" };
                 
                 //4bc7f305-aa16-450a-a3be-aad8fba7f425
                 Table table = new Table(2, 10) { Id = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363"), BigBlind = 10000, SmallBlind = 5000 };

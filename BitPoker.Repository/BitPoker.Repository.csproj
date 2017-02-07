@@ -52,11 +52,13 @@
     <Compile Include="IGenericRepository.cs" />
     <Compile Include="IHandRepository.cs" />
     <Compile Include="IMessagesRepository.cs" />
+    <Compile Include="IPeerRepository.cs" />
     <Compile Include="IPlayerRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ITableRepository.cs" />
     <Compile Include="MockHandRepo.cs" />
     <Compile Include="MockMessageRepo.cs" />
+    <Compile Include="MockPeerRepo.cs" />
     <Compile Include="MockPlayerRepo.cs" />
     <Compile Include="MockTableRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

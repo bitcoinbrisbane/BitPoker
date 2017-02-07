@@ -9,8 +9,8 @@ namespace BitPoker.Repository
 {
     public class MockHandRepo : IHandRepository
     {
-        private Peer alice;
-        private Peer bob;
+        private IPlayer alice;
+        private IPlayer bob;
 
         private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
         private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
@@ -27,27 +27,27 @@ namespace BitPoker.Repository
 
         public MockHandRepo()
         {
-            alice = new Peer()
+            alice = new TexasHoldemPlayer()
             {
                 BitcoinAddress = alice_address,
-                LastSeen = DateTime.UtcNow.AddSeconds(-5),
+                //LastSeen = DateTime.UtcNow.AddSeconds(-5),
                 IPAddress = "https://www.bitpoker.io/api/players/msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-                Latency = new TimeSpan(0, 0, 0, 0, 200)
+                //Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
-            bob = new Peer()
+            bob = new TexasHoldemPlayer()
             {
                 BitcoinAddress = bob_address,
-                LastSeen = DateTime.UtcNow.AddSeconds(-1),
+                //LastSeen = DateTime.UtcNow.AddSeconds(-1),
                 IPAddress = "https://www.bitpoker.io/api/players/mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo",
-                Latency = new TimeSpan(0, 0, 0, 0, 200)
+                //Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
             //Two mock hands
             _hands = new List<Hand>(3);
 
             //Add mocks
-            Peer[] players = new Peer[2];
+            IPlayer[] players = new TexasHoldemPlayer[2];
             players[0] = alice;
             players[1] = bob;
 
@@ -241,7 +241,7 @@ namespace BitPoker.Repository
             _hands.Add(hand);
 
             //Begin a simple heads up
-            players = new Peer[2];
+            players = new TexasHoldemPlayer[2];
             players[0] = alice;
 
             id = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516");
@@ -282,11 +282,11 @@ namespace BitPoker.Repository
             _hands.Add(newHand);
         }
 
-        public MockHandRepo(IPlayerRepository playerRepo)
-        {
-            alice = playerRepo.Find(alice_address);
-            bob = playerRepo.Find(bob_address);
-        }
+        //public MockHandRepo(IPlayerRepository playerRepo)
+        //{
+        //    alice = playerRepo.Find(alice_address);
+        //    bob = playerRepo.Find(bob_address);
+        //}
 
         public void Add(Hand entity)
         {

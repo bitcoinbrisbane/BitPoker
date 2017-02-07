@@ -12,12 +12,13 @@ namespace BitPoker.Controllers.v1
 
         public Repository.ITableRepository TableRepo { get; set; }
 
-        public String privateKey;
+        internal String _privateKey;
 
         public Models.Contracts.IPokerContract Contract { get; set; }
 
-        public MessageController()
+        public MessageController(String privateKey)
         {
+            _privateKey = privateKey;
         }
 
         public Models.IResponse Get(Models.IRequest request)
@@ -29,12 +30,19 @@ namespace BitPoker.Controllers.v1
 
             switch (request.Method.ToUpper())
             {
-                case "GetPlayers":
-                    response.Result = PlayerRepo.All();
+                case "GetInfo":
+                    base.Log = String.Format("Getinfo called by {0}", request.Id);
+                    response.Result = new Models.Peer()
+                    {
+                        LastSeen = DateTime.UtcNow
+                    };
                     break;
-                case "GetTables":
-                    response.Result = TableRepo.All();
+                case "GetPeers":
+                //    response.Result = PlayerRepo.All();
                     break;
+                //case "GetTables":
+                //    response.Result = TableRepo.All();
+                //    break;
                 case "GetHands":
                     throw new NotImplementedException();
                     //break;
@@ -124,7 +132,6 @@ namespace BitPoker.Controllers.v1
             //        //var scriptPubKey = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new[] { aliceKey, userKey });
             //    }
             //}
-
 
             //BitcoinPubKeyAddress address = new BitcoinPubKeyAddress(request.BitcoinAddress);
             //bool verified = address.VerifyMessage(request.ToString(), request.Signature);
@@ -233,16 +240,18 @@ namespace BitPoker.Controllers.v1
             Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
             var table = this.TableRepo.Find(request.TableId);
 
-            if (table != null)
+            if (table != null && table.Peers[request.Seat] == null)
             {
-                for (Int32 i = 0; i < table.MaxPlayers; i++)
-                {
-                    if (table.Peers[i] == null)
-                    {
-                        response.Seat = i;
-                        break;
-                    }
-                }
+                //for (Int32 i = 0; i < table.MaxPlayers; i++)
+                //{
+                //    if (table.Peers[i] == null)
+                //    {
+                //        response.Seat = i;
+                //        break;
+                //    }
+                //}
+
+                response.Seat = request.Seat;
 
                 return response;
             }
@@ -258,7 +267,7 @@ namespace BitPoker.Controllers.v1
 
             if (table != null)
             {
-                NBitcoin.Transaction tx = new NBitcoin.Transaction(request.TxID);
+                NBitcoin.Transaction tx = new NBitcoin.Transaction();
                 NBitcoin.TransactionBuilder builder = new NBitcoin.TransactionBuilder();
                 Boolean isValid = true; // builder.Verify(tx);
 

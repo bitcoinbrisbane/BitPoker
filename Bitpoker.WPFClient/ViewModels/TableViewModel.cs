@@ -42,7 +42,7 @@ namespace Bitpoker.WPFClient.ViewModels
             using (BitPoker.NetworkClient.Blockr client = new BitPoker.NetworkClient.Blockr())
             {
                 //Clients.Blockr client = new Clients.Blockr();
-                Decimal balance = await client.GetAddressBalanceAsync(request.Player.BitcoinAddress, 2);
+                Decimal balance = await client.GetAddressBalanceAsync(request.NewPlayer.BitcoinAddress, 2);
 
                 if (balance > 0)
                 {
