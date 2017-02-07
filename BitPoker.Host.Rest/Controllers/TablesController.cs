@@ -22,13 +22,13 @@ namespace BitPoker.Controllers.Rest
 
         public IEnumerable<Models.Contracts.Table> Get()
         {
-            AddLog("Get tabls");
+            AddLog("Get tables");
             return TableRepo.All();
         }
 
         public Models.Contracts.Table Get(Guid id)
         {
-            AddLog("Get called");
+            AddLog("Get table");
             return TableRepo.Find(id);
         }
 

@@ -19,23 +19,16 @@
 
     <input id="submit" type="button" name="submit" value="submit">
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
 
-            var url = window.location.href;
-            var address = url().param('address');
-            var peerUri = 'http://localhost8080/peers/' + address;
-            var tableUri = 'http://localhost8080/tables/' + address;
+            //var url = window.location.href;
+            //var params = url.substring(1).split('?');
+            //var keys = params.split('&');
+            var address = 'msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv';
 
-            // Send an AJAX request
-            $.getJSON(peerUri)
-                .done(function (data) {
-                    $.each(data, function (key, item) {
-                        // Add a list item for the product.
-                        //$('#peers').append({ text: formatItem(item) });
-                        $('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="/Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.IPAddress + '</td></tr>');
-                    });
-                });
+            //var peerUri = 'http://localhost:8080/peers/' + address;
+            var tableUri = 'http://localhost:8080/tables/'; //+ address;
 
             $.getJSON(tableUri)
                 .done(function (data) {
@@ -45,7 +38,27 @@
                         $('#tables').append('<tr><td>' + item.NetworkAddress + '</td><td><a href="/table.html?address=' + item.NetworkAddress + '">' + item.NetworkAddress + '</a></td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</td></tr>');
                     });
                 });
+
+
+
+            //function GetURLParameter(sParam)
+            //{
+            //    var sPageURL = window.location.search.substring(1);
+            //    var sURLVariables = sPageURL.split('&');
+
+            //    for (var i = 0; i < sURLVariables.length; i++)
+            //    {
+            //        var sParameterName = sURLVariables[i].split('=');
+
+            //        if (sParameterName[0] == sParam)
+            //        {
+            //            return sParameterName[1];
+            //        }
+            //    }
+            //}​
         });
+
+
 
         ////$(document).ready(function () {
         //    // click on button submit
