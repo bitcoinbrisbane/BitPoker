@@ -3,10 +3,37 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+
 </head>
 <body>
     <h1>Table ...</h1>
 
+    <p>Join</p>
 
+    <p>Buy in transaction</p>
+    <input name="buyInTx" />
+
+    <h2>Build a tx</h2>
+
+    <p id="demo">A Paragraph.</p>
+
+    <button type="button" onclick="randomAddress()">Try it</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.2.0-1/bitcoinjs-min.js"></script>
+    <script>
+        function myFunction() {
+           key = Bitcoin.ECKey();
+            document.getElementById("demo").innerHTML = key.toWIF();
+        }
+
+        function randomAddress() {
+            var key = Bitcoin.ECPair.makeRandom();
+            var PubKey = key.pub.getAddress().toString();
+            var PrivKey = key.toWIF();
+            // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
+            console.log("Public Key: " + PubKey);
+            console.log("Private Key: " + PrivKey);
+        }
+    </script>
 </body>
 </html>
