@@ -8,9 +8,9 @@ namespace BitPoker.Core.RestHost
     {
         private List<String> _logs;
 
-        public IEnumerable<String> Logs { get { return _logs; } }
+        internal IEnumerable<String> Logs { get { return _logs; } }
 
-        public Boolean Verify(String address, String message, String signature)
+        internal Boolean Verify(String address, String message, String signature)
         {
             NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
             var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
@@ -19,9 +19,9 @@ namespace BitPoker.Core.RestHost
             return verified;
         }
 
-        public void AddLog(String message)
+        internal void AddLog(String message)
         {
-            Console.WriteLine(message);
+            //Console.WriteLine(message);
 
             if (_logs == null)
             {

@@ -5,8 +5,7 @@ using System.Collections.Generic;
 
 namespace BitPoker.Core.RestHost.Controllers
 {
-    //[EnableCors(origins: "*", headers: "*", methods: "*")]
-    [EnableCors("AllowSpecificOrigin")]
+    [EnableCors("AllowSpecificOrigin"), Route("api/[controller]")]
     public class TablesController : BaseController, ITablesController
     {
         public Repository.ITableRepository TableRepo { get; set; }
@@ -16,17 +15,14 @@ namespace BitPoker.Core.RestHost.Controllers
             this.TableRepo = new Repository.MockTableRepo();
         }
 
-        public TablesController(Repository.ITableRepository repo)
-        {
-            this.TableRepo = repo;
-        }
-
+        [HttpGet]
         public IEnumerable<Models.Contracts.Table> Get()
         {
             AddLog("Get tables");
             return TableRepo.All();
         }
 
+        [HttpGet("{id}")]
         public Models.Contracts.Table Get(Guid id)
         {
             AddLog("Get table");

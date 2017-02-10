@@ -1,34 +1,28 @@
 ﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
 namespace BitPoker.Core.RestHost.Controllers
 {
-    //[EnableCors("origins: "*", headers: "*", methods: "*")]
-    [EnableCors("AllowSpecificOrigin")]
+    [EnableCors("AllowSpecificOrigin"), Route("api/[controller]")]
     public class PeersController : BaseController
     {
         public Repository.IGenericRepository<Models.Peer> PeerRepo { get; set; }
 
         public PeersController()
         {
-            //PlayerRepo = new Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
-            //PlayerRepo.Add(new Models.Peer() { IPAddress = "https://www.bitpoker.io/api/alice" });
-
             PeerRepo = new Repository.MockPeerRepo();
         }
 
-        public PeersController(Repository.IGenericRepository<Models.Peer> repo)
-        {
-            PeerRepo = repo;
-        }
-
+        [HttpGet]
         public IEnumerable<Models.Peer> Get()
         {
             AddLog("Get peers");
             return PeerRepo.All();
         }
 
+        [HttpGet("{address}")]
         public Models.Peer Get(String address)
         {
             AddLog("Get peer");

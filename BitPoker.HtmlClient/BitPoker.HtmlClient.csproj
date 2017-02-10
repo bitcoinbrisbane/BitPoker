@@ -16,11 +16,12 @@
     <RootNamespace>BitPoker.HtmlClient</RootNamespace>
     <AssemblyName>BitPoker.HtmlClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIIS>true</UseIIS>
     <UseIISExpress>false</UseIISExpress>
-    <IISExpressSSLPort />
+    <!--<IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressUseClassicPipelineMode />-->
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
