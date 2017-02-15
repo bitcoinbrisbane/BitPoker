@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BitPoker.Core.RestHost.Controllers
+namespace BitPoker.Net.RestHost.Controllers
 {
     [EnableCors("AllowSpecificOrigin"), Route("api/[controller]")]
     public class TablesController : BaseController, ITablesController

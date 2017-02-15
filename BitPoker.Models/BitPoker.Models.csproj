@@ -55,6 +55,7 @@
     <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IResponse.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Messages\ActionMessageResponse.cs" />
     <Compile Include="Messages\AddPeerRequest.cs" />
     <Compile Include="Messages\AddPlayerRequest.cs" />

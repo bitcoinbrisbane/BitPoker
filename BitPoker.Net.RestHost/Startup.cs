@@ -28,6 +28,7 @@ namespace BitPoker.Core.RestHost
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddCors();
             services.AddMvc();
 
             services.AddCors(options =>

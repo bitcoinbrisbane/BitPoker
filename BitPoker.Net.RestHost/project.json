@@ -11,7 +11,7 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Microsoft.NETCore.App": "1.1.0"
+    "NBitcoin": "3.0.2.3"
   },
 
   "tools": {
@@ -19,23 +19,27 @@
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "dotnet5.6",
-        "portable-net45+win8"
-      ]
+    "net461": {
+      "dependencies": {
+        "BitPoker.Models": {
+          "target": "project"
+        },
+        "BitPoker.Repository": {
+          "target": "project"
+        },
+        "BitPoker.Repository.LiteDB": {
+          "target": "project"
+        },
+        "BitPoker.Repository.Mocks": {
+          "target": "project"
+        }
+      }
     }
   },
 
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
-  },
-
-  "runtimeOptions": {
-    "configProperties": {
-      "System.GC.Server": true
-    }
   },
 
   "publishOptions": {

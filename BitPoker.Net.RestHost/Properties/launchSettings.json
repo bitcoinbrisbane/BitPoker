@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:10399/",
+      "applicationUrl": "http://localhost:1230/",
       "sslPort": 0
     }
   },
@@ -19,7 +19,7 @@
     "BitPoker.Core.RestHost": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5000/api/values",
+      "launchUrl": "http://localhost:5000/api/peers",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

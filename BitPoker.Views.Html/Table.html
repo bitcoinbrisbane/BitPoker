@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <h1>Table ...</h1>
+
+    <h2>Last Actions</h2>
+
+    <table id="actions"></table>
+
+    <h2>Hand History</h2>
+
+    <table id="history"></table>
+
+    <p>Join</p>
+    <button type="button" onclick="join()">Join Table</button>
+
+    <p>Buy in transaction</p>
+    <input name="buyInTx" />
+    <button type="button" onclick="buyIn()">Buy In</button>
+
+    <h2>Build a tx</h2>
+
+    <p id="key"></p>
+
+    <button type="button" onclick="randomAddress()">Random</button>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.2.0-1/bitcoinjs-min.js"></script>
+    
+    <script>
+        function createKey() {
+            key = Bitcoin.ECKey();
+            document.getElementById("key").innerHTML = key.toWIF();
+        }
+
+        function randomAddress() {
+            var key = Bitcoin.ECPair.makeRandom();
+            var PubKey = key.pub.getAddress().toString();
+            var PrivKey = key.toWIF();
+            // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
+            console.log("Public Key: " + PubKey);
+            console.log("Private Key: " + PrivKey);
+        }
+
+        function join() {
+
+            var request = {
+                Seat: 1
+            };
+
+            $.post("http://localhost:5000/api/tables/join", request)
+              .done(function (data) {
+                  alert("Data Loaded: " + data);
+              });
+        }
+
+        function buyIn() {
+
+        }
+    </script>
+</body>
+</html>

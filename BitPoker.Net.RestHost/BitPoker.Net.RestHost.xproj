@@ -6,8 +6,8 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>e39a2f9a-c1d3-4f10-bb4f-9af9874e5a03</ProjectGuid>
-    <RootNamespace>BitPoker.Core.RestHost</RootNamespace>
+    <ProjectGuid>4b541b42-7ed1-45e1-a8f6-e828aa2f6f4b</ProjectGuid>
+    <RootNamespace>BitPoker.Net.RestHost</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -15,5 +15,11 @@
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj" />
+    <ProjectReference Include="..\BitPoker.Repository.LiteDB\BitPoker.Repository.LiteDB.csproj" />
+    <ProjectReference Include="..\BitPoker.Repository.Mocks\BitPoker.Repository.Mocks.csproj" />
+    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet.Web\Microsoft.DotNet.Web.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

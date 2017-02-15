@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Linq;
 
-namespace BitPoker.Controllers.v1
+namespace BitPoker.Host.JsonRPC
 {
     public class MessageController : BaseController
     {

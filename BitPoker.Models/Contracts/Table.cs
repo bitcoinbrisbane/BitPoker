@@ -8,6 +8,9 @@ namespace BitPoker.Models.Contracts
     /// </summary>
 	public class Table : NoLimitTexasHoldem, IPokerContract, ITable
 	{
+        /// <summary>
+        /// Should this be an address?
+        /// </summary>
         public Guid Id { get; set; }
 
         public String HashAlgorithm { get; set; }

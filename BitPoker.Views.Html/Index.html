@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     
     <script>
-        var uri = 'http://localhost:8080/peers';
+        var uri = 'http://localhost:5000/api/peers';
 
         $(document).ready(function () {
           // Send an AJAX request
@@ -24,7 +24,7 @@
                   $.each(data, function (key, item) {
                       // Add a list item for the product.
                       //$('#peers').append({ text: formatItem(item) });
-                      $('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="/Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.IPAddress + '</td></tr>');
+                      $('#peers').append('<tr><td>' + item.userAgent + '</td><td><a href="Peer.html?address=' + item.bitcoinAddress + '">' + item.bitcoinAddress + '</a></td><td>' + item.networkAddress + '</td></tr>');
                   });
               });
         });

@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAddAndReadRepository.cs" />
+    <Compile Include="IReadOnlyRepository.cs" />
     <Compile Include="IGenericRepository.cs" />
     <Compile Include="IHandRepository.cs" />
     <Compile Include="IMessagesRepository.cs" />

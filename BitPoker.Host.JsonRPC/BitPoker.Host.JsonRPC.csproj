@@ -51,12 +51,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
+      <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
+      <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.LiteDB\BitPoker.Repository.LiteDB.csproj">
+      <Project>{9d248950-d9e5-43ec-8eef-cc9d350bae38}</Project>
+      <Name>BitPoker.Repository.LiteDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
+      <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>
+      <Name>BitPoker.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

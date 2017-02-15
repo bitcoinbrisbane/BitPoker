@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "NBitcoin": "3.0.2.4",
+    "NETStandard.Library": "1.6.1",
+    "xunit.core": "2.2.0-rc2-build3523"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

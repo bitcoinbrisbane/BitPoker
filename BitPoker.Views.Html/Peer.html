@@ -21,21 +21,16 @@
             //var url = window.location.href;
             //var params = url.substring(1).split('?');
             //var keys = params.split('&');
-            var address = 'msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv';
+            //var address = 'msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv';
 
-            //var peerUri = 'http://localhost:8080/peers/' + address;
-            var tableUri = 'http://localhost:8080/tables/'; //+ address;
+            var tableUri = 'http://localhost:5000/api/tables/'; //+ address;
 
             $.getJSON(tableUri)
                 .done(function (data) {
                     $.each(data, function (key, item) {
-                        // Add a list item for the product.
-                        //$('#peers').append({ text: formatItem(item) });
-                        $('#tables').append('<tr><td>' + item.NetworkAddress + '</td><td><a href="/table.html?address=' + item.NetworkAddress + '">' + item.NetworkAddress + '</a></td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</td></tr>');
+                        $('#tables').append('<tr><td>' + item.networkAddress + '</td><td><a href="table.html?address=' + item.id + '">' + item.id + '</a></td><td>' + item.smallBlind + '</td><td>' + item.bigBlind + '</td><td>Join</td></tr>');
                     });
                 });
-
-
 
             //function GetURLParameter(sParam)
             //{
