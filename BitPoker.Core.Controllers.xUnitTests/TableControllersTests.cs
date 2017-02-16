@@ -13,7 +13,8 @@ namespace BitPoker.Core.Controllers.xUnitTests
         [Fact]
         public void x_Should_Join_Table_In_Seat_2()
         {
-
+            var response = _controller.JoinTable(null);
+            Assert.NotNull(response);
         }
     }
 }
