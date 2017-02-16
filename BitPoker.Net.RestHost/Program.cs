@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 
-namespace BitPoker.Core.RestHost
+namespace BitPoker.Net.RestHost
 {
     public class Program
     {

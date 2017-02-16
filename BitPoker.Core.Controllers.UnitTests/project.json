@@ -2,14 +2,39 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "BitPoker.Net.RestHost": "1.0.0-*",
     "NBitcoin": "3.0.2.4",
     "NETStandard.Library": "1.6.1",
-    "xunit.core": "2.2.0-rc2-build3523"
+    "NUnit": "3.6.0",
+    "NUnit3TestAdapter": "3.7.0"
   },
 
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "net461": {
+      "dependencies": {
+        "BitPoker.Models": {
+          "target": "project"
+        }
+      }
     }
   }
 }
+
+//{
+//  "version": "1.0.0-*",
+//  "testRunner": "mstest",
+//  "dependencies": {
+//    "dotnet-test-mstest": "1.0.1-preview",
+//    "MSTest.TestFramework": "1.0.0-preview",
+//    "MyASP.NetCoreProject": "1.0.0-*"
+//  },
+//  "frameworks": {
+//    "net461": {
+//      "dependencies": {
+//        "MyClassLibrary": {
+//          "target": "project"
+//        }
+//      }
+//    }
+//  }
+//}

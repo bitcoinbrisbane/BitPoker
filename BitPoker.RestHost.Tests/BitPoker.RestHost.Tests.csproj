@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8BCBDE19-9C6B-44CE-AEE1-CC93EDE3E995}</ProjectGuid>
+    <ProjectGuid>{BD7D8468-393F-4CD5-9F72-7710B583A527}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BitPoker.Clients.ReST</RootNamespace>
-    <AssemblyName>BitPoker.Clients.ReST</AssemblyName>
+    <RootNamespace>BitPoker.RestHost.Tests</RootNamespace>
+    <AssemblyName>BitPoker.RestHost.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,16 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">
-      <Project>{5758d35e-c5c6-4d21-b571-029b38e85f62}</Project>
-      <Name>BitPoker.Clients</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
-      <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
-      <Name>BitPoker.Models</Name>
+    <ProjectReference Include="..\BitPoker.Net.RestHost\BitPoker.Net.RestHost.xproj">
+      <Project>{4b541b42-7ed1-45e1-a8f6-e828aa2f6f4b}</Project>
+      <Name>BitPoker.Net.RestHost</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

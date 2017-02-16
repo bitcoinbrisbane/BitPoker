@@ -1,23 +1,24 @@
 ﻿using NBitcoin;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace BitPoker.Core.Controllers.UnitTests
 {
+    [TestFixture]
     public class TableControllerTests
     {
-        //private BitPoker.Core.Controllers.
+        private BitPoker.Net.RestHost.Controllers.TablesController _controller;
 
-        [Fact]
+        [Test, Category("Table Controller")]
         public void Should_Join_Table_In_Seat_2()
         {
             //private key 93GnRYsUXD4FPCiV46n8vqKvwHSZQgjnyuBvhNtqRvq3Ac26kVc
 
-            //Guid tableId = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363");
-            //_controller.TableRepo = new Repository.MockTableRepo();
+            Guid tableId = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363");
+            _controller.TableRepo = new Repository.MockTableRepo();
 
             //request.Method = "JoinTable";
             //request.Params = new Models.Messages.JoinTableRequest()
@@ -28,10 +29,10 @@ namespace BitPoker.Core.Controllers.UnitTests
             //    Seat = 2,
             //    Version = 1
             //};
+            var request = new BitPoker.Models.Messages.JoinTableRequest();
+            var response = _controller.JoinTable(request);
 
-            //var response = _controller.Post(request);
-
-            //Assert.IsNotNull(response);
+            Assert.IsNotNull(response);
             //Assert.IsNull(response.Error);
             //Assert.AreEqual(response.Id.ToString(), REQUEST_ID);
 
@@ -39,7 +40,7 @@ namespace BitPoker.Core.Controllers.UnitTests
             //Assert.AreEqual(2, result.Seat);
         }
 
-        [Fact]
+        [Test]
         public void Should_Join_Table_In_First_Empty_Seat()
         {
             //private key 91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf
@@ -69,13 +70,13 @@ namespace BitPoker.Core.Controllers.UnitTests
             //Assert.AreEqual(1, tableResponse.Seat);
         }
 
-        [Fact]
+        [Test]
         public void Should_Not_Join_Full_Table()
         {
 
         }
 
-        [Fact]
+        [Test]
         public void Should_Buy_In_To_Joined_Table()
         {
             BitcoinSecret secret = new BitcoinSecret("91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf", Network.TestNet);
@@ -126,25 +127,25 @@ namespace BitPoker.Core.Controllers.UnitTests
             //Assert.IsNotNull(buyInResponse);
         }
 
-        [Fact]
+        [Test]
         public void Should_Not_Buy_In_Under_The_Min()
         {
 
         }
 
-        [Fact]
+        [Test]
         public void Should_Not_Buy_In_Over_The_Max()
         {
 
         }
 
-        [Fact]
+        [Test]
         public void Should_Not_Buy_In_With_Unconfirmed_UTXo()
         {
 
         }
 
-        [Fact]
+        [Test]
         public void Should_Not_Buy_In_With_Invalid_Tx()
         {
 

@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BitPoker.Models.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PeerTests
     {
-        [TestMethod]
+        [Test]
         public void Should_Get_Peer_As_String()
         {
             Models.Peer peer = new Peer()
