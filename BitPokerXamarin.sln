@@ -50,7 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1035EA35
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mocks", "Mocks", "{05A8A570-BC65-443A-9BC9-DCF8AD4EE249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Owin.RestHost", "BitPoker.Core.RestHost\BitPoker.Owin.RestHost\BitPoker.Owin.RestHost.csproj", "{4A73EA12-64AE-40CC-BC6F-E55F893FE5DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Owin.RestHost", "BitPoker.Owin.RestHost\BitPoker.Owin.RestHost.csproj", "{4A73EA12-64AE-40CC-BC6F-E55F893FE5DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Console", "BitPoker.Console\BitPoker.Console.csproj", "{0DC60958-1BE6-4252-AA1E-69BE7F7A3300}"
 EndProject
