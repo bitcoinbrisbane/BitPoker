@@ -54,6 +54,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Owin.RestHost", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Console", "BitPoker.Console\BitPoker.Console.csproj", "{0DC60958-1BE6-4252-AA1E-69BE7F7A3300}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Controllers.Rest", "BitPoker.Controllers.Rest\BitPoker.Controllers.Rest.csproj", "{73E6416E-ABDE-4B20-9BCE-660678D3368C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -478,6 +480,46 @@ Global
 		{0DC60958-1BE6-4252-AA1E-69BE7F7A3300}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0DC60958-1BE6-4252-AA1E-69BE7F7A3300}.Release|x86.ActiveCfg = Release|Any CPU
 		{0DC60958-1BE6-4252-AA1E-69BE7F7A3300}.Release|x86.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Ad-Hoc|x86.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.AppStore|x86.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Debug|x86.Build.0 = Debug|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|iPhone.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|x86.ActiveCfg = Release|Any CPU
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -492,5 +534,6 @@ Global
 		{630CF422-2C7D-4CD5-990F-71D50C02C3C4} = {80BFA192-488D-44AC-9085-9D89F7F7A482}
 		{4A73EA12-64AE-40CC-BC6F-E55F893FE5DE} = {98C73B43-1F13-4C18-9124-CD35598509A2}
 		{0DC60958-1BE6-4252-AA1E-69BE7F7A3300} = {B06CFE45-5EF4-4535-B26D-0A58C3CE388F}
+		{73E6416E-ABDE-4B20-9BCE-660678D3368C} = {98C73B43-1F13-4C18-9124-CD35598509A2}
 	EndGlobalSection
 EndGlobal
