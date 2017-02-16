@@ -5,7 +5,8 @@
     "BitPoker.Net.RestHost": "1.0.0-*",
     "NBitcoin": "3.0.2.4",
     "NETStandard.Library": "1.6.1",
-    "xunit": "2.2.0-rc2-build3523"
+    "xunit": "2.2.0-rc2-build3523",
+    "xunit.runner.visualstudio": "2.1.0"
   },
 
   "frameworks": {
