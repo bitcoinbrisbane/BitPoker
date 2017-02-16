@@ -1,13 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
 namespace BitPoker.Models.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PlayerTests
     {
-        [TestMethod, TestCategory("RPC")]
+        [Test]
         public void Should_Get_Player_As_ToString()
         {
             Peer alice = new Peer()
@@ -23,7 +23,7 @@ namespace BitPoker.Models.Tests
             //Assert.AreEqual("{\"UserAgent\":null,\"BitcoinAddress\":\"msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv\",\"PublicKey\":null,\"IPAddress\":\"https://www.bitpoker.io/api/players/msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv\",\"Latency\":\"00:00:00.2000000\",\"LastSeen\":\"2016-11-08T10:44:20.9578656Z\"}", actual);
         }
 
-        [TestMethod, TestCategory("RPC")]
+        [Test]
         public void Should_Get_Player_As_Json()
         {
             Peer alice = new Peer()

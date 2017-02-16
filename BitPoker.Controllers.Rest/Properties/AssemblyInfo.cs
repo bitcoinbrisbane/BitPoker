@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BitPoker.Clients.ReST")]
+[assembly: AssemblyTitle("BitPoker.Controllers.Rest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BitPoker.Clients.ReST")]
+[assembly: AssemblyProduct("BitPoker.Controllers.Rest")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8bcbde19-9c6b-44ce-aee1-cc93ede3e995")]
+[assembly: Guid("73e6416e-abde-4b20-9bce-660678d3368c")]
 
 // Version information for an assembly consists of the following four values:
 //

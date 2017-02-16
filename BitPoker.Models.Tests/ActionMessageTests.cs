@@ -1,16 +1,16 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Xml.Serialization;
 using System.IO;
 using System.Xml;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
 namespace BitPoker.Models.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ActionMessageTests
     {
-        [TestMethod, TestCategory("Models")]
+        [Test]
         public void Should_Get_Small_Blind_Action_Message_As_Hash()
         {
             Messages.ActionMessage message = new Messages.ActionMessage()
@@ -32,7 +32,7 @@ namespace BitPoker.Models.Tests
             Assert.AreEqual("cb19bc14bca61bee174e5d6591530ad72b3ab58e0c5a904baec5b5de85c65e88", NBitcoin.DataEncoders.Encoders.Hex.EncodeData(actual));
         }
 
-        [TestMethod, TestCategory("RPC")]
+        [Test]
         public void Should_Get_Call_Action_Message_ToString()
         {
             Messages.ActionMessage message = new Messages.ActionMessage()
@@ -51,7 +51,7 @@ namespace BitPoker.Models.Tests
             Assert.AreEqual("{\"TableId\":\"bf368921-346a-42d8-9cb8-621f9cad5e16\",\"HandId\":\"398b5fe2-da27-4772-81ce-37fa615719b5\",\"Index\":2,\"Action\":\"CALL\",\"Amount\":5000000,\"Tx\":null,\"PreviousHash\":\"cb19bc14bca61bee174e5d6591530ad72b3ab58e0c5a904baec5b5de85c65e88\",\"HashAlgorithm\":\"SHA256\",\"Version\":1.0,\"BitcoinAddress\":\"msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv\",\"TimeStamp\":\"2016-08-17T00:00:00\"}", actual);
         }
 
-        [TestMethod]
+        [Test]
         public void Should_Sign_Action_Message()
         {
             String messageToSign = "{\"TableId\":\"bf368921-346a-42d8-9cb8-621f9cad5e16\",\"HandId\":\"398b5fe2-da27-4772-81ce-37fa615719b5\",\"Index\":2,\"Action\":\"CALL\",\"Amount\":5000000,\"Tx\":null,\"PreviousHash\":\"8ab9f91c002d8ccdbd8a49f7e028d27ca6ef01cf1fdaa4eca637868d8e4adf31\",\"HashAlgorithm\":\"SHA256\",\"Version\":1.0,\"BitcoinAddress\":\"msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv\",\"TimeStamp\":\"2016-08-17T00:00:00\"}";

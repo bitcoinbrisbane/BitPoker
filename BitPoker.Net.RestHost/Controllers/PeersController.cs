@@ -8,11 +8,11 @@ namespace BitPoker.Net.RestHost.Controllers
     [EnableCors("AllowSpecificOrigin"), Route("api/[controller]")]
     public class PeersController : BaseController
     {
-        public Repository.IGenericRepository<Models.Peer> PeerRepo { get; set; }
+        public BitPoker.Repository.IGenericRepository<Models.Peer> PeerRepo { get; set; }
 
         public PeersController()
         {
-            PeerRepo = new Repository.MockPeerRepo();
+            PeerRepo = new BitPoker.Repository.MockPeerRepo();
         }
 
         [HttpGet]

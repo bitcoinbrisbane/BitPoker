@@ -1,20 +1,20 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using BitPoker.Models.ExtensionMethods;
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
 using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace BitPoker.Models.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class HandTests
     {
         private Hand headsUpHand;
 
-        [TestInitialize]
+        [SetUp]
         public void Setup()
         {
             Repository.IHandRepository mockHandRepo = new Repository.MockHandRepo();
@@ -24,7 +24,7 @@ namespace BitPoker.Models.Tests
             headsUpHand = mockHandRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
         }
 
-        [TestMethod]
+        [Test]
         public void Should_Get_Small_Blind_Player_In_Heads_Up()
         {
             Repository.IHandRepository mockHandRepo = new Repository.MockHandRepo();
@@ -38,7 +38,7 @@ namespace BitPoker.Models.Tests
             Assert.IsTrue(bb.BitcoinAddress == "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo");
         }
 
-        [TestMethod, TestCategory("Repo")]
+        [Test]
         public void Should_Get_Big_Blind_Player_In_Heads_Up()
         {
             Repository.IHandRepository mockHandRepo = new Repository.MockHandRepo();
@@ -52,14 +52,14 @@ namespace BitPoker.Models.Tests
             Assert.IsTrue(bb.BitcoinAddress == "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo");
         }
 
-        [TestMethod, TestCategory("Models")]
+        [Test]
         public void Should_Get_Hand_ToString()
         {
             String actual = headsUpHand.ToString();
             Assert.AreEqual("2d59577d-0f42-4a11-ae14-78ccf5b4b2e000000000-0000-0000-0000-0000000000000", actual);
         }
 
-        [TestMethod]
+        [Test]
         public void Should_Get_History_As_XML()
         {
             XmlSerializer xsSubmit = new XmlSerializer(typeof(List<Messages.ActionMessage>));

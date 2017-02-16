@@ -9,14 +9,14 @@ namespace BitPoker.Net.RestHost.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class PlayersController : BaseController, IPlayersController
     {
-        public Repository.IPlayerRepository PlayerRepo { get; set; }
+        public BitPoker.Repository.IPlayerRepository PlayerRepo { get; set; }
 
         public PlayersController()
         {
-            PlayerRepo = new Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
+            PlayerRepo = new BitPoker.Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
         }
 
-        public PlayersController(Repository.IPlayerRepository repo)
+        public PlayersController(BitPoker.Repository.IPlayerRepository repo)
         {
             PlayerRepo = repo;
         }
