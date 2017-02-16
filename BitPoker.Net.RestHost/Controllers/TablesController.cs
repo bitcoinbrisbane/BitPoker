@@ -9,11 +9,11 @@ namespace BitPoker.Net.RestHost.Controllers
     [EnableCors("AllowSpecificOrigin"), Route("api/[controller]")]
     public class TablesController : BaseController, ITablesController
     {
-        public Repository.ITableRepository TableRepo { get; set; }
+        public BitPoker.Repository.ITableRepository TableRepo { get; set; }
 
         public TablesController()
         {
-            this.TableRepo = new Repository.MockTableRepo();
+            this.TableRepo = new BitPoker.Repository.MockTableRepo();
         }
 
         [HttpGet]
