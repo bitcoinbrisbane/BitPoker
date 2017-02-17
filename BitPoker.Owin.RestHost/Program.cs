@@ -16,7 +16,7 @@ namespace BitPoker.Owin.RestHost
 				// Create HttpCient and make a request to api/values 
 				HttpClient client = new HttpClient();
 
-				var response = client.GetAsync(baseAddress + "api/test").Result;
+				var response = client.GetAsync(baseAddress + "api/logs").Result;
 
 				Console.WriteLine(response);
 				Console.WriteLine(response.Content.ReadAsStringAsync().Result);

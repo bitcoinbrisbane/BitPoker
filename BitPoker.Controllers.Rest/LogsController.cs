@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 
-namespace BitPoker.Net.RestHost.Controllers
+namespace BitPoker.Controllers.Rest
 {
     [Route("api/[controller]")]
     public class LogsController : ApiController
