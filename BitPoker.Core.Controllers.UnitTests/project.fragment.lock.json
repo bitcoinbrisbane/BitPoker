@@ -26,7 +26,7 @@
         "bin/Debug/BitPoker.Repository.dll": {}
       },
       "runtime": {
-        "../packages/NBitcoin.3.0.0.48/lib/net45/NBitcoin.dll": {},
+        "../packages/NBitcoin.3.0.0.99/lib/net45/NBitcoin.dll": {},
         "../packages/Newtonsoft.Json.9.0.1/lib/net45/Newtonsoft.Json.dll": {},
         "bin/Debug/BitPoker.Repository.dll": {}
       },

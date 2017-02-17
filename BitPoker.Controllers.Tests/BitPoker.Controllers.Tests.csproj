@@ -73,9 +73,9 @@
     <Compile Include="TableControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BitPoker.Core.RestHost\BitPoker.Core.RestHost.xproj">
-      <Project>{4b541b42-7ed1-45e1-a8f6-e828aa2f6f4b}</Project>
-      <Name>BitPoker.Core.RestHost</Name>
+    <ProjectReference Include="..\BitPoker.Controllers.Rest\BitPoker.Controllers.Rest.csproj">
+      <Project>{73e6416e-abde-4b20-9bce-660678d3368c}</Project>
+      <Name>BitPoker.Controllers.Rest</Name>
     </ProjectReference>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>

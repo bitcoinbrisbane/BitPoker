@@ -12,7 +12,18 @@ namespace BitPoker.Owin.RestHost
 				name: "AllTests",
 				routeTemplate: "Tests",
 				defaults: new { controller = "Tests", action = "Get" });
-		}
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+
+            //config.Routes.MapHttpRoute(
+            //        name: "x",
+
+            //        routeTemplate: "api/{controller}/{id}",
+            //        defaults: new { id = RouteParameter.Optional });
+        }
 
 		public void Configuration(IAppBuilder appBuilder)
 		{

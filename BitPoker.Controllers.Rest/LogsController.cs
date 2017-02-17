@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace BitPoker.Controllers.Rest
 {
     [Route("api/[controller]")]
-    public class LogsController : ApiController
+    public class LogsController : BaseController
     {
         // GET: api/values
         [HttpGet]

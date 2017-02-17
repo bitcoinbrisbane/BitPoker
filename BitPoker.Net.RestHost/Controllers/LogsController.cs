@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BitPoker.Net.RestHost.Controllers
@@ -11,9 +9,9 @@ namespace BitPoker.Net.RestHost.Controllers
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Models.Log> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new List<Models.Log>();
         }
     }
 }

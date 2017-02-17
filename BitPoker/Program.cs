@@ -72,8 +72,8 @@ namespace BitPoker
             //peersRepo.Add(new Peer() { IPAddress = "https://www.bitpoker.io/api/", UserAgent = "Website" });
 
 
-            Clients.ITableClient tableClient = new Clients.JSONRPC.TableClient();
-            Clients.IPeerClient peerClient = new Clients.JSONRPC.PeerClient(1);
+            Clients.ITableClient tableClient = new Clients.Rest.Client();
+            Clients.IPeerClient peerClient = new Clients.Rest.Client();
 
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
