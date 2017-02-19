@@ -25,9 +25,9 @@ namespace BitPoker.Controllers.Rest
             return PlayerRepo.All();
         }
 
-        public Models.IPlayer Get(String address)
+        public Models.IPlayer Get(String id)
         {
-            Models.IPlayer player = PlayerRepo.Find(address);
+            Models.IPlayer player = PlayerRepo.Find(id);
             return player;
         }
 

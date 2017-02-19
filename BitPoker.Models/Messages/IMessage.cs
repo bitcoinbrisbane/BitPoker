@@ -7,6 +7,14 @@ namespace BitPoker.Models.Messages
     /// </summary>
     public interface IMessage
     {
+		Guid Id { get; }
+
         Decimal Version { get; }
+
+		String BitcoinAddress { get; }
+
+		String Hash { get; }
+
+		String Signature { get; }
     }
 }

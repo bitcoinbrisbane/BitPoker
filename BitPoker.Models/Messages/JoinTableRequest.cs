@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class JoinTableRequest : BaseRequest
+    public class JoinTableRequest : BaseRequest, IMessage
     {
         public Guid TableId { get; set; }
 

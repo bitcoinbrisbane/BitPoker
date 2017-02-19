@@ -19,5 +19,9 @@ namespace BitPoker.Models.Messages
 
         [DataMember]
         public DateTime TimeStamp { get; set; }
+
+		public String Hash { get; set; }
+
+		public String Signature { get; set; }
     }
 }

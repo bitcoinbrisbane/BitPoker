@@ -17,6 +17,52 @@ namespace BitPoker.Models.Contracts
 
         public String NetworkAddress { get; set; }
 
+		//public Int64 NLockTime { get; set; }
+
+		public String BitcoinAddress
+		{
+			get
+			{
+				if (this.Peers != null)
+				{
+					if (this.Peers[0] != null)
+					{
+						return this.Peers[0].BitcoinAddress;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
+
+		public String PublicKey
+		{
+			get
+			{
+				if (this.Peers != null)
+				{
+					if (this.Peers[0] != null)
+					{
+						return this.Peers[0].PublicKey;
+					}
+					else
+					{
+						return null;
+					}
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
+
         /// <summary>
         /// Array of players in their seats
         /// </summary>

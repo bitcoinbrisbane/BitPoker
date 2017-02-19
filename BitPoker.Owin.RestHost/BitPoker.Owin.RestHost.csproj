@@ -78,6 +78,7 @@
     <Compile Include="Controllers\TablesController.cs" />
     <Compile Include="Controllers\PeersController.cs" />
     <Compile Include="Repository\InMemoryLogRepository.cs" />
+    <Compile Include="Controllers\HandController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

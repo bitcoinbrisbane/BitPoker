@@ -85,6 +85,7 @@
     <Compile Include="Peer.cs" />
     <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
+    <Compile Include="Messages\BaseResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

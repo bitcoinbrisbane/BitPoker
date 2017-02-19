@@ -11,7 +11,7 @@ namespace BitPoker.Controllers.Tests
 
         private BitPoker.Controllers.Rest.TablesController _controller;
 
-        //[TestInitialize]
+        [SetUp]
         public void Setup()
         {
             _controller = new BitPoker.Controllers.Rest.TablesController();

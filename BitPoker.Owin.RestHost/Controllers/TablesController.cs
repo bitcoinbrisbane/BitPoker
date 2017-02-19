@@ -8,7 +8,7 @@ namespace BitPoker.Owin.RestHost
 	{
 		public TablesController()
 		{
-			//Inject repo
+			base.TableRepo = new BitPoker.Repository.LiteDB.TableRepository("bitpoker.db");
 		}
 	}
 }
