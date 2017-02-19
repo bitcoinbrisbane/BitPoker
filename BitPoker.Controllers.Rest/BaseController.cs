@@ -6,10 +6,6 @@ namespace BitPoker.Controllers.Rest
 {
     public abstract class BaseController : ApiController
     {
-        private List<String> _logs;
-
-        internal IEnumerable<String> Logs { get { return _logs; } }
-
         internal Boolean Verify(String address, String message, String signature)
         {
             //NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
@@ -24,12 +20,12 @@ namespace BitPoker.Controllers.Rest
         {
             //Console.WriteLine(message);
 
-            if (_logs == null)
-            {
-                _logs = new List<string>();
-            }
+            //if (_logs == null)
+            //{
+            //    _logs = new List<string>();
+            //}
 
-            _logs.Add(message);
+            //_logs.Add(message);
         }
     }
 }

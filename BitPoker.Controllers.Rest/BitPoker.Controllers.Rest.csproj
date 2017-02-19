@@ -72,7 +72,6 @@
     <Compile Include="PeersController.cs" />
     <Compile Include="PlayersController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\InMemoryLogRepository.cs" />
     <Compile Include="TablesController.cs" />
   </ItemGroup>
   <ItemGroup>

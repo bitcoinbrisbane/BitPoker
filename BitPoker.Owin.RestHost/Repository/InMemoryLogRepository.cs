@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BitPoker.Models;
 
-namespace BitPoker.Controllers.Rest.Repository
+namespace BitPoker.Owin.RestHost.Repository
 {
     public class InMemoryLogRepository : BitPoker.Repository.IAddAndReadRepository<Models.Log>
     {

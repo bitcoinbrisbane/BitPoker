@@ -7,11 +7,12 @@ namespace BitPoker.Controllers.Rest
     [Route("api/[controller]")]
     public class LogsController : BaseController
     {
-        // GET: api/values
+		public Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Models.Log> Get()
         {
-            return new string[] { "value1", "value2" };
+			return LogRepo.All();
         }
     }
 }
