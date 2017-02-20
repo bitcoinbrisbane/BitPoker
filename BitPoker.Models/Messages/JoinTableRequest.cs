@@ -19,5 +19,10 @@ namespace BitPoker.Models.Messages
         {
             base.Version = 1.0M;
         }
+
+		public override string ToString()
+		{
+			return string.Format("[JoinTableRequest: TableId={0}, NewPlayer={1}, PublicKey={2}, Seat={3}]", TableId, NewPlayer, PublicKey, Seat);
+		}
     }
 }

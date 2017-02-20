@@ -15,9 +15,8 @@ namespace BitPoker.Owin.RestHost
 			using (WebApp.Start<Startup>(url: baseAddress))
 			{
 				Console.WriteLine("Server running at {0} - press Enter to quit. ", baseAddress);
+				Console.ReadLine();
 			}
-
-			Console.ReadLine();
 		}
 	}
 }

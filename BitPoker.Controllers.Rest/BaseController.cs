@@ -8,6 +8,11 @@ namespace BitPoker.Controllers.Rest
     {
 		internal Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
 
+		/// <summary>
+		/// Users bitcoin address
+		/// </summary>
+		public String _localBitcoinAddress;
+
 		internal Boolean Verify(Models.Messages.IMessage message)
 		{
 			//NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
@@ -38,8 +43,8 @@ namespace BitPoker.Controllers.Rest
 
         internal void AddLog(String message)
         {
-			Guid id = Guid.NewGuid();
-			LogRepo.Add(new Models.Log() { Id = id, Message = message, TimeStamp = DateTime.UtcNow });
+			//Guid id = Guid.NewGuid();
+			//LogRepo.Add(new Models.Log() { Id = id, Message = message, TimeStamp = DateTime.UtcNow });
         }
     }
 }

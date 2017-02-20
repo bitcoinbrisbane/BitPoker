@@ -24,7 +24,7 @@ namespace BitPoker.Models.NTests
 		}
 
 		[Test()]
-		public void Should_Get_Table_Pulic_Key()
+		public void Should_Get_Table_Public_Key()
 		{
 			BitPoker.Models.Contracts.Table table = new Contracts.Table(2, 2);
 
@@ -35,6 +35,18 @@ namespace BitPoker.Models.NTests
 			};
 
 			Assert.AreEqual("mwKNGSDZmGdhJGybLADxVVHrPa3GRmeDjk", table.BitcoinAddress);
+		}
+
+		[Test()]
+		public void Should_Get_Buy_In_Request_To_String()
+		{
+			BitPoker.Models.Messages.BuyInRequest request = new BitPoker.Models.Messages.BuyInRequest()
+			{
+				BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ"
+			}
+
+			String expected = "BuyIn";
+			Assert.AreEqual(expected, request.ToString());
 		}
 	}
 }

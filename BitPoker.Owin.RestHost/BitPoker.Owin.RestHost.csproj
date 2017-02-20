@@ -79,6 +79,7 @@
     <Compile Include="Controllers\PeersController.cs" />
     <Compile Include="Repository\InMemoryLogRepository.cs" />
     <Compile Include="Controllers\HandController.cs" />
+    <Compile Include="Controllers\UserAgentController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

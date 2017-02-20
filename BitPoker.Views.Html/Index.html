@@ -6,7 +6,12 @@
 </head>
 <body>
     <h1>BitPoker.io Lobby</h1>
+	<h2 id="walletaddress"></h2>
+	<p>Balance</p>
+	<p id="walletbalance"></p>
 
+	<img src="http://tbtc.blockr.io/api/v1/address/Qr/n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ"></img>
+		
     <h2>Peers</h2>
 
     <table id="peers">
@@ -15,18 +20,24 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     
     <script>
-        var uri = 'http://localhost:5000/api/peers';
+        var peersUri = 'http://localhost:5000/api/peers';
+		var userAgentUri = 'http://localhost:5000/api/useragent';
 
         $(document).ready(function () {
           // Send an AJAX request
-          $.getJSON(uri)
-              .done(function (data) {
-                  $.each(data, function (key, item) {
-                      // Add a list item for the product.
-                      //$('#peers').append({ text: formatItem(item) });
-                      $('#peers').append('<tr><td>' + item.userAgent + '</td><td><a href="Peer.html?address=' + item.bitcoinAddress + '">' + item.bitcoinAddress + '</a></td><td>' + item.networkAddress + '</td></tr>');
-                  });
+          $.getJSON(peersUri)
+          .done(function (data) {
+              $.each(data, function (key, item) {
+                  $('#peers').append('<tr><td>' + item.userAgent + '</td><td><a href="Peer.html?address=' + item.bitcoinAddress + '">' + item.bitcoinAddress + '</a></td><td>' + item.networkAddress + '</td></tr>');
               });
+          });
+
+          $.getJSON(userAgentUri)
+          .done(function (data) {
+              $('#walletaddress').append(data.BitcoinAdress);
+          });
+
+			//http://tbtc.blockr.io/api/v1/address/balance/n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ
         });
     </script>
 </body>

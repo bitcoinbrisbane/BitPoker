@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace BitPoker.Owin.RestHost
 {
-	[EnableCors(origins: "*", headers: "*", methods: "*")]
+	[Route("api/[controller]")]
+	[EnableCors("*", "*", "*")]
 	public class PeersController : BitPoker.Controllers.Rest.PeersController
 	{
 		public PeersController()

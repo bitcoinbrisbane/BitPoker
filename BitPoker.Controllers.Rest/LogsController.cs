@@ -4,7 +4,6 @@ using System.Web.Http;
 
 namespace BitPoker.Controllers.Rest
 {
-    [Route("api/[controller]")]
     public class LogsController : BaseController
     {
 		public Repository.IReadOnlyRepository<Models.Log> LogRepo { get; set; }

@@ -8,8 +8,13 @@ namespace BitPoker.Controllers.Tests
     {
         private BitPoker.Models.IRequest request;
         private const String REQUEST_ID = "a66a8eb4-ea1f-42bb-b5f2-03456094b1f6";
+		private const String TABLE_ID = "d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363";
 
-        private BitPoker.Controllers.Rest.TablesController _controller;
+		private const String BITCOIN_ADDRESS_1 = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ";
+		private const String PRIVATE_KEY = "93GnRYsUXD4FPCiV46n8vqKvwHSZQgjnyuBvhNtqRvq3Ac26kVc";
+
+
+		private BitPoker.Controllers.Rest.TablesController _controller;
 
         [SetUp]
         public void Setup()
@@ -17,24 +22,25 @@ namespace BitPoker.Controllers.Tests
             _controller = new BitPoker.Controllers.Rest.TablesController();
         }
 
-        //[TestMethod, TestCategory("Join Table")]
 		[Test()]
         public void Should_Join_Table_In_Seat_2()
         {
-            //private key 93GnRYsUXD4FPCiV46n8vqKvwHSZQgjnyuBvhNtqRvq3Ac26kVc
 
-            Guid tableId = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363");
+            Guid tableId = new Guid(TABLE_ID);
             _controller.TableRepo = new Repository.MockTableRepo();
 
             Models.Messages.JoinTableRequest request = new Models.Messages.JoinTableRequest()
             {
                 Id = new Guid(REQUEST_ID),
-                BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ",
+                BitcoinAddress = BITCOIN_ADDRESS_1,
                 TableId = tableId,
                 TimeStamp = new DateTime(2016, 12, 12),
                 Seat = 2,
                 Version = 1
             };
+
+			NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(PRIVATE_KEY, NBitcoin.Network.TestNet);
+			request.Signature = secret.PrivateKey.SignMessage(request.ToString());
 
             Models.Messages.JoinTableResponse response = _controller.JoinTable(request);
 
@@ -42,7 +48,6 @@ namespace BitPoker.Controllers.Tests
             Assert.AreEqual(2, response.Seat);
         }
 
-        //[TestMethod, TestCategory("Join Table")]
 		[Test()]
         public void Should_Join_Table_In_First_Empty_Seat()
         {
@@ -70,14 +75,12 @@ namespace BitPoker.Controllers.Tests
             Assert.AreEqual(1, response.Seat);
         }
 
-        //[TestMethod, Ignore, TestCategory("Join Table")]
 		[Test()]
         public void Should_Not_Join_Full_Table()
         {
 
         }
 
-        //[TestMethod, TestCategory("Buy In")]
 		[Test()]
         public void Should_Buy_In_To_Joined_Table()
         {
@@ -110,16 +113,15 @@ namespace BitPoker.Controllers.Tests
 
             ////Debug.Assert(txBuilder.Verify(tx)); //check fully signed
 
-            //request.Method = "BuyIn";
-            //request.Params = new Models.Messages.BuyInRequest()
-            //{
-            //    BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
-            //    //TableId = tableId,
-            //    TimeStamp = new DateTime(2016, 12, 12) //,
-            //    //TxID = "af651c3435b5a11a8d7792dbc1d20a20a23fce0beb0b6931bf0ce407bfd28a0a"
-            //};
+            Models.Messages.BuyInRequest request = new Models.Messages.BuyInRequest()
+            {
+                BitcoinAddress = "mypckwJUPVMi8z1kdSCU46hUY9qVQSrZWt",
+				TableId = new Guid(TABLE_ID),
+                TimeStamp = new DateTime(2016, 12, 12) //,
+                //TxID = "af651c3435b5a11a8d7792dbc1d20a20a23fce0beb0b6931bf0ce407bfd28a0a"
+            };
 
-            //var response = _controller.Post(request);
+            var response = _controller.BuyIn(request);
 
             //Assert.IsNotNull(response);
             //Assert.IsNull(response.Error);
@@ -129,28 +131,24 @@ namespace BitPoker.Controllers.Tests
             //Assert.IsNotNull(buyInResponse);
         }
 
-        //[TestMethod, TestCategory("Buy In")]
 		[Test()]
         public void Should_Not_Buy_In_Under_The_Min()
         {
 
         }
 
-        //[TestMethod, Ignore, TestCategory("Buy In")]
 		[Test()]
         public void Should_Not_Buy_In_Over_The_Max()
         {
 
         }
 
-        //[TestMethod, Ignore, TestCategory("Buy In")]
 		[Test()]
         public void Should_Not_Buy_In_With_Unconfirmed_UTXo()
         {
 
         }
 
-        //[TestMethod, Ignore, TestCategory("Buy In")]
 		[Test()]
         public void Should_Not_Buy_In_With_Invalid_Tx()
         {

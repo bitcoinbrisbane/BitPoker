@@ -53,7 +53,16 @@ namespace BitPoker.Controllers.Rest
             //    default:
             //        throw new NotImplementedException();
             //}
+
+			throw new NotImplementedException();
         }
+
+		[Authorize]
+		[HttpPost]
+		public void AddTable(Models.Messages.AddTableRequest request)
+		{
+			TableRepo.Add(request.Table);
+		}
 
         [HttpPost, Route("join")]
         public Models.Messages.JoinTableResponse JoinTable(Models.Messages.JoinTableRequest request)

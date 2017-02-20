@@ -40,7 +40,6 @@
     <Compile Include="Blockr\AddressResponse.cs" />
     <Compile Include="Blockr\Data.cs" />
     <Compile Include="Blockr\Tx.cs" />
-    <Compile Include="BaseTable.cs" />
     <Compile Include="Contracts\IPokerContract.cs" />
     <Compile Include="Contracts\ITable.cs" />
     <Compile Include="Contracts\NoLimitTexasHoldem.cs" />
@@ -86,6 +85,8 @@
     <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
     <Compile Include="Messages\BaseResponse.cs" />
+    <Compile Include="Messages\UserAgentResponse.cs" />
+    <Compile Include="Contracts\BaseTable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
