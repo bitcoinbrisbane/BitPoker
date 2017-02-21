@@ -797,11 +797,12 @@ An REST API is located at https://www.bitpoker.io/api for users to develop clien
 ## Coloured coin crowd sale
 The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
 
-## Coloured coin chip (testnet)
-Used as in game currency mhAYHH9nuCzSwp47asR7Yo3wthsXgL9EhR
+## Coloured coin chip / open asset (testnet)
+Used as in game 'chip' currency: Issance address: mhAYHH9nuCzSwp47asR7Yo3wthsXgL9EhR
+Asset Address: bWs8RXSy8Ngt8p4DUdVXJCexXEK3hig9ZEK
 
-## Colour coin chip
-Used as in game currency 
+## Colour coin chip (mainnet)
+
 
 ## References
 1. https://lightning.network/lightning-network-paper.pdf
