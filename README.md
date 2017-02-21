@@ -816,4 +816,5 @@ Used as in game currency
 10. https://people.csail.mit.edu/rivest/ShamirRivestAdleman-MentalPoker.pdf
 11. http://www.nongnu.org/libtmcg/WEWoRC2005_proc.pdf
 12. http://www.cs.technion.ac.il/~ranjit/papers/poker.pdf
+13. A c# poker engine https://github.com/NikolayIT/TexasHoldemGameEngine
 
