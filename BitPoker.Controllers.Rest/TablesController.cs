@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace BitPoker.Controllers.Rest
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TablesController : BaseController, ITablesController
     {
         public BitPoker.Repository.ITableRepository TableRepo { get; set; }
@@ -28,33 +26,6 @@ namespace BitPoker.Controllers.Rest
         {
             AddLog("Get table");
             return TableRepo.Find(id);
-        }
-
-        [HttpPost]
-        public void Post(Models.IRequest request)
-        {
-            ////if (request.Method == "AddTableRequest")
-            //switch (request.Method)
-            //{
-            //    case "AddTableRequest":
-            //        Models.Messages.AddTableRequest addTableRequest = request.Params as Models.Messages.AddTableRequest;
-
-            //        Boolean valid = true; //!base.Verify(addTableRequest.BitcoinAddress, addTableRequest.ToString(), request.Signature
-            //        if (!valid)
-            //        {
-            //            //throw new Exceptions.SignatureNotValidException();
-            //            throw new Exception();
-            //        }
-            //        else
-            //        {
-            //            TableRepo.Add(addTableRequest.Table);
-            //        }
-            //        break;
-            //    default:
-            //        throw new NotImplementedException();
-            //}
-
-			throw new NotImplementedException();
         }
 
 		[Authorize]
@@ -129,7 +100,12 @@ namespace BitPoker.Controllers.Rest
 						//curl -d '{"pubkeys": ["02c716d071a76cbf0d29c29cacfec76e0ef8116b37389fb7a3e76d6d32cf59f4d3", "033ef4d5165637d99b673bcdbb7ead359cee6afd7aaf78d3da9d2392ee4102c8ea", "022b8934cc41e76cb4286b9f3ed57e2d27798395b04dd23711981a77dc216df8ca"], "script_type": "multisig-2-of-3"}' https://api.blockcypher.com/v1/btc/main/addr
 						NBitcoin.Script tableRedeemScript = NBitcoin.PayToMultiSigTemplate.Instance.GenerateScriptPubKey(2, new NBitcoin.PubKey[] { tablePubkey, requestPubKey });
 
-						return new Models.Messages.BuyInResponse() { Id = request.Id, TimeStamp = DateTime.UtcNow, RedeemScript = tableRedeemScript.ToString() };
+						return new Models.Messages.BuyInResponse() 
+						{ 
+							Id = request.Id, 
+							TimeStamp = DateTime.UtcNow, 
+							RedeemScript = tableRedeemScript.ToString() 
+						};
 					}
 					else
 					{
@@ -145,14 +121,13 @@ namespace BitPoker.Controllers.Rest
             {
                 throw new ArgumentException("Table id not found");
             }
-
-			return response;
         }
 
 		[HttpPost, Route("deal")]
 		public Models.Messages.DealResponse Deal(Models.Messages.DealRequest request)
 		{
-			return new Models.Messages.DealResponse();
+			
+			return new Models.Messages.DealResponse() { Id = request.Id, TimeStamp = DateTime.UtcNow };
 		}
     }
 }

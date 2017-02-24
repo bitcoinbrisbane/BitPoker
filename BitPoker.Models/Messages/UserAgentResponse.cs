@@ -10,6 +10,10 @@ namespace BitPoker.Models.Messages
 
 		public String BitcoinAddress { get; set; }
 
+		public TimeSpan UpTime { get; set; }
+
+		public TimeSpan LastSeen { get; set; }
+
 		public UserAgentResponse()
 		{
 		}

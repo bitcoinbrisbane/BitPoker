@@ -5,7 +5,15 @@
 	<meta charset="utf-8" />
 </head>
 <body>
-    <h1>Tables</h1>
+    <h1>My Tables</h1>
+
+    <table>
+        <tr>
+            <th></th>
+        </tr>
+    </table>
+
+    <h1>All known peers tables</h1>
 
     <table>
         <tr>
@@ -27,14 +35,14 @@
         <input type="submit" value="Submit">
     </form>
 
-    <script>
+    <script type="text/javascript">
 
-        var client = new $.JsonRpcClient({ ajaxUrl: 'https://www.bitpoker.io/api/table' });
-        client.call(
-          'bar', [ 'A parameter', 'B parameter' ],
-          function(result) { alert('Foo bar answered: ' + result.my_answer); },
-          function(error)  { console.log('There was an error', error); }
-        );
+        //var client = new $.JsonRpcClient({ ajaxUrl: 'https://www.bitpoker.io/api/table' });
+        //client.call(
+        //  'bar', [ 'A parameter', 'B parameter' ],
+        //  function(result) { alert('Foo bar answered: ' + result.my_answer); },
+        //  function(error)  { console.log('There was an error', error); }
+        )//;
     </script>
 </body>
 </html>

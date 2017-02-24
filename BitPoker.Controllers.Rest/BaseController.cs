@@ -6,7 +6,11 @@ namespace BitPoker.Controllers.Rest
 {
     public abstract class BaseController : ApiController
     {
-		internal Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
+		public DateTime StartTime { get; set; }
+
+		public DateTime LastRequest { get; set; }
+
+		public Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
 
 		/// <summary>
 		/// Users bitcoin address
@@ -20,12 +24,12 @@ namespace BitPoker.Controllers.Rest
 			//bool verified = pubKey.VerifyMessage(message, signature);
 
 			//return verified;
-			return true;
+			return Verify(message.BitcoinAddress, message.Id.ToString(), message.Signature);
 		}
 
         internal Boolean Verify(String address, String message, String signature)
         {
-            NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
+            //NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
             var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
             bool verified = pubKey.VerifyMessage(message, signature);
 
@@ -43,6 +47,8 @@ namespace BitPoker.Controllers.Rest
 
         internal void AddLog(String message)
         {
+			LastRequest = DateTime.UtcNow;
+
 			//Guid id = Guid.NewGuid();
 			//LogRepo.Add(new Models.Log() { Id = id, Message = message, TimeStamp = DateTime.UtcNow });
         }

@@ -7,7 +7,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>BitPoker.Console</RootNamespace>
     <AssemblyName>BitPoker.Console</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,10 +28,33 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NBitcoin">
+      <HintPath>..\packages\NBitcoin.3.0.2.4\lib\net45\NBitcoin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">
+      <Project>{5758D35E-C5C6-4D21-B571-029B38E85F62}</Project>
+      <Name>BitPoker.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Clients.Rest\BitPoker.Clients.Rest.csproj">
+      <Project>{5B6DC93F-3D72-4519-AEA9-95754E8DF350}</Project>
+      <Name>BitPoker.Clients.Rest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
+      <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
+      <Name>BitPoker.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

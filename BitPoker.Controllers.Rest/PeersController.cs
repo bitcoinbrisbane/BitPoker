@@ -30,32 +30,22 @@ namespace BitPoker.Controllers.Rest
             return player;
         }
 
-        //[HttpPost]
-        //public Models.IResponse Post(Models.IRequest model)
-        //{
-        //    if (model.Method == "AddPeer")
-        //    {
-        //        Models.Messages.RPCResponse response = new Models.Messages.RPCResponse();
-        //        Models.Messages.AddPeerRequest request = model.Params as Models.Messages.AddPeerRequest;
+		//Todo: Authorization
+		[HttpPost]
+		public void Post(Models.Messages.AddPeerRequest request)
+		{
+			if (request != null)
+			{
+				if (base.Verify(request))
+				{
+					Models.Peer peer = new Models.Peer()
+					{
+						NetworkAddress = request.NetworkAddress
+					};
 
-        //        //need to include timestamp too
-        //        Boolean valid = base.Verify(request.BitcoinAddress, model.Id.ToString(), model.Signature);
-
-        //        if (valid)
-        //        {
-        //            PeerRepo.Add(request.Peer);
-        //            return response;
-        //        }
-        //        else
-        //        {
-        //            response.Error = "invalid siganture";
-        //            return response;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
+					PeerRepo.Add(peer);
+				}
+			}
+		}
     }
 }

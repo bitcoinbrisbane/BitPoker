@@ -43,7 +43,7 @@ namespace BitPoker.Models.NTests
 			BitPoker.Models.Messages.BuyInRequest request = new BitPoker.Models.Messages.BuyInRequest()
 			{
 				BitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ"
-			}
+			};
 
 			String expected = "BuyIn";
 			Assert.AreEqual(expected, request.ToString());

@@ -8,6 +8,7 @@ namespace BitPoker.Owin.RestHost
 	{
 		public HandController()
 		{
+			base.HandRepo = new BitPoker.Repository.LiteDB.HandRepository("bitpoker3.db");
 		}
 	}
 }

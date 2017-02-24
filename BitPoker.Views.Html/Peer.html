@@ -3,72 +3,38 @@
 <head>
     <title>BitPoker.io Peer</title>
 	<meta charset="utf-8" />
-    <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>BitPoker.io Peer</h1>
 
-    <h2 id="peer">Peer</h2>
-
-    <h2>Tables</h2>
-
-    <table id="tables"></table>
-
+	<p>Peers tables</p>
+	<table>
+	</table>
+		
     <script type="text/javascript">
         $(document).ready(function () {
 
             //var url = window.location.href;
             //var params = url.substring(1).split('?');
             //var keys = params.split('&');
-            //var address = 'msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv';
 
-            var tableUri = 'http://localhost:5000/api/tables/'; //+ address;
+			//Get peer info from local controller + db
+            var address = 'msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv';
+            var peerUrl = 'http://localhost:5000/api/peer/' + address;
 
-            $.getJSON(tableUri)
-                .done(function (data) {
+            $.getJSON(peerUrl)
+            .done(function (response) {
+
+				var networkAddress = response.NetworkAddress;
+
+	            $.getJSON(networkAddress + '/api/tables')
+    			.done(function (response) {
                     $.each(data, function (key, item) {
                         $('#tables').append('<tr><td>' + item.networkAddress + '</td><td><a href="table.html?address=' + item.id + '">' + item.id + '</a></td><td>' + item.smallBlind + '</td><td>' + item.bigBlind + '</td><td>Join</td></tr>');
                     });
-                });
-
-            //function GetURLParameter(sParam)
-            //{
-            //    var sPageURL = window.location.search.substring(1);
-            //    var sURLVariables = sPageURL.split('&');
-
-            //    for (var i = 0; i < sURLVariables.length; i++)
-            //    {
-            //        var sParameterName = sURLVariables[i].split('=');
-
-            //        if (sParameterName[0] == sParam)
-            //        {
-            //            return sParameterName[1];
-            //        }
-            //    }
-            //}​
+            });
         });
-
-
-
-        ////$(document).ready(function () {
-        //    // click on button submit
-        //    $("#submit").on('click', function () {
-        //        var url = 'http://localhost:3333';
-
-        //        var request = {};
-        //        request.method = "gettables";
-        //        request.id = "1";
-        //        request.jsonrpc = "2.0";
-        //        request.params = {};
-
-        //        $.post(url, JSON.stringify(request), displayResult, "json");
-        //    });
-
-        //    function displayResult(response) {
-        //        alert(response);
-        //    };
-        ////});
     </script>
 </body>
 </html>

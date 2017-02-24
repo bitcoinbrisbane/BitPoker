@@ -10,10 +10,12 @@ namespace BitPoker.Controllers.Rest
 		{
 			return new Models.Messages.UserAgentResponse() 
 			{ 
-				Agent = "BitPoker",
+				Agent = "BitPoker c#",
 				Version = 0.1M,
 				TimeStamp = DateTime.UtcNow,
-				BitcoinAddress = _localBitcoinAddress
+				BitcoinAddress = _localBitcoinAddress,
+				UpTime = DateTime.UtcNow - base.StartTime,
+				LastSeen = DateTime.Now - base.LastRequest
 			};
 		}
 	}

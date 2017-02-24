@@ -35,10 +35,10 @@ namespace BitPoker.Models.Messages
             this.Version = 1.0M;
 		}
 
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //    //return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
-        //}
+        public override string ToString()
+        {
+            //return base.ToString();
+            return String.Format("{0}{1}{2}{3}{4}{5}{6:yyyyMMddHHmmss}{7}", Id, BitcoinAddress, HandId, Index, Action, Amount, TimeStamp, PreviousHash);
+        }
 	}
 }
