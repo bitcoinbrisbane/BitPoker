@@ -3,14 +3,12 @@
 <head>
     <title>BitPoker.io Tables</title>
 	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>My Tables</h1>
 
-    <table>
-        <tr>
-            <th></th>
-        </tr>
+    <table id="myTables">
     </table>
 
     <h1>All known peers tables</h1>
@@ -35,14 +33,21 @@
         <input type="submit" value="Submit">
     </form>
 
-    <script type="text/javascript">
+    <script>
+		//Local controller
+        var tablesUri = 'http://localhost:5000/api/tables';
+				
+        $(document).ready(function () {
+				
+	         $.getJSON(tablesUri)
+	         	.done(function (response) {
+              	$.each(response, function (key, item) {
+					//console.warn(item.BitcoinAddress);
 
-        //var client = new $.JsonRpcClient({ ajaxUrl: 'https://www.bitpoker.io/api/table' });
-        //client.call(
-        //  'bar', [ 'A parameter', 'B parameter' ],
-        //  function(result) { alert('Foo bar answered: ' + result.my_answer); },
-        //  function(error)  { console.log('There was an error', error); }
-        )//;
+                  	$('#myTables').append('<tr><td><a href="Table.html?id=' + item.Id + '">' + item.Id + '</td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</tr>');
+              });
+          	});
+        });
     </script>
 </body>
 </html>
