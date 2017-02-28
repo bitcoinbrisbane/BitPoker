@@ -1,6 +1,6 @@
 ﻿using BitPoker.Models.Players;
 
-namespace BitPoker.Logic.GameMechanics
+namespace BitPoker.Models.GameMechanics
 {
     public interface ITexasHoldemGame
     {

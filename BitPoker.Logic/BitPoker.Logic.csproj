@@ -36,7 +36,6 @@
     <Compile Include="Providers\RandomProvider.cs" />
     <Compile Include="GameMechanics\InternalPlayer.cs" />
     <Compile Include="GameMechanics\InternalPlayerMoney.cs" />
-    <Compile Include="GameMechanics\ITexasHoldemGame.cs" />
     <Compile Include="GameMechanics\TwoPlayersBettingLogic.cs" />
     <Compile Include="GameMechanics\TwoPlayersHandLogic.cs" />
     <Compile Include="GameMechanics\TwoPlayersTexasHoldemGame.cs" />

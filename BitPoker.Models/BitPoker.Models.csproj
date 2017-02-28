@@ -108,6 +108,7 @@
     <Compile Include="Players\PlayerAction.cs" />
     <Compile Include="Players\PlayerActionAndName.cs" />
     <Compile Include="Players\BasePlayer.cs" />
+    <Compile Include="GameMechanics\ITexasHoldemGame.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -119,5 +120,6 @@
     <Folder Include="Cards\" />
     <Folder Include="GameContext\" />
     <Folder Include="Players\" />
+    <Folder Include="GameMechanics\" />
   </ItemGroup>
 </Project>

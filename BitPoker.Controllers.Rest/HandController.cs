@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace BitPoker.Controllers.Rest
 {
-    public class HandController : BaseController
+    public class HandController : BaseController, IHandController
     {
 		public BitPoker.Repository.IHandRepository HandRepo { get; set; }
 

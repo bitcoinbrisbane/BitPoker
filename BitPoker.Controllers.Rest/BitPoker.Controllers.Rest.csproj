@@ -76,6 +76,7 @@
     <Compile Include="TablesController.cs" />
     <Compile Include="UserAgentController.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="IHandController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -89,6 +90,10 @@
     <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
       <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>
       <Name>BitPoker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Logic\BitPoker.Logic.csproj">
+      <Project>{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}</Project>
+      <Name>BitPoker.Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
