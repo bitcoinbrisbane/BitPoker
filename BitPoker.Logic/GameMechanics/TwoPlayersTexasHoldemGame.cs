@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BitPoker.Logic.Players;
+using BitPoker.Models.Players;
 
 namespace BitPoker.Logic.GameMechanics
 {

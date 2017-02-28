@@ -2,6 +2,7 @@
 using BitPoker.Models;
 using BitPoker.Models.Cards;
 using System;
+using BitPoker.Models.GameContext;
 
 namespace BitPoker.Logic.Players
 {

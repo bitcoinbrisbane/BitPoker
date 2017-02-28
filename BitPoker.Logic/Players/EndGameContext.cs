@@ -1,4 +1,6 @@
-﻿namespace BitPoker.Logic.Players
+﻿using BitPoker.Models.GameContext;
+
+namespace BitPoker.Logic.Players
 {
     public class EndGameContext : IEndGameContext
     {

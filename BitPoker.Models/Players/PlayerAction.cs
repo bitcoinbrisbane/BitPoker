@@ -20,7 +20,7 @@ namespace BitPoker.Models.Players
 
         public PlayerActionType Type { get; }
 
-        public Int64 Money { get; internal set; }
+        public Int64 Money { get; set; }
 
         public static PlayerAction Fold()
         {

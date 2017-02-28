@@ -1,10 +1,12 @@
-﻿namespace BitPoker.Logic.Players
-{
-	using System;
-	using System.Collections.Generic;
-	using BitPoker.Models;
+﻿using System;
+using System.Collections.Generic;
+using BitPoker.Models;
+using BitPoker.Models.GameContext;
+using BitPoker.Models.Players;
 
-	public class GetTurnContext
+namespace BitPoker.Logic.Players
+{
+	public class GetTurnContext : IGetTurnContext
     {
         public GetTurnContext(
             GameRoundType roundType,

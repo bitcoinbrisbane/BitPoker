@@ -1,11 +1,12 @@
 ﻿using BitPoker.Models.Cards;
 using System;
+using BitPoker.Models.GameContext;
 
 namespace BitPoker.Logic.Players
 {
     public class StartHandContext : IStartHandContext
     {
-        public StartHandContext(Card firstCard, Card secondCard, int handNumber, int moneyLeft, int smallBlind, string firstPlayerName)
+        public StartHandContext(Card firstCard, Card secondCard, Int64 handNumber, Int64 moneyLeft, Int64 smallBlind, string firstPlayerName)
         {
             this.FirstCard = firstCard;
             this.SecondCard = secondCard;

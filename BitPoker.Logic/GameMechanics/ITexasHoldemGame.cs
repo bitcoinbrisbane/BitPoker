@@ -1,4 +1,4 @@
-﻿using BitPoker.Logic.Players;
+﻿using BitPoker.Models.Players;
 
 namespace BitPoker.Logic.GameMechanics
 {

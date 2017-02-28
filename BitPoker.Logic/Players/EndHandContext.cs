@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BitPoker.Models.Cards;
+using BitPoker.Models.GameContext;
 
 namespace BitPoker.Logic.Players
 {

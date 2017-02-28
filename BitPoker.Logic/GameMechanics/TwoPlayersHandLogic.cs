@@ -48,6 +48,7 @@
                     player.PlayerMoney.Money,
                     this.smallBlind,
                     this.players[0].Name);
+				
                 player.StartHand(startHandContext);
             }
 

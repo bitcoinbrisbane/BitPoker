@@ -1,4 +1,7 @@
-﻿namespace BitPoker.Logic.Players
+﻿using BitPoker.Models.GameContext;
+using BitPoker.Models.Players;
+
+namespace BitPoker.Logic.Players
 {
     public abstract class PlayerDecorator : IPlayer
     {
