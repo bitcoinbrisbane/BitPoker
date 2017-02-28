@@ -1,5 +1,6 @@
 ﻿namespace BitPoker.Logic.Players
 {
+	using System;
 	using System.Collections.Generic;
 	using BitPoker.Models;
 
@@ -8,11 +9,11 @@
         public GetTurnContext(
             GameRoundType roundType,
             IReadOnlyCollection<PlayerActionAndName> previousRoundActions,
-            int smallBlind,
-            int moneyLeft,
-            int currentPot,
-            int myMoneyInTheRound,
-            int currentMaxBet)
+            Int64 smallBlind,
+            Int64 moneyLeft,
+            Int64 currentPot,
+            Int64 myMoneyInTheRound,
+            Int64 currentMaxBet)
         {
             this.RoundType = roundType;
             this.PreviousRoundActions = previousRoundActions;
@@ -27,19 +28,19 @@
 
         public IReadOnlyCollection<PlayerActionAndName> PreviousRoundActions { get; }
 
-        public int SmallBlind { get; }
+        public Int64 SmallBlind { get; }
 
-        public int MoneyLeft { get; }
+        public Int64 MoneyLeft { get; }
 
-        public int CurrentPot { get; }
+        public Int64 CurrentPot { get; }
 
-        public int MyMoneyInTheRound { get; }
+        public Int64 MyMoneyInTheRound { get; }
 
-        public int CurrentMaxBet { get; }
+        public Int64 CurrentMaxBet { get; }
 
         public bool CanCheck => this.MyMoneyInTheRound == this.CurrentMaxBet;
 
-        public int MoneyToCall => this.CurrentMaxBet - this.MyMoneyInTheRound;
+        public Int64 MoneyToCall => this.CurrentMaxBet - this.MyMoneyInTheRound;
 
         public bool IsAllIn => this.MoneyLeft <= 0;
     }

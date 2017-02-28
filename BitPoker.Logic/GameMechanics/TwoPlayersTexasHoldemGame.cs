@@ -1,14 +1,13 @@
-﻿namespace BitPoker.Logic.GameMechanics
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BitPoker.Logic.Players;
+
+namespace BitPoker.Logic.GameMechanics
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using BitPoker.Logic.Players;
-
     public class TwoPlayersTexasHoldemGame : ITexasHoldemGame
     {
-        private static readonly int[] SmallBlinds =
+        private static readonly Int64[] SmallBlinds =
             {
                 1, 2, 3, 5, 10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 150, 200, 300,
                 400, 500, 600, 800, 1000, 1500, 2000, 3000, 4000, 5000, 6000, 8000,
@@ -21,9 +20,9 @@
 
         private readonly ICollection<InternalPlayer> allPlayers;
 
-        private readonly int initialMoney;
+        private readonly Int64 initialMoney;
 
-        public TwoPlayersTexasHoldemGame(IPlayer firstPlayer, IPlayer secondPlayer, int initialMoney = 1000)
+        public TwoPlayersTexasHoldemGame(IPlayer firstPlayer, IPlayer secondPlayer, Int64 initialMoney = 1000)
         {
             if (firstPlayer == null)
             {

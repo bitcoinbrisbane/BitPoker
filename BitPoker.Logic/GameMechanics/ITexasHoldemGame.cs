@@ -1,7 +1,7 @@
-﻿namespace BitPoker.Logic.GameMechanics
-{
-    using BitPoker.Logic.Players;
+﻿using BitPoker.Logic.Players;
 
+namespace BitPoker.Logic.GameMechanics
+{
     public interface ITexasHoldemGame
     {
         int HandsPlayed { get; }

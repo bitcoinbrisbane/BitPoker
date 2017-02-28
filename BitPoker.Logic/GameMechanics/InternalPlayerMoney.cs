@@ -7,7 +7,7 @@
 
 	public class InternalPlayerMoney
     {
-        public InternalPlayerMoney(int startMoney)
+        public InternalPlayerMoney(Int64 startMoney)
         {
             this.Money = startMoney;
             this.NewHand();
@@ -15,13 +15,13 @@
         }
 
         // Player money in the game
-        public int Money { get; set; }
+        public Int64 Money { get; set; }
 
         // The amount of money the player is currently put in the pot
-        public int CurrentlyInPot { get; private set; }
+        public Int64 CurrentlyInPot { get; private set; }
 
         // The amount of money the player is currently bet
-        public int CurrentRoundBet { get; private set; }
+        public Int64 CurrentRoundBet { get; private set; }
 
         // False when player folds
         public bool InHand { get; private set; }
@@ -47,7 +47,7 @@
         }
 
         // TODO: Currently there is no limit in the raise amount as long as it is positive number
-        public PlayerAction DoPlayerAction(PlayerAction action, int maxMoneyPerPlayer)
+        public PlayerAction DoPlayerAction(PlayerAction action, Int64 maxMoneyPerPlayer)
         {
             if (action.Type == PlayerActionType.Raise)
             {
@@ -82,7 +82,7 @@
             return action;
         }
 
-        public void NormalizeBets(int moneyPerPlayer)
+        public void NormalizeBets(Int64 moneyPerPlayer)
         {
             if (moneyPerPlayer < this.CurrentRoundBet)
             {
@@ -91,14 +91,14 @@
             }
         }
 
-        private void PlaceMoney(int money)
+        private void PlaceMoney(Int64 money)
         {
             this.CurrentRoundBet += money;
             this.CurrentlyInPot += money;
             this.Money -= money;
         }
 
-        private void CallTo(int maxMoneyPerPlayer)
+        private void CallTo(Int64 maxMoneyPerPlayer)
         {
             var moneyToPay = Math.Min(this.CurrentRoundBet + this.Money, maxMoneyPerPlayer);
             var diff = moneyToPay - this.CurrentRoundBet;

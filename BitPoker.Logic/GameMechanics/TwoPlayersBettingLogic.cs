@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using System.Linq;
+	using System;
 
 	using BitPoker.Logic.Players;
 	using BitPoker.Models;
@@ -11,16 +12,16 @@
     {
         private readonly IList<InternalPlayer> allPlayers;
 
-        private readonly int smallBlind;
+        private readonly Int64 smallBlind;
 
-        public TwoPlayersBettingLogic(IList<InternalPlayer> players, int smallBlind)
+        public TwoPlayersBettingLogic(IList<InternalPlayer> players, Int64 smallBlind)
         {
             this.allPlayers = players;
             this.smallBlind = smallBlind;
             this.RoundBets = new List<PlayerActionAndName>();
         }
 
-        public int Pot
+        public Int64 Pot
         {
             get
             {

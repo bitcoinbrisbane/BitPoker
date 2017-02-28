@@ -1,8 +1,9 @@
-﻿namespace BitPoker.Logic.Players
-{
-    using BitPoker.Models.Cards;
+﻿using BitPoker.Models.Cards;
+using System;
 
-    public class StartHandContext
+namespace BitPoker.Logic.Players
+{
+    public class StartHandContext : IStartHandContext
     {
         public StartHandContext(Card firstCard, Card secondCard, int handNumber, int moneyLeft, int smallBlind, string firstPlayerName)
         {
@@ -18,12 +19,13 @@
 
         public Card SecondCard { get; }
 
-        public int HandNumber { get; }
+        public Int64 HandNumber { get; }
 
-        public int MoneyLeft { get; }
+        public Int64 MoneyLeft { get; }
 
-        public int SmallBlind { get; }
+        public Int64 SmallBlind { get; }
 
+		[Obsolete]
         public string FirstPlayerName { get; }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace BitPoker.Logic.Players
-{
-    using System.Collections.Generic;
-    using BitPoker.Models.Cards;
+﻿using System.Collections.Generic;
+using BitPoker.Models.Cards;
 
-    public class EndHandContext
+namespace BitPoker.Logic.Players
+{
+    public class EndHandContext : IEndHandContext
     {
         public EndHandContext(Dictionary<string, ICollection<Card>> showdownCards)
         {

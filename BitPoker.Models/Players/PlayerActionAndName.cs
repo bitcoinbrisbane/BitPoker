@@ -1,14 +1,16 @@
-﻿namespace BitPoker.Logic.Players
+﻿using System;
+
+namespace BitPoker.Models.Players
 {
     public struct PlayerActionAndName
     {
-        public PlayerActionAndName(string playerName, PlayerAction action)
+        public PlayerActionAndName(String playerName, PlayerAction action)
         {
             this.PlayerName = playerName;
             this.Action = action;
         }
 
-        public string PlayerName { get; }
+        public String PlayerName { get; }
 
         public PlayerAction Action { get; }
     }

@@ -7,12 +7,13 @@
 	using BitPoker.Models.Helpers;
 	using BitPoker.Logic.Players;
 	using BitPoker.Models;
+	using System;
 
 	internal class TwoPlayersHandLogic
     {
-        private readonly int handNumber;
+        private readonly Int64 handNumber;
 
-        private readonly int smallBlind;
+        private readonly Int64 smallBlind;
 
         private readonly IList<InternalPlayer> players;
 
@@ -24,7 +25,7 @@
 
         private Dictionary<string, ICollection<Card>> showdownCards;
 
-        public TwoPlayersHandLogic(IList<InternalPlayer> players, int handNumber, int smallBlind)
+        public TwoPlayersHandLogic(IList<InternalPlayer> players, Int64 handNumber, Int64 smallBlind)
         {
             this.handNumber = handNumber;
             this.smallBlind = smallBlind;
@@ -79,7 +80,7 @@
             }
         }
 
-        private void DetermineWinnerAndAddPot(int pot)
+        private void DetermineWinnerAndAddPot(Int64 pot)
         {
             if (this.players.Count(x => x.PlayerMoney.InHand) == 1)
             {

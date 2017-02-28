@@ -97,6 +97,17 @@
     <Compile Include="Cards\IDeck.cs" />
     <Compile Include="IDeepCloneable{T}.cs" />
     <Compile Include="Enums\PlayerActionType.cs" />
+    <Compile Include="GameContext\IEndGameContext.cs" />
+    <Compile Include="GameContext\IEndHandContext.cs" />
+    <Compile Include="GameContext\IEndRoundContext.cs" />
+    <Compile Include="GameContext\IGetTurnContext.cs" />
+    <Compile Include="GameContext\IStartGameContext.cs" />
+    <Compile Include="GameContext\IStartHandContext.cs" />
+    <Compile Include="GameContext\IStartRoundContext.cs" />
+    <Compile Include="Players\IPlayer.cs" />
+    <Compile Include="Players\PlayerAction.cs" />
+    <Compile Include="Players\PlayerActionAndName.cs" />
+    <Compile Include="Players\BasePlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -106,5 +117,7 @@
     <Folder Include="Exceptions\" />
     <Folder Include="Enums\" />
     <Folder Include="Cards\" />
+    <Folder Include="GameContext\" />
+    <Folder Include="Players\" />
   </ItemGroup>
 </Project>

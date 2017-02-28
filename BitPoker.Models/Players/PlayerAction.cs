@@ -1,8 +1,7 @@
-﻿namespace BitPoker.Logic.Players
-{
-	using System;
-	using BitPoker.Models.Players;
+﻿using System;
 
+namespace BitPoker.Models.Players
+{
 	public class PlayerAction
     {
         private static readonly PlayerAction FoldObject = new PlayerAction(PlayerActionType.Fold);
@@ -13,7 +12,7 @@
             this.Type = type;
         }
 
-        private PlayerAction(int money)
+        private PlayerAction(Int64 money)
         {
             this.Type = PlayerActionType.Raise;
             this.Money = money;
@@ -21,7 +20,7 @@
 
         public PlayerActionType Type { get; }
 
-        public int Money { get; internal set; }
+        public Int64 Money { get; internal set; }
 
         public static PlayerAction Fold()
         {
@@ -42,7 +41,7 @@
         /// If amount is more or equal to the players money the player will be in all-in state
         /// </param>
         /// <returns>A new player action object containing information about the player action and the raise amount</returns>
-        public static PlayerAction Raise(int withAmount)
+        public static PlayerAction Raise(Int64 withAmount)
         {
             if (withAmount <= 0)
             {

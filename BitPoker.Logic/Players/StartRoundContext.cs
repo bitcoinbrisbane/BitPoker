@@ -1,12 +1,13 @@
-﻿namespace BitPoker.Logic.Players
-{
-	using System.Collections.Generic;
-	using BitPoker.Models;
-	using BitPoker.Models.Cards;
+﻿using System.Collections.Generic;
+using BitPoker.Models;
+using BitPoker.Models.Cards;
+using System;
 
-	public class StartRoundContext
+namespace BitPoker.Logic.Players
+{
+	public class StartRoundContext : IStartRoundContext
     {
-        public StartRoundContext(GameRoundType roundType, IReadOnlyCollection<Card> communityCards, int moneyLeft, int currentPot)
+        public StartRoundContext(GameRoundType roundType, IReadOnlyCollection<Card> communityCards, Int64 moneyLeft, Int64 currentPot)
         {
             this.RoundType = roundType;
             this.CommunityCards = communityCards;
@@ -18,8 +19,8 @@
 
         public IReadOnlyCollection<Card> CommunityCards { get; }
 
-        public int MoneyLeft { get; }
+        public Int64 MoneyLeft { get; }
 
-        public int CurrentPot { get; }
+		public Int64 CurrentPot { get; }
     }
 }

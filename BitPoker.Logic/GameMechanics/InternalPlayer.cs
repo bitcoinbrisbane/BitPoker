@@ -1,10 +1,9 @@
-﻿namespace BitPoker.Logic.GameMechanics
+﻿using System.Collections.Generic;
+using BitPoker.Models.Cards;
+using BitPoker.Logic.Players;
+
+namespace BitPoker.Logic.GameMechanics
 {
-    using System.Collections.Generic;
-
-    using BitPoker.Models.Cards;
-    using BitPoker.Logic.Players;
-
     internal class InternalPlayer : PlayerDecorator
     {
         public InternalPlayer(IPlayer player)
@@ -13,17 +12,17 @@
             this.Cards = new List<Card>();
         }
 
-        public List<Card> Cards { get; }
+        public IList<Card> Cards { get; }
 
         public InternalPlayerMoney PlayerMoney { get; private set; }
 
-        public override void StartGame(StartGameContext context)
+        public override void StartGame(IStartGameContext context)
         {
             this.PlayerMoney = new InternalPlayerMoney(context.StartMoney);
             base.StartGame(context);
         }
 
-        public override void StartHand(StartHandContext context)
+        public override void StartHand(IStartHandContext context)
         {
             this.Cards.Clear();
             this.Cards.Add(context.FirstCard);
@@ -34,7 +33,7 @@
             base.StartHand(context);
         }
 
-        public override void StartRound(StartRoundContext context)
+        public override void StartRound(IStartRoundContext context)
         {
             this.PlayerMoney.NewRound();
             base.StartRound(context);
