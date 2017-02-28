@@ -44,9 +44,9 @@
     <Compile Include="Contracts\ITable.cs" />
     <Compile Include="Contracts\NoLimitTexasHoldem.cs" />
     <Compile Include="Contracts\TexasHoldem.cs" />
-    <Compile Include="ExtensionMethods\ActionExtension.cs" />
-    <Compile Include="ExtensionMethods\HandExtensions.cs" />
-    <Compile Include="ExtensionMethods\TableExtensions.cs" />
+    <Compile Include="Extensions\ActionExtension.cs" />
+    <Compile Include="Extensions\HandExtensions.cs" />
+    <Compile Include="Extensions\TableExtensions.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="Helpers\Chain.cs" />
@@ -87,9 +87,24 @@
     <Compile Include="Messages\BaseResponse.cs" />
     <Compile Include="Messages\UserAgentResponse.cs" />
     <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="Exceptions\ActionOutOfTurnException.cs" />
+    <Compile Include="Cards\Card.cs" />
+    <Compile Include="Cards\CardExtensions.cs" />
+    <Compile Include="Cards\CardSuit.cs" />
+    <Compile Include="Cards\CardType.cs" />
+    <Compile Include="Enums\GameRoundType.cs" />
+    <Compile Include="Enums\HandRankType.cs" />
+    <Compile Include="Cards\IDeck.cs" />
+    <Compile Include="IDeepCloneable{T}.cs" />
+    <Compile Include="Enums\PlayerActionType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Cards\" />
   </ItemGroup>
 </Project>

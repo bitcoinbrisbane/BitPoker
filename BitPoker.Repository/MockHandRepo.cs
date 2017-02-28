@@ -27,6 +27,9 @@ namespace BitPoker.Repository
 
         public MockHandRepo()
         {
+
+			Guid tableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16");
+
             alice = new TexasHoldemPlayer()
             {
                 BitcoinAddress = alice_address,
@@ -53,7 +56,7 @@ namespace BitPoker.Repository
 
             //Full hand
             Guid id = new Guid("398b5fe2-da27-4772-81ce-37fa615719b5");
-            Hand hand = new Hand(players)
+            Hand hand = new Hand(tableId, players)
             {
                 Id = id
             };
@@ -245,11 +248,7 @@ namespace BitPoker.Repository
             players[0] = alice;
 
             id = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516");
-            hand = new Hand(players)
-            {
-                Id = id,
-                TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16")
-            };
+			hand = new Hand(tableId, players);
 
             //SMALL BLIND
             sb = new Models.Messages.ActionMessage()
@@ -269,15 +268,14 @@ namespace BitPoker.Repository
             hand.AddMessage(sb);
             _hands.Add(hand);
 
+
+			data = NBitcoin.DataEncoders.Encoders.ASCII.DecodeData(hand.ToString());
+			hash = NBitcoin.Crypto.Hashes.SHA256(data);
+
             hand = null;
 
             Guid newHandId = new Guid("c5123f5c-c8d0-4d29-b7bf-111a6330ba62");
-            Hand newHand = new Hand(players)
-            {
-                Id = newHandId,
-                TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"),
-                PreviousHandId = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516")
-            };
+			Hand newHand = new Hand(tableId, players, Convert.ToBase64String(hash), id);
 
             _hands.Add(newHand);
         }

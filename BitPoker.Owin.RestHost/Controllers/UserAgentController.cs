@@ -16,18 +16,13 @@ namespace BitPoker.Owin.RestHost
 		{
 			get
 			{
-				//if (String.IsNullOrEmpty(_localBitcoinAddress))
-				//{
-				//	base._localBitcoinAddress = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ";
-				//}
-				return _localBitcoinAddress;
+				return base.LocalBitcoinAddress;
 			}
-			set { _localBitcoinAddress = value; }
 		}
 
 		public UserAgentController()
 		{
-			this.Address = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ";
+			//this.Address = "n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ";
 		}
 	}
 }

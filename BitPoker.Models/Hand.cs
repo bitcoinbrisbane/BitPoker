@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BitPoker.Models
 {
@@ -17,11 +18,9 @@ namespace BitPoker.Models
         [Obsolete("Use index")]
         public Guid Id { get; set; }
 
-        public Guid TableId { get; set; }
+        public Guid TableId { get; private set; }
 
         public Int16 PlayerToAct { get; private set; }
-
-        //public Int16 Round { get; set; }
 
         public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
 
@@ -29,34 +28,34 @@ namespace BitPoker.Models
 
 		public Int64 TimeStamp { get; set; }
 
-        public Guid PreviousHandId { get; set; }
+        public Guid PreviousHandId { get; private set; }
 
-        public String PreviousHandHash { get; set; }
+        public String PreviousHandHash { get; private set; }
 
-        public Hand()
+		public ICollection<String> AllowedActions { get; set; }
+
+        public Hand(Guid tableId, IPlayer[] players)
         {
+			this.TableId = tableId;
+            this.Players = players;
             this.PlayerToAct = 1;
-            //Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
+
             _history = new List<Messages.ActionMessage>();
 
             this.Deck = new FiftyTwoCardDeck();
         }
 
-        public Hand(IPlayer[] players)
+        public Hand(Guid tableId, IPlayer[] players, String previousHandHash, Guid previousHandId)
         {
+			this.TableId = tableId;
             this.Players = players;
-            this.PlayerToAct = 1;
-            //Id = Guid.NewGuid();
-            _history = new List<Messages.ActionMessage>();
+            this.PlayerToAct = 0; //dealer
+            Id = Guid.NewGuid();
 
-            this.Deck = new FiftyTwoCardDeck();
-        }
+			this.PreviousHandHash = previousHandHash;
+			this.PreviousHandId = previousHandId;
 
-        public Hand(IPlayer[] players, Guid id)
-        {
-            this.Players = players;
-            this.PlayerToAct = 1;
-            Id = id;
             _history = new List<Messages.ActionMessage>();
 
             this.Deck = new FiftyTwoCardDeck();
@@ -64,7 +63,13 @@ namespace BitPoker.Models
 
         public Boolean AddMessage(Messages.ActionMessage message)
         {
-            //validate first
+			var lastAction = this.History.OrderByDescending(h => h.Index).Last();
+
+			//if (Players.Where(p => p.BitcoinAddress == message.BitcoinAddress)
+			//{
+				
+			//}
+			    
             _history.Add(message);
             return true;
         }

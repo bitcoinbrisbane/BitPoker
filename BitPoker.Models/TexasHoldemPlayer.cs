@@ -13,7 +13,7 @@ namespace BitPoker.Models
 
 		public Boolean IsBigBlind { get; set; }
 
-		public Boolean IsTurnToAct { get; set; }
+		//public Boolean IsTurnToAct { get; set; }
 
 		//public ICollection<BitPoker.Models.IMessage> AllowedActions { get; set; }
 

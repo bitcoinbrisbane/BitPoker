@@ -6,16 +6,39 @@ namespace BitPoker.Controllers.Rest
 {
     public abstract class BaseController : ApiController
     {
+		private String _privateKey;
+
 		public DateTime StartTime { get; set; }
 
 		public DateTime LastRequest { get; set; }
 
 		public Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
 
+		public String PrivateKey
+		{
+			set { _privateKey = value; }
+		}
+
+		public NBitcoin.Network Network { get; set; }
+
 		/// <summary>
 		/// Users bitcoin address
 		/// </summary>
-		public String _localBitcoinAddress;
+		public String LocalBitcoinAddress
+		{
+			get
+			{
+				if (!String.IsNullOrEmpty(_privateKey))
+				{
+					NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(_privateKey);
+					return secret.GetAddress().ToString();
+				}
+				else
+				{
+					return "";
+				}
+			}
+		}
 
 		internal Boolean Verify(Models.Messages.IMessage message)
 		{
@@ -36,6 +59,12 @@ namespace BitPoker.Controllers.Rest
             //return verified;
             return true;
         }
+
+		internal String SignMessge(String message)
+		{
+			NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(_privateKey, this.Network);
+			return secret.PrivateKey.SignMessage(message);
+		}
 
 		internal Boolean ValidateTx(String tx)
 		{

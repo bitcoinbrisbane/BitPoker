@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
 
 namespace BitPoker.Controllers.Rest
 {
@@ -12,43 +13,28 @@ namespace BitPoker.Controllers.Rest
 
 		public HandController()
 		{
+			base.PrivateKey = System.Configuration.ConfigurationManager.AppSettings["BitcoinPrivateKey"];
 		}
 
 		[HttpGet]
 		public IEnumerable<BitPoker.Models.Hand> Get(string id)
 		{
-			return HandRepo.All();
+			return HandRepo.All().Where(h => h.Id.ToString() == id);
 		}
 
 		[HttpPost]
 		public void Post(BitPoker.Models.Messages.ActionMessage message)
 		{
-			//message.HandId;
-		}
+			if (base.Verify(message) == true)
+			{
+				Models.Hand hand = HandRepo.All().Single(h => h.Id.ToString() == message.HandId.ToString());
 
-		[HttpPost, Route("call")]
-		public void Call()
-		{
-		}
-
-		[HttpPost, Route("bet")]
-		public void Bet()
-		{
-		}
-
-		[HttpPost, Route("raise")]
-		public void Raise()
-		{
-		}
-
-		[HttpPost, Route("fold")]
-		public void Fold()
-		{
-		}
-
-		[HttpPost, Route("check")]
-		public void Check()
-		{
+				if (hand != null)
+				{
+					
+					//TexasHoldem.Logic.GameMechanics.TwoPlayersTexasHoldemGame holdem = new TexasHoldem.Logic.GameMechanics.TwoPlayersTexasHoldemGame();
+				}
+			}
 		}
     }
 }

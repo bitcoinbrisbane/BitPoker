@@ -28,6 +28,8 @@ namespace BitPoker.Models.ExtensionMethods
             }
         }
 
+
+
         public static Boolean IsValid(this Hand value)
         {
             if (value.History != null)
@@ -36,5 +38,9 @@ namespace BitPoker.Models.ExtensionMethods
             }
             return false;
         }
+
+		public static void Shuffle(this Hand value)
+		{
+		}
     }
 }

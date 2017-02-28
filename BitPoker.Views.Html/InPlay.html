@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>BitPoker.io</title>
+	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Table ...</h1>
+
+    <h2>Last Actions</h2>
+
+    <table id="actions"></table>
+
+    <h2>Action</h2>
+
+    <table id="history"></table>
+
+
+
+    <script>
+
+
+        function randomAddress() {
+            var key = Bitcoin.ECPair.makeRandom();
+            var PubKey = key.pub.getAddress().toString();
+            var PrivKey = key.toWIF();
+            // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
+            console.log("Public Key: " + PubKey);
+            console.log("Private Key: " + PrivKey);
+        }
+       
+    </script>
+</body>
+</html>

@@ -3,6 +3,9 @@ using Microsoft.Owin.Hosting;
 
 namespace BitPoker.Owin.RestHost
 {
+	/// <summary>
+	/// Not yet used
+	/// </summary>
 	public class OwinService : IDisposable
 	{
 		private IDisposable _webApp;

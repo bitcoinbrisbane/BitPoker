@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="Messages.cs" />
     <Compile Include="Models.cs" />
+    <Compile Include="HandTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BitPoker.Models\BitPoker.Models.csproj">
