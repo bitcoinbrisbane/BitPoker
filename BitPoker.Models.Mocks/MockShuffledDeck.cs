@@ -30,7 +30,7 @@ namespace BitPoker.Models.Mocks
             _cards.Add(new Byte[] { 0x00 });
         }
 
-        public void Shuffle()
+        public void Shuffle(IRandom random)
         {
         }
     }
