@@ -88,7 +88,7 @@ namespace BitPoker.Models.Mocks
         {
         }
 
-        public void Shuffle()
+        public void Shuffle(IRandom random)
         {
         }
     }

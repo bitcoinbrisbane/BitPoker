@@ -53,6 +53,7 @@
     <Compile Include="IDeck.cs" />
     <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="IRandom.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Messages\ActionMessageResponse.cs" />
@@ -114,12 +115,5 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Cards\" />
-    <Folder Include="GameContext\" />
-    <Folder Include="Players\" />
-    <Folder Include="GameMechanics\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
