@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>BitPoker.Logic.NTests</RootNamespace>
     <AssemblyName>BitPoker.Logic.NTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +29,12 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.7.1\lib\net45\Moq.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InternalPlayerMoneyTests.cs" />
@@ -36,6 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BitPoker.Models\BitPoker.Models.csproj">
+      <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
+      <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BitPoker.Logic\BitPoker.Logic.csproj">
+      <Project>{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}</Project>
+      <Name>BitPoker.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

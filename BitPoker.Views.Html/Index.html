@@ -43,13 +43,7 @@
 	         $.getJSON(peersUri)
 	         	.done(function (response) {
               	$.each(response, function (key, item) {
-					console.warn(item.BitcoinAddress);
-					//console.warn(key);
-					//$.getJSON(item + "/api/useragent")
-					//.done(function peer)
-					//{
                   	$('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.NetworkAddress + '</td></tr>');
-					//}
               });
           	});
 

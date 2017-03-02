@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>BitPoker.io</title>
+    <title>BitPoker.io Playing..</title>
 	<meta charset="utf-8" />
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
@@ -17,18 +17,21 @@
     <table id="history"></table>
 
 
-
     <script>
+		var logUri = 'http://';
+				
+        $(document).ready(function () {
+				
+	         $.getJSON(peersUri)
+	         	.done(function (response) {
+              	$.each(response, function (key, item) {
+					//console.warn(item.BitcoinAddress);
 
+                  	$('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.NetworkAddress + '</td></tr>');
 
-        function randomAddress() {
-            var key = Bitcoin.ECPair.makeRandom();
-            var PubKey = key.pub.getAddress().toString();
-            var PrivKey = key.toWIF();
-            // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
-            console.log("Public Key: " + PubKey);
-            console.log("Private Key: " + PrivKey);
-        }
+              });
+          	});
+		}
        
     </script>
 </body>

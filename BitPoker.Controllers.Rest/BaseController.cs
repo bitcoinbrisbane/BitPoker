@@ -7,6 +7,7 @@ namespace BitPoker.Controllers.Rest
     public abstract class BaseController : ApiController
     {
 		private String _privateKey;
+		private String _ccPrivateKey; //Colour coin
 
 		public DateTime StartTime { get; set; }
 
@@ -38,6 +39,16 @@ namespace BitPoker.Controllers.Rest
 					return "";
 				}
 			}
+		}
+
+		public void SetPrivateKey(Byte[] key)
+		{
+			_privateKey = Convert.ToBase64String(key);
+		}
+
+		public void SetCCPrivateKey(Byte[] key)
+		{
+			_ccPrivateKey = Convert.ToBase64String(key);
 		}
 
 		internal Boolean Verify(Models.Messages.IMessage message)

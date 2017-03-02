@@ -24,7 +24,7 @@ namespace BitPoker.Logic.GameMechanics
 
         private readonly Int64 initialMoney;
 
-        public TwoPlayersTexasHoldemGame(IPlayer firstPlayer, IPlayer secondPlayer, Int64 initialMoney = 1000)
+        public TwoPlayersTexasHoldemGame(Models.Players.IPlayer firstPlayer, Models.Players.IPlayer secondPlayer, Int64 initialMoney = 1000)
         {
             if (firstPlayer == null)
             {
@@ -56,7 +56,7 @@ namespace BitPoker.Logic.GameMechanics
 
         public int HandsPlayed { get; private set; }
 
-        public IPlayer Start()
+        public Models.Players.IPlayer Start()
         {
             var playerNames = this.allPlayers.Select(x => x.Name).ToList().AsReadOnly();
             foreach (var player in this.allPlayers)
@@ -88,5 +88,10 @@ namespace BitPoker.Logic.GameMechanics
 
             return winner;
         }
-    }
+
+		Models.IPlayer ITexasHoldemGame.Start()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

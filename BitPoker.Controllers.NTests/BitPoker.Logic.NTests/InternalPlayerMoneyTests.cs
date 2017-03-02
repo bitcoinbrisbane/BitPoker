@@ -1,9 +1,9 @@
-﻿namespace TexasHoldem.Logic.Tests.GameMechanics
+﻿namespace BitPoker.Logic.Tests.GameMechanics
 {
     using NUnit.Framework;
 
-    using TexasHoldem.Logic.GameMechanics;
-    using TexasHoldem.Logic.Players;
+	using BitPoker.Logic.GameMechanics;
+    using BitPoker.Models.Players;
 
     [TestFixture]
     public class InternalPlayerMoneyTests
