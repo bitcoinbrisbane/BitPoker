@@ -12,7 +12,7 @@ namespace BitPoker.Controllers.Rest
 
         public PlayersController()
         {
-            PlayerRepo = new BitPoker.Repository.MockPlayerRepo(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
+            PlayerRepo = new BitPoker.Repository.Mocks.PlayerRepository(@"E:\Repos\bitpoker\BitPoker.Repository\mockplayers.json");
         }
 
         public PlayersController(BitPoker.Repository.IPlayerRepository repo)

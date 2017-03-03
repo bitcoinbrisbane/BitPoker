@@ -12,22 +12,24 @@
 
     <table id="actions"></table>
 
-    <h2>Action</h2>
+    <h2>Log</h2>
 
-    <table id="history"></table>
+	<p>Show all activity</p>
+    <table id="log"></table>
 
 
     <script>
-		var logUri = 'http://';
+		var logUrl = 'http://localhost:5000/api/log';
+		var handHistoryUrl = 'http://localhost:5000/api/log';
 				
         $(document).ready(function () {
 				
-	         $.getJSON(peersUri)
+	         $.getJSON(logUrl)
 	         	.done(function (response) {
               	$.each(response, function (key, item) {
 					//console.warn(item.BitcoinAddress);
 
-                  	$('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.NetworkAddress + '</td></tr>');
+                  	$('#history').append('<tr><td>' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td></tr>');
 
               });
           	});

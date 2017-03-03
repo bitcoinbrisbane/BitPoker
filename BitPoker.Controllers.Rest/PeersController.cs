@@ -12,7 +12,7 @@ namespace BitPoker.Controllers.Rest
 
         public PeersController()
         {
-            PeerRepo = new BitPoker.Repository.MockPeerRepo();
+            PeerRepo = new BitPoker.Repository.Mocks.PeerRepository();
         }
 
         [HttpGet]

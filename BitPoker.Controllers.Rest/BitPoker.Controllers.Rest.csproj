@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
-    <Compile Include="HandController.cs" />
+    <Compile Include="HandsController.cs" />
     <Compile Include="IPlayersController.cs" />
     <Compile Include="ITablesController.cs" />
     <Compile Include="LogsController.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="UserAgentController.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="IHandController.cs" />
+    <Compile Include="ActionController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -94,6 +95,10 @@
     <ProjectReference Include="..\BitPoker.Logic\BitPoker.Logic.csproj">
       <Project>{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}</Project>
       <Name>BitPoker.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.Mocks\BitPoker.Repository.Mocks.csproj">
+      <Project>{13C2882F-3B16-455B-9CD1-0DEA92883769}</Project>
+      <Name>BitPoker.Repository.Mocks</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

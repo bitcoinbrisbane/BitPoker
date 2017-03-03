@@ -11,7 +11,7 @@ namespace BitPoker.Controllers.Rest
 
         public TablesController()
         {
-            this.TableRepo = new BitPoker.Repository.MockTableRepo();
+            //this.TableRepo = new BitPoker.Repository.MockTableRepo();
         }
 
         [HttpGet]

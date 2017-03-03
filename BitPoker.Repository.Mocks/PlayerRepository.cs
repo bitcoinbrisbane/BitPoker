@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using BitPoker.Models;
 using System.Linq;
 
-namespace BitPoker.Repository
+namespace BitPoker.Repository.Mocks
 {
-    public class MockPlayerRepo : IPlayerRepository
+    public class PlayerRepository : IPlayerRepository
     {
-        private List<IPlayer> _players = new List<IPlayer>();
+        private List<IPlayer> _mocks = new List<IPlayer>();
 
-        public MockPlayerRepo()
+        public PlayerRepository()
         {
             TexasHoldemPlayer alice = new TexasHoldemPlayer()
             {
@@ -27,14 +27,14 @@ namespace BitPoker.Repository
                 //Latency = new TimeSpan(0, 0, 0, 0, 200)
             };
 
-            _players.Add(alice);
-            _players.Add(bob);
+            _mocks.Add(alice);
+            _mocks.Add(bob);
         }
 
-        public MockPlayerRepo(String fileName)
+        public PlayerRepository(String fileName)
         {
             String json = System.IO.File.ReadAllText(fileName);
-            _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<IPlayer>>(json);
+            _mocks = Newtonsoft.Json.JsonConvert.DeserializeObject<List<IPlayer>>(json);
         }
 
         public void Add(IPlayer item)
@@ -43,12 +43,12 @@ namespace BitPoker.Repository
 
         public IEnumerable<IPlayer> All()
         {
-            return _players;
+            return _mocks;
         }
 
         public IPlayer Find(String address)
         {
-            return _players.FirstOrDefault(p => p.BitcoinAddress == address);
+            return _mocks.FirstOrDefault(p => p.BitcoinAddress == address);
         }
 
         public Int32 Save()

@@ -5,21 +5,21 @@ using System.Linq;
 
 namespace BitPoker.Controllers.Rest
 {
-    public class HandController : BaseController, IHandController
+    public class ActionController : BaseController
     {
 		public BitPoker.Repository.IHandRepository HandRepo { get; set; }
 
 		public BitPoker.Repository.IMessagesRepository MessageRepo { get; set; }
 
-		public HandController()
+		public ActionController()
 		{
 			base.PrivateKey = System.Configuration.ConfigurationManager.AppSettings["BitcoinPrivateKey"];
 		}
 
 		[HttpGet]
-		public IEnumerable<BitPoker.Models.Hand> Get(string id)
+		public IEnumerable<BitPoker.Models.Messages.ActionMessage> Get(string id)
 		{
-			return HandRepo.All().Where(h => h.Id.ToString() == id);
+			return MessageRepo.All().Where(m => m.HandId.ToString() == id);
 		}
 
 		[HttpPost]
@@ -31,7 +31,6 @@ namespace BitPoker.Controllers.Rest
 
 				if (hand != null)
 				{
-					
 					//TexasHoldem.Logic.GameMechanics.TwoPlayersTexasHoldemGame holdem = new TexasHoldem.Logic.GameMechanics.TwoPlayersTexasHoldemGame();
 				}
 			}

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace BitPoker.Controllers.Tests
 {
     [TestFixture()]
-    public class TableControllerTests
+    public class TablesControllerTests
     {
         private BitPoker.Models.IRequest request;
         private const String REQUEST_ID = "a66a8eb4-ea1f-42bb-b5f2-03456094b1f6";
@@ -27,7 +27,7 @@ namespace BitPoker.Controllers.Tests
         {
 
             Guid tableId = new Guid(TABLE_ID);
-            _controller.TableRepo = new Repository.MockTableRepo();
+            _controller.TableRepo = new Repository.Mocks.TableRepository();
 
             Models.Messages.JoinTableRequest request = new Models.Messages.JoinTableRequest()
             {
@@ -54,7 +54,7 @@ namespace BitPoker.Controllers.Tests
             //private key 91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf
 
             Guid tableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c");
-            _controller.TableRepo = new Repository.MockTableRepo();
+            _controller.TableRepo = new Repository.Mocks.TableRepository();
 
             NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret("91xCHwaMdufE8fmxachVhU12wdTjY7nGbZeGgjx4JQSuSDNizhf", NBitcoin.Network.TestNet);
             NBitcoin.BitcoinAddress address = secret.GetAddress();

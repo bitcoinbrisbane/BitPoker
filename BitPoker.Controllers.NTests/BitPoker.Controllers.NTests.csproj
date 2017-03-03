@@ -32,9 +32,6 @@
     <Reference Include="NBitcoin">
       <HintPath>..\packages\NBitcoin.3.0.2.4\lib\net45\NBitcoin.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -45,10 +42,14 @@
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TableControllerTests.cs" />
+    <Compile Include="TablesControllerTests.cs" />
     <Compile Include="PeersControllerTests.cs" />
+    <Compile Include="HandsControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

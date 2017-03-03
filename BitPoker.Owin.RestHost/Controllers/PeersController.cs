@@ -10,7 +10,7 @@ namespace BitPoker.Owin.RestHost
 	{
 		public PeersController()
 		{
-			base.PeerRepo = new BitPoker.Repository.MockPeerRepo();
+			base.PeerRepo = new BitPoker.Repository.Mocks.PeerRepository();
 			//base.PeerRepo = new BitPoker.Repository.LiteDB.PeerRepository("bitpoker3.db");
 		}
 	}

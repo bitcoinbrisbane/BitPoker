@@ -3,15 +3,16 @@
 <head>
     <title>BitPoker.io</title>
 	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Table ...</h1>
+    <h1 id="table">Table </h1>
 
     <h2>Last Actions</h2>
 
     <table id="actions"></table>
 
-    <h2>Hand History</h2>
+    <h2>Previous Hands</h2>
 
     <table id="history"></table>
 
@@ -26,25 +27,30 @@
 
     <p id="key"></p>
 
-    <button type="button" onclick="randomAddress()">Random</button>
+    <button type="button" onclick="join()">Random</button>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.2.0-1/bitcoinjs-min.js"></script>
     
-    <script>
-        function createKey() {
-            key = Bitcoin.ECKey();
-            document.getElementById("key").innerHTML = key.toWIF();
-        }
+    <script>	
+        $(document).ready(function () {
+			var tablesUri = 'http://localhost:5000/api/tables/bf368921-346a-42d8-9cb8-621f9cad5e16';
+			var handsUri = 'http://localhost:5000/api/hands/bf368921-346a-42d8-9cb8-621f9cad5e16';
+			
+	         $.getJSON(tablesUri)
+	         	.done(function (response) {
+  
+                  	$('#table').append(response.ID);
+          	});
 
-        function randomAddress() {
-            var key = Bitcoin.ECPair.makeRandom();
-            var PubKey = key.pub.getAddress().toString();
-            var PrivKey = key.toWIF();
-            // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
-            console.log("Public Key: " + PubKey);
-            console.log("Private Key: " + PrivKey);
-        }
+	         $.getJSON(handsUri)
+	         	.done(function (response) {
+  
+	              	$.each(response, function (key, item) {
+						//console.warn(item.BitcoinAddress);
+
+	                  	$('#hands').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+	              });
+          	});
+        });
 
         function join() {
 
@@ -61,6 +67,7 @@
         function buyIn() {
 
         }
+			
     </script>
 </body>
 </html>

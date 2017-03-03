@@ -1,11 +1,10 @@
-﻿namespace TexasHoldem.Logic.Tests.GameMechanics
+﻿namespace BitPoker.Logic.Tests.GameMechanics
 {
 	using System;
 
 	using Moq;
 	using NUnit.Framework;
 	using BitPoker.Logic.GameMechanics;
-	using BitPoker.Logic.Players;
 	using BitPoker.Models.Players;
 
 	[TestFixture]
@@ -19,6 +18,8 @@
             Mock<IPlayer> mockedSecondPlayer = new Mock<IPlayer>();
             var initialMoney = 1000;
             var twoPlayersGame = new TwoPlayersTexasHoldemGame(firstPlayer, mockedSecondPlayer.Object, initialMoney);
+
+			Assert.Throws<ArgumentNullException>(() => new TwoPlayersTexasHoldemGame(firstPlayer, mockedSecondPlayer.Object, initialMoney));
         }
 
         [Test]

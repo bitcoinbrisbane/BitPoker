@@ -41,9 +41,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Html", "Html", "{3133FBAB-3
 		BitPoker.Views.Html\Me.html = BitPoker.Views.Html\Me.html
 		BitPoker.Views.Html\Peer.html = BitPoker.Views.Html\Peer.html
 		BitPoker.Views.Html\Tables.html = BitPoker.Views.Html\Tables.html
-		Table.html = Table.html
 		BitPoker.Views.Html\AddPeer.html = BitPoker.Views.Html\AddPeer.html
 		BitPoker.Views.Html\InPlay.html = BitPoker.Views.Html\InPlay.html
+		BitPoker.Views.Html\Table.html = BitPoker.Views.Html\Table.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{98C73B43-1F13-4C18-9124-CD35598509A2}"
