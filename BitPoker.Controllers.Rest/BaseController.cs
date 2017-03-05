@@ -15,7 +15,7 @@ namespace BitPoker.Controllers.Rest
 
 		public Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
 
-		public String PrivateKey
+		internal String PrivateKey
 		{
 			set { _privateKey = value; }
 		}
@@ -41,12 +41,12 @@ namespace BitPoker.Controllers.Rest
 			}
 		}
 
-		public void SetPrivateKey(Byte[] key)
+		internal void SetPrivateKey(Byte[] key)
 		{
 			_privateKey = Convert.ToBase64String(key);
 		}
 
-		public void SetCCPrivateKey(Byte[] key)
+		internal void SetCCPrivateKey(Byte[] key)
 		{
 			_ccPrivateKey = Convert.ToBase64String(key);
 		}

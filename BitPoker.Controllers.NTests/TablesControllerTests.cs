@@ -42,7 +42,7 @@ namespace BitPoker.Controllers.Tests
 			NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(PRIVATE_KEY, NBitcoin.Network.TestNet);
 			request.Signature = secret.PrivateKey.SignMessage(request.ToString());
 
-            Models.Messages.JoinTableResponse response = _controller.JoinTable(request);
+            Models.Messages.JoinTableResponse response = _controller.Post(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(2, response.Seat);
@@ -69,7 +69,7 @@ namespace BitPoker.Controllers.Tests
                 Version = 1
             };
 
-            Models.Messages.JoinTableResponse response = _controller.JoinTable(request);
+            Models.Messages.JoinTableResponse response = _controller.Post(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(1, response.Seat);
@@ -121,7 +121,7 @@ namespace BitPoker.Controllers.Tests
                 //TxID = "af651c3435b5a11a8d7792dbc1d20a20a23fce0beb0b6931bf0ce407bfd28a0a"
             };
 
-            var response = _controller.BuyIn(request);
+            //var response = _controller.BuyIn(request);
 
             //Assert.IsNotNull(response);
             //Assert.IsNull(response.Error);

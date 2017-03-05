@@ -7,10 +7,11 @@
 </head>
 <body>
     <h1 id="table">Table </h1>
+	<p id="tabledetails"></p>
 
     <h2>Last Actions</h2>
-
     <table id="actions"></table>
+	<button type="button" onclick="refresh()">Refresh</button>
 
     <h2>Previous Hands</h2>
 
@@ -34,22 +35,32 @@
         $(document).ready(function () {
 			var tablesUri = 'http://localhost:5000/api/tables/bf368921-346a-42d8-9cb8-621f9cad5e16';
 			var handsUri = 'http://localhost:5000/api/hands/bf368921-346a-42d8-9cb8-621f9cad5e16';
+			var logsUri = 'http://localhost:5000/api/logs';
+
+			refresh();
 			
-	         $.getJSON(tablesUri)
+         	$.getJSON(tablesUri)
 	         	.done(function (response) {
-  
-                  	$('#table').append(response.ID);
+                  	$('#table').append(response.Id);
+					$('#tabledetables').append(response.SmallBlind + ' ' + response.BigBlind);
           	});
 
 	         $.getJSON(handsUri)
 	         	.done(function (response) {
-  
 	              	$.each(response, function (key, item) {
-						//console.warn(item.BitcoinAddress);
-
-	                  	$('#hands').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+	                  	$('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
 	              });
           	});
+
+			function refresh(){
+		         $.getJSON(logsUri)
+		         	.done(function (response) {
+		              	$.each(response, function (key, item) {
+		                  	$('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+		              });
+					setTimeout(refresh,5000);
+		      	});
+			}
         });
 
         function join() {

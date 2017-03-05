@@ -14,10 +14,11 @@ namespace BitPoker.Repository.Mocks
 			_tables = new List<Table>(n);
 
 			//Table as per the readme
-			Table mockHeadsUpTable = new Table(2, 2) { Id = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"), BigBlind = 10000, SmallBlind = 5000 };
+			Table mockHeadsUpTable = new Table(2, 2) { Id = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16"), BigBlind = 10000, SmallBlind = 5000, MinBuyIn = 100000, MaxBuyIn = 200000, MinPlayers = 2, MaxPlayers = 2, HashAlgorithm = "SHA256" };
 
 			Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", NetworkAddress = "https://www.bitpoker.io/api/alice" };
-			Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", NetworkAddress = "http://localhost:8080" };
+			Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", NetworkAddress = "http://localhost:5000" };
+
 			mockHeadsUpTable.Peers[0] = alice;
 			mockHeadsUpTable.Peers[1] = bob;
 
@@ -31,7 +32,6 @@ namespace BitPoker.Repository.Mocks
 			mockTableWithEmptySeat.Peers[0] = alice;
 			mockTableWithEmptySeat.Peers[2] = bob;
 
-			_tables.Add(mockHeadsUpTable);
 			_tables.Add(mockEmptyTable);
 			_tables.Add(mockTableWithEmptySeat);
 		}
@@ -66,7 +66,7 @@ namespace BitPoker.Repository.Mocks
 			}
 			else
 			{
-				return _tables.SingleOrDefault(t => t.Id.ToString() == id.ToString());
+				return _tables.Single(t => t.Id.ToString() == id.ToString());
 			}
 		}
 

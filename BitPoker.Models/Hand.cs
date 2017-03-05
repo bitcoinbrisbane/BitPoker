@@ -18,9 +18,9 @@ namespace BitPoker.Models
         [Obsolete("Use index")]
         public Guid Id { get; set; }
 
-        public Guid TableId { get; private set; }
+        public Guid TableId { get; set; }
 
-        public Int16 PlayerToAct { get; private set; }
+        public Int16 PlayerToAct { get; set; }
 
         //public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
 
@@ -28,9 +28,9 @@ namespace BitPoker.Models
 
 		public Int64 TimeStamp { get; set; }
 
-        public Guid PreviousHandId { get; private set; }
+        public Guid PreviousHandId { get; set; }
 
-        public String PreviousHandHash { get; private set; }
+        public String PreviousHandHash { get; set; }
 
 		//public ICollection<String> AllowedActions { get; set; }
 

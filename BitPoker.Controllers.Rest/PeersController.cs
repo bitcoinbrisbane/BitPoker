@@ -5,7 +5,7 @@ using System.Web.Http.Cors;
 
 namespace BitPoker.Controllers.Rest
 {
-    [EnableCors("*", "*", "*")]
+    //[EnableCors("*", "*", "*")]
     public class PeersController : BaseController
     {
         public BitPoker.Repository.IGenericRepository<Models.Peer> PeerRepo { get; set; }

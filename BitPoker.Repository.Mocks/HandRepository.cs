@@ -27,7 +27,14 @@ namespace BitPoker.Repository.Mocks
         public HandRepository()
         {
 			_hands = new List<Hand>();
-			_hands.Add(new Hand() { Index = 0 });
+			_hands.Add(new Hand() { Index = 0, TableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c") });
+			_hands.Add(new Hand() { Index = 1, TableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c") });
+			_hands.Add(new Hand() { Index = 2, TableId = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c") });
+
+
+			_hands.Add(new Hand() { Index = 0, TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16") });
+			_hands.Add(new Hand() { Index = 1, TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16") });
+			_hands.Add(new Hand() { Index = 2, TableId = new Guid("bf368921-346a-42d8-9cb8-621f9cad5e16") });
         }
 
         //public MockHandRepo(IPlayerRepository playerRepo)
