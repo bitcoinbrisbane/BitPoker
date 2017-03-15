@@ -10,34 +10,6 @@ namespace BitPoker.Models.NTests
 		private const String TABLE_ID = "d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363";
 
 		[Test()]
-		public void Should_Get_Table_Bitcoin_Address()
-		{
-			BitPoker.Models.Contracts.Table table = new Contracts.Table(2,2);
-
-			table.Peers[0] = new Peer()
-			{
-				BitcoinAddress = "mwKNGSDZmGdhJGybLADxVVHrPa3GRmeDjk",
-				PublicKey = "026F36F4380413165050FE415B6826DF6485753677378D2AA30034A91DA35A2E6D"
-			};
-
-			Assert.AreEqual("mwKNGSDZmGdhJGybLADxVVHrPa3GRmeDjk", table.BitcoinAddress);
-		}
-
-		[Test()]
-		public void Should_Get_Table_Public_Key()
-		{
-			BitPoker.Models.Contracts.Table table = new Contracts.Table(2, 2);
-
-			table.Peers[0] = new Peer()
-			{
-				BitcoinAddress = "mwKNGSDZmGdhJGybLADxVVHrPa3GRmeDjk",
-				PublicKey = "026F36F4380413165050FE415B6826DF6485753677378D2AA30034A91DA35A2E6D"
-			};
-
-			Assert.AreEqual("mwKNGSDZmGdhJGybLADxVVHrPa3GRmeDjk", table.BitcoinAddress);
-		}
-
-		[Test()]
 		public void Should_Get_Buy_In_Request_To_String()
 		{
 			BitPoker.Models.Messages.BuyInRequest request = new BitPoker.Models.Messages.BuyInRequest()

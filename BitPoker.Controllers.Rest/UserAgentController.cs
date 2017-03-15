@@ -13,10 +13,15 @@ namespace BitPoker.Controllers.Rest
 				Agent = "BitPoker c#",
 				Version = 0.1M,
 				TimeStamp = DateTime.UtcNow,
-				BitcoinAddress = base.LocalBitcoinAddress,
+				BitcoinAddress = base.LocalBitcoinAddress.ToString(),
 				UpTime = DateTime.UtcNow - base.StartTime,
 				LastSeen = DateTime.Now - base.LastRequest
 			};
+		}
+
+		protected void SetPrivateKey(String key)
+		{
+			base.PrivateKey = key;
 		}
 	}
 }

@@ -11,7 +11,16 @@ namespace BitPoker.Owin.RestHost
 		public TablesController()
 		{
 			//base.TableRepo = new BitPoker.Repository.LiteDB.TableRepository("bitpoker3.db");
-			base.TableRepo = new BitPoker.Repository.Mocks.TableRepository();
+			String tableRepo = System.Configuration.ConfigurationManager.AppSettings["TableRepo"];
+
+			if (!String.IsNullOrEmpty(tableRepo))
+			{
+				//base.TableRepo = Activator.CreateInstance(Type.GetType(tableRepo));
+			}
+			else
+			{
+				base.TableRepo = new BitPoker.Repository.Mocks.TableRepository();
+			}
 		}
 	}
 }

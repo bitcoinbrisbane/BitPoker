@@ -29,9 +29,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NBitcoin">
-      <HintPath>..\packages\NBitcoin.3.0.2.4\lib\net45\NBitcoin.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -45,11 +42,16 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="NBitcoin">
+      <HintPath>..\packages\NBitcoin.3.0.2.9\lib\net45\NBitcoin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TablesControllerTests.cs" />
     <Compile Include="PeersControllerTests.cs" />
     <Compile Include="HandsControllerTests.cs" />
+    <Compile Include="BuyInControllerTests.cs" />
+    <Compile Include="JoinControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

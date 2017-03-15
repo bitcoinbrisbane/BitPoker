@@ -6,7 +6,7 @@ namespace BitPoker.Controllers.Tests
     [TestFixture()]
     public class TablesControllerTests
     {
-        private BitPoker.Models.IRequest request;
+        //private BitPoker.Models.IRequest request;
         private const String REQUEST_ID = "a66a8eb4-ea1f-42bb-b5f2-03456094b1f6";
 		private const String TABLE_ID = "d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363";
 
@@ -42,7 +42,7 @@ namespace BitPoker.Controllers.Tests
 			NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(PRIVATE_KEY, NBitcoin.Network.TestNet);
 			request.Signature = secret.PrivateKey.SignMessage(request.ToString());
 
-            Models.Messages.JoinTableResponse response = _controller.Post(request);
+			Models.Messages.JoinTableResponse response = null; //_controller.Post(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(2, response.Seat);
@@ -69,7 +69,7 @@ namespace BitPoker.Controllers.Tests
                 Version = 1
             };
 
-            Models.Messages.JoinTableResponse response = _controller.Post(request);
+			Models.Messages.JoinTableResponse response = null; // = _controller.Join(request);
 
             Assert.IsNotNull(response);
             Assert.AreEqual(1, response.Seat);

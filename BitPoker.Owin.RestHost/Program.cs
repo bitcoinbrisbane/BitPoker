@@ -20,13 +20,21 @@ namespace BitPoker.Owin.RestHost
 			//	}
 			//});
 
-			string baseAddress = "http://localhost:5000/";
+			String baseAddress = System.Configuration.ConfigurationManager.AppSettings["baseurl"];
 
-			// Start OWIN host 
-			using (WebApp.Start<Startup>(url: baseAddress))
+			if (!String.IsNullOrEmpty(baseAddress))
 			{
-				Console.WriteLine("Server running at {0} - press Enter to quit. ", baseAddress);
-				Console.ReadLine();
+
+				// Start OWIN host 
+				using (WebApp.Start<Startup>(url: baseAddress))
+				{
+					Console.WriteLine("Server running at {0} - press Enter to quit. ", baseAddress);
+					Console.ReadLine();
+				}
+			}
+			else
+			{
+				Console.WriteLine("No base url config setting found");
 			}
 
 			//Console.ReadLine();

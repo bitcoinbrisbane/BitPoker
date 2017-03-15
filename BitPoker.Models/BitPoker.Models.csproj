@@ -35,6 +35,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="NBitcoin">
+      <HintPath>..\packages\NBitcoin.3.0.2.9\lib\net45\NBitcoin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blockr\AddressResponse.cs" />

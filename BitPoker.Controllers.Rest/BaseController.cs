@@ -6,7 +6,7 @@ namespace BitPoker.Controllers.Rest
 {
     public abstract class BaseController : ApiController
     {
-		private String _privateKey;
+		//private String _privateKey;
 		private String _ccPrivateKey; //Colour coin
 
 		public DateTime StartTime { get; set; }
@@ -17,7 +17,24 @@ namespace BitPoker.Controllers.Rest
 
 		internal String PrivateKey
 		{
-			set { _privateKey = value; }
+			get;
+			set;
+		}
+
+		internal NBitcoin.ISecret Secret
+		{
+			get
+			{
+				if (!String.IsNullOrEmpty(PrivateKey))
+				{
+					NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(PrivateKey);
+					return secret;
+				}
+				else
+				{
+					return null;
+				}
+			}
 		}
 
 		public NBitcoin.Network Network { get; set; }
@@ -25,25 +42,25 @@ namespace BitPoker.Controllers.Rest
 		/// <summary>
 		/// Users bitcoin address
 		/// </summary>
-		public String LocalBitcoinAddress
+		public NBitcoin.BitcoinAddress LocalBitcoinAddress
 		{
 			get
 			{
-				if (!String.IsNullOrEmpty(_privateKey))
+				if (!String.IsNullOrEmpty(PrivateKey))
 				{
-					NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(_privateKey);
-					return secret.GetAddress().ToString();
+					NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(PrivateKey);
+					return secret.GetAddress();
 				}
 				else
 				{
-					return "";
+					return null;
 				}
 			}
 		}
 
 		internal void SetPrivateKey(Byte[] key)
 		{
-			_privateKey = Convert.ToBase64String(key);
+			PrivateKey = Convert.ToBase64String(key);
 		}
 
 		internal void SetCCPrivateKey(Byte[] key)
@@ -63,7 +80,6 @@ namespace BitPoker.Controllers.Rest
 
         internal Boolean Verify(String address, String message, String signature)
         {
-            //NBitcoin.BitcoinAddress a = NBitcoin.BitcoinAddress.Create(address);
             var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
             bool verified = pubKey.VerifyMessage(message, signature);
 
@@ -73,8 +89,7 @@ namespace BitPoker.Controllers.Rest
 
 		internal String SignMessge(String message)
 		{
-			NBitcoin.BitcoinSecret secret = new NBitcoin.BitcoinSecret(_privateKey, this.Network);
-			return secret.PrivateKey.SignMessage(message);
+			return this.Secret.PrivateKey.SignMessage(message);
 		}
 
 		internal Boolean ValidateTx(String tx)

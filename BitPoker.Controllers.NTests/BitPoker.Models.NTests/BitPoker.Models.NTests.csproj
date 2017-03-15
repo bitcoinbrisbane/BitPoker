@@ -37,6 +37,7 @@
     <Compile Include="CardExtensionsTests.cs" />
     <Compile Include="CardTests.cs" />
     <Compile Include="DeckTests.cs" />
+    <Compile Include="TableExtensionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BitPoker.Models\BitPoker.Models.csproj">

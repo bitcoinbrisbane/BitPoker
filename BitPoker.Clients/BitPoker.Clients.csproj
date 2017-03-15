@@ -44,7 +44,8 @@
     <Compile Include="IPeerClient.cs" />
     <Compile Include="ITableClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IUserAgent.cs" />
+    <Compile Include="IUserAgentClient.cs" />
+    <Compile Include="ITransactionClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
