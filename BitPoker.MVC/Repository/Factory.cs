@@ -44,7 +44,7 @@ namespace BitPoker.MVC.Repository
 
                 if (repoName.Contains("Mock"))
                 {
-                    return new BitPoker.Repository.MockTableRepo();
+					return new BitPoker.Repository.Mocks.TableRepository();
                 }
                 else
                 {

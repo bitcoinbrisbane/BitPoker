@@ -34,8 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.WPFClient.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.NetworkClient", "BitPoker.NetworkClient\BitPoker.NetworkClient.csproj", "{630CF422-2C7D-4CD5-990F-71D50C02C3C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.MVC.Models", "BitPoker.MVC.Models\BitPoker.MVC.Models.csproj", "{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Clients", "BitPoker.Clients\BitPoker.Clients.csproj", "{5758D35E-C5C6-4D21-B571-029B38E85F62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Clients.JSONRPC", "BitPoker.Clients.JSONRPC\BitPoker.Clients.JSONRPC.csproj", "{EEBC1A57-B303-4F5D-BD13-E4C7B5E5B505}"
@@ -586,46 +584,6 @@ Global
 		{630CF422-2C7D-4CD5-990F-71D50C02C3C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{630CF422-2C7D-4CD5-990F-71D50C02C3C4}.Release|x86.ActiveCfg = Release|Any CPU
 		{630CF422-2C7D-4CD5-990F-71D50C02C3C4}.Release|x86.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|Mixed Platforms.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Ad-Hoc|x86.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|Mixed Platforms.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|x86.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.AppStore|x86.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Debug|x86.Build.0 = Debug|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|iPhone.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|x86.ActiveCfg = Release|Any CPU
-		{280E0971-DDCD-4FCF-BEAE-6841D16C3DFD}.Release|x86.Build.0 = Release|Any CPU
 		{5758D35E-C5C6-4D21-B571-029B38E85F62}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{5758D35E-C5C6-4D21-B571-029B38E85F62}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{5758D35E-C5C6-4D21-B571-029B38E85F62}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU

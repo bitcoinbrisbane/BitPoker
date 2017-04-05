@@ -29,18 +29,6 @@ namespace BitPoker.MVC.Controllers
         /// <returns></returns>
         public BitPoker.Models.Hand Get(Guid id, Int32 index = 0)
         {
-            //Full hand
-            if (id.ToString() == "398b5fe2-da27-4772-81ce-37fa615719b5")
-            {
-                _repo = new BitPoker.Repository.MockHandRepo();
-            }
-
-            //Begining of hand, dealt, small blind posted
-            if (id.ToString() == "91dacf01-4c4b-4656-912b-2c3a11f6e516")
-            {
-                _repo = new BitPoker.Repository.MockHandRepo();
-            }
-
             BitPoker.Models.Hand hand = _repo.Find(id);
             return hand;
         }

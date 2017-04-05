@@ -24,7 +24,6 @@ namespace BitPoker.Owin.RestHost
 
 			if (!String.IsNullOrEmpty(baseAddress))
 			{
-
 				// Start OWIN host 
 				using (WebApp.Start<Startup>(url: baseAddress))
 				{

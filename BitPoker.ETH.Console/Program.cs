@@ -90,7 +90,7 @@ namespace BitPoker.ETH.Console
 			}
 
 			var individualReturns = contract.GetFunction("individualReturns");
-			var return0 = individualReturns.CallDeserializingToObjectAsync<DTOs.IndividualReturn>("0xb712a7797a7d52fe92d17a5e251aa19784cd18b0").Result;
+			//var return0 = individualReturns.CallDeserializingToObjectAsync<DTOs.IndividualReturn>("0xb712a7797a7d52fe92d17a5e251aa19784cd18b0").Result;
 		}
 
 		private static string GetABIFromFile(String path)

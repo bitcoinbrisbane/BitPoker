@@ -217,7 +217,7 @@ namespace BitPoker.MVC.Controllers
             var message = new BitPoker.Models.Messages.DeckResponse();
 
             message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
-            message.Deck.Shuffle();
+			message.Deck.Shuffle(new BitPoker.MVC.Models.PseudoRandom());
         }
     }
 }
