@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using BitPoker.Models.Messages;
 
-namespace BitPoker.Repository
+namespace BitPoker.Repository.Mocks
 {
-    public class MockMessageRepo : IMessagesRepository
+    public class MessageRepo : IMessagesRepository
     {
 
         public IEnumerable<ActionMessage> All()

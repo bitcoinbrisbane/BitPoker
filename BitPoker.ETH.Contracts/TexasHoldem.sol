@@ -67,6 +67,8 @@ contract TexasHoldem is BitPoker{
 
     struct Action {
         AllowedAction action;
+        address player;
+        uint256 amount;
     }
 
     struct Hand {
@@ -93,6 +95,6 @@ contract TexasHoldem is BitPoker{
     {
         if (actions.length == 0) throw;
 
-        if (action[0])
+        if (action[0].action != smallBlind) throw;
     }
 }

@@ -49,7 +49,7 @@
     <Compile Include="PeerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HandRepository.cs" />
-    <Compile Include="MockMessageRepo.cs" />
+    <Compile Include="MessageRepo.cs" />
     <Compile Include="PlayerRepository.cs" />
     <Compile Include="TableRepository.cs" />
   </ItemGroup>
