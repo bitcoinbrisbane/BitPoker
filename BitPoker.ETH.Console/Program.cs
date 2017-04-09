@@ -7,7 +7,7 @@ namespace BitPoker.ETH.Console
 	class MainClass
 	{
 		private static String CONTRACT_PATH = @"/Users/lucascullen/GitHub/BitcoinBrisbane/BitPoker/BitPoker.ETH.Contracts/Bin/Contracts/";
-		private static String CONTRACT_FILE_NAME = "poker";
+		private static String CONTRACT_FILE_NAME = "Chip";
 
 		public static void Main(string[] args)
 		{

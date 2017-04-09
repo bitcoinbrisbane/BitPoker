@@ -96,19 +96,22 @@ Each client connects to one another in the "lobby".  They can then look for play
 Methods are of two types.  Game play / action messages that determin a players turn intent.  Methods that do not, such as join a table.
 
 Non action methods
+- Join
 - BuyIn
 - Deal
 - Quit
 - SitOut
 - Shuffle
+- Leave
 
 Action methods
 - SmallBlind
 - BigBlind
+- Call
 - Bet
 - Raise
 - Fold
-- Shuffle
+- Muck
 
 ### Overview
 If the game is to be developed using Ethereum contracts:
@@ -144,6 +147,11 @@ By embedding the payment conditional upon knowledge of a secure cryptographic ha
 In the below *table contract* the below game Texas Holdem is defined as an Enum.  The whole rules of the game could be defined as a contract, thus allowing anyone to develop variations of the game, such as the "Seven Duce" rule, other variations of poker such as Omaha or even other games.  
 
 These are out side the scope of this paper.
+
+Ropsten keys (in folder)
+MyEtherWallet password Test12345
+Private Key bbbe14b22e95f7d48a1b1268d27440078fdfd29183d00102319a61b3ba5b8511
+Account 0x736060769FfE0fFB6e1799A06B2F5633ABAb53E0
 
 ## Messages
 All actions are sent as JSON RPC.  They must include a public key hash and be signed.  The payload must also reference their previous message hash.

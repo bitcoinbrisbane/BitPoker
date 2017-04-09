@@ -6,7 +6,7 @@ namespace BitPoker.Controllers.Tests
     [TestClass]
     public class TableControllerTests
     {
-        private BitPoker.Models.IRequest request;
+        //private BitPoker.Models.IRequest request;
         private const String REQUEST_ID = "a66a8eb4-ea1f-42bb-b5f2-03456094b1f6";
 
         private BitPoker.Controllers.Rest.TablesController _controller;
@@ -23,7 +23,7 @@ namespace BitPoker.Controllers.Tests
             //private key 93GnRYsUXD4FPCiV46n8vqKvwHSZQgjnyuBvhNtqRvq3Ac26kVc
 
             Guid tableId = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363");
-            _controller.TableRepo = new Repository.MockTableRepo();
+            _controller.TableRepo = new Repository.Mocks.TableRepository
 
             Models.Messages.JoinTableRequest request = new Models.Messages.JoinTableRequest()
             {

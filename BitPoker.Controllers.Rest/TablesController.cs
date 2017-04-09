@@ -33,11 +33,5 @@ namespace BitPoker.Controllers.Rest
 		{
 			TableRepo.Add(request.Table);
 		}
-
-		//[HttpPost, Route("deal")]
-		//public Models.Messages.DealResponse Deal(Models.Messages.DealRequest request)
-		//{
-		//	return new Models.Messages.DealResponse() { Id = request.Id, TimeStamp = DateTime.UtcNow };
-		//}
     }
 }

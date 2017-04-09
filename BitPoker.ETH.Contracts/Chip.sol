@@ -1,4 +1,4 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.8;
 
 //ERC20 token for the in game chip of BitPoker.io
 contract Chip {
@@ -9,12 +9,18 @@ contract Chip {
     string public contractUrl = "https://www.bitpoker.io/contract";
     uint8 public decimals = 4;
     uint256 public totalSupply = 10000000;
+    //uint256 public startDate;
 
     /* This creates an array with all balances */
     mapping (address=>uint256) public balanceOf;
-
+    
     /* This generates a public event on the blockchain that will notify clients */
     event Transfer(address indexed from, address indexed to, uint256 value);
+
+    // function Chip()
+    // {
+    //     startDate = now;
+    // }
 
     /* Send chips */
     function transfer(address _to, uint256 _value) {
@@ -23,10 +29,5 @@ contract Chip {
         balanceOf[msg.sender] -= _value;                     // Subtract from the sender
         balanceOf[_to] += _value;                            // Add the same to the recipient
         Transfer(msg.sender, _to, _value);                   // Notify anyone listening that this transfer took place
-    }
-
-    /* This unnamed function is called whenever someone tries to send ether to it */
-    function () {
-        throw;     // Prevents accidental sending of ether
     }
 }

@@ -81,7 +81,7 @@ namespace BitPoker.Controllers.Rest
         internal Boolean Verify(String address, String message, String signature)
         {
             var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
-            bool verified = pubKey.VerifyMessage(message, signature);
+            //bool verified = pubKey.VerifyMessage(message, signature);
 
             //return verified;
             return true;
