@@ -145,7 +145,7 @@ In the below *table contract* the below game Texas Holdem is defined as an Enum.
 
 These are out side the scope of this paper.
 
-Ropsen keys (in folder)
+Ropsten keys (in folder)
 MyEtherWallet password Test12345
 Private Key bbbe14b22e95f7d48a1b1268d27440078fdfd29183d00102319a61b3ba5b8511
 Account 0x736060769FfE0fFB6e1799A06B2F5633ABAb53E0
