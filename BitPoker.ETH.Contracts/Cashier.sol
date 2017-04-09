@@ -4,7 +4,7 @@ contract tokenRecipient {
     function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData); 
 }
 
-//In game currency
+//ICO contract
 contract Cashier {
     uint256 public totalSupply = 10000000;
     uint256 public startDate;
