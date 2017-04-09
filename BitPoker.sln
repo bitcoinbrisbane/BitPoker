@@ -83,6 +83,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{DD932A2F-6F50-4BC3-9273-F689F5EEA00D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{2FBC5255-32B5-4545-AD65-5316D1325E2F}"
+	ProjectSection(SolutionItems) = preProject
+		BitPoker.ETH.Contracts\Cashier.sol = BitPoker.ETH.Contracts\Cashier.sol
+		BitPoker.ETH.Contracts\Chip.sol = BitPoker.ETH.Contracts\Chip.sol
+		BitPoker.ETH.Contracts\Poker.sol = BitPoker.ETH.Contracts\Poker.sol
+		BitPoker.ETH.Contracts\TexasHoldem.sol = BitPoker.ETH.Contracts\TexasHoldem.sol
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.ETH.Console", "BitPoker.ETH.Console\BitPoker.ETH.Console.csproj", "{A4A615C0-7337-45C1-A89C-0F055761C152}"
 EndProject

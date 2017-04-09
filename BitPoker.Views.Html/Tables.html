@@ -9,11 +9,12 @@
     <h1>My Tables</h1>
 
     <table id="myTables">
+
     </table>
 
     <h1>All known peers tables</h1>
 
-    <table>
+    <table id="peersTables">
         <tr>
             <th></th>
         </tr>
@@ -36,21 +37,26 @@
     <script>
 		//Local controller
         var tablesUri = 'http://localhost:5000/api/tables/';
+        var peersUri = 'http://localhost:5000/api/peers/';
 				
         $(document).ready(function () {
 				
 	         $.getJSON(tablesUri)
 	         	.done(function (response) {
               	$.each(response, function (key, item) {
-					//console.warn(item.BitcoinAddress);
-
                   	$('#myTables').append('<tr><td><a href="Table.html?id=' + item.Id + '">' + item.Id + '</td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</tr>');
               });
           	});
 
-              function refreshPeersTables() {
-                  
-              }
+            function refreshPeersTables() {
+                $.getJSON(peersUri)
+               .done(function (response) {
+                   //TODO:  Iterate through all peers.
+                   $.each(response, function (key, item) {
+                       $('#peersTables').append('<tr><td><a href="Table.html?id=' + item.Id + '">' + item.Id + '</td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</tr>');
+                   });
+               });
+            }
         });
     </script>
 </body>
