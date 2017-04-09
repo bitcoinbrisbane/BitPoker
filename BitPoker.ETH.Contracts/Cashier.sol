@@ -17,14 +17,6 @@ contract Cashier {
     /* This generates a public event on the blockchain that will notify clients */
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    // function MyToken(uint256 initialSupply, string tokenName, uint8 decimalUnits, string tokenSymbol) {
-    //     balanceOf[msg.sender] = initialSupply;
-    //     totalSupply = initialSupply;
-    //     name = tokenName;
-    //     symbol = tokenSymbol;
-    //     decimals = decimalUnits;
-    // }
-
     function Cashier()
     {
         startDate = now;
