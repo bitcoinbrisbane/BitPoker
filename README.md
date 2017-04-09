@@ -96,19 +96,22 @@ Each client connects to one another in the "lobby".  They can then look for play
 Methods are of two types.  Game play / action messages that determin a players turn intent.  Methods that do not, such as join a table.
 
 Non action methods
+- Join
 - BuyIn
 - Deal
 - Quit
 - SitOut
 - Shuffle
+- Leave
 
 Action methods
 - SmallBlind
 - BigBlind
+- Call
 - Bet
 - Raise
 - Fold
-- Shuffle
+- Muck
 
 ### Overview
 If the game is to be developed using Ethereum contracts:
