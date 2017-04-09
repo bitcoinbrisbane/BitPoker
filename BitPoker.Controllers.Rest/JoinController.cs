@@ -15,7 +15,7 @@ namespace BitPoker.Controllers.Rest
 				Models.Messages.JoinTableResponse response = new Models.Messages.JoinTableResponse();
 				Models.Contracts.Table table = this.TableRepo.Find(request.TableId);
 
-				if (table != null && table.Peers[request.Seat] == null)
+				if (table != null)
 				{
 					for (Int32 i = 0; i < table.MaxPlayers; i++)
 					{

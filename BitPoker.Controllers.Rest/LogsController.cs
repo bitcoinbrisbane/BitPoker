@@ -10,7 +10,7 @@ namespace BitPoker.Controllers.Rest
         [HttpGet]
         public IEnumerable<Models.Log> Get(Int32 max = 20)
         {
-			return LogRepo.All().OrderByDescending(l => l.TimeStamp).Take(max);
+			return LogRepo.All().OrderByDescending(l => l.TimeStamp);
         }
     }
 }

@@ -18,6 +18,7 @@
 
     <table id="history"></table>
 
+
     <p>Join</p>
     <button type="button" onclick="join()">Join Table</button>
 
@@ -32,53 +33,57 @@
     <button type="button" onclick="join()">Join</button>
 
     <script>	
+        var tablesUri = 'http://localhost:5000/api/tables/bf368921-346a-42d8-9cb8-621f9cad5e16';
+        var handsUri = 'http://localhost:5000/api/hands/bf368921-346a-42d8-9cb8-621f9cad5e16';
+        var logsUri = 'http://localhost:5000/api/logs';
+
         $(document).ready(function () {
-			var tablesUri = 'http://localhost:5000/api/tables/bf368921-346a-42d8-9cb8-621f9cad5e16';
-			var handsUri = 'http://localhost:5000/api/hands/bf368921-346a-42d8-9cb8-621f9cad5e16';
-			var logsUri = 'http://localhost:5000/api/logs';
 
-			refresh();
+            refresh();
 			
-         	$.getJSON(tablesUri)
+            $.getJSON(tablesUri)
 	         	.done(function (response) {
-                  	$('#table').append(response.Id);
-					$('#tabledetables').append(response.SmallBlind + ' ' + response.BigBlind);
-          	});
+	         	    $('#table').append(response.Id);
+	         	    $('#tabledetables').append(response.SmallBlind + ' ' + response.BigBlind);
+	         	});
 
-	         $.getJSON(handsUri)
-	         	.done(function (response) {
-	              	$.each(response, function (key, item) {
-	                  	$('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
-	              });
-          	});
+            $.getJSON(handsUri)
+               .done(function (response) {
+                   $.each(response, function (key, item) {
+                       $('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+                   });
+               });
+        });
 
-			function refresh() {
-		         $.getJSON(logsUri)
-		         	.done(function (response) {
-		              	$.each(response, function (key, item) {
-		                  	$('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
-		              });
-					setTimeout(refresh,5000);
-		      	});
-			}
+		function refresh() {
+		        $.getJSON(logsUri)
+		        .done(function (response) {
+		            $.each(response, function (key, item) {
+		                $('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+		            });
+				setTimeout(refresh,5000);
+		    });
+		}
 
         function join() {
 
             var request = {
+                BitcoinAddress: "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 Seat: 1,
-				TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16"
+                TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16",
+                Signature: "mock"
             };
 
             $.post("http://localhost:5000/api/join", request)
-              .done(function (data) {
-                  alert("Data Loaded: " + data);
-              });
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                });
         }
 
         function buyIn() {
 
         	//Get a signed tx off controller
-	         $.getJSON("http://localhost:5000/api/transaction?amount=10000&address=")
+	            $.getJSON("http://localhost:5000/api/transaction?amount=10000&address=")
 	         	.done(function (response) {
      	            var request = {
 						TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16",
@@ -87,11 +92,11 @@
 
 					//Then post to 
 		            $.post("http://localhost:5000/api/buyin", request)
-		              .done(function (data) {
-		                  alert("Data Loaded: " + data);
+		                .done(function (data) {
+		                    alert("Data Loaded: " + data);
 		          	});
               	});
-	      	});
+	      	}
 
 			
         function deal() {
@@ -102,12 +107,11 @@
             };
 
             $.post("http://localhost:5000/api/deal", request)
-              .done(function (data) {
-                  alert("Data Loaded: " + data);
-              });
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                });
         	}
-        });
-			
+
     </script>
 </body>
 </html>
