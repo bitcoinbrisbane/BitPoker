@@ -40,7 +40,7 @@
       <HintPath>..\packages\NBitcoin.3.0.2.4\lib\net45\NBitcoin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -75,6 +75,10 @@
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.Mocks\BitPoker.Repository.Mocks.csproj">
+      <Project>{13c2882f-3b16-455b-9cd1-0dea92883769}</Project>
+      <Name>BitPoker.Repository.Mocks</Name>
     </ProjectReference>
     <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
       <Project>{fcc27f60-7edf-464b-9876-f196a4a7dfb3}</Project>

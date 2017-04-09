@@ -8,7 +8,7 @@ contract tokenRecipient {
 contract Cashier {
     uint256 public totalSupply = 10000000;
     uint256 public startDate;
-    decimals decimalUnits = 4;
+    //decimals decimalUnits = 4;
 
     /* This creates an array with all balances */
     mapping (address=>uint256) public balanceOf;
