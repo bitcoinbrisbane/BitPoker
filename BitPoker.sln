@@ -94,11 +94,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.ETH.Console", "Bit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Logic", "BitPoker.Logic\BitPoker.Logic.csproj", "{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}"
 EndProject
-<<<<<<< HEAD
-=======
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitPoker.Controllers.xTests", "BitPoker.Controllers.xTests\BitPoker.Controllers.xTests.csproj", "{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}"
 EndProject
->>>>>>> 53f74f4b6a8aa1047dd25a96e1d3f16e7944a1eb
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -1109,8 +1106,6 @@ Global
 		{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}.Release|x86.ActiveCfg = Release|Any CPU
 		{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A}.Release|x86.Build.0 = Release|Any CPU
-<<<<<<< HEAD
-=======
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
@@ -1151,7 +1146,6 @@ Global
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}.Release|x86.ActiveCfg = Release|Any CPU
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E}.Release|x86.Build.0 = Release|Any CPU
->>>>>>> 53f74f4b6a8aa1047dd25a96e1d3f16e7944a1eb
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1179,9 +1173,6 @@ Global
 		{5B6DC93F-3D72-4519-AEA9-95754E8DF350} = {80BFA192-488D-44AC-9085-9D89F7F7A482}
 		{A4A615C0-7337-45C1-A89C-0F055761C152} = {DD932A2F-6F50-4BC3-9273-F689F5EEA00D}
 		{BA2B1D24-969C-4B79-8DF0-FD1A3DBD7E1A} = {DD932A2F-6F50-4BC3-9273-F689F5EEA00D}
-<<<<<<< HEAD
-=======
 		{67F6D4C0-36D6-4061-B92C-E4A7AE18BC7E} = {1035EA35-D523-43DE-B2B8-D1CED3E87BA3}
->>>>>>> 53f74f4b6a8aa1047dd25a96e1d3f16e7944a1eb
 	EndGlobalSection
 EndGlobal
