@@ -35,7 +35,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NBitcoin">
-      <HintPath>..\packages\NBitcoin.3.0.2.13\lib\net45\NBitcoin.dll</HintPath>
+      <HintPath>..\packages\NBitcoin.3.0.2.14\lib\net45\NBitcoin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -107,11 +107,12 @@
     <Compile Include="GameContext\IStartGameContext.cs" />
     <Compile Include="GameContext\IStartHandContext.cs" />
     <Compile Include="GameContext\IStartRoundContext.cs" />
-    <Compile Include="Players\IPlayer.cs" />
+    <Compile Include="Players\IPlayerLogic.cs" />
     <Compile Include="Players\PlayerAction.cs" />
     <Compile Include="Players\PlayerActionAndName.cs" />
     <Compile Include="Players\BasePlayer.cs" />
     <Compile Include="GameMechanics\ITexasHoldemGame.cs" />
+    <Compile Include="Players\IPlayerAction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

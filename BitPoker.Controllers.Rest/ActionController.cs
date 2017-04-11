@@ -31,7 +31,8 @@ namespace BitPoker.Controllers.Rest
 
 				if (hand != null)
 				{
-					//TexasHoldem.Logic.GameMechanics.TwoPlayersTexasHoldemGame holdem = new TexasHoldem.Logic.GameMechanics.TwoPlayersTexasHoldemGame();
+					BitPoker.Models.Players.IPlayer player1 = new 
+					BitPoker.Logic.GameMechanics.TwoPlayersTexasHoldemGame holdem = new BitPoker.Logic.GameMechanics.TwoPlayersTexasHoldemGame();
 				}
 			}
 		}

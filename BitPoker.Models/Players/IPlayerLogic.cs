@@ -3,7 +3,7 @@ using BitPoker.Models.GameContext;
 
 namespace BitPoker.Models.Players
 {
-    public interface IPlayer
+    public interface IPlayerLogic
     {
         String Name { get; }
 

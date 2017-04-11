@@ -1,4 +1,4 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.8;
 
 //ERC20 token for the in game chip of BitPoker.io
 contract Chip {

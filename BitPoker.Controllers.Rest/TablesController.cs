@@ -27,11 +27,11 @@ namespace BitPoker.Controllers.Rest
             return TableRepo.Find(id);
         }
 
-		//[Authorize]
-		[HttpPost]
-		public void Post(Models.Messages.AddTableRequest request)
-		{
-			TableRepo.Add(request.Table);
-		}
+	//[Authorize]
+	[HttpPost]
+	public void Post(Models.Messages.AddTableRequest request)
+	{
+		TableRepo.Add(request.Table);
+	}
     }
 }

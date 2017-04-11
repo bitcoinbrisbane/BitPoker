@@ -6,8 +6,8 @@ namespace BitPoker.ETH.Console
 {
 	class MainClass
 	{
-		private static String CONTRACT_PATH = @"/Users/lucascullen/GitHub/BitcoinBrisbane/BitPoker/BitPoker.ETH.Contracts/Bin/Contracts/";
-		private static String CONTRACT_FILE_NAME = "Chip";
+		private static String CONTRACT_PATH = @"/Users/lucascullen/GitHub/BitcoinBrisbane/BitPoker/bin/BitPoker.ETH.Contracts/";
+		private static String CONTRACT_FILE_NAME = "Cashier";
 
 		public static void Main(string[] args)
 		{
@@ -23,12 +23,7 @@ namespace BitPoker.ETH.Console
 				System.Console.WriteLine(accounts[i] + " " + balance.Value);
 			}
 
-			//var newAccountResponse = web3.Personal.NewAccount.SendRequestAsync(password).Result;
-			//accounts = web3.Personal.ListAccounts.SendRequestAsync().Result;
-
 			Boolean unlockResponse = web3.Personal.UnlockAccount.SendRequestAsync(accounts[0], password, 120).Result;
-
-			//
 
 			//Contract
 			var bytes = GetBytesFromFile(CONTRACT_PATH + CONTRACT_FILE_NAME + ".bin"); 
@@ -36,8 +31,8 @@ namespace BitPoker.ETH.Console
 			//Deploy the contract
 
 			String contractHash = web3.Eth.DeployContract.SendRequestAsync(bytes, accounts[0], new Nethereum.Hex.HexTypes.HexBigInteger(1000000)).Result;
-			//const String txHash = "0x2f432ba0d2b8047a552ea6d6907be67ffbfa679f8f52a04df0876032c4d77409";
-
+			System.Console.WriteLine("Contract hash {0}", contractHash);
+			
 			//Write out the response from the contract
 			var isMining = web3.Eth.Mining.IsMining.SendRequestAsync().Result;
 
@@ -47,6 +42,8 @@ namespace BitPoker.ETH.Console
 			}
 
 			var receipt = web3.Eth.Transactions.GetTransactionReceipt.SendRequestAsync(contractHash).Result;
+			System.Console.WriteLine("Contract receipt {0}", receipt.BlockHash);
+			
 			System.Console.Write("Processing");
 
 			while (receipt == null)
@@ -65,19 +62,14 @@ namespace BitPoker.ETH.Console
 
 			var contractAddress = receipt.ContractAddress;
 			var contract = web3.Eth.GetContract(abi, contractAddress);
+			var buyFunction = contract.GetFunction("buy");
 
-
-			var lodgeFunction = contract.GetFunction("lodge");
-			object[] inputs = new object[3] { 100000, 11000, 30000 };
-
-			var estimated = lodgeFunction.CallAsync<Int64>(inputs).Result;
-			System.Console.WriteLine(estimated);
-
+			
 			unlockResponse = web3.Personal.UnlockAccount.SendRequestAsync(accounts[1], password, 120).Result;
 
 			if (unlockResponse == true)
 			{
-				var estimatedTx = lodgeFunction.SendTransactionAsync(accounts[1], inputs).Result;
+				var estimatedTx = buyFunction.SendTransactionAsync(accounts[1]).Result;
 				System.Console.WriteLine(estimatedTx);
 				receipt = null;
 
@@ -90,7 +82,6 @@ namespace BitPoker.ETH.Console
 			}
 
 			var individualReturns = contract.GetFunction("individualReturns");
-			//var return0 = individualReturns.CallDeserializingToObjectAsync<DTOs.IndividualReturn>("0xb712a7797a7d52fe92d17a5e251aa19784cd18b0").Result;
 		}
 
 		private static string GetABIFromFile(String path)

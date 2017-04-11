@@ -17,11 +17,6 @@ contract Chip {
     /* This generates a public event on the blockchain that will notify clients */
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    // function Chip()
-    // {
-    //     startDate = now;
-    // }
-
     /* Send chips */
     function transfer(address _to, uint256 _value) {
         if (balanceOf[msg.sender] < _value) throw;           // Check if the sender has enough

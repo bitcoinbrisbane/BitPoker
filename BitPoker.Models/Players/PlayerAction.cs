@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Players
 {
-	public class PlayerAction
+    public class PlayerAction : Models.IPlayerAction
     {
         private static readonly PlayerAction FoldObject = new PlayerAction(PlayerActionType.Fold);
         private static readonly PlayerAction CheckCallObject = new PlayerAction(PlayerActionType.CheckCall);

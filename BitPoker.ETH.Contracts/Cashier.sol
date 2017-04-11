@@ -1,11 +1,9 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.8;
 
-contract tokenRecipient { 
-    function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData); 
-}
+import "Chip";
 
 //ICO contract
-contract Cashier {
+contract Cashier as Chip {
     uint256 public totalSupply = 10000000;
     uint256 public startDate;
     //decimals decimalUnits = 4;

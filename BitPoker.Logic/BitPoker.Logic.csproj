@@ -60,6 +60,7 @@
     <Folder Include="GameMechanics\" />
     <Folder Include="Helpers\" />
     <Folder Include="Players\" />
+    <Folder Include="Context\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">

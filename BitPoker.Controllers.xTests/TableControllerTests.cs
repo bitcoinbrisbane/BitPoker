@@ -2,9 +2,8 @@
 
 namespace BitPoker.Controllers.xTests
 {
-    //[TestClass]
-    //public class TableControllerTests
-    //{
+    public class TableControllerTests
+    {
     //    //private BitPoker.Models.IRequest request;
     //    private const String REQUEST_ID = "a66a8eb4-ea1f-42bb-b5f2-03456094b1f6";
 
@@ -147,5 +146,5 @@ namespace BitPoker.Controllers.xTests
     //    {
 
     //    }
-    //}
+    }
 }
