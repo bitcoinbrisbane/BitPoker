@@ -11,7 +11,7 @@ contract Chip {
     uint256 public totalSupply = 10000000;
 
     /* This creates an array with all balances */
-    mapping (address=>uint256) public balanceOf;
+    mapping (address=>uint) public balanceOf;
 
     /* This generates a public event on the blockchain that will notify clients */
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -40,18 +40,20 @@ contract Cashier is Chip {
         startDate = now;
     }
 
-    function buy () payable {
+    function buy() payable {
         //Sliding scale of ICO
-        uint256 amount = 0;
-        if (now < startDate + 30 days)
-        {
-            amount = msg.value * 10000;
-        }
-        else
-        {
-            amount = msg.value * 5000;
-        }
-
+        uint amount = 1;
+        
+        // if (now < startDate + 30 days)
+        // {
+        //     amount += msg.value * 1000;
+        // }
+        // else
+        // {
+        //     amount += msg.value * 500;
+        // }
+        
+        amount += msg.value * 1000;
         balanceOf[msg.sender] += amount;
     }
 }

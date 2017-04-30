@@ -1,9 +1,10 @@
 ﻿using System;
+using BitPoker.Models.GameContext;
 using BitPoker.Models.Players;
 
 namespace BitPoker.Models
 {
-	public class TexasHoldemPlayer : IPlayer, IPlayerAction
+	public class TexasHoldemPlayer : BasePlayer, BitPoker.Models.IPlayer, IPlayerLogic
 	{
 		//Texas holdem properties
 		public Int16 Position { get; set; }
@@ -23,13 +24,22 @@ namespace BitPoker.Models
 		public String BitcoinAddress { get; set; }
 
 		public UInt64 Stack { get; set; }
-
-		//public PlayerActionType Type => throw new NotImplementedException();
-
-		//public long Money { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		
+		public override string Name { get; }
 
 		public TexasHoldemPlayer()
 		{
 		}
+		
+		public TexasHoldemPlayer(String bitcoinAddress)
+		{
+			this.Name = bitcoinAddress;
+		}
+		
+		public override PlayerAction GetTurn(IGetTurnContext context)
+		{
+			throw new NotImplementedException();
+		}
+
 	}
 }

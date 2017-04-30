@@ -59,7 +59,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NBitcoin">
-      <HintPath>..\packages\NBitcoin.3.0.2.14\lib\net45\NBitcoin.dll</HintPath>
+      <HintPath>..\packages\NBitcoin.3.0.2.15\lib\net45\NBitcoin.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +79,8 @@
     <Compile Include="JoinController.cs" />
     <Compile Include="BuyInController.cs" />
     <Compile Include="TransactionController.cs" />
+    <Compile Include="AIActionController.cs" />
+    <Compile Include="IActionController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

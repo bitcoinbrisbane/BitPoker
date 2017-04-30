@@ -26,7 +26,7 @@ namespace BitPoker.Logic.Players
 
         public Int64 SmallBlind { get; }
 
-		[Obsolete]
+	[Obsolete]
         public string FirstPlayerName { get; }
     }
 }

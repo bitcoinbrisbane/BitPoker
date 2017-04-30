@@ -43,15 +43,15 @@
     <Compile Include="Helpers\HandEvaluator.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\IHandEvaluator.cs" />
-    <Compile Include="Players\EndGameContext.cs" />
-    <Compile Include="Players\EndHandContext.cs" />
-    <Compile Include="Players\EndRoundContext.cs" />
-    <Compile Include="Players\GetTurnContext.cs" />
     <Compile Include="Players\PlayerDecorator.cs" />
-    <Compile Include="Players\StartGameContext.cs" />
-    <Compile Include="Players\StartHandContext.cs" />
-    <Compile Include="Players\StartRoundContext.cs" />
     <Compile Include="InternalGameException.cs" />
+    <Compile Include="Context\EndGameContext.cs" />
+    <Compile Include="Context\EndHandContext.cs" />
+    <Compile Include="Context\EndRoundContext.cs" />
+    <Compile Include="Context\GetTurnContext.cs" />
+    <Compile Include="Context\StartGameContext.cs" />
+    <Compile Include="Context\StartHandContext.cs" />
+    <Compile Include="Context\StartRoundContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cards\" />

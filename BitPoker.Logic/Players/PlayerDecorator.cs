@@ -3,16 +3,16 @@ using BitPoker.Models.Players;
 
 namespace BitPoker.Logic.Players
 {
-    public abstract class PlayerDecorator : IPlayer
+    public abstract class PlayerDecorator : IPlayerLogic
     {
-        protected PlayerDecorator(IPlayer player)
+        protected PlayerDecorator(IPlayerLogic player)
         {
             this.Player = player;
         }
 
         public virtual string Name => this.Player.Name;
 
-        protected IPlayer Player { get; }
+        protected BitPoker.Models.Players.IPlayerLogic Player { get; }
 
         public virtual void StartGame(IStartGameContext context)
         {
