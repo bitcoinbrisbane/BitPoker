@@ -35,12 +35,6 @@
           "buildAction": "None",
           "codeLanguage": "any",
           "copyToOutput": true
-        },
-        "bin/Debug/mockplayers.json": {
-          "buildAction": "None",
-          "codeLanguage": "any",
-          "copyToOutput": true,
-          "outputPath": "mockplayers.json"
         }
       }
     },

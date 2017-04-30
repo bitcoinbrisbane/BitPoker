@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BitPoker.Models;
 using System.Linq;
 
-namespace BitPoker.Repository
+namespace BitPoker.Repository.Mocks
 {
     [Obsolete]
     public class MockPeerRepo : IPeerRepository

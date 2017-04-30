@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using BitPoker.Models;
 using System.Linq;
 
-namespace BitPoker.Repository
+namespace BitPoker.Repository.Mocks
 {
-    public class MockPlayerRepo : IPlayerRepository
+    public class PlayerRepo : IPlayerRepository
     {
         private List<IPlayer> _players = new List<IPlayer>();
 
-        public MockPlayerRepo()
+        public PlayerRepo()
         {
             TexasHoldemPlayer alice = new TexasHoldemPlayer()
             {
@@ -31,7 +31,7 @@ namespace BitPoker.Repository
             _players.Add(bob);
         }
 
-        public MockPlayerRepo(String fileName)
+        public PlayerRepo(String fileName)
         {
             String json = System.IO.File.ReadAllText(fileName);
             _players = Newtonsoft.Json.JsonConvert.DeserializeObject<List<IPlayer>>(json);

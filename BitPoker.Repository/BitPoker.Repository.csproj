@@ -58,18 +58,9 @@
     <Compile Include="IPlayerRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ITableRepository.cs" />
-    <Compile Include="MockHandRepo.cs" />
-    <Compile Include="MockMessageRepo.cs" />
-    <Compile Include="MockPeerRepo.cs" />
-    <Compile Include="MockPlayerRepo.cs" />
-    <Compile Include="MockTableRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="mockplayers.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="mocktables.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
