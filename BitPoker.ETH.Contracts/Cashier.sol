@@ -10,7 +10,6 @@ contract Cashier as Chip {
 
     /* This creates an array with all balances */
     mapping (address=>uint256) public balanceOf;
-    mapping (address=>mapping(address=>uint256)) public allowance;
 
     /* This generates a public event on the blockchain that will notify clients */
     event Transfer(address indexed from, address indexed to, uint256 value);

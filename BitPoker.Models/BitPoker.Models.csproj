@@ -50,14 +50,12 @@
     <Compile Include="Extensions\HandExtensions.cs" />
     <Compile Include="Extensions\TableExtensions.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
-    <Compile Include="Hand.cs" />
     <Compile Include="Helpers\Chain.cs" />
     <Compile Include="IDeck.cs" />
     <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IRandom.cs" />
     <Compile Include="IResponse.cs" />
-    <Compile Include="Log.cs" />
     <Compile Include="Messages\ActionMessageResponse.cs" />
     <Compile Include="Messages\AddPeerRequest.cs" />
     <Compile Include="Messages\AddPlayerRequest.cs" />
@@ -84,7 +82,6 @@
     <Compile Include="Contracts\Table.cs" />
     <Compile Include="Messages\ActionMessage.cs" />
     <Compile Include="IRequest.cs" />
-    <Compile Include="Peer.cs" />
     <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
     <Compile Include="Messages\BaseResponse.cs" />
@@ -113,10 +110,17 @@
     <Compile Include="Players\BasePlayer.cs" />
     <Compile Include="GameMechanics\ITexasHoldemGame.cs" />
     <Compile Include="Players\IPlayerAction.cs" />
+    <Compile Include="GameMechanics\TexasHoldemHand.cs" />
+    <Compile Include="DTOs\Log.cs" />
+    <Compile Include="DTOs\Hand.cs" />
+    <Compile Include="DTOs\Peer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs\" />
   </ItemGroup>
 </Project>

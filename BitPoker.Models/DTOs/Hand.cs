@@ -20,13 +20,13 @@ namespace BitPoker.Models
 
         public Guid TableId { get; set; }
 
-        public Int16 PlayerToAct { get; set; }
+        //public Int16 PlayerToAct { get; set; }
 
         //public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
 
         public IDeck Deck { get; set; }
 
-		public Int64 TimeStamp { get; set; }
+	public Int64 TimeStamp { get; set; }
 
         public Guid PreviousHandId { get; set; }
 

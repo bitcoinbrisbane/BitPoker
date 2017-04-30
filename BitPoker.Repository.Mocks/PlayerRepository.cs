@@ -11,7 +11,7 @@ namespace BitPoker.Repository.Mocks
 
         public PlayerRepository()
         {
-            TexasHoldemPlayer alice = new TexasHoldemPlayer()
+            TexasHoldemPlayer alice = new BitPoker.Models.TexasHoldemPlayer()
             {
                 BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
                 //LastSeen = DateTime.UtcNow.AddSeconds(-5),

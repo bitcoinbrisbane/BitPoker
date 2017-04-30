@@ -1,18 +1,20 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.8;
+
+import "Chip";
 
 //Base rules etc
-contract BitPoker {
+contract BitPoker is Chip{
     
     enum Rank {
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
         Jack,
         Queen,
         King,
@@ -34,21 +36,25 @@ contract BitPoker {
     uint16 rake;
 }
 
-contract TexasHoldem is BitPoker{
-    uint256 minBuyIn;
-    uint256 maxBuyIn;
-    uint256 smallBlind;
-    uint256 bigBlind;
+contract TexasHoldem is BitPoker { 
+    uint256 public minBuyIn;
+    uint256 public maxBuyIn;
+    uint256 public smallBlind;
+    uint256 public bigBlind;
 
-    uint8 minPlayers;
-    uint8 maxPlayers;
+    uint8 public minPlayers;
+    uint8 public maxPlayers;
 
-    uint8 dealerIndex = 0;
-    uint256 refundDate;
+    //Hand indexes
+    uint8 public dealerIndex = 0;
+    uint256 public handIndex = 0;
+
+    //Hours +
+    uint256 public refundDate;
 
     //move to base
-    address owner;
-    string contractUrl;
+    address public owner;
+    string public contractUrl;
 
     enum AllowedAction {
         SmallBlind,
@@ -62,21 +68,25 @@ contract TexasHoldem is BitPoker{
 
     struct Player {
         uint256 stack;
-        address myAddress;
+        address name;
     }
 
     struct Action {
-        AllowedAction action;
+        //AllowedAction action;
+        string action;
         address player;
         uint256 amount;
     }
 
     struct Hand {
+        uint8 dealerIndex;
         Action[] actions;
     }
 
     //mapping (address => uint256) public players;
-    Player[] players;
+    Player[] public players;
+
+    Hand[] public hands;
 
     //Url to owners game
     function TexasHoldem(string _url, uint8 _minPlayers, uint8 _maxPlayers)
@@ -86,15 +96,64 @@ contract TexasHoldem is BitPoker{
     }
 
     //buy in
-    function buyIn ()
+    function buyIn (uint8 seatNumber, uint256 stack)
     {
         //Add players balance
+        var player = Player(stack, msg.sender);
+        players[seatNumber] = player;
     }
 
-    function awardPot(Action[] actions) internal
-    {
-        if (actions.length == 0) throw;
+    // function sit(uint8 seatNumber)
+    // {
+    //     //Ignore checking if seat is filled
+    // }
 
-        if (action[0].action != smallBlind) throw;
+    function addAction(string _action, uint256 _amount)
+    {
+        //Current hand
+        var hand = Hands[handIndex];
+
+        var playerToAct = players[hand.dealerIndex + 1];
+
+        var action = Action(_action, msg.sender, 0);
+
+        if (msg.sender == playerToAct.name)
+        {
+            if (hand.dealerIndex + 1 == 1)
+            {
+                if (_action == "SmallBlind")
+                {
+                    action.amount = smallBlind;
+                    Actions[hand.dealerIndex + 1] = action;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            if (hand.dealerIndex + 1 == 2)
+            {
+                if (_action == "BigBlind")
+                {
+                    action.amount = bigBlind;
+                    Actions[hand.dealerIndex + 1] = action;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+        else
+        {
+            throw;
+        }
+
+    }
+
+    function awardPot(string _action, uint256 _amount)
+    {
+
     }
 }
