@@ -69,11 +69,10 @@
         "bin/Debug/BitPoker.Repository.Mocks.dll": {}
       },
       "contentFiles": {
-        "bin/Debug/data/mockplayers.json": {
+        "bin/Debug/BitPoker.Repository.Mocks.pdb": {
           "buildAction": "None",
           "codeLanguage": "any",
-          "copyToOutput": true,
-          "outputPath": "data/mockplayers.json"
+          "copyToOutput": true
         }
       }
     }

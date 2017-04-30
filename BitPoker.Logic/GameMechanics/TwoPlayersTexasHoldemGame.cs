@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BitPoker.Logic.Players;
+using BitPoker.Models;
 using BitPoker.Models.GameMechanics;
 using BitPoker.Models.Players;
 
@@ -56,6 +57,14 @@ namespace BitPoker.Logic.GameMechanics
 
         public int HandsPlayed { get; private set; }
 
+        int ITexasHoldemGame.HandsPlayed
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public Models.Players.IPlayerLogic Start()
         {
             var playerNames = this.allPlayers.Select(x => x.Name).ToList().AsReadOnly();
@@ -89,10 +98,15 @@ namespace BitPoker.Logic.GameMechanics
             return winner;
         }
 
-	//Models.IPlayer ITexasHoldemGame.Start()
-	//{
-	//	throw new NotImplementedException();
-	//}
-	
-	}
+        IPlayer ITexasHoldemGame.Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        //Models.IPlayer ITexasHoldemGame.Start()
+        //{
+        //	throw new NotImplementedException();
+        //}
+
+    }
 }

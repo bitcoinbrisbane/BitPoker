@@ -29,6 +29,11 @@ namespace BitPoker.Clients.ZeroMQ
             throw new NotImplementedException();
         }
 
+        public Task<Peer> GetPeerAsync(string host)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<Peer> GetPeerInfoAsync(string host)
         {
             throw new NotImplementedException();
