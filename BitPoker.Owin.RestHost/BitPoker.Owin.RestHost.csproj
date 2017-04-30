@@ -40,8 +40,8 @@
       <HintPath>..\packages\Microsoft.Owin.Hosting.3.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -62,14 +62,28 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="WebApiConfig.cs" />
+    <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\PeersController.cs" />
+    <Compile Include="Repository\InMemoryLogRepository.cs" />
+    <Compile Include="Controllers\HandsController.cs" />
+    <Compile Include="Controllers\UserAgentController.cs" />
+    <Compile Include="OwinService.cs" />
+    <Compile Include="Controllers\HandController.cs" />
+    <Compile Include="Controllers\JoinController.cs" />
+    <Compile Include="Controllers\BuyInController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -85,6 +99,19 @@
       <Project>{195a8ca4-2680-4010-aecf-ea2742240dc1}</Project>
       <Name>BitPoker.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
+      <Project>{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}</Project>
+      <Name>BitPoker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.LiteDB\BitPoker.Repository.LiteDB.csproj">
+      <Project>{9D248950-D9E5-43EC-8EEF-CC9D350BAE38}</Project>
+      <Name>BitPoker.Repository.LiteDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.Mocks\BitPoker.Repository.Mocks.csproj">
+      <Project>{13C2882F-3B16-455B-9CD1-0DEA92883769}</Project>
+      <Name>BitPoker.Repository.Mocks</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

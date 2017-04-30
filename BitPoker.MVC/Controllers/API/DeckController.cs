@@ -12,7 +12,7 @@ namespace BitPoker.MVC.Controllers
 
         public DeckController()
         {
-            repo = new BitPoker.Repository.MockHandRepo();
+            repo = new BitPoker.Repository.Mocks.HandRepository();
         }
 
         /// <summary>

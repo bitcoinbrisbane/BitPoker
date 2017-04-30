@@ -2,10 +2,8 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class BuyInResponse
+    public class BuyInResponse : BaseResponse
     {
-        public BuyInResponse()
-        {
-        }
+		public String RedeemScript { get; set; }
     }
 }

@@ -3,11 +3,18 @@
 <head>
     <title>BitPoker.io Tables</title>
 	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Tables</h1>
+    <h1>My Tables</h1>
 
-    <table>
+    <table id="myTables">
+
+    </table>
+
+    <h1>All known peers tables</h1>
+
+    <table id="peersTables">
         <tr>
             <th></th>
         </tr>
@@ -28,13 +35,29 @@
     </form>
 
     <script>
+		//Local controller
+        var tablesUri = 'http://localhost:5000/api/tables/';
+        var peersUri = 'http://localhost:5000/api/peers/';
+				
+        $(document).ready(function () {
+				
+	         $.getJSON(tablesUri)
+	         	.done(function (response) {
+              	$.each(response, function (key, item) {
+                  	$('#myTables').append('<tr><td><a href="Table.html?id=' + item.Id + '">' + item.Id + '</td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</tr>');
+              });
+          	});
 
-        var client = new $.JsonRpcClient({ ajaxUrl: 'https://www.bitpoker.io/api/table' });
-        client.call(
-          'bar', [ 'A parameter', 'B parameter' ],
-          function(result) { alert('Foo bar answered: ' + result.my_answer); },
-          function(error)  { console.log('There was an error', error); }
-        );
+            function refreshPeersTables() {
+                $.getJSON(peersUri)
+               .done(function (response) {
+                   //TODO:  Iterate through all peers.
+                   $.each(response, function (key, item) {
+                       $('#peersTables').append('<tr><td><a href="Table.html?id=' + item.Id + '">' + item.Id + '</td><td>' + item.SmallBlind + '</td><td>' + item.BigBlind + '</tr>');
+                   });
+               });
+            }
+        });
     </script>
 </body>
 </html>

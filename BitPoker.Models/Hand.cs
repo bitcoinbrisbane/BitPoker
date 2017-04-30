@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BitPoker.Models
 {
     public class Hand : IHand
     {
-        private List<Messages.ActionMessage> _history;
+        //private List<Messages.ActionMessage> _history;
 
-        public IPlayer[] Players { get; private set; }
+        public IPlayer[] Players { get; set; }
 
         /// <summary>
         /// Hand number of the table
@@ -19,11 +20,9 @@ namespace BitPoker.Models
 
         public Guid TableId { get; set; }
 
-        public Int16 PlayerToAct { get; private set; }
+        public Int16 PlayerToAct { get; set; }
 
-        //public Int16 Round { get; set; }
-
-        public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
+        //public IReadOnlyList<Messages.ActionMessage> History { get { return _history; } }
 
         public IDeck Deck { get; set; }
 
@@ -33,41 +32,47 @@ namespace BitPoker.Models
 
         public String PreviousHandHash { get; set; }
 
-        public Hand()
-        {
-            this.PlayerToAct = 1;
-            //Id = Guid.NewGuid();
-            _history = new List<Messages.ActionMessage>();
+		//public ICollection<String> AllowedActions { get; set; }
 
-            this.Deck = new FiftyTwoCardDeck();
-        }
+   //     public Hand(Guid tableId, IPlayer[] players)
+   //     {
+			//this.TableId = tableId;
+   //         this.Players = players;
+   //         this.PlayerToAct = 1;
+   //         Id = Guid.NewGuid();
 
-        public Hand(IPlayer[] players)
-        {
-            this.Players = players;
-            this.PlayerToAct = 1;
-            //Id = Guid.NewGuid();
-            _history = new List<Messages.ActionMessage>();
+   //         _history = new List<Messages.ActionMessage>();
 
-            this.Deck = new FiftyTwoCardDeck();
-        }
+   //         this.Deck = new FiftyTwoCardDeck();
+   //     }
 
-        public Hand(IPlayer[] players, Guid id)
-        {
-            this.Players = players;
-            this.PlayerToAct = 1;
-            Id = id;
-            _history = new List<Messages.ActionMessage>();
+   //     public Hand(Guid tableId, IPlayer[] players, String previousHandHash, Guid previousHandId)
+   //     {
+			//this.TableId = tableId;
+   //         this.Players = players;
+   //         this.PlayerToAct = 0; //dealer
+   //         Id = Guid.NewGuid();
 
-            this.Deck = new FiftyTwoCardDeck();
-        }
+			//this.PreviousHandHash = previousHandHash;
+			//this.PreviousHandId = previousHandId;
 
-        public Boolean AddMessage(Messages.ActionMessage message)
-        {
-            //validate first
-            _history.Add(message);
-            return true;
-        }
+   //         _history = new List<Messages.ActionMessage>();
+
+   //         this.Deck = new FiftyTwoCardDeck();
+   //     }
+
+   //     public Boolean AddMessage(Messages.ActionMessage message)
+   //     {
+			//var lastAction = this.History.OrderByDescending(h => h.Index).Last();
+
+			////if (Players.Where(p => p.BitcoinAddress == message.BitcoinAddress)
+			////{
+				
+			////}
+			    
+   //         _history.Add(message);
+   //         return true;
+   //     }
 
         public override string ToString()
         {

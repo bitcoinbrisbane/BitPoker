@@ -2,13 +2,22 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class AddPeerRequest : BaseRequest
+    public class AddPeerRequest : BaseRequest, IMessage
     {
-        public Peer Peer { get; set; }
+        public String NetworkAddress { get; set; }
 
-        public AddPeerRequest()
-        {
-            base.Version = 1.0M;
-        }
+		//public String UserAgent { get; set; }
+
+		///// <summary>
+		///// ID of peer
+		///// </summary>
+		//public String PeersBitcoinAddress { get; set; }
+
+		//public String PublicKey { get; set; }
+
+        //public AddPeerRequest()
+        //{
+        //    base.Version = 1.0M;
+        //}
     }
 }

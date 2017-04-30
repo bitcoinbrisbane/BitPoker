@@ -60,7 +60,7 @@ namespace BitPoker.MVC.Controllers
                 };
 
                 //smallBlind.Signature = alice_secret.PrivateKey.SignMessage(smallBlind.ToString());
-                hand.AddMessage(smallBlind);
+                //hand.AddMessage(smallBlind);
 
                 //var bb = table.Players[1];
 

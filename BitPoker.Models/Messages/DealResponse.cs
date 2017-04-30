@@ -2,7 +2,7 @@
 
 namespace BitPoker.Models.Messages
 {
-    public class DealResponse : RPCResponse
+    public class DealResponse : BaseResponse
     {
         public IDeck Deck { get; set; }
 

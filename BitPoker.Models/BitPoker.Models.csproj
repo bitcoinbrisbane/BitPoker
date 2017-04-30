@@ -29,31 +29,33 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NBitcoin">
+      <HintPath>..\packages\NBitcoin.3.0.2.14\lib\net45\NBitcoin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blockr\AddressResponse.cs" />
     <Compile Include="Blockr\Data.cs" />
     <Compile Include="Blockr\Tx.cs" />
-    <Compile Include="BaseTable.cs" />
     <Compile Include="Contracts\IPokerContract.cs" />
     <Compile Include="Contracts\ITable.cs" />
     <Compile Include="Contracts\NoLimitTexasHoldem.cs" />
     <Compile Include="Contracts\TexasHoldem.cs" />
-    <Compile Include="ExtensionMethods\ActionExtension.cs" />
-    <Compile Include="ExtensionMethods\HandExtensions.cs" />
-    <Compile Include="ExtensionMethods\TableExtensions.cs" />
+    <Compile Include="Extensions\ActionExtension.cs" />
+    <Compile Include="Extensions\HandExtensions.cs" />
+    <Compile Include="Extensions\TableExtensions.cs" />
     <Compile Include="FiftyTwoCardDeck.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="Helpers\Chain.cs" />
     <Compile Include="IDeck.cs" />
     <Compile Include="IHand.cs" />
     <Compile Include="IPlayer.cs" />
+    <Compile Include="IRandom.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Messages\ActionMessageResponse.cs" />
@@ -85,8 +87,35 @@
     <Compile Include="Peer.cs" />
     <Compile Include="Messages\ShuffleRequest.cs" />
     <Compile Include="TexasHoldemPlayer.cs" />
+    <Compile Include="Messages\BaseResponse.cs" />
+    <Compile Include="Messages\UserAgentResponse.cs" />
+    <Compile Include="Contracts\BaseTable.cs" />
+    <Compile Include="Exceptions\ActionOutOfTurnException.cs" />
+    <Compile Include="Cards\Card.cs" />
+    <Compile Include="Cards\CardExtensions.cs" />
+    <Compile Include="Cards\CardSuit.cs" />
+    <Compile Include="Cards\CardType.cs" />
+    <Compile Include="Enums\GameRoundType.cs" />
+    <Compile Include="Enums\HandRankType.cs" />
+    <Compile Include="Cards\IDeck.cs" />
+    <Compile Include="IDeepCloneable{T}.cs" />
+    <Compile Include="Enums\PlayerActionType.cs" />
+    <Compile Include="GameContext\IEndGameContext.cs" />
+    <Compile Include="GameContext\IEndHandContext.cs" />
+    <Compile Include="GameContext\IEndRoundContext.cs" />
+    <Compile Include="GameContext\IGetTurnContext.cs" />
+    <Compile Include="GameContext\IStartGameContext.cs" />
+    <Compile Include="GameContext\IStartHandContext.cs" />
+    <Compile Include="GameContext\IStartRoundContext.cs" />
+    <Compile Include="Players\IPlayerLogic.cs" />
+    <Compile Include="Players\PlayerAction.cs" />
+    <Compile Include="Players\PlayerActionAndName.cs" />
+    <Compile Include="Players\BasePlayer.cs" />
+    <Compile Include="GameMechanics\ITexasHoldemGame.cs" />
+    <Compile Include="Players\IPlayerAction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

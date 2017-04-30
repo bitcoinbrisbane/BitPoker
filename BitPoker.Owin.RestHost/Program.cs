@@ -1,6 +1,7 @@
 ﻿using Microsoft.Owin.Hosting;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace BitPoker.Owin.RestHost
 {
@@ -8,21 +9,42 @@ namespace BitPoker.Owin.RestHost
 	{
 		public static void Main(string[] args)
 		{
-			string baseAddress = "http://localhost:5001/";
+            //Spin up multiple hosts for testing.
+            if (String.IsNullOrEmpty(args[0]))
+            {
+                args[0] = System.Configuration.ConfigurationManager.AppSettings["baseurl"];
+            }
 
-			// Start OWIN host 
-			using (WebApp.Start<Startup>(url: baseAddress))
-			{
-				// Create HttpCient and make a request to api/values 
-				HttpClient client = new HttpClient();
+            //foreach (String baseAddress in args)
+            //{
+            //    //Seems to fail on Mac
+            //    Task.Run(() =>
+            //    {
+            //        //Start OWIN host
+            //        using (WebApp.Start<Startup>(url: baseAddress))
+            //        {
+            //            Console.WriteLine("Server running at {0} - press Enter to quit. ", baseAddress);
+            //        }
+            //    });
+            //}
 
-				var response = client.GetAsync(baseAddress + "api/logs").Result;
 
-				Console.WriteLine(response);
-				Console.WriteLine(response.Content.ReadAsStringAsync().Result);
-			}
+            if (!String.IsNullOrEmpty(args[0]))
+            {
+                // Start OWIN host 
+                using (WebApp.Start<Startup>(url: args[0]))
+                {
+                    Console.WriteLine("Server running at {0} - press Enter to quit. ", args[0]);
+                    Console.ReadLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No base url config setting found");
 
-			Console.ReadLine();
-		}
+            }
+
+            Console.ReadLine();
+        }
 	}
 }

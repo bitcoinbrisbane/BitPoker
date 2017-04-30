@@ -14,6 +14,6 @@ namespace BitPoker.Controllers.Rest
 
         Table Get(Guid id);
 
-        void Post(IRequest request);
+        //void Post(IRequest request);
     }
 }

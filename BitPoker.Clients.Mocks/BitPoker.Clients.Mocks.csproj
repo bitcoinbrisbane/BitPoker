@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="PeerClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAgentClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BitPoker.Clients\BitPoker.Clients.csproj">

@@ -16,8 +16,6 @@ namespace BitPoker.Models
             get; private set;
         }
 
-        //private IList<String> cards;
-
         public FiftyTwoCardDeck()
         {
             //cards = new List<string>(LENGTH);
@@ -49,10 +47,9 @@ namespace BitPoker.Models
             //}
         }
 
-        public void Shuffle()
+        public void Shuffle(IRandom random)
         {
-            Random rnd = new Random();
-            Cards = Cards.OrderBy((item) => rnd.Next()).ToList();
+            Cards = Cards.OrderBy((item) => random.Next()).ToList();
         }
 
         public void Encrypt()

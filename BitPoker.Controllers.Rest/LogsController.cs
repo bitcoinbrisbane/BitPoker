@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
 
 namespace BitPoker.Controllers.Rest
 {
-    [Route("api/[controller]")]
     public class LogsController : BaseController
     {
-        // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Models.Log> Get(Int32 max = 20)
         {
-            return new string[] { "value1", "value2" };
+			return LogRepo.All().OrderByDescending(l => l.TimeStamp);
         }
     }
 }

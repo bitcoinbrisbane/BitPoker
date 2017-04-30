@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{A4A615C0-7337-45C1-A89C-0F055761C152}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BitPoker.ETH.Console</RootNamespace>
+    <AssemblyName>BitPoker.ETH.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExternalConsole>true</ExternalConsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="crypto">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.1\lib\net45\crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="EdjCase.JsonRpc.Core">
+      <HintPath>..\packages\EdjCase.JsonRpc.Core.1.1.0\lib\portable45-net45+win8+wpa81\EdjCase.JsonRpc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EdjCase.JsonRpc.Client">
+      <HintPath>..\packages\EdjCase.JsonRpc.Client.1.1.0\lib\portable45-net45+win8+wpa81\EdjCase.JsonRpc.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Hex">
+      <HintPath>..\packages\Nethereum.Hex.1.0.6\lib\portable45-net45+win8+wpa81\Nethereum.Hex.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.ABI">
+      <HintPath>..\packages\Nethereum.ABI.1.0.6\lib\portable45-net45+win8+wpa81\Nethereum.ABI.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.JsonRpc.Client">
+      <HintPath>..\packages\Nethereum.JsonRpc.Client.1.0.6\lib\portable45-net45+win8+wpa81\Nethereum.JsonRpc.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.RPC">
+      <HintPath>..\packages\Nethereum.RPC.1.0.6\lib\portable45-net45+win8+wpa81\Nethereum.RPC.dll</HintPath>
+    </Reference>
+    <Reference Include="Nethereum.Web3">
+      <HintPath>..\packages\Nethereum.Web3.1.0.6\lib\portable45-net45+win8+wpa81\Nethereum.Web3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

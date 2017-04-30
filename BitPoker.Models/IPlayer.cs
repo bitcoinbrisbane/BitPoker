@@ -12,7 +12,7 @@ namespace BitPoker.Models
 
         Boolean IsBigBlind { get; set; }
 
-        Boolean IsTurnToAct { get; set; }
+        //Boolean IsTurnToAct { get; set; }
 
         String BitcoinAddress { get; set; }
 

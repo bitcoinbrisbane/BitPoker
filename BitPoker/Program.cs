@@ -147,8 +147,8 @@ namespace BitPoker
                         Console.WriteLine("What is the peers address?");
                         String peerAddress = Console.ReadLine();
 
-                        Peer newPeer = peerClient.GetPeerInfoAsync(peerAddress).Result;
-                        peersRepo.Add(newPeer);
+                        //Peer newPeer = peerClient.GetPeerInfoAsync(peerAddress).Result;
+                        //peersRepo.Add(newPeer);
 
                         break;
                     case "22":
@@ -245,7 +245,7 @@ namespace BitPoker
             Console.ReadKey();
 
             IDeck deck = new FiftyTwoCardDeck();
-            deck.Shuffle();
+            deck.Shuffle(null);
 
             DumpToDisk(deck.Cards, "deck.txt");
 		}
@@ -343,7 +343,7 @@ namespace BitPoker
             //var alice_tx = CreateTransaction(alice_secret, d, 10000).Result;
             //String alice_tx_hex = alice_tx.ToHex();
 
-            Repository.IHandRepository handRepo = new Repository.MockHandRepo();
+            Repository.IHandRepository handRepo = new Repository.Mocks.HandRepository();
             var hand = handRepo.Find(new Guid("398b5fe2-da27-4772-81ce-37fa615719b5"));
 
             //String json = JsonConvert.SerializeObject(hand);

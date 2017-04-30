@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C94A73D5-D691-43F8-AAE0-61F87548E94D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BitPoker.Controllers.NTests</RootNamespace>
+    <AssemblyName>BitPoker.Controllers.NTests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NBitcoin">
+      <HintPath>..\packages\NBitcoin.3.0.2.9\lib\net45\NBitcoin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TablesControllerTests.cs" />
+    <Compile Include="PeersControllerTests.cs" />
+    <Compile Include="HandsControllerTests.cs" />
+    <Compile Include="BuyInControllerTests.cs" />
+    <Compile Include="JoinControllerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitPoker.Models\BitPoker.Models.csproj">
+      <Project>{195A8CA4-2680-4010-AECF-EA2742240DC1}</Project>
+      <Name>BitPoker.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository\BitPoker.Repository.csproj">
+      <Project>{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}</Project>
+      <Name>BitPoker.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Repository.Mocks\BitPoker.Repository.Mocks.csproj">
+      <Project>{13C2882F-3B16-455B-9CD1-0DEA92883769}</Project>
+      <Name>BitPoker.Repository.Mocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitPoker.Controllers.Rest\BitPoker.Controllers.Rest.csproj">
+      <Project>{73E6416E-ABDE-4B20-9BCE-660678D3368C}</Project>
+      <Name>BitPoker.Controllers.Rest</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

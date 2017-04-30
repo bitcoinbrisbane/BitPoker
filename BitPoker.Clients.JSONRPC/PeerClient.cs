@@ -18,7 +18,12 @@ namespace BitPoker.Clients.JSONRPC
             _version = version;
         }
 
-        public async Task<Peer> GetPeerInfoAsync(string host)
+		public async Task<Peer> GetPeerAsync(string host)
+		{
+			throw new NotImplementedException();
+		}
+
+		public async Task<Peer> GetPeerInfoAsync(string host)
         {
             String endPoint = String.Format("{0}/v{1}/messages", host, _version);
             String json = await GetAsync(endPoint);

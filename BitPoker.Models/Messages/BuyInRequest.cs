@@ -16,9 +16,9 @@ namespace BitPoker.Models.Messages
             base.Version = 1.0M;
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+		public override string ToString()
+		{
+			return string.Format("[BuyInRequest: TableId={0}, Tx={1}]", TableId, Tx);
+		}
     }
 }

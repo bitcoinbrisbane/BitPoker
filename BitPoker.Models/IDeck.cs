@@ -11,7 +11,7 @@ namespace BitPoker.Models
 
         void New();
 
-        void Shuffle();
+        void Shuffle(IRandom random);
 
         void Encrypt();
     }

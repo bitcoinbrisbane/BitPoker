@@ -25,6 +25,59 @@ namespace BitPoker.Models.Mocks
         public HeadsUpColdDeck()
         {
             this.Cards = new List<Byte[]>(52);
+
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
+			this.Cards.Add(new Byte[] { 0x00 });
         }
 
         public void Encrypt()
@@ -35,7 +88,7 @@ namespace BitPoker.Models.Mocks
         {
         }
 
-        public void Shuffle()
+        public void Shuffle(IRandom random)
         {
         }
     }

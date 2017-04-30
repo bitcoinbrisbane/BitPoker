@@ -23,6 +23,8 @@ namespace BitPoker.MVC.Controllers
         //BOB
         //private const String BOB_WIF = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
 
+        public BitPoker.Models.IRandom RandomProvider { get; set; }
+
         public MessageController()
         {
             this.playerRepo = new Repository.InMemoryPlayerRepo();
@@ -207,7 +209,7 @@ namespace BitPoker.MVC.Controllers
             var message = new BitPoker.Models.Messages.DeckResponse();
 
             message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
-            message.Deck.Shuffle();
+            message.Deck.Shuffle(this.RandomProvider);
         }
 
         internal void Deck()
@@ -215,7 +217,7 @@ namespace BitPoker.MVC.Controllers
             var message = new BitPoker.Models.Messages.DeckResponse();
 
             message.Deck = new BitPoker.Models.FiftyTwoCardDeck();
-            message.Deck.Shuffle();
+			message.Deck.Shuffle(new BitPoker.MVC.Models.PseudoRandom());
         }
     }
 }

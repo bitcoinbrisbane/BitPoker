@@ -1,19 +1,23 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>BitPoker.io</title>
 	<meta charset="utf-8" />
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>-->
+	<script src="jquery-3.1.1.min.js"></script>
 </head>
 <body>
-    <h1>Table ...</h1>
+    <h1 id="table">Table </h1>
+	<p id="tabledetails"></p>
 
     <h2>Last Actions</h2>
-
     <table id="actions"></table>
+	<button type="button" onclick="refresh()">Refresh</button>
 
-    <h2>Hand History</h2>
+    <h2>Previous Hands</h2>
 
     <table id="history"></table>
+
 
     <p>Join</p>
     <button type="button" onclick="join()">Join Table</button>
@@ -26,41 +30,88 @@
 
     <p id="key"></p>
 
-    <button type="button" onclick="randomAddress()">Random</button>
+    <button type="button" onclick="join()">Join</button>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bitcoinjs-lib/0.2.0-1/bitcoinjs-min.js"></script>
-    
-    <script>
-        function createKey() {
-            key = Bitcoin.ECKey();
-            document.getElementById("key").innerHTML = key.toWIF();
-        }
+    <script>	
+        var tablesUri = 'http://localhost:5000/api/tables/bf368921-346a-42d8-9cb8-621f9cad5e16';
+        var handsUri = 'http://localhost:5000/api/hands/bf368921-346a-42d8-9cb8-621f9cad5e16';
+        var logsUri = 'http://localhost:5000/api/logs';
 
-        function randomAddress() {
-            var key = Bitcoin.ECPair.makeRandom();
-            var PubKey = key.pub.getAddress().toString();
-            var PrivKey = key.toWIF();
-            // Hit F12 to enter the Chrome Developer Tools, hit ESC to access the console from there; On Mac, use ⌘-⌥ I
-            console.log("Public Key: " + PubKey);
-            console.log("Private Key: " + PrivKey);
-        }
+        $(document).ready(function () {
+
+            refresh();
+			
+            $.getJSON(tablesUri)
+	         	.done(function (response) {
+	         	    $('#table').append(response.Id);
+	         	    $('#tabledetables').append(response.SmallBlind + ' ' + response.BigBlind);
+	         	});
+
+            $.getJSON(handsUri)
+               .done(function (response) {
+                   $.each(response, function (key, item) {
+                       $('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+                   });
+               });
+        });
+
+		function refresh() {
+		        $.getJSON(logsUri)
+		        .done(function (response) {
+		            $.each(response, function (key, item) {
+		                $('#history').append('<tr><td>' + item.Index + '</td><td>' + item.TimeStamp + '</td><td>' + item.Id + '</tr>');
+		            });
+				setTimeout(refresh,5000);
+		    });
+		}
 
         function join() {
 
             var request = {
-                Seat: 1
+                BitcoinAddress: "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
+                Seat: 1,
+                TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16",
+                Signature: "mock"
             };
 
-            $.post("http://localhost:5000/api/tables/join", request)
-              .done(function (data) {
-                  alert("Data Loaded: " + data);
-              });
+            $.post("http://localhost:5000/api/join", request)
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                });
         }
 
         function buyIn() {
 
-        }
+        	//Get a signed tx off controller
+	            $.getJSON("http://localhost:5000/api/transaction?amount=10000&address=")
+	         	.done(function (response) {
+     	            var request = {
+						TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16",
+						Tx: response
+		            };
+
+					//Then post to 
+		            $.post("http://localhost:5000/api/buyin", request)
+		                .done(function (data) {
+		                    alert("Data Loaded: " + data);
+		          	});
+              	});
+	      	}
+
+			
+        function deal() {
+
+            var request = {
+                Seat: 1,
+				TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16"
+            };
+
+            $.post("http://localhost:5000/api/deal", request)
+                .done(function (data) {
+                    alert("Data Loaded: " + data);
+                });
+        	}
+
     </script>
 </body>
 </html>

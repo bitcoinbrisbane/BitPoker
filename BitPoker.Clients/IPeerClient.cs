@@ -7,14 +7,14 @@ namespace BitPoker.Clients
     public interface IPeerClient
     {
         /// <summary>
-        /// Gets peer info, such as user agent
+        /// Gets peer from repo
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        Task<Models.Peer> GetPeerInfoAsync(String host);
+        Task<Models.Peer> GetPeerAsync(String host);
 
         /// <summary>
-        /// Get peers from a peer
+        /// Get peers from local repo
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>

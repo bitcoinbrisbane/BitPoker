@@ -19,5 +19,14 @@ namespace BitPoker.Models.Messages
 
         [DataMember]
         public DateTime TimeStamp { get; set; }
+
+		public String Hash { get; set; }
+
+		public String Signature { get; set; }
+
+		public override string ToString()
+		{
+			return string.Format("[BaseRequest: Id={0}, Version={1}, BitcoinAddress={2}, TimeStamp={3}, Hash={4}, Signature={5}]", Id, Version, BitcoinAddress, TimeStamp, Hash, Signature);
+		}
     }
 }

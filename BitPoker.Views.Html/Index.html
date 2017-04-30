@@ -3,30 +3,77 @@
 <head>
     <title>BitPoker.io Lobby</title>
 	<meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>BitPoker.io Lobby</h1>
+	<h2 id="walletaddress"></h2>
+	<p id="walletbalance">Balance: </p>
 
+	<p id="ccwalletbalance"></p>
+
+	<h2>Colour coin balance</p>
+
+	<img src="http://tbtc.blockr.io/api/v1/address/Qr/n4HzHsTzz4kku4X21yaG1rjbqtVNDBsyKZ"></img>
+		
     <h2>Peers</h2>
 
     <table id="peers">
     </table>
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    
-    <script>
-        var uri = 'http://localhost:5000/api/peers';
+	<a href="AddPeer.html">Add known peer</a>
 
+    <h2>Logs</h2>
+
+    <table id="logs">
+    </table>
+
+    <script>
+		//Local controller
+        var peersUri = 'http://localhost:5000/api/peers';
+		var userAgentUri = 'http://localhost:5000/api/useragent';
+		var logsUri = 'http://localhost:5000/api/logs';		
+
+		//3rd parties
+		var ccUri = 'http://testnet.api.coloredcoins.org/v3/addressinfo';
+		var balanceUri = 'http://tbtc.blockr.io/api/v1/address/balance/';
+				
         $(document).ready(function () {
-          // Send an AJAX request
-          $.getJSON(uri)
-              .done(function (data) {
-                  $.each(data, function (key, item) {
-                      // Add a list item for the product.
-                      //$('#peers').append({ text: formatItem(item) });
-                      $('#peers').append('<tr><td>' + item.userAgent + '</td><td><a href="Peer.html?address=' + item.bitcoinAddress + '">' + item.bitcoinAddress + '</a></td><td>' + item.networkAddress + '</td></tr>');
-                  });
+				
+	         $.getJSON(peersUri)
+	         	.done(function (response) {
+              	$.each(response, function (key, item) {
+                  	$('#peers').append('<tr><td>' + item.UserAgent + '</td><td><a href="Peer.html?address=' + item.BitcoinAddress + '">' + item.BitcoinAddress + '</a></td><td>' + item.NetworkAddress + '</td></tr>');
               });
+          	});
+
+			$.getJSON(userAgentUri)
+			.done(function (response) {
+				var address = response.BitcoinAddress;
+			  	$('#walletaddress').append(address);
+
+				$.getJSON(balanceUri + address)
+				.done(function (response) {
+				  $('#walletbalance').append(response.data.balance);
+				});
+			});
+
+	         $.getJSON(logsUri)
+	         	.done(function (response) {
+              	$.each(response, function (key, item) {
+					$('#logs').append(item);
+					//$.getJSON(item + "/api/useragent")
+					//.done(function peer)
+					//{
+                  	//	$('#peers').append('<tr><td>' + peer.userAgent + '</td><td><a href="Peer.html?address=' + peer.bitcoinAddress + '">' + peer.bitcoinAddress + '</a></td><td>' + peer.networkAddress + '</td></tr>');
+					//}
+              });
+          	});
+
+			//$.getJSON(balanceUri + address)
+			//.done(function (response) {
+			//  $('#walletbalance').append(response.data.balance);
+			//});
         });
     </script>
 </body>
