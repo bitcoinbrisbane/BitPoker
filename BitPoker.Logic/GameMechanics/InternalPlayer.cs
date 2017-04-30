@@ -8,7 +8,7 @@ namespace BitPoker.Logic.GameMechanics
 {
     internal class InternalPlayer : PlayerDecorator
     {
-        public InternalPlayer(IPlayer player)
+        public InternalPlayer(IPlayerLogic player)
             : base(player)
         {
             this.Cards = new List<Card>();

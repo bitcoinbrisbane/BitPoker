@@ -24,11 +24,32 @@ namespace BitPoker.Models
 
 		public UInt64 Stack { get; set; }
 
-		//public PlayerActionType Type => throw new NotImplementedException();
+        public PlayerActionType Type
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
-		//public long Money { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public long Money
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
 
-		public TexasHoldemPlayer()
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        //public PlayerActionType Type => throw new NotImplementedException();
+
+        //public long Money { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public TexasHoldemPlayer()
 		{
 		}
 	}

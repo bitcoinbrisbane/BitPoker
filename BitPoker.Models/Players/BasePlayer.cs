@@ -4,7 +4,7 @@
 	using BitPoker.Models.Cards;
 	using BitPoker.Models.GameContext;
 
-	public abstract class BasePlayer : Models.Players.IPlayer
+	public abstract class BasePlayer : Models.Players.IPlayerLogic
 	{
         public abstract string Name { get; }
 
