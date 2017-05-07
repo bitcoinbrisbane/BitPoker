@@ -18,7 +18,7 @@ namespace BitPoker.Core.Controllers.UnitTests
             //private key 93GnRYsUXD4FPCiV46n8vqKvwHSZQgjnyuBvhNtqRvq3Ac26kVc
 
             Guid tableId = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363");
-            _controller.TableRepo = new Repository.MockTableRepo();
+            _controller.TableRepo = new Repository.Mocks.TableRepository();
 
             //request.Method = "JoinTable";
             //request.Params = new Models.Messages.JoinTableRequest()

@@ -28,14 +28,48 @@ namespace BitPoker.Clients.Rest
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Peer>> GetPeersAsync(string host)
+        public async Task<IEnumerable<Peer>> GetPeersAsync(string host)
         {
-            throw new NotImplementedException();
+            //String json = JsonConvert.SerializeObject(request);
+            //StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //using (HttpClient httpClient = new HttpClient())
+            //{
+            //    using (HttpResponseMessage responseMessage = httpClient.PostAsync(url, requestContent).Result)
+            //    {
+            //        if (responseMessage.IsSuccessStatusCode)
+            //        {
+            //            String responseContent = responseMessage.Content.ReadAsStringAsync().Result;
+            //            Console.WriteLine(responseContent);
+            //        }
+            //        else
+            //        {
+            //            throw new InvalidOperationException();
+            //        }
+            //    }
+            //}
+
+
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(String.Format("{0}/api/peers", host));
+                String json = await response.Content.ReadAsStringAsync();
+
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Peer>>(json);
+            }
         }
 
-        public Task<IEnumerable<IPlayer>> GetPlayers(string host, Guid tableId)
+        public async Task<IEnumerable<IPlayer>> GetPlayers(string host, Guid tableId)
         {
-            throw new NotImplementedException();
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(String.Format("{0}/api/peers", host));
+                String json = await response.Content.ReadAsStringAsync();
+
+                //return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Peer>>(json);
+
+                throw new Exception();
+            }
         }
 
         public Task<IEnumerable<ITable>> GetTablesAsync(string host)

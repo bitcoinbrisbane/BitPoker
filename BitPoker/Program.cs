@@ -22,10 +22,6 @@ namespace BitPoker
 		private static IList<Byte[]> TableDeck;
         private static List<Byte[]> _keys;
 
-        //private static Stack<String> actions;
-
-		//private static ICollection<TexasHoldemPlayer> Players;
-        //private static ICollection<Peer> Peers;
 
         private const String alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
         private const String bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";
@@ -43,11 +39,9 @@ namespace BitPoker
 
         private const String MOCK_HAND_ID = "398b5fe2-da27-4772-81ce-37fa615719b5";
 
-
         private static Repository.IPlayerRepository playerRepo;
         private static Repository.ITableRepository tableRepo;
         private static Repository.IGenericRepository<Peer> peersRepo;
-
 
         private static Peer me;
 
@@ -58,22 +52,53 @@ namespace BitPoker
         /// <param name="args"></param>
 		public static void Main (string[] args)
 		{
-            Console.WriteLine("This is a console client for bitpoker, making REST or JSON RPC calls to the host");
+            Console.WriteLine("{0} This is a console client for bitpoker, making REST or JSON RPC calls to the host", DateTime.UtcNow);
 
-            Int16 port = 8080; ///for rest
-            String baseUrl = String.Format("http://localhost:{0}", port);
+            Server server = new Server();
+            server.MessageEvent += Server_MessageEvent;
 
-            me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App", NetworkAddress = baseUrl };
+            Int16 restPort = 8080; ///for rest
+            Int16 tcpPort = 5555;
 
+            if (args == null || args.Length < 1)
+            {
+                Log(String.Format("tcp://127.0.0.1:{0}", tcpPort));
+                args = new string[] { carol.ToString(), String.Format("tcp://127.0.0.1:{0}", tcpPort )};
+            }
+
+            Log("Starting tcp server");
+            Task task = new Task(() => server.Listen(args[0]));
+            task.Start();
+            Log("TCP server running");
+
+            String baseUrl = String.Format("http://localhost:{0}", restPort);
+            Log(baseUrl);
+
+            Console.WriteLine("Enter private key, or press enter to use {0}", carol_wif);
+            String privateKey = Console.ReadLine();
+
+            if (String.IsNullOrEmpty(privateKey))
+            {
+                me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App v0.1", NetworkAddress = baseUrl };
+            }
+            else
+            {
+                carol_secret = new BitcoinSecret(privateKey, NBitcoin.Network.TestNet);
+                carol = carol_secret.GetAddress();
+                Log(String.Concat("Address set to ", carol));
+                me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App v0.1", NetworkAddress = baseUrl };
+            }
+
+            Log("Setting up local repositories");
+            
+            //TODO refect
             tableRepo = new Repository.LiteDB.TableRepository("bitpoker.db");
             playerRepo = new Repository.LiteDB.PlayerRepository<TexasHoldemPlayer>("bitpoker.db");
             peersRepo = new Repository.LiteDB.PeerRepository("bitpoker.db");
 
-            //peersRepo.Add(new Peer() { IPAddress = "https://www.bitpoker.io/api/", UserAgent = "Website" });
-
-
+            Log("Setting up clients");
             Clients.ITableClient tableClient = new Clients.Rest.Client();
-            Clients.IPeerClient peerClient = new Clients.Rest.Client();
+            Clients.IPeerClient peerClient = new Clients.ZeroMQ.Client(carol_secret.PrivateKey.ToString());  //Clients.Rest.Client();
 
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
@@ -204,9 +229,7 @@ namespace BitPoker
                 command = Console.ReadLine();
             }
 
-            //String aliceJSON = Newtonsoft.Json.JsonConvert.SerializeObject(alice2);
 
-            
             var cards = ConvertToByteArray(@"C:\Users\lucas.cullen\Source\Repos\bitpoker\headsupcolddeck.txt");
 
             Mnemonic mnemo = new Mnemonic("test", Wordlist.English);
@@ -225,27 +248,18 @@ namespace BitPoker
             deck.Shuffle(null);
 
             DumpToDisk(deck.Cards, "deck.txt");
-
-            //NBitcoin.Key key = new NBitcoin.Key();
-            //var w = key.GetWif(NBitcoin.Network.TestNet);
-            //NBitcoin.BitcoinAddress a = w.GetAddress();
-            //var ca = a.ToColoredAddress();
-
-			//http://www.codeproject.com/Articles/745134/csharp-async-socket-server
-			//https://code.msdn.microsoft.com/windowsdesktop/Communication-through-91a2582b/
-
-            ////CancellationTokenSource cts = new CancellationTokenSource();
-            //listener = new TcpListener(IPAddress.Any, 6666);
-
-            //_client = new NetworkClient () { ListeningPort = 11001 };
-            //_client.StartListening ();
 		}
 
-		/// <summary>
-		/// Write values to disk
-		/// </summary>
-		/// <param name="data">Data.</param>
-		public static void DumpToDisk(IEnumerable<Byte[]> data, String filePath)
+        private static void Server_MessageEvent(object sender, MessageArgs e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        /// <summary>
+        /// Write values to disk
+        /// </summary>
+        /// <param name="data">Data.</param>
+        public static void DumpToDisk(IEnumerable<Byte[]> data, String filePath)
 		{
 			using(StreamWriter writetext = new StreamWriter(filePath))
 			{
@@ -636,49 +650,9 @@ namespace BitPoker
             return "";
         }
 
-        public static void Listen()
+        private static void Log(String message)
         {
-            TcpListener serverSocket = new TcpListener(8888);
-            int requestCount = 0;
-
-            TcpClient clientSocket = default(TcpClient);
-            serverSocket.Start();
-
-            Console.WriteLine(" >> Server Started");
-            clientSocket = serverSocket.AcceptTcpClient();
-
-            Console.WriteLine(" >> Accept connection from client");
-            requestCount = 0;
-
-            while ((true))
-            {
-                try
-                {
-                    requestCount = requestCount + 1;
-                    NetworkStream networkStream = clientSocket.GetStream();
-                    byte[] bytesFrom = new byte[10025];
-                    networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-                    Console.WriteLine(" >> Data from client - " + dataFromClient);
-
-                    string serverResponse = "Last Message from client" + dataFromClient;
-                    Byte[] sendBytes = Encoding.ASCII.GetBytes(serverResponse);
-                    networkStream.Write(sendBytes, 0, sendBytes.Length);
-                    networkStream.Flush();
-
-                    Console.WriteLine(" >> " + serverResponse);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.ToString());
-                }
-            }
-
-            clientSocket.Close();
-            serverSocket.Stop();
-            Console.WriteLine(" >> exit");
-            Console.ReadLine();
+            Console.WriteLine("{0} {1}", DateTime.UtcNow, message);
         }
     }
 }

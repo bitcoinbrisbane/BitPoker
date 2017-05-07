@@ -8,7 +8,8 @@
         "bin/Debug/BitPoker.Models.dll": {}
       },
       "runtime": {
-        "../packages/Newtonsoft.Json.9.0.1/lib/net45/Newtonsoft.Json.dll": {},
+        "../packages/NBitcoin.3.0.2.14/lib/net45/NBitcoin.dll": {},
+        "../packages/Newtonsoft.Json.10.0.2/lib/net45/Newtonsoft.Json.dll": {},
         "bin/Debug/BitPoker.Models.dll": {}
       },
       "contentFiles": {
@@ -26,7 +27,7 @@
         "bin/Debug/BitPoker.Repository.dll": {}
       },
       "runtime": {
-        "../packages/NBitcoin.3.0.0.99/lib/net45/NBitcoin.dll": {},
+        "../packages/NBitcoin.3.0.2.4/lib/net45/NBitcoin.dll": {},
         "../packages/Newtonsoft.Json.9.0.1/lib/net45/Newtonsoft.Json.dll": {},
         "bin/Debug/BitPoker.Repository.dll": {}
       },
@@ -35,12 +36,6 @@
           "buildAction": "None",
           "codeLanguage": "any",
           "copyToOutput": true
-        },
-        "bin/Debug/mockplayers.json": {
-          "buildAction": "None",
-          "codeLanguage": "any",
-          "copyToOutput": true,
-          "outputPath": "mockplayers.json"
         }
       }
     },
@@ -51,7 +46,7 @@
         "bin/Debug/BitPoker.Repository.LiteDB.dll": {}
       },
       "runtime": {
-        "../packages/LiteDB.2.0.2/lib/net35/LiteDB.dll": {},
+        "../packages/LiteDB.3.0.1/lib/net35/LiteDB.dll": {},
         "bin/Debug/BitPoker.Repository.LiteDB.dll": {}
       },
       "contentFiles": {
@@ -69,6 +64,8 @@
         "bin/Debug/BitPoker.Repository.Mocks.dll": {}
       },
       "runtime": {
+        "../packages/NBitcoin.3.0.2.9/lib/net45/NBitcoin.dll": {},
+        "../packages/Newtonsoft.Json.9.0.1/lib/net45/Newtonsoft.Json.dll": {},
         "bin/Debug/BitPoker.Repository.Mocks.dll": {}
       },
       "contentFiles": {
