@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BitPoker.Models;
 
 namespace BitPoker.Owin.RestHost.Repository
 {
-    public class InMemoryLogRepository : BitPoker.Repository.IAddAndReadRepository<Models.Log>
+    public class InMemoryLogRepository : BitPoker.Repository.IAddAndReadRepository<Log>
     {
 		private readonly Int32 _maxRows;
-        private List<Models.Log> _logs;
-
+        private List<Log> _logs;
+        
 		public InMemoryLogRepository(Int32 maxRows = 10000)
 		{
 			_maxRows = maxRows;
@@ -22,6 +23,8 @@ namespace BitPoker.Owin.RestHost.Repository
             {
                 _logs.Clear();
             }
+            
+            Console.WriteLine(entity);
         }
 
         public IEnumerable<Log> All()
@@ -31,7 +34,7 @@ namespace BitPoker.Owin.RestHost.Repository
 
         public Log Find(string id)
         {
-            throw new NotImplementedException();
+            return _logs.SingleOrDefault(l => l.Id.ToString() == id);
         }
     }
 }

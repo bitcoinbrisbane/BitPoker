@@ -15,6 +15,10 @@ namespace BitPoker.Controllers.Rest
 
 		public Repository.IAddAndReadRepository<Models.Log> LogRepo { get; set; }
 
+        /// <summary>
+        /// Owner private key
+        /// </summary>
+        /// <value>The private key.</value>
 		internal String PrivateKey
 		{
 			get;
@@ -80,7 +84,7 @@ namespace BitPoker.Controllers.Rest
 
         internal Boolean Verify(String address, String message, String signature)
         {
-            var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
+            //var pubKey = new NBitcoin.BitcoinPubKeyAddress(address);
             //bool verified = pubKey.VerifyMessage(message, signature);
 
             //return verified;
@@ -103,7 +107,8 @@ namespace BitPoker.Controllers.Rest
         internal void AddLog(String message)
         {
 			LastRequest = DateTime.UtcNow;
-
+            Console.WriteLine(message);
+            
 			//Guid id = Guid.NewGuid();
 			//LogRepo.Add(new Models.Log() { Id = id, Message = message, TimeStamp = DateTime.UtcNow });
         }

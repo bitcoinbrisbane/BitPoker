@@ -16,7 +16,7 @@ namespace BitPoker.Controllers.Rest
 
 		public HandsController()
 		{
-            		this.MaxRows = 1000;
+    		this.MaxRows = 1000;
 			String key = System.Configuration.ConfigurationManager.AppSettings["BitcoinPrivateKey"];
 
 			if (!String.IsNullOrEmpty(key))

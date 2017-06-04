@@ -22,7 +22,12 @@ namespace BitPoker.Controllers.Rest
 						if (table.Peers[i] == null)
 						{
 							response.Seat = i;
-							table.Peers[i] = request.NewPlayer;
+                            table.Peers[i] = new Models.Peer()
+                            {
+                                BitcoinAddress = request.BitcoinAddress,
+                                NetworkAddress = request.NetworkAddress,
+                                UserAgent = request.UserAgent
+                            };
 
 							TableRepo.Update(table);
 

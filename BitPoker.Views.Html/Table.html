@@ -3,12 +3,23 @@
 <head>
     <title>BitPoker.io</title>
 	<meta charset="utf-8" />
-    <!--<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>-->
 	<script src="jquery-3.1.1.min.js"></script>
 </head>
 <body>
+    <!--alice = msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv 
+    bob = mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo-->
+    
+    <!--alice_wif = "93Loqe8T3Qn3fCc87AiJHYHJfFFMLy6YuMpXzffyFsiodmAMCZS";
+    bob_wif = "91yMBYURGqd38spSA1ydY6UjqWiyD1SBGJDuqPPfRWcpG53T672";-->
+
     <h1 id="table">Table </h1>
 	<p id="tabledetails"></p>
+    
+    <h2>Peers</h2>
+    <table id="peers"></table>
+    
+    <input id="host" value="http://localhost:5000"/></input>
+    <input id="tableId" value="35bc5692-6781-4a79-a5d2-89752edd882e" /></input>
 
     <h2>Last Actions</h2>
     <table id="actions"></table>
@@ -18,12 +29,13 @@
 
     <table id="history"></table>
 
-
+    <h2>Pre hand</h2>
     <p>Join</p>
+    Me <input id="me" value="msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv" />
     <button type="button" onclick="join()">Join Table</button>
 
     <p>Buy in transaction</p>
-    <input name="buyInTx" />
+    <input name="buyInTx" value="100000" />
     <button type="button" onclick="buyIn()">Buy In</button>
 
     <h2>Build a tx</h2>
@@ -31,16 +43,27 @@
     <p id="key"></p>
 
     <button type="button" onclick="join()">Join</button>
+    
+    <h2>Actions</h2>
+    <button type="button" onclick="check()">Check</button>
+    <button type="button" onclick="bet()">Bet</button>
+    <button type="button" onclick="call()">Call</button>
+    <button type="button" onclick="fold()">Fold</button>
 
-    <script>	
-        var tablesUri = 'http://localhost:5000/api/tables/bf368921-346a-42d8-9cb8-621f9cad5e16';
-        var handsUri = 'http://localhost:5000/api/hands/bf368921-346a-42d8-9cb8-621f9cad5e16';
-        var logsUri = 'http://localhost:5000/api/logs';
+    <script>
+        var x = $('#tableId').value;
+
+        var host = 'http://localhost:5000';
+        var tableId = '35bc5692-6781-4a79-a5d2-89752edd882e'; // $('#tableid');
+
+        var tablesUri = host + '/api/tables/' + tableId;
+        var handsUri = host + '/api/hands/' + tableId;
+        var logsUri = host + '/api/logs';
 
         $(document).ready(function () {
 
             refresh();
-			
+
             $.getJSON(tablesUri)
 	         	.done(function (response) {
 	         	    $('#table').append(response.Id);
@@ -69,14 +92,15 @@
 
             var request = {
                 BitcoinAddress: "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv",
-                Seat: 1,
-                TableId: "bf368921-346a-42d8-9cb8-621f9cad5e16",
-                Signature: "mock"
+                TableId: tableId,
+                Signature: "mock",
+                UserAgent: "BitPoker Html",
+                NetworkAddress: "http://localhost:5000/api/"
             };
 
             $.post("http://localhost:5000/api/join", request)
                 .done(function (data) {
-                    alert("Data Loaded: " + data);
+                    alert("Joined table at seat: " + data.Seat);
                 });
         }
 
@@ -90,7 +114,7 @@
 						Tx: response
 		            };
 
-					//Then post to 
+					//Then post to
 		            $.post("http://localhost:5000/api/buyin", request)
 		                .done(function (data) {
 		                    alert("Data Loaded: " + data);
@@ -98,7 +122,7 @@
               	});
 	      	}
 
-			
+
         function deal() {
 
             var request = {

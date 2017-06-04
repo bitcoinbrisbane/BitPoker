@@ -42,6 +42,7 @@ namespace BitPoker
         private static Repository.IPlayerRepository playerRepo;
         private static Repository.ITableRepository tableRepo;
         private static Repository.IGenericRepository<Peer> peersRepo;
+        private static Repository.IHandRepository handRepo;
 
         private static Peer me;
 
@@ -65,7 +66,7 @@ namespace BitPoker
                 Log(String.Format("tcp://127.0.0.1:{0}", tcpPort));
                 args = new string[] { carol.ToString(), String.Format("tcp://127.0.0.1:{0}", tcpPort )};
             }
-
+            
             Log("Starting tcp server");
             Task task = new Task(() => server.Listen(args[0]));
             task.Start();
@@ -79,26 +80,41 @@ namespace BitPoker
 
             if (String.IsNullOrEmpty(privateKey))
             {
-                me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App v0.1", NetworkAddress = baseUrl };
+                me = new Peer() 
+                { 
+                    BitcoinAddress = carol.ToString(), 
+                    UserAgent = "Console App v0.1", 
+                    NetworkAddress = baseUrl 
+                };
             }
             else
             {
                 carol_secret = new BitcoinSecret(privateKey, NBitcoin.Network.TestNet);
                 carol = carol_secret.GetAddress();
                 Log(String.Concat("Address set to ", carol));
-                me = new Peer() { BitcoinAddress = carol.ToString(), UserAgent = "Console App v0.1", NetworkAddress = baseUrl };
+                me = new Peer() 
+                { 
+                    BitcoinAddress = carol.ToString(), 
+                    UserAgent = "Console App v0.1", 
+                    NetworkAddress = baseUrl 
+                };
             }
 
             Log("Setting up local repositories");
             
             //TODO refect
-            tableRepo = new Repository.LiteDB.TableRepository("bitpoker.db");
+            
             playerRepo = new Repository.LiteDB.PlayerRepository<TexasHoldemPlayer>("bitpoker.db");
             peersRepo = new Repository.LiteDB.PeerRepository("bitpoker.db");
-
+            tableRepo = new Repository.LiteDB.TableRepository("bitpoker.db");
+            
+            
+            
             Log("Setting up clients");
             Clients.ITableClient tableClient = new Clients.Rest.Client();
             Clients.IPeerClient peerClient = new Clients.ZeroMQ.Client(carol_secret.PrivateKey.ToString());  //Clients.Rest.Client();
+
+
 
             Console.WriteLine("***");
             Console.WriteLine("This console app, under the context of Carol. {0}", carol);
@@ -109,7 +125,7 @@ namespace BitPoker
             Console.WriteLine("21. Add know peer (local db)");
             Console.WriteLine("22. Reload all peers");
 
-            Console.WriteLine("3. Add new table");
+            Console.WriteLine("3. Add new table contract");
             Console.WriteLine("4. List tables (local db)");
             Console.WriteLine("41. Get tables from know peers");
             Console.WriteLine("42. Refresh all peer's tables");
@@ -159,8 +175,24 @@ namespace BitPoker
                         UInt64 sb = Convert.ToUInt64(Console.ReadLine().Trim());
 
                         Console.WriteLine("Big blind? {0}", sb * 2);
+                        UInt64 bb = Convert.ToUInt64(Console.ReadLine().Trim());
 
-                        //AddTable(sb, sb * 2);
+                        Console.WriteLine("Min buy in? {0}", bb * 20);
+                        UInt64 minBuyIn = Convert.ToUInt64(Console.ReadLine().Trim());
+                        
+                        Console.WriteLine("Max buy in? {0}", bb * 100);
+                        UInt64 maxBuyIn = Convert.ToUInt64(Console.ReadLine().Trim());
+
+                        tableRepo.Add(new Models.Contracts.Table() 
+                        { 
+                            SmallBlind = sb,
+                            BigBlind = bb,
+                            MinBuyIn = minBuyIn,
+                            MaxBuyIn = maxBuyIn,
+                            MinPlayers = 2,
+                            MaxPlayers = 2
+                        });
+                        
                         break;
                     case "4":
                         Console.WriteLine("### Dumping all tables in local database:");

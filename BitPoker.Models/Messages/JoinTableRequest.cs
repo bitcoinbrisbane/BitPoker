@@ -6,9 +6,11 @@ namespace BitPoker.Models.Messages
     {
         public Guid TableId { get; set; }
 
-        public Peer NewPlayer { get; set; }
+        public String UserAgent { get; set; }
 
         public String PublicKey { get; set; }
+        
+        public String NetworkAddress { get; set; }
 
         /// <summary>
         /// Specify the seat
@@ -20,9 +22,9 @@ namespace BitPoker.Models.Messages
             base.Version = 1.0M;
         }
 
-		public override string ToString()
-		{
-			return string.Format("[JoinTableRequest: TableId={0}, NewPlayer={1}, PublicKey={2}, Seat={3}]", TableId, NewPlayer, PublicKey, Seat);
-		}
+        public override string ToString()
+        {
+            return string.Format("[JoinTableRequest: TableId={0}, UserAgent={1}, PublicKey={2}, NetworkAddress={3}, Seat={4}]", TableId, UserAgent, PublicKey, NetworkAddress, Seat);
+        }
     }
 }

@@ -11,5 +11,10 @@ namespace BitPoker.Models
         public String Type { get; set; }
 
         public String Message { get; set; }
+        
+        public override string ToString()
+        {
+            return string.Format("[Log: Id={0}, TimeStamp={1}, Type={2}, Message={3}]", Id, TimeStamp, Type, Message);
+        }
     }
 }

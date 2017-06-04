@@ -25,9 +25,9 @@ namespace BitPoker.Repository.Mocks
 
 			_tables.Add(mockHeadsUpTable);
 
-			//Empty table
+			//Free seat
 			Table mockEmptyTable = new Table(2, 10) { Id = new Guid("35bc5692-6781-4a79-a5d2-89752edd882e"), BigBlind = 10000, SmallBlind = 5000 };
-			mockHeadsUpTable.Peers[0] = alice;
+			//mockHeadsUpTable.Peers[0] = alice;
 
 			Table mockTableWithEmptySeat = new Table(2, 10) { Id = new Guid("be7514a3-e73c-4f95-ba26-c398641eea5c"), BigBlind = 10000, SmallBlind = 5000, MinBuyIn = 100000, MaxBuyIn = 200000 };
 			mockTableWithEmptySeat.Peers[0] = alice;
@@ -73,32 +73,6 @@ namespace BitPoker.Repository.Mocks
 
 		public IEnumerable<Table> All()
 		{
-			//List<Table> tables = new List<Table>(2);
-			//tables.Add(new Table(2, 10)
-			//{
-			//    Id = new Guid("d6d9890d-0ca2-4b5d-ae98-fa4d45eb4363"),
-			//    BigBlind = 10000,
-			//    SmallBlind = 5000,
-			//    MaxBuyIn = 20000000,
-			//    MinBuyIn = 10000000
-			//});
-
-			//Table mockTable = new Table(2, 2) { Id = new Guid("29a67f70-ac8d-4280-947a-d42e97224bd8"), BigBlind = 10000, SmallBlind = 5000 };
-
-			////Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", Stack = 100000 };
-			////Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", Stack = 100000 };
-
-			//Models.Peer alice = new Models.Peer() { BitcoinAddress = "msPJhg9GPzMN6twknwmSQvrUKZbZnk51Tv", IPAddress = "https://www.bitpoker.io/api/alice" };
-			//Models.Peer bob = new Models.Peer() { BitcoinAddress = "mhSW3EUNoVkD1ZQV1ZpnxdRMBjo648enyo", IPAddress = "http://localhost:8080" };
-			//mockTable.Peers.Add(alice);
-			//mockTable.Peers.Add(bob);
-
-			//tables.Add(mockTable);
-
-			//Table lonelyTable = new Table(2, 10) { Id = new Guid("91dacf01-4c4b-4656-912b-2c3a11f6e516"), BigBlind = 10000, SmallBlind = 5000 };
-			//lonelyTable.Peers.Add(alice);
-
-			//return tables;
 			return _tables;
 		}
 
@@ -112,6 +86,9 @@ namespace BitPoker.Repository.Mocks
 
 		public void Update(Table entity)
 		{
+            var table = _tables.SingleOrDefault(t => t.Id == entity.Id);
+            _tables.Remove(table);
+            _tables.Add(entity);
 		}
 
 		public void Save()

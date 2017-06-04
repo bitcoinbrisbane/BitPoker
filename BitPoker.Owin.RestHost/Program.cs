@@ -9,9 +9,11 @@ namespace BitPoker.Owin.RestHost
 	{
 		public static void Main(string[] args)
 		{
-            //Spin up multiple hosts for testing.
-            if (String.IsNullOrEmpty(args[0]))
+            if (args.Length == 0)
             {
+                args = new string[1];
+                
+                //Spin up multiple hosts for testing.
                 args[0] = System.Configuration.ConfigurationManager.AppSettings["baseurl"];
             }
 

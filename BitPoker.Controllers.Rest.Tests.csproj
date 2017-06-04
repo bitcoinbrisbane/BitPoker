@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A2BD43E-724B-4281-9427-92AF4E7DC9FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BitPoker.Controllers.Rest.Tests</RootNamespace>
+    <AssemblyName>BitPoker.Controllers.Rest.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="JoinControllerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="BitPoker.Controllers.Rest\BitPoker.Controllers.Rest.csproj">
+      <Project>{73E6416E-ABDE-4B20-9BCE-660678D3368C}</Project>
+      <Name>BitPoker.Controllers.Rest</Name>
+    </ProjectReference>
+    <ProjectReference Include="BitPoker.Repository.Mocks\BitPoker.Repository.Mocks.csproj">
+      <Project>{13C2882F-3B16-455B-9CD1-0DEA92883769}</Project>
+      <Name>BitPoker.Repository.Mocks</Name>
+    </ProjectReference>
+    <ProjectReference Include="BitPoker.Repository\BitPoker.Repository.csproj">
+      <Project>{FCC27F60-7EDF-464B-9876-F196A4A7DFB3}</Project>
+      <Name>BitPoker.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
