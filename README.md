@@ -802,14 +802,22 @@ An REST API is located at https://www.bitpoker.io/api for users to develop clien
 | GET | /Players/bitcoinaddress |
 | GET | /Tables |
 
-## Coloured coin crowd sale
-The following colour coin asset will be sold to raise funds for the development of the project. Asset Id Ua9V5JgADia5zJdSnSTDDenKhPuTVc6RbeNmsJ
+### Ethereum public / private keys for testing (Ropsten)
+Key 1
+{"version":3,"id":"3a09b190-c942-4165-be3f-3006a47efdde","address":"49f88ab85d38d2465b1450c0488acf193404a3af","Crypto":{"ciphertext":"765c4b8f0c9f4ea1dd3b38d38e6279134d981e2e5d2f55118cdb0a1e68f23698","cipherparams":{"iv":"9e87c9faa4b95ad0c457c69767aca715"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"fc76f22df1e42b2a5d9513eb7516523fd96734868b8c1344d33a385f27c93a22","n":1024,"r":8,"p":1},"mac":"4a9515fcc274e7041f8e6f25d2afb92c3e6a55b69b7b14a56df42cb06f3f6a07"}}
 
-## Coloured coin chip / open asset (testnet)
-Used as in game 'chip' currency: Issance address: mhAYHH9nuCzSwp47asR7Yo3wthsXgL9EhR
-Asset Address: bWs8RXSy8Ngt8p4DUdVXJCexXEK3hig9ZEK
+07f9f3506231416d4ea1ce35d2eeb8b73195d1b70553b093ca55923fedcfab51 Private Key
+0x49F88Ab85D38D2465b1450C0488aCf193404a3aF Address
 
-## Colour coin chip (mainnet)
+Key 2
+{"version":3,"id":"7147b6ec-d44a-43bb-bdd7-491f280d0344","address":"a633a412221768286a119c1f006b4fdf97d6d28a","Crypto":{"ciphertext":"7267e69116649e3f31a6cdc6b77fa3aa201716ad2814e4b8ff6b84b3580bb4f0","cipherparams":{"iv":"31f590b012ac8227474244f51880646d"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"fc75d6b6bfac5147d19a7b1e3db8bd45d14556a625791901b78b5804e4004ea3","n":1024,"r":8,"p":1},"mac":"68751ea2f21168e3dfc6ed30414410520722b94e04c1aa4f639852ad498d5243"}}
+
+9e96ec45d19bbca257489059992be96b221aaba590c25c24caa857eabae8854a Private Key
+0xA633a412221768286A119C1F006b4fDf97D6D28A Address
+
+### Ethereum public keys (Mainnet)
+0xB5dCFf27Ea5BC5BdBDe31e73E9466a7FdD3043Cf
+
 
 
 ## References
