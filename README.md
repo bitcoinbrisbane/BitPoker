@@ -815,6 +815,12 @@ Key 2
 9e96ec45d19bbca257489059992be96b221aaba590c25c24caa857eabae8854a Private Key
 0xA633a412221768286A119C1F006b4fDf97D6D28A Address
 
+Multisig Wallet
+0x13340072363a2e6a8C46f268aF9d8dBee22cFb0c
+
+ICO Test Account (Ropsten)
+0x13340072363a2e6a8C46f268aF9d8dBee22cFb0c 
+
 ### Ethereum public keys (Mainnet)
 0xB5dCFf27Ea5BC5BdBDe31e73E9466a7FdD3043Cf
 
